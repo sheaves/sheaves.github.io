@@ -7,7 +7,10 @@ description: "About me"
 ## Liang Ze Wong <img align="right" src="/images/photo.jpg" width="150" />
 
 I am a third-year [math](http://www.math.washington.edu/){:target="_blank"} PhD student at the University of Washington, Seattle. 
-My current interests are in category theory and Hopf algebras. Specifically, I'm interested in monads, monoidal categories, bicategories, and manisfestations of Hopf-algebra-type structures in such categories. I've also recently begun learning about model categories and $\infty$-categories.
+
+My current interests are in category theory and Hopf algebras. Specifically, I'm interested in monads, monoidal categories, bicategories, and manisfestations of Hopf-algebra-type structures in such categories. 
+
+I've also recently begun learning about model categories and $\infty$-categories.
 
 ### History
 
