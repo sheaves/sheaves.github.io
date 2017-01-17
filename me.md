@@ -29,5 +29,5 @@ My first name is Liang Ze, but many people call me "Zee". I have also been known
 - Liang ([Generation name](http://en.wikipedia.org/wiki/Generation_name){:target="_blank"}; all my male cousins have this "middle" name)
 - Ze (Given name)
 
-I used to write simple snippets of code for this site, mostly in Python/Sage. Nowadays, I spend more time playing around with string diagrams.
+I used to write simple snippets of code for this site, mostly in Python/Sage. Nowadays, I spend more time playing around with string diagrams. If I have enough time and motivation, I might post some stuff about string diagrams here someday.
 
