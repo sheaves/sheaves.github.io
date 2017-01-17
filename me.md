@@ -6,8 +6,8 @@ description: "About me"
 
 ## Liang Ze Wong <img align="right" src="/images/photo.jpg" width="150" />
 
-I am a second-year [math](http://www.math.washington.edu/){:target="_blank"} PhD student at the University of Washington, Seattle. 
-My interests are representation theory and non-commutative algebra.
+I am a third-year [math](http://www.math.washington.edu/){:target="_blank"} PhD student at the University of Washington, Seattle. 
+My current interests are in category theory and Hopf algebras. Specifically, I'm interested in monads, monoidal categories, bicategories, and manisfestations of Hopf-algebra-type structures in such categories. I've also recently begun learning about model categories and $\infty$-categories.
 
 ### History
 
@@ -23,11 +23,11 @@ My interests are representation theory and non-commutative algebra.
 - L.Z. Wong, [*Irredundant Generating Sets of Finite Nilpotent Groups*](http://www.math.cornell.edu/files/Research/SeniorTheses/wongLiangThesis.pdf){:target="_blank"},  senior thesis, advised by [R. Keith Dennis](http://www.math.cornell.edu/m/People/Faculty/dennis){:target="_blank"}, 2012.
 
 ### Misc.
-My friends call me Liang Ze, but I have been known to respond to various combinations of the following:
+My first name is Liang Ze, but some people call me "Zee". I have also been known to respond to various combinations of the following:
 
 - Wong (Family/last name)
 - Liang ([Generation name](http://en.wikipedia.org/wiki/Generation_name){:target="_blank"}; all my male cousins have this "middle" name)
 - Ze (Given name)
 
-In my spare time, I write simple snippets of code for this site, mostly in Python/Sage.
+I used to write simple snippets of code for this site, mostly in Python/Sage. Nowadays, I spend more time playing around with string diagrams.
 
