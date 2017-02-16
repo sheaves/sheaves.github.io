@@ -1,8 +1,8 @@
 [Distributive Laws](https://golem.ph.utexas.edu/category/2017/02/distributive_laws.html)
 
-The Kan Extension Seminar II continues and this week, we discuss Jon Beck's ``Distributive Laws'', which was published in 1969 in the proceedings of the [Seminar on Triples and Categorical Homology Theory, LNM vol 80](http://www.tac.mta.ca/tac/reprints/articles/18/tr18abs.html). In [the previous Kan II post](https://golem.ph.utexas.edu/category/2017/02/the_category_theoretic_underst.html), Evangelia described the relationship between Lawvere theories and finitary monads, along with two ways of combining them (the sum and tensor) that are very natural for Lawvere theories but less so for monads. Distributive laws give us a way of *composing* monads to get another monad, and are more natural from the monad point of view.
+The [Kan Extension Seminar II](http://www.math.jhu.edu/~eriehl/kanII/) continues and this week, we discuss Jon Beck's "Distributive Laws", which was published in 1969 in the proceedings of the [Seminar on Triples and Categorical Homology Theory, LNM vol 80](http://www.tac.mta.ca/tac/reprints/articles/18/tr18abs.html). In [the previous Kan seminar post](https://golem.ph.utexas.edu/category/2017/02/the_category_theoretic_underst.html), Evangelia described the relationship between Lawvere theories and finitary monads, along with two ways of combining them (the sum and tensor) that are very natural for Lawvere theories but less so for monads. Distributive laws give us a way of *composing* monads to get another monad, and are more natural from the monad point of view.
 
-Beck's paper starts by defining and characterizing distributive laws. He then describes the category of algebras of the composite monad, and shows how it fits into a `distributive square of adjunctions' containing the categories of algebras of the original monads. Finally, he ends off with a series of examples.
+Beck's paper starts by defining and characterizing distributive laws. He then describes the category of algebras of the composite monad, and shows how it fits into a "distributive square of adjunctions" containing the categories of algebras of the original monads. Finally, he ends off with a series of examples.
 
 Before we dive into the paper, I would like to thank Emily Riehl, Alexander Campbell and Brendan Fong for allowing me to be a part of this seminar, and the other participants for their wonderful virtual company. I would also like to thank my advisor [James Zhang](https://www.math.washington.edu/~zhang/) and his group for their insightful and encouraging comments as I was preparing for this seminar.
 
@@ -12,58 +12,60 @@ First, some differences between this post and Beck's paper:
 
 * I'll use a different convention than Beck for writing the composition of two functors. Given $F:\mathbf{X} \to \mathbf{Y}$ and $G: \mathbf{Y} \to \mathbf{Z}$, their composite will be denoted $GF$ in this post ($FG$ in Beck's paper). 
 
-* I'll use the terms `monad' and `[monadic](https://ncatlab.org/nlab/show/monadic+functor)' instead of `triple' and `tripleable'.
+* I'll use the terms "monad" and "[monadic](https://ncatlab.org/nlab/show/monadic+functor)" instead of "triple" and "tripleable".
 
-* I'll rely quite a bit on string diagrams instead of commutative diagrams. These are to be read from *right to left* and *top to bottom*. You can learn about string diagrams through [this video](https://www.youtube.com/view_play_list?p=50ABC4792BD0A086) or [this paper](https://arxiv.org/pdf/1401.7220.pdf) (warning: they read string diagrams in different directions!).
+* I'll rely quite a bit on string diagrams instead of commutative diagrams. These are to be read from *right to left* and *top to bottom*. You can learn about string diagrams through [these videos](https://www.youtube.com/view_play_list?p=50ABC4792BD0A086) or [this paper](https://arxiv.org/pdf/1401.7220.pdf) (warning: they read string diagrams in different directions!).
 
-* All constructions involving the category of $S$-algebras, $\cX^S$, will be done in an `object-free' manner involving only the universal property of $\cX^S$.
+* All constructions involving the category of $S$-algebras, $\mathbf{X}^S$, will be done in an "object-free" manner involving only the universal property of $\mathbf{X}^S$.
 
-The last two points have the advantage of making the resulting theory applicable to $2$-categories other than $\mathbf{Cat}$, by replacing `categories/ functors/natural transformations' with `0/1/2-cells'.
+The last two points have the advantage of making the resulting theory applicable to $2$-categories other than $\mathbf{Cat}$, by replacing categories/ functors/natural transformations with 0/1/2-cells.
 
 ### Motivating examples
 
-**Example 1**: Let $S$ be the free monoid monad and $T$ be the free abelian group monad the over $\mathbf{Set}$. Then the elementary fact that `multiplication distributes over addition' means we have a map $STX \to TSX$ sending $(a+b)(c+d)$, say, to $ac+ad+bc+bd$. Further, the composition of $T$ with $S$ is the free ring monad, $TS$.
+**Example 1**: Let $S$ be the free monoid monad and $T$ be the free abelian group monad the over $\mathbf{Set}$. Then the elementary school fact that multiplication distributes over addition means we have a function $STX \to TSX$ for $X$ a set, sending $(a+b)(c+d)$, say, to $ac+ad+bc+bd$. Further, the composition of $T$ with $S$ is the free ring monad, $TS$.
 
 **Example 2**: Let $A$ and $B$ be monoids in a *braided* monoidal category $(\mathcal{V}, \otimes, 1)$. Then $A \otimes B$ is also a monoid, with multiplication:
+
 $$
 A \otimes B \otimes A \otimes B \xrightarrow{A \otimes tw_{BA} \otimes B} A \otimes A \otimes B \otimes B \xrightarrow{\mu_A \otimes \mu_B} A \otimes B,
 $$
+
 where $tw_{BA}: B \otimes A \to A \otimes B$ is provided by the braiding in $\mathcal{V}$.
 
-In example 1, the monoidal category $\left(\mathbf{End}(\mathbf{Set}), \circ, \text{Id}\right)$ is not braided -- this is why we need distributive laws!
+In example 1, there is also a monoidal category in the background: $\left(\mathbf{End}(\mathbf{Set}), \circ, \text{Id}\right)$. But it is not braided -- this is why we need distributive laws!
 
 ### Distributive laws, composite and lifted monads
 
-Let $(S,\eta^S, \mu^S)$ and $(T,\eta^T,\mu^T)$ be monads on a category $\cX$. I'll use *S*carlet and *T*eal strings to denote $S$ and $T$, resp. 
-A \emph{distributive law of $S$ over $T$} is a natural transformation $\ell:ST \Rightarrow TS$
+Let $(S,\eta^S, \mu^S)$ and $(T,\eta^T,\mu^T)$ be monads on a category $\mathbf{X}$. I'll use **S**carlet and **T**eal strings to denote $S$ and $T$, resp. 
+A *distributive law of $S$ over $T$* is a natural transformation $\ell:ST \Rightarrow TS$, denoted
 
-> <img src="http://sheaves.github.io/distributive/dist_def.png" alt="distributive law" width="150"/>
+![](http://sheaves.github.io/distributive/dist_def.png "Definition of distributive law")
 
 satisfying the following equalities:
 
-> <img src="http://sheaves.github.io/distributive/dist_axioms.png" alt="axioms for a distributive law" width="600"/>
+![](http://sheaves.github.io/distributive/dist_axioms.png "Axioms for a distributive law")
 
 A distributive law looks somewhat like a braiding in a braided monoidal category. In fact, it is a *local pre-braiding*: `local' in the sense of being defined only for $S$ over $T$, and `pre' because it is not necessarily invertible. 
 
 As the above examples suggest, a distributive law allows us to define a multiplication $m:TSTS \Rightarrow TS$:
 
-> <img src="http://sheaves.github.io/distributive/comp_mult.png" alt="multiplication for composite monad" width="150"/>
+![](http://sheaves.github.io/distributive/comp_mult.png "Multiplication for the composite monad")
 
 It is easy to check visually that this makes $TS$ a monad, with unit $\eta^T \eta^S$. For instance, the proof that $m$ is associative looks like this:
 
-> <img src="http://sheaves.github.io/distributive/comp_assoc.png" alt="associativity for composite monad" width="600"/>
+![](http://sheaves.github.io/distributive/comp_assoc.png "Associativity for the composite monad")
 
 Not only is $TS$ a monad, we also have monad maps $T \eta^S: T \Rightarrow TS$ and $\eta^T S: S \Rightarrow TS$:
 
-> <img src="http://sheaves.github.io/distributive/comp_maps.png" alt="monad maps to composite monad" width="450"/>
+![](http://sheaves.github.io/distributive/comp_maps.png "Monad maps to the composite monad")
 
 Asserting that $T \eta^S$ is a monad morphism is the same as asserting these two equalities:
 
-> <img src="http://sheaves.github.io/distributive/comp_maps_check.png" alt="check monad maps" width="600"/>
+![](http://sheaves.github.io/distributive/comp_maps_check.png "Check that we have a monad map")
 
 Similar diagrams hold for $\eta^T S$. Finally, the multiplication $m$ also satisfies a *middle unitary law*:
 
-> <img src="http://sheaves.github.io/distributive/comp_middle_unit.png" alt="middle unitary law" width="300"/>
+![](http://sheaves.github.io/distributive/comp_middle_unit.png "Middle unitary law")
 
 To get back the distributive law, we can simply plug the appropriate units at both ends of $m$:
 
