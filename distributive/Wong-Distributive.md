@@ -91,7 +91,7 @@ We may express $U^S \tilde{T} = T U^S$ via the following equivalent commutative 
 
 <img src="http://sheaves.github.io/distributive/lift_diagrams.png" alt="Commutative diagrams for lifts" width="300"/>
 
-The diagram on the right makes it clear that this is equivalent to $\tilde{T}, \tilde{\eta}^T, \tilde{\mu}^T$ being lifts of $TU^S, \eta^T U^S,\mu^T U^S$, resp. Thus, to get a monad lift of $T$, it suffices to produce an $S$-action on $TU^S$ and check that it is compatible with $\eta^T U^S$ and $\mu^T U^S$. We may simply combine the distributive law with the canonical $S$-action on $U^S$ to obtain the desired action on $TU^S$:
+The diagram on the right makes it clear that $\tilde{T}$ being a monad lift of $T$ is equivalent to $\tilde{T}, \tilde{\eta}^T, \tilde{\mu}^T$ being lifts of $TU^S, \eta^T U^S,\mu^T U^S$, resp. Thus, to get a monad lift of $T$, it suffices to produce an $S$-action on $TU^S$ and check that it is compatible with $\eta^T U^S$ and $\mu^T U^S$. We may simply combine the distributive law with the canonical $S$-action on $U^S$ to obtain the desired action on $TU^S$:
 
 <img src="http://sheaves.github.io/distributive/lift_action.png" alt="S-action on TU^S" width="120"/>
 
