@@ -256,4 +256,4 @@ Such relations occur frequently when studying quantum groups, for example.
 
 This is suprising, because one can easily define $\mathbb{Q}(q)$ and non-commutative $\mathbb{Q}(q)$-algebras in Singular/Plural, which is what Sage is using. It seems that the problem is in Sage's wrapper for Singular/Plural, because Sage can't even pass the ring $\mathbb{Q}(q)$ to Singular. 
 
-There's a [trac ticket](http://trac.sagemath.org/ticket/14886){:target="_blank"} for this problem, but until it gets resolved, we'll just have to define such rings directly in Singular/Plural. Thanks to the amazing capabilities of the [Sage Cell Server](https://sagecell.sagemath.org/){:target="_blank"}, we'll do this in the next post!
+There's a [trac ticket](http://trac.sagemath.org/ticket/14886){:target="_blank"} for this problem, but until it gets resolved, we'll just have to define such rings directly in Singular/Plural. Thanks to the amazing capabilities of the [Sage Cell Server](https://sagecell.sagemath.org/){:target="_blank"}, ~~we'll do this in the next post~~!
