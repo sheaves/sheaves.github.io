@@ -87,9 +87,11 @@ $$
 U^S \tilde{T} = T U^S, \qquad U^S \tilde{\eta}^T = \eta^T U^S, \qquad U^S \tilde{\mu}^T = \mu^T U^S.
 $$
 
-<img src="http://sheaves.github.io/distributive/lift_diagrams.png" alt="Commutative diagrams for lifts" width="250"/>
+We may express $U^S \tilde{T} = T U^S$ via the following equivalent commutative diagrams:
 
-The above diagram makes it clear that this is equivalent to $\tilde{T}, \tilde{\eta}^T, \tilde{\mu}^T$ being lifts of $TU^S, \eta^T U^S,\mu^T U^S$, resp. Thus, to get a monad lift of $T$, it suffices to produce an $S$-action on $TU^S$ and check that it is compatible with $\eta^T U^S$ and $\mu^T U^S$. We may simply combine the distributive law with the canonical $S$-action on $U^S$ to obtain the desired action on $TU^S$:
+<img src="http://sheaves.github.io/distributive/lift_diagrams.png" alt="Commutative diagrams for lifts" width="300"/>
+
+The diagram on the right makes it clear that this is equivalent to $\tilde{T}, \tilde{\eta}^T, \tilde{\mu}^T$ being lifts of $TU^S, \eta^T U^S,\mu^T U^S$, resp. Thus, to get a monad lift of $T$, it suffices to produce an $S$-action on $TU^S$ and check that it is compatible with $\eta^T U^S$ and $\mu^T U^S$. We may simply combine the distributive law with the canonical $S$-action on $U^S$ to obtain the desired action on $TU^S$:
 
 <img src="http://sheaves.github.io/distributive/lift_action.png" alt="S-action on TU^S" width="120"/>
 
@@ -101,7 +103,7 @@ The key steps in the proof that these constructions are mutually inverse are con
 
 <img src="http://sheaves.github.io/distributive/lift_inverse.png" alt="Constructions are mutually inverse" width="300"/>
 
-The first shows that the resulting distributive law in the (distributive law $\to$ monad lift $\to$ distributive law) construction is the same as the original distributive law we started with. The second shows that in the (monad lift $\tilde{T}$ $\to$ distributive law $\to$ another lift $\tilde{T}'$) construction, the $S$-action on $U^S \tilde{T}'$ (LHS) is the same as the original $S$-action on $U^S \tilde{T}$ (RHS), hence $\tilde{T} = \tilde{T}'$ (by virtue of being lifts, $\tilde{T}$ and $\tilde{T}'$ can only differ in their induced $S$-actions on $U^S \tilde{T} = U^S \tilde{T} = TU^S$). We thus have another characterization of distributive laws:
+The first shows that the resulting distributive law in the (distributive law $\to$ monad lift $\to$ distributive law) construction is the same as the original distributive law we started with. The second shows that in the (monad lift $\tilde{T}$ $\to$ distributive law $\to$ another lift $\tilde{T}'$) construction, the $S$-action on $U^S \tilde{T}'$ (LHS of the equation) is the same as the original $S$-action on $U^S \tilde{T}$ (RHS), hence $\tilde{T} = \tilde{T}'$ (by virtue of being lifts, $\tilde{T}$ and $\tilde{T}'$ can only differ in their induced $S$-actions on $U^S \tilde{T} = U^S \tilde{T}' = TU^S$). We thus have another characterization of distributive laws:
 
 > **Theorem** &nbsp; *The following are equivalent: (1) Distributive laws $\ell:ST \Rightarrow TS$; (3) monad lifts of $T$ to $\mathbf{X}^S$.*
 
