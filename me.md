@@ -29,6 +29,6 @@ I used to write simple snippets of code for this site, mostly in Python/Sage. No
 My first name is Liang Ze, but many people call me "Zee". I have also been known to respond to various combinations of the following:
 
 - Wong (Family/last name)
-- Liang ([Generation name](http://en.wikipedia.org/wiki/Generation_name){:target="_blank"}; all my male cousins have this "middle" name)
+- Liang ([Generation name](http://en.wikipedia.org/wiki/Generation_name){:target="_blank"})
 - Ze (Given name)
 
