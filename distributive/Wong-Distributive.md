@@ -20,7 +20,7 @@ First, some differences between this post and Beck's paper:
 
 The last two points have the advantage of making the resulting theory applicable to $2$-categories or bicategories other than $\mathbf{Cat}$, by replacing categories/ functors/ natural transformations with 0/1/2-cells.
 
-Since string diagrams play a key role in this post, here's a short example illustrating their use. Suppose we have functors $F: \mathbf{X} \to \mathbf{Y}$ and $U: \mathbf{Y} \to \mathbf{X}$ such that $F \dashv U$. Let $\eta: 1_{\mathbf{X}} \Rightarrow UF$ be the unit and $\varepsilon: FU \Rightarrow 1_{\mathbf{Y}}$ be the counit of the adjunction. Then the composite $F \overset{F \eta}{\Rightarrow} FUF \overset{\varepsilon F} F$ can be drawn thus:
+Since string diagrams play a key role in this post, here's a short example illustrating their use. Suppose we have functors $F: \mathbf{X} \to \mathbf{Y}$ and $U: \mathbf{Y} \to \mathbf{X}$ such that $F \dashv U$. Let $\eta: 1^{\mathbf{X}} \Rightarrow{UF}$ be the unit and $\varepsilon: FU \Rightarrow 1^{\mathbf{Y}}$ the counit of the adjunction. Then the composite $F \overset{F \eta}{\Rightarrow} FUF \overset{\varepsilon F} F$ can be drawn thus:
 
 <p style="text-align:center;">
 <img src="http://sheaves.github.io/distributive/sample.png" alt="Sample string diagram" width="300"/>
