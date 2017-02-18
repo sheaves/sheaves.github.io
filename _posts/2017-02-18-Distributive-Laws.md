@@ -5,7 +5,7 @@ tag:
 - Category theory
 ---
 
-I've been participating in the [Kan Extension Seminar II](http://www.math.jhu.edu/~eriehl/kanII/), and this week it's my turn to post about Jon Beck's "Distributive Laws" at the [n-Category Cafe](https://golem.ph.utexas.edu/category/)!
+I've been participating in the [Kan Extension Seminar II](http://www.math.jhu.edu/~eriehl/kanII/), and this week it's my turn to [post about Jon Beck's "Distributive Laws"](https://golem.ph.utexas.edu/category/2017/02/distributive_laws.html) at the [n-Category Cafe](https://golem.ph.utexas.edu/category/)!
 
 The post uses lots of string diagrams for monads, resulting in pictures like the following:
 
