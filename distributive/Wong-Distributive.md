@@ -106,7 +106,7 @@ In addition to making $TS$ a monad, distributive laws also let us lift $T$ to th
 <img src="http://sheaves.github.io/distributive/lift_univ.png" alt="Universal property of S-algebras" width="250"/>
 </p>
 
-Given $\tilde{G}: \mathbf{Y} \to \mathbf{X}^S$, we get a functor $\mathbf{Y} \to \mathbf{X}$ by composing with $U^S$. This composite $U^S \tilde{G}$ has an $S$-action given by the canonical action on $U^S$. The universal property says that every such functor $G: \mathbf{Y} \to \mathbf{X}$ with an $S$-action is of the form $U^S \tilde{G}$. Similary statements hold for natural transformations. We will call $\tilde{G}$ and $\tilde{\phi}$ *lifts* of $G$ and $\phi$, resp.
+Given $\tilde{G}: \mathbf{Y} \to \mathbf{X}^S$, we get a functor $\mathbf{Y} \to \mathbf{X}$ by composing with $U^S$. This composite $U^S \tilde{G}$ has an $S$-action given by the canonical action on $U^S$. The universal property says that every such functor $G: \mathbf{Y} \to \mathbf{X}$ with an $S$-action is of the form $U^S \tilde{G}$. Similar statements hold for natural transformations. We will call $\tilde{G}$ and $\tilde{\phi}$ *lifts* of $G$ and $\phi$, resp.
 
 A *monad lift of $T$ to $\mathbf{X}^S$* is a monad $(\tilde{T}, \tilde{\eta}^T,\tilde{\mu}^T)$ on $\mathbf{X}^S$ such that
 
