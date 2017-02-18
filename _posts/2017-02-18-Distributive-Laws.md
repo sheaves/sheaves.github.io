@@ -9,6 +9,6 @@ I've been participating in the [Kan Extension Seminar II](http://www.math.jhu.ed
 
 The post uses lots of string diagrams for monads, resulting in pictures like the following:
 
-![](/distributive/comp_assoc "Associativity of the composite monad")
+![](/distributive/comp_assoc.png "Associativity of the composite monad")
 
 See you [there](https://golem.ph.utexas.edu/category/2017/02/distributive_laws.html)!
