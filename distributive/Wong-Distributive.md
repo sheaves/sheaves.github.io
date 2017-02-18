@@ -26,7 +26,7 @@ Since string diagrams play a key role in this post, here's a short example illus
 <img src="http://sheaves.github.io/distributive/sample.png" alt="Sample string diagram" width="300"/>
 </p>
 
-Most diagrams in this most will not be as meticulously labelled as the above. Unlabelled white regions will always stand for a fixed category $\mathbf{X}$. If $F \dashv U$, I'll use the same colored string to denote them both, since they can be distinguished from their context: above, $F$ goes from a white to red region, whereas $U$ goes from red to white (remember to read from *right to left*!). The composite monad $UF$ (not shown above) would also be a string of the same color, going from a white region to a white region.
+Most diagrams in this post will not be as meticulously labelled as the above. Unlabelled white regions will always stand for a fixed category $\mathbf{X}$. If $F \dashv U$, I'll use the same colored string to denote them both, since they can be distinguished from their context: above, $F$ goes from a white to red region, whereas $U$ goes from red to white (remember to read from *right to left*!). The composite monad $UF$ (not shown above) would also be a string of the same color, going from a white region to a white region.
 
 ### Motivating examples
 
