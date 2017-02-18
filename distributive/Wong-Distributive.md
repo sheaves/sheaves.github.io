@@ -128,7 +128,7 @@ The diagram on the right makes it clear that $\tilde{T}$ being a monad lift of $
 
 (Recall that the unlabelled white region is $\mathbf{X}$. In subsequent diagrams, we will leave the red region unlabelled as well, and this will always be $\mathbf{X}^S$. Similarly, teal regions will denote $\mathbf{X}^T$.)
 
-Conversely, suppose we have a monad lift $\tilde{T}$ of $T$. Then the equality $U^S \tilde{T} = T U^S$ can expressed by saying that we have an *invertible* natural transformation $\chi: U^S \tilde{T} \Rightarrow TU^S$. Using $\chi$ and the unit and counit of the adjunction $F^S \dashv U^S$ that gives rise to $S$, we obtain a distributive law of $S$ over $T$:
+Conversely, suppose we have a monad lift $\tilde{T}$ of $T$. Then the equality $U^S \tilde{T} = T U^S$ can be expressed by saying that we have an *invertible* natural transformation $\chi: U^S \tilde{T} \Rightarrow TU^S$. Using $\chi$ and the unit and counit of the adjunction $F^S \dashv U^S$ that gives rise to $S$, we obtain a distributive law of $S$ over $T$:
 
 <p style="text-align:center;">
 <img src="http://sheaves.github.io/distributive/lift_dist.png" alt="Getting a distributive law from a lift" width="120"/>
