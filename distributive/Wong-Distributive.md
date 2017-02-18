@@ -45,6 +45,7 @@ In example 1, there is also a monoidal category in the background: the category 
 ### Distributive laws, composite and lifted monads
 
 Let $(S,\eta^S, \mu^S)$ and $(T,\eta^T,\mu^T)$ be monads on a category $\mathbf{X}$. I'll use **S**carlet and **T**eal strings to denote $S$ and $T$, resp., and white regions will stand for $\mathbf{X}$.
+
 A *distributive law of $S$ over $T$* is a natural transformation $\ell:ST \Rightarrow TS$, denoted
 
 <p style="text-align:center;">
