@@ -22,4 +22,6 @@ permalink: /quotes/
 >
 > - William Thurston, *On proof and progress in mathematics*
 
-
+>  One person's clear mental image is another person's intimidation.
+>
+> - William Thurston, *On proof and progress in mathematics*
