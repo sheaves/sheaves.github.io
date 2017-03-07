@@ -16,7 +16,7 @@ permalink: /quotes/
 
 > Mathematics is a process of staring hard enough with enough perseverence at at the fog of muddle and confusion to eventually break through to improved clarity.
 >
-> - William Thurston, [MatheOverflow bio](http://mathoverflow.net/users/9062/bill-thurston){:target="_blank"}
+> - William Thurston, [MathOverflow bio](http://mathoverflow.net/users/9062/bill-thurston){:target="_blank"}
 
 > What we are doing is finding ways for *people* to understand and think about mathematics.
 >
