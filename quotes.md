@@ -25,3 +25,15 @@ permalink: /quotes/
 >  One person's clear mental image is another person's intimidation.
 >
 > - William Thurston, *On proof and progress in mathematics*
+
+> Have respect for the meaning, but do not imagine it can be taught.
+>
+> - Herman Hesse, *The Glass Bead Game*
+
+> Abstractions are fine, but I think people also have to breathe air and eat bread.
+>
+> - Herman Hesse, *The Glass Bead Game*
+
+> It is all there, and yet it is not there. What is lacking? A nothing, but that nothing is everything.
+>
+> - Honore de Balzac, *Le Chef-d'œuvre inconnu*
