@@ -5,7 +5,7 @@ permalink: /quotes/
 ---
 
 > You cannot stay on the summit forever; you have to come down again. So why bother in the first place? Just this: What is above knows what is below, but what is below does not know what is above. 
->
+> .
 > One climbs, one sees. One descends, one sees no longer, but one has seen. 
 >
 > - Rene Daumal, *Le Mont Analogue*
@@ -13,6 +13,16 @@ permalink: /quotes/
 > The purpose of abstraction is not to be vague, but to create a new semantic level in which one can be absolutely precise. 
 >
 > - Edsger Dijkstra
+
+> I like to imagine abstraction (abstractly ha ha ha) as pulling the strings on a marionette. The marionette, being "real life," is easily accessible. Everyone understands the marionette whether it's walking or dancing or fighting. We can see it and it makes sense. But watch instead the hands of the puppeteers. Can you look at the hand movements of the puppeteers and know what the marionette is doing? 
+> ... 
+> Imagine it gets worse. Much, much worse. Imagine that the marionettes we see are controlled by marionettoids we don't see which are in turn controlled by pre-puppeteers which are finally controlled by actual puppeteers.
+> ...
+> I spent years trying to fake puppeteer lingo, but I have officially given up. My goal here is to write
+something that I can understand and remember and talk about with my non-puppeteer friends and family,
+which will allow me to speak my own language to the puppeteers.
+>
+> - Piper Harron, [*The Equidistribution of Lattice Shapes of Rings of Integers of Cubic, Quartic, and Quintic Number Fields: an Artist’s Rendering*](http://www.theliberatedmathematician.com/wp-content/uploads/2015/11/PiperThesisPostPrint.pdf){:target="_blank"}
 
 > Mathematics is a process of staring hard enough with enough perseverence at at the fog of muddle and confusion to eventually break through to improved clarity.
 >
