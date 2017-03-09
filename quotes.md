@@ -5,7 +5,6 @@ permalink: /quotes/
 ---
 
 > You cannot stay on the summit forever; you have to come down again. So why bother in the first place? Just this: What is above knows what is below, but what is below does not know what is above. 
-> .
 > One climbs, one sees. One descends, one sees no longer, but one has seen. 
 >
 > - Rene Daumal, *Le Mont Analogue*
