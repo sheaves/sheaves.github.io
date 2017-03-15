@@ -37,7 +37,7 @@ which will allow me to speak my own language to the puppeteers.
 
 > Think deeply of simple things.
 >
-> - Gauss?
+> - Gauss? Arnold Ross? (from Sara Billey's [research motto](https://sites.math.washington.edu/~billey/advice/timely.fashion.pdf){:target="_blank"})
 
 > We should be mindful of everything, for we can interpret everything.
 >
