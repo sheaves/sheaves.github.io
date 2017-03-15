@@ -35,6 +35,18 @@ which will allow me to speak my own language to the puppeteers.
 >
 > - William Thurston, *On proof and progress in mathematics*
 
+> Think deeply of simple things.
+>
+> - Gauss?
+
+> We should be mindful of everything, for we can interpret everything.
+>
+> - Herman Hesse, *The Glass Bead Game*
+
+> Anyone can create a pretty little bamboo garden in the world, but I doubt the gardener would succeed in incorporating the world in his bamboo grove.
+>
+> - Herman Hesse, *The Glass Bead Game*
+
 > Have respect for the meaning, but do not imagine it can be taught.
 >
 > - Herman Hesse, *The Glass Bead Game*
@@ -46,3 +58,6 @@ which will allow me to speak my own language to the puppeteers.
 > It is all there, and yet it is not there. What is lacking? A nothing, but that nothing is everything.
 >
 > - Honore de Balzac, *Le Chef-d'œuvre inconnu*
+
+
+
