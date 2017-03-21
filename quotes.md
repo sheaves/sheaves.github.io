@@ -59,5 +59,6 @@ which will allow me to speak my own language to the puppeteers.
 >
 > - Honore de Balzac, *Le Chef-d'œuvre inconnu*
 
-
-
+> Is this all 'just language'? There would be no shame if it were: language can have the most profound effect. New language can make new concepts thinkable, and make old, apparently obscure, concepts suddenly seem natural and obvious.
+>
+> - Tom Leinster, *Higher Opeards, Higher Categories*
