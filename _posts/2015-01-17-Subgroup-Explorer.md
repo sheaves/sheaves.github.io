@@ -102,7 +102,7 @@ def subgroup_class_lattices(Cardinality= 6):
                     edge_colors = None
 
                 # Define vertex labels
-                vertex_labels = {h : h.structure_description() for h in subgroups}
+                vertex_labels = {h : "$"+h.structure_description(latex=True)+"$" for h in subgroups}
 
                 #### END OF CUSTOM DISPLAY OPTIONS
 
@@ -170,7 +170,7 @@ def subgroup_class_lattices(Cardinality= 6):
                     edge_colors = None
 
                 # Define vertex labels
-                vertex_labels = {cc : cc[0].structure_description() for cc in sub_classes}
+                vertex_labels = {cc : "$"+cc[0].structure_description(latex=True)+"$" for cc in sub_classes}
 
                 #### END OF CUSTOM DISPLAY OPTIONS
 
