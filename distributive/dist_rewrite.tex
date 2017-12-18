@@ -1,0 +1,6548 @@
+\documentclass{article}
+
+\title{Beck's ``Distributive Laws'' in string}
+\author{L.Z. Wong}
+\date\today
+
+%%% Packages
+	% Page size and margins
+		\usepackage[letterpaper, portrait, margin=1in]{geometry}
+		\usepackage[bottom]{footmisc} % To force footnotes to the bottom
+
+	%%% Hyperlinks and table of contents
+		% http://tex.stackexchange.com/questions/73862/how-can-i-make-a-clickable-table-of-contents
+		\usepackage{hyperref}
+		\hypersetup{
+			linktocpage,
+		    colorlinks = True,
+		    citecolor=black,
+		    filecolor=black,
+		    linkcolor=blue,
+		    urlcolor=blue
+		}
+
+		% For \cref
+		\usepackage{cleveref}
+
+	%%% Figures and captions
+		\usepackage{caption}
+		\usepackage{subcaption}
+
+	%%% Basic math
+		\usepackage{amsmath,amssymb,amsthm}
+		\usepackage{mathtools}
+
+		\numberwithin{equation}{section}
+
+	%%% Tikz and Tikz-cd
+		\usepackage{tikz,tikz-cd}
+		\usetikzlibrary{arrows}
+		% \usetikzlibrary{external} % To save diagrams in a separate folder
+		% \tikzexternalize % activate!
+		\definecolor{vioteal}{RGB}{90,140,220}
+		%\definecolor{purgray}{RGB}{75,0,215}
+		\tikzstyle{every picture}=[semithick, scale = 0.7, baseline = (current bounding box.center)]
+		\tikzset{t/.style= {draw=white, double = teal, ultra thick}} % S
+		\tikzset{vt/.style= {draw=white, double = vioteal, ultra thick}} % S
+		\tikzset{s/.style= {draw=white, double = red, ultra thick}} % T
+		\tikzset{f/.style= {draw=white, double = black, ultra thick}} % Other functors		
+		\tikzset{s0/.style= {red, semithick}} % S without border
+		\tikzset{t0/.style= {teal, semithick}} % T without border
+		\tikzset{f0/.style= {black, semithick}} % other functors without border
+		\tikzset{ts/.style = {violet, ultra thick} } % TS
+		\tikzset{s-scope/.style={every path/.style=s}}	% For scopes. Every path in scope will have style t (above)
+
+		\tikzset{% for drawing adjunctions in tikz-cd
+		    symbol/.style={%
+		        draw=none,
+		        every to/.append style={%
+		            edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
+		    }
+		}
+
+	%%% Theorem environments
+		% http://www.maths.tcd.ie/~dwilkins/LaTeXPrimer/Theorems.html
+		\newtheorem{theorem}{Theorem}[section]
+		\newtheorem{lemma}[theorem]{Lemma}
+		\newtheorem{proposition}[theorem]{Proposition}
+		\newtheorem{corollary}[theorem]{Corollary}
+
+		\theoremstyle{definition}
+		\newtheorem{definition}[theorem]{Definition}
+
+		% \newenvironment{proof}[1][Proof]{\begin{trivlist}
+		% \item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+		% \newenvironment{definition}[1][Definition]{\begin{trivlist}
+		% \item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+		\newenvironment{example}[1][Example]{\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+		\newenvironment{remark}[1][Remark]{\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+	%%% Categories
+		\newcommand{\cat}[1]{\mathbf{#1}}
+		\newcommand{\Set}{\cat{Set}}
+		\newcommand{\Rel}{\cat{Rel}}
+		\newcommand{\Alg}{\cat{Alg}}
+		\newcommand{\Bim}{\cat{Bim}}
+		\newcommand{\Cat}{\cat{Cat}}
+		\newcommand{\Mnd}{\cat{Mnd}}
+		\newcommand{\Dist}{\cat{Dist}}
+
+	%%% Variable categories
+		\newcommand{\varcat}[1]{\mathbf{#1}}
+		\newcommand{\cA}{\varcat{A}}
+		\newcommand{\cB}{\varcat{B}}
+		\newcommand{\cC}{\varcat{C}}
+		
+		\newcommand{\cX}{\varcat{X}}
+		\newcommand{\cY}{\varcat{Y}}
+		\newcommand{\cZ}{\varcat{Z}}
+
+		\newcommand{\cK}{\mathcal{K}}
+
+		\newcommand{\To}{\Rightarrow}
+
+	%%% Tildes
+		\renewcommand{\t}[1]{\tilde{#1}}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+%%% Introductory material
+
+	\begin{abstract}
+		This is a rewrite of Beck's `Distributive Laws' \cite{beck1969distributive}, making use of string diagrams so that the proofs apply to $2$-categories other than $\Cat$.
+	\end{abstract}
+
+	\subsection{Introduction}
+		In this document, we rewrite portions of Beck's `Distributive Laws' \cite{beck1969distributive} from a formal point of view, modifying some of the arguments so that they apply to $2$-categories other than $\Cat$. The structure of the next 3 sections mirrors that of \cite{beck1969distributive}.
+
+		In the rest of this section, we review the string diagrammatic calculus, and reformulate some aspects of Street's \cite{street1972formal} using string diagrams.
+
+\pagebreak
+
+\section{Distributive laws, composite and lifted monads}
+	\label{main}
+
+	We work in a $2$-category $\cK$. Let $(S,\eta^S,\mu^S),(T,\eta^T,\mu^T)$ be monads over the same 0-cell $\cX$. We will denote them using \underline{S}carlet and \underline{T}eal strings, resp. The white regions surrounding the strings will stand for $\cX$.	 
+
+	\begin{definition}
+		A \emph{distributive law of $S$ over $T$} is a 2-cell $\ell: ST \Rightarrow TS$
+		\begin{equation*} % definition
+			\begin{tikzpicture}
+				\node at (-1,2.3) {$S$};
+				\node at (1,2.3) {$T$};
+				\node at (-1,0) {$\ell$};
+				
+				\draw [t]
+				(1,2) 
+					to [out = -90, in = 90]
+				(-1,-2);
+
+				\draw [s] 
+				(-1,2) 
+					to [out = -90, in = 90 ] 
+				(1,-2);	
+			\end{tikzpicture}
+		\end{equation*}
+
+		such that the following equalities hold:
+
+		\begin{equation} \label{eq:dist_units}% unitality
+			\begin{aligned}
+				\begin{tikzpicture}			
+						\draw [t]
+						(1,2) 
+							to [out = -90, in = 90]
+						(-1,-2);
+
+						\draw [s] 
+						(-0.5,1) 
+							to [out = -90, in = 90 ] 
+						(1,-2);	
+
+						\draw[fill, color=red] (-0.5,1) circle (.08);
+						\path (-0.9,1) node {$\eta^S$};
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad
+			=
+			\qquad
+			\begin{aligned}
+				\begin{tikzpicture}			
+					\draw [t]
+					(-1,2) 
+						to [out = down, in = up]
+					(-1,-2);
+
+					\draw [s] 
+					(1,-0.5) 
+						to [out = down, in =up ] 
+					(1,-2);	
+
+					\draw[fill, color=red] (1,-0.5) circle (.08);					
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad \qquad 
+			; 
+			\qquad \qquad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw [t]
+					(0.5,1) 
+						to [out = -90, in = 90]
+					(-1,-2);
+					
+					\draw [s] 
+					(-1,2) 
+						to [out = -90, in = 90] 
+					(1,-2);	
+
+					\draw[fill, color=teal] (0.5,1) circle (.08);
+					\path (0.95, 1) node {$\eta^T$};					
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad 
+			= 
+			\qquad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw [t]
+					(-1,-0.5) 
+						to [out = down, in = up]
+					(-1,-2);
+
+					\draw [s] 
+					(1,2) 
+						to [out = down, in =up ] 
+					(1,-2);	
+
+					\draw[fill, color=teal] (-1,-0.5) circle (.08);
+				\end{tikzpicture}
+			\end{aligned}	
+		\end{equation}
+
+		\begin{equation} \label{eq:SST}% double S
+			\begin{aligned}
+				\begin{tikzpicture}[xscale=-1]
+						\draw [t]
+						(-2,2) 
+							to [out=-90, in = 90]
+						(1,-4);							
+						
+						\draw [s] 
+						(0,2) 
+							to [out=-90, in=150]
+						(1,0) 
+							to [out= 30, in =-90]
+						(2,2);
+						\draw [s]
+						(1,0) 
+							to [out = -90, in = 90]
+						(-2,-4);
+
+						\path (0.9,0.4) node {$\mu^S$};
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad
+			=
+			\qquad
+			\begin{aligned}
+				\begin{tikzpicture}[xscale = -1]
+					\draw [t]
+					(-2,2)  
+						to [out=-90, in = 90]
+					(1,-4);
+
+					\draw [s] 
+					(0,2) 
+						to [out = -90, in = 150]
+					(-1.5,-3) 
+						to [out= 30, in =-90]
+					(2,2);
+
+					\draw [s]
+					(-1.5,-3) 
+						to 
+					(-1.5,-4);		
+				\end{tikzpicture}
+			\end{aligned}
+		\end{equation}
+
+		\begin{equation} \label{eq:STT} % double T 
+			\begin{aligned}
+				\begin{tikzpicture}				
+					\draw [t] 
+					(0,2) 
+						to [out=-90, in=150]
+					(1,0) 
+						to [out= 30, in =-90]
+					(2,2);
+
+					\draw [t]
+					(1,0) 
+						to [out = -90, in = 90]
+					(-2,-4);
+																
+					\draw [s]
+					(-2,2) 
+						to [out=-90, in = 90]
+					(1,-4);
+
+					\path (1.1,0.4) node {$\mu^T$};
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad 
+			=
+			\qquad
+			\begin{aligned}
+				\begin{tikzpicture}				
+					\draw [t] 
+					(0,2) 
+						to [out = -90, in = 150]
+					(-1.5,-3) 
+						to [out= 30, in =-90]
+					(2,2);
+
+					\draw [t]
+					(-1.5,-3) 
+						to 
+					(-1.5,-4);
+					
+					\draw [s]
+					(-2,2)  
+						to [out=-90, in = 90]
+					(1,-4);
+				\end{tikzpicture}
+			\end{aligned}
+		\end{equation}
+	\end{definition}
+
+	Intuitively, we `braid' $S$ over $T$, in such a way that the expected `topological moves' holds. More precisely, a distributive law can be thought of as a \emph{local pre-braiding} of $S$ and $T$; `local' indicates it is not necessarily defined for all 1-cells (in our case, it is only defined for $S$ and $T$!), and `pre' indicates it is not necessarily invertible.
+
+	We now state the main proposition as a guide to rest of the section. Some new terms in the proposition will be defined in the following subsections where the corresponding equivalences are proved.
+	\pagebreak	
+	\begin{proposition}
+		The following are equivalent:
+		\begin{enumerate}
+			\item distributive laws $\ell: ST \Rightarrow TS$,
+
+			\item multiplications $m: TSTS \To TS$ making $(TS,\eta^T \eta^S, m)$ a monad, such that the 2-cells
+				\begin{equation*} S \xRightarrow{\eta^T S} TS \xLeftarrow{T \eta^S} T \end{equation*}
+				are monad morphisms and a middle unitary law holds.
+
+			\item liftings of the monad $T$ to a monad $\tilde{T}$ over $\cX^S$,
+
+			\item extensions of the monad $S$ to a monad $\tilde{S}$ over $\cX_T$,
+
+			\item certain elements of $\Mnd\left(\Mnd(\cC) \right)$.
+		\end{enumerate}
+	\end{proposition}
+
+	In \Cref{comp}, we define some properties satisfied by the composite monad $TS$, and prove $(1\iff 2)$. 
+
+	In \Cref{lift}, we define what it means to have a lift or extension of a monad over the corresponding Eilenberg-Moore or Kleisli objects, and prove $(1 \iff 3)$. In fact, Beck's paper only mentions the first three points:  (4) is stated in \cite{cheng2011distributive} without proof, but is equivalent to $(3)$ by duality, as we shall see in \Cref{lift}
+
+	In \Cref{mndmnd}, we define and show the equivalence between $\Dist(\cC)$ and $\Mnd\left(\Mnd(\cC) \right)$ in the manner of \cite{street1972formal}. This equivalence is what we mean by $(1 \iff 5)$.
+
+	\subsection{The composite monad} \label{comp}
+		Let $S$ and $T$ be monads as above. The composite $TS$ will be denoted by any of the following equivalent diagrams:
+		\begin{equation} \label{eq:TS_def}% TS definition
+			\begin{aligned}
+				\begin{tikzpicture}	
+					\path (0,0) node (TS) {$TS$};	
+					\draw [ts]
+					(TS) 
+						to
+					(0,-3);	
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad
+			=
+			\qquad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\path (-1,0) node (T) {$T$};
+					\path (1,0) node (S) {$S$};
+					
+					\draw [s]
+					(S)
+						to 
+					(1,-3);
+					
+					\draw [t] 
+					(T) 
+						to 
+					(-1,-3);					
+
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad
+			=
+			\qquad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\path (-1,0) node (T) {$T$};
+					\path (1,0) node (S) {$S$};
+					\path (0,-3) node (TS) {$TS$};	
+					\path (0,-2) node (c) {};
+					
+					
+					\draw [t] 
+					(T) 
+						to [out = -90, in = 90]
+					(c.center);
+
+					\draw [s]
+					(S)
+						to [out = -90, in =90]
+					(c.center);
+					
+					\draw [ts]
+					(c.center)
+						to
+					(TS);	
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad
+			=
+			\qquad
+			\begin{aligned}
+				\begin{tikzpicture}[yscale=-1]
+					\path (-1,0) node (T) {$T$};
+					\path (1,0) node (S) {$S$};
+					\path (0,-3) node (TS) {$TS$};	
+					\path (0,-2) node (c) {};			
+
+					
+					\draw [t] 
+					(T) 
+						to [out = -90, in = 90]
+					(c.center);
+
+					\draw [s]
+					(S)
+						to [out = -90, in =90]
+					(c.center);					
+
+					\draw [ts]
+					(c.center)
+						to
+					(TS);	
+				\end{tikzpicture}
+			\end{aligned}
+		\end{equation}		
+		It might be helpful to think of the thick purple string as a wire `sleeve' that contains a teal and scarlet wire. Just remember that inside the sleeve, the teal wire is always to the left of the scarlet wire.
+
+		The units of $S$ and $T$ give rise to 2-cells which we denote in the following (hopefully intuitive) manner:
+		\begin{equation} \label{eq:S_T_to_ST}% monad morphisms S, T to TS
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw [ts]
+					(-1,-0.5) 
+						to
+					(-1,-2);
+					
+					\draw [t] 
+					(-1,1) 
+						to
+					(-1,-0.5);	
+					\draw[fill, color=red, ] (-1,-0.5) circle (.08);
+					\node at (-1.75,-0.5) {$T \eta^S$};
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad
+			=
+			\qquad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\path (-1,0) node (T) {};
+					\path (0.5,-1.5) node (S) {};
+					
+					\draw [s]
+					(S.center)
+						to 
+					(0.5,-3);
+					
+					\draw [t] 
+					(T.center) 
+						to
+					 (-1,-3) ;	
+					
+					\draw[fill, color=red] (0.5,-1.5) circle (.08);
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad \qquad 
+			;
+			\qquad \qquad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw [ts]
+					(-1,-0.5) 
+						to
+					(-1,-2);
+					
+					\draw [s] 
+					(-1,1) 
+						to
+					(-1,-0.5);	
+					\draw[fill, color=teal, ] (-1,-0.5) circle (.08);
+					\node at (-1.75,-0.5) {$\eta^T S$};
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad
+			=
+			\qquad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\path (-1,-1.5) node (T) {};
+					\path (0.5,0) node (S) {};
+					
+					\draw [s]
+					(S.center)
+						to 
+					(0.5,-3);
+					
+					\draw [t] 
+					(T.center) 
+						to
+					 (-1,-3) ;	
+					
+					\draw[fill, color=teal] (T) circle (.08);
+				\end{tikzpicture}
+			\end{aligned}				
+		\end{equation}
+
+		A $2$-cell $m:TSTS \To TS$ may be expressed using various equivalent diagrams, including the following:
+		\begin{equation} % various m
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw [t] 
+					(-0.5,-1) -- (-0.5,-2) ;					
+					\draw [t]
+					(1,-1) -- (1,-2);					
+					\draw [t]
+					(0,-4) -- (0,-3);			
+			
+					\draw [s]
+					(0,-1) -- (0,-2);
+					\draw [s]
+					(1.5,-1) -- (1.5,-2);					
+					\draw [s] (1,-3) -- (1,-4);		
+
+					\draw[rounded corners, fill = violet, fill opacity = 0.2]  (-1,-2) rectangle (2,-3);
+					\node at (0.5,-2.5) {$m$};					
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad
+			=
+			\qquad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw [ts]
+					(1,-1) -- (1,-2);					
+					\draw [ts]
+					(0.5,-4) -- (0.5,-3);			
+			
+					\draw [ts]
+					(0,-1) -- (0,-2);	
+
+					\draw[rounded corners, fill = violet, fill opacity = 0.2]  (-0.5,-2) rectangle (1.5,-3);
+					\node at (0.5,-2.5) {$m$};
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad
+			=
+			\qquad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw [ts] 
+					(-1,-0.5) 
+						to [out = -90, in = 150]
+					(0,-2.5) 
+						to [out = 30, in =-90]
+					(1,-0.5);
+					
+					\draw [ts]
+					(0,-3.5) 
+						to
+					(0,-2.5);	
+
+					\node at (0,-2) {$m$};
+				\end{tikzpicture}
+			\end{aligned}
+			% \qquad
+			% =
+			% \qquad
+			% \begin{aligned}
+			% 	\begin{tikzpicture}
+			% 		\draw [ts] 
+			% 		(-0.5,-2) node (v1) {} 
+			% 			to [out = -90, in = 150]
+			% 		(0,-2.5) node (m) {} 
+			% 			to [out = 30, in =-90]
+			% 		(0.5,-2) node (v2) {};					
+			% 		\draw [ts]
+			% 		(0,-3) 
+			% 			to
+			% 		(m.center);	
+			% 		\draw [t]
+			% 		(-0.75,-1)
+			% 			to [out = -90, in =150]
+			% 		(v1.center);
+			% 		\draw [t]
+			% 		(0.25,-1)
+			% 			to [out = -90, in =150]
+			% 		(v2.center);
+			% 		\draw [s]
+			% 		(-0.25,-1)
+			% 			to [out = -90, in =30]
+			% 		(v1.center);
+			% 		\draw [s]
+			% 		(0.75,-1)
+			% 			to [out = -90, in =30]
+			% 		(v2.center);					
+			% 		\draw [t]
+			% 		(0,-3)
+			% 			to [out = 210, in =90]
+			% 		(-0.25,-4);
+			% 		\draw [s]
+			% 		(0,-3)
+			% 			to [out = -30, in =90]
+			% 		(0.25,-4);	
+			% 	\end{tikzpicture}
+			% \end{aligned}
+			\qquad = \qquad \dots									
+		\end{equation}
+
+		\begin{definition} % middle unitary law
+			We say that $m:TSTS\To TS$ satisfies the \emph{middle unitary law} if
+			\begin{equation} \label{eq:middle-unit-1}
+			 	\begin{aligned}
+			 		\begin{tikzpicture}						
+						\draw [t] 
+						(-0.5,-0.5) -- (-0.5,-2) ;					
+						\draw [t]
+						(1,-1.5) -- (1,-2);					
+						\draw [t]
+						(0,-4) -- (0,-3);			
+				
+						\draw [s]
+						(0,-1.5) -- (0,-2);
+						\draw [s]
+						(1.5,-0.5) -- (1.5,-2);					
+						\draw [s] (1,-3) -- (1,-4);		
+
+						\draw[rounded corners, fill = violet, fill opacity = 0.2]  (-1,-2) rectangle (2,-3);
+						\node at (0.5,-2.5) {$m$};	
+						
+						 \draw[fill, color=teal] (1,-1.5) circle (.08);
+						 \draw[fill, color=red] (0,-1.5) circle (.08);	
+			 		\end{tikzpicture}
+			 	\end{aligned}
+			 	\qquad \qquad = \qquad \qquad
+			 	\begin{aligned}
+			 		\begin{tikzpicture}
+			 			\draw [t] (0,0.5) -- (0,-3);
+			 			\draw [s] (2,0.5) -- (2,-3);
+			 		\end{tikzpicture}	
+			 	\end{aligned}
+			 	\qquad .
+			\end{equation}
+			Equivalently, expressed using $\eta^T S$ and $T \eta^S$,
+			\begin{equation} \label{eq:middle-unit-2}
+			 	\begin{aligned}
+			 		\begin{tikzpicture}						
+						\draw [ts] 
+						(-1,-1) node (v1) {} 
+							to [out = -90, in = 150]
+						(0,-2) 
+							to [out = 30, in =-90]
+						(1,-1) node (v2) {};
+						
+						\draw [ts]
+						(0,-3) 
+							to
+						(0,-2);	
+						
+						\draw [t]
+						(-1,0.5)
+							to
+						(v1.center);
+						
+						\draw [s]
+						(1,0.5)
+							to
+						(v2.center);
+
+						\draw[fill, color=red, ] (-1,-1) circle (.08);	
+						\draw[fill, color=teal, ] (1,-1) circle (.08);	
+			 		\end{tikzpicture}
+			 	\end{aligned}	 	
+			 	\qquad \qquad 
+			 	= 
+			 	\qquad \qquad
+			 	\begin{aligned}
+			 		\begin{tikzpicture}
+			 			\draw[ts]
+			 			(0,0.5) -- (0,-3);
+			 		\end{tikzpicture}
+			 	\end{aligned}					 	
+			 	\qquad .
+			\end{equation}			
+		\end{definition}
+
+		\begin{lemma}[$1 \longrightarrow 2$]
+			A distributive law $\ell:ST \To TS$ gives rise to a multiplication $m:TSTS \To TS$ such that $(TS, \eta^T \eta^S, m)$ is a monad,
+			the 2-cells
+				\begin{equation*} S \xRightarrow{\eta^T S} TS \xLeftarrow{T \eta^S} T \end{equation*}
+			are monad morphisms, and the middle unitary law holds. 
+		\end{lemma}
+		\begin{proof}
+
+		Given a distributive law $\ell : ST \To TS$, define a multiplication $m: TSTS \To TS$ by
+		\begin{equation} \label{eq:m_def} % m for TS
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw [ts] 
+					(-1,-0.5) 
+						to [out = -90, in = 150]
+					(0,-2.5) 
+						to [out = 30, in =-90]
+					(1,-0.5);
+					
+					\draw [ts]
+					(0,-3.5) 
+						to
+					(0,-2.5);	
+
+					\node at (0,-2) {$m$};		
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad
+			:= 
+			\qquad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw [t] 
+					(-1,-0.5) 
+						to [out = -90, in = 150]
+					(0,-2.5) 
+						to [out = 30, in =-90]
+					(1,-0.5);
+					
+					\draw [t]
+					(0,-3.5) 
+						to
+					(0,-2.5);		
+			
+					\draw [s]
+					(0,-0.5) 
+						to [out=-90, in =150 ] 
+					(1,-2.5)
+						to [out = 30, in =-90]
+					(2,-0.5);
+					
+					\draw [s] (1,-2.5) -- (1,-3.5);
+				\end{tikzpicture}
+			\end{aligned}
+		\end{equation}
+
+		with unit  $\eta^T \eta^S$
+		\begin{equation} % unit of TS
+			\begin{aligned}
+				\begin{tikzpicture}
+					\path (-1,-0.5) node (TS) {};
+					
+					\draw [ts] 
+					(TS.center) 
+						to
+					 (-1,-2) ;	
+
+					\draw[fill, color=violet] (TS) circle (.08);
+					\node at (-1.75,-1) {$\eta^T \eta^S$};					
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad
+			=
+			\qquad
+			\begin{aligned}
+				\begin{tikzpicture}					
+					\draw [t]
+					(-1,-0.5) 
+						to
+					(-1,-2);
+					
+					\draw [s] 
+					(0.5,-0.5) 
+						to
+					(0.5,-2);	
+
+					\draw[fill, color=teal] (-1,-0.5) circle (.08);
+					\draw[fill, color=red] (0.5,-0.5) circle (.08);
+				\end{tikzpicture}
+			\end{aligned}\qquad.
+		\end{equation}		
+
+		Associativity and unitality of $m$ and $\eta^T \eta^S$ follow from the associativity and unitality of of $\mu^S,\mu^T, \eta^S,\eta^T$:
+		\begin{equation} % assoc for m
+			\begin{aligned}
+				\begin{tikzpicture}
+					\begin{scope}[teal, shift={(4,0)}]
+						\path (0,1) node (i1) {};
+						\path (2,1) node (i2) {};
+						\path (3.5,1) node (i3) {};	
+						
+						\path (1,-1) node (m1) {};
+						\path (2,-3) node (m2) {};
+					
+						\path (2,-3.5) node (o1) {};
+					
+						\path[draw]
+						(i1.center) 
+							to [out=-90, in=150] 
+						(m1.center)
+							to [out=30, in=-90] 
+						(i2.center);
+							\path[draw]
+						(m1.center) 
+							to [out=-90, in=150] 
+						(m2.center)
+							to [out=30, in=-90] 
+						(i3.center);
+					
+						\path[draw]
+						(m2.center) 
+							to 
+						(o1.center);
+					\end{scope}	
+						\begin{scope}[s-scope, shift={(4.9,0)}];
+						\path (0,1) node (i1) {};
+						\path (2,1) node (i2) {};
+						\path (3.5,1) node (i3) {};	
+					
+						\path (1,-1) node (m1) {};
+						\path (2,-3) node (m2) {};
+					
+						\path (2,-3.5) node (o1) {};
+					
+						\path[draw]
+						(i1.center) 
+							to [out=-90, in=150] 
+						(m1.center)
+							to [out=30, in=-90] 
+						(i2.center);
+							\path[draw]
+						(m1.center) 
+							to [out=-90, in=150] 
+						(m2.center)
+							to [out=30, in=-90] 
+						(i3.center);
+					
+						\path[draw]
+						(m2.center) 
+							to 
+						(o1.center);
+					\end{scope}	
+				\end{tikzpicture}
+			\end{aligned}
+			=
+			\begin{aligned}
+			 	\begin{tikzpicture}
+			 		\begin{scope}[teal, shift={(4,0)}]
+			 			\path (0,1) node (i1) {};
+			 			\path (2,1) node (i2) {};
+			 			\path (3.5,1) node (i3) {};	
+						
+			 			\path (1,-1.5) node (m1) {};
+			 			\path (1.5,-2.5) node (m2) {};
+						
+			 			\path (1.5,-3.5) node (o1) {};
+						
+			 			\path[draw]
+			 			(i1.center) 
+			 				to [out=-90, in=150] 
+			 			(m1.center)
+			 				to [out=30, in=-90] 
+			 			(i2.center);
+			
+			 			\path[draw]
+			 			(m1.center) 
+			 				to [out=-90, in=150] 
+			 			(m2.center)
+			 				to [out=30, in=-90] 
+			 			(i3.center);
+						
+			 			\path[draw]
+			 			(m2.center) 
+			 				to 
+			 			(o1.center);
+			 		\end{scope}	
+			
+			 		\begin{scope}[s-scope, shift={(4.9,0)}];
+			 			\path (0,1) node (i1) {};
+			 			\path (2,1) node (i2) {};
+			 			\path (4,1) node (i3) {};	
+						
+			 			\path (2,-2) node (m1) {};
+			 			\path (2.5,-3) node (m2) {};
+						
+			 			\path (2.5,-3.5) node (o1) {};
+						
+			 			\path[draw]
+			 			(i1.center) 
+			 				to [out=-90, in=150] 
+			 			(m1.center)
+			 				to [out=30, in=-90] 
+			 			(i2.center);
+			
+			 			\path[draw]
+			 			(m1.center) 
+			 				to [out=-90, in=150] 
+			 			(m2.center)
+			 				to [out=30, in=-90] 
+			 			(i3.center);
+						
+			 			\path[draw]
+			 			(m2.center) 
+			 				to 
+			 			(o1.center);
+			 		\end{scope}	
+			 	\end{tikzpicture}
+			\end{aligned}
+			=
+			\begin{aligned}
+			 	\begin{tikzpicture}[xscale=-1]
+			 		\begin{scope}[teal, shift={(4.9,0)}];
+			 			\path (0,1) node (i1) {};
+			 			\path (2,1) node (i2) {};
+			 			\path (4,1) node (i3) {};	
+						
+			 			\path (2,-2) node (m1) {};
+			 			\path (2.5,-3) node (m2) {};
+						
+			 			\path (2.5,-3.5) node (o1) {};
+						
+			 			\path[draw]
+			 			(i1.center) 
+			 				to [out=-90, in=150] 
+			 			(m1.center)
+			 				to [out=30, in=-90] 
+			 			(i2.center);
+			
+			 			\path[draw]
+			 			(m1.center) 
+			 				to [out=-90, in=150] 
+			 			(m2.center)
+			 				to [out=30, in=-90] 
+			 			(i3.center);
+						
+			 			\path[draw]
+			 			(m2.center) 
+			 				to 
+			 			(o1.center);
+			 		\end{scope}	
+			
+			 		\begin{scope}[s-scope, shift={(4,0)}]
+			 			\path (0,1) node (i1) {};
+			 			\path (2,1) node (i2) {};
+			 			\path (3.5,1) node (i3) {};	
+						
+			 			\path (1,-1.5) node (m1) {};
+			 			\path (1.5,-2.5) node (m2) {};
+						
+			 			\path (1.5,-3.5) node (o1) {};
+						
+			 			\path[draw]
+			 			(i1.center) 
+			 				to [out=-90, in=150] 
+			 			(m1.center)
+			 				to [out=30, in=-90] 
+			 			(i2.center);
+			
+			 			\path[draw]
+			 			(m1.center) 
+			 				to [out=-90, in=150] 
+			 			(m2.center)
+			 				to [out=30, in=-90] 
+			 			(i3.center);
+						
+			 			\path[draw]
+			 			(m2.center) 
+			 				to 
+			 			(o1.center);
+			 		\end{scope}	
+			 	\end{tikzpicture}
+			\end{aligned}
+			=
+			\begin{aligned}
+			 	\begin{tikzpicture}[xscale=-1]
+			 		\begin{scope}[teal, shift={(4.9,0)}];
+			 			\path (0,1) node (i1) {};
+			 			\path (2,1) node (i2) {};
+			 			\path (3.5,1) node (i3) {};	
+						
+			 			\path (1,-1) node (m1) {};
+			 			\path (2,-3) node (m2) {};
+						
+			 			\path (2,-3.5) node (o1) {};
+						
+			 			\path[draw]
+			 			(i1.center) 
+			 				to [out=-90, in=150] 
+			 			(m1.center)
+			 				to [out=30, in=-90] 
+			 			(i2.center);
+
+			 			\path[draw]
+			 			(m1.center) 
+			 				to [out=-90, in=150] 
+			 			(m2.center)
+			 				to [out=30, in=-90] 
+			 			(i3.center);
+						
+			 			\path[draw]
+			 			(m2.center) 
+			 				to 
+			 			(o1.center);
+			 		\end{scope}	
+
+			 		\begin{scope}[s-scope, shift={(4,0)}]
+			 			\path (0,1) node (i1) {};
+			 			\path (2,1) node (i2) {};
+			 			\path (3.5,1) node (i3) {};	
+						
+			 			\path (1,-1) node (m1) {};
+			 			\path (2,-3) node (m2) {};
+								
+			 			\path (2,-3.5) node (o1) {};
+						
+			 			\path[draw]
+			 			(i1.center) 
+			 				to [out=-90, in=150] 
+			 			(m1.center)
+			 				to [out=30, in=-90] 
+			 			(i2.center);
+
+			 			\path[draw]
+			 			(m1.center) 
+			 				to [out=-90, in=150] 
+			 			(m2.center)
+			 				to [out=30, in=-90] 
+			 			(i3.center);
+						
+			 			\path[draw]
+			 			(m2.center) 
+			 				to 
+			 			(o1.center);
+			 		\end{scope}	
+			 	\end{tikzpicture}
+			\end{aligned}
+		\end{equation}
+		\begin{equation} % unitality
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw [t] 
+					(-1,-1) 
+						to [out = -90, in = 150]
+					(0,-2.5) 
+						to [out = 30, in =-90]
+					(1,0);
+					
+					\draw [t]
+					(0,-3) 
+						to
+					(0,-2.5);			
+			
+					\draw [s]
+					(0,-1) 
+						to [out=-90, in =150 ] 
+					(1,-2.5)
+						to [out = 30, in =-90]
+					(2,0);
+					
+					\draw [s] (1,-2.5) -- (1,-3);
+					
+					\draw[fill, color=red] (0,-1) circle (.08);		
+					\draw[fill, color=teal] (-1,-1) circle (.08);						
+				\end{tikzpicture}
+			\end{aligned}
+			\quad
+			=
+			\quad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw [t] 
+					(-1,-1) 
+						to [out = -90, in = 150]
+					(0,-2.5) 
+						to [out = 30, in =-90]
+					(1,0);
+					
+					\draw [t]
+					(0,-3) 
+						to
+					(0,-2.5);			
+			
+					\draw [s]
+					(0.75,-2.25) 
+						to [out=-90, in =150 ] 
+					(1,-2.5)
+						to [out = 30, in =-90]
+					(2,0);
+					
+					\draw [s] (1,-2.5) -- (1,-3);
+					
+					\draw[fill, color=red] (0.75,-2.25) circle (.08);		
+					\draw[fill, color=teal] (-1,-1) circle (.08);						
+				\end{tikzpicture}
+			\end{aligned}
+			\quad
+			=
+			\quad			
+			\begin{aligned}
+				\begin{tikzpicture}					
+					\draw [t] (0,-3) -- (0,0);			
+					
+					\draw [s] (1,0) to (1,-3);					
+				\end{tikzpicture}
+			\end{aligned}
+			\quad
+			=
+			\quad
+			\begin{aligned}
+				\begin{tikzpicture}[xscale=-1]
+					\draw [t]
+					(0.75,-2.25) 
+						to [out=-90, in =150 ] 
+					(1,-2.5)
+						to [out = 30, in =-90]
+					(2,0);
+
+					\draw [s] 
+					(-1,-1) 
+						to [out = -90, in = 150]
+					(0,-2.5) 
+						to [out = 30, in =-90]
+					(1,0);
+					
+					\draw [s]
+					(0,-3) 
+						to
+					(0,-2.5);			
+
+					
+					\draw [t] (1,-2.5) -- (1,-3);
+					
+					\draw[fill, color=teal] (0.75,-2.25) circle (.08);		
+					\draw[fill, color=red] (-1,-1) circle (.08);							
+				\end{tikzpicture}
+			\end{aligned}
+			\quad
+			=
+			\quad
+			\begin{aligned}
+				\begin{tikzpicture}[xscale=-1]
+					\draw [t]
+					(0,-1) 
+						to [out=-90, in =150 ] 
+					(1,-2.5)
+						to [out = 30, in =-90]
+					(2,0);
+
+					\draw [s] 
+					(-1,-1) 
+						to [out = -90, in = 150]
+					(0,-2.5) 
+						to [out = 30, in =-90]
+					(1,0);
+					
+					\draw [s]
+					(0,-3) 
+						to
+					(0,-2.5);			
+
+					
+					\draw [t] (1,-2.5) -- (1,-3);
+					
+					\draw[fill, color=teal] (0,-1) circle (.08);		
+					\draw[fill, color=red] (-1,-1) circle (.08);						
+				\end{tikzpicture}
+			\end{aligned}			
+		\end{equation}
+
+		Thus $(TS, \eta^T\eta^S, m)$ is a monad.
+		We check that $T \eta^S$ is a monad morphism, leaving the analogous proof for $\eta^T S$ to the reader:
+		\begin{equation} \label{eq:T_to_TS_check} % check mult
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw [ts] 
+					(-1,-1) 
+						to [out = -90, in = 150]
+					(0,-2.5) 
+						to [out = 30, in =-90]
+					(1,-1);
+					
+					\draw [ts]
+					(0,-3.5) 
+						to
+					(0,-2.5);		
+					
+					\draw [t]
+					(-1,0.5)
+						to
+					(-1,-1);		
+					
+					\draw [t]
+					(1,0.5)
+						to
+					(1,-1);
+					
+					\draw[fill, color=red, ] (-1,-1) circle (.08);
+					\draw[fill, color=red, ] (1,-1) circle (.08);
+				\end{tikzpicture}
+			\end{aligned}
+			\quad
+			=
+			\quad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw [t] 
+					(-1,0.5) 
+						to [out = -90, in = 150]
+					(0,-2.5) 
+						to [out = 30, in =-90]
+					(1,0.5);
+					
+					\draw [t]
+					(0,-3.5) 
+						to
+					(0,-2.5);			
+			
+					\draw [s]
+					(0,-1) 
+						to [out=-90, in =150 ] 
+					(1,-2.5)
+						to [out = 30, in =-90]
+					(2,-1);
+					
+					\draw [s] (1,-2.5) -- (1,-3.5);	
+					\draw[fill, color=red] (0,-1) circle (.08);
+					\draw[fill, color=red] (2,-1) circle (.08);
+				\end{tikzpicture}
+			\end{aligned}
+			\quad
+			=
+			\quad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw [t] 
+					(-1,0.5) 
+						to [out = -90, in = 150]
+					(0,-1.5) 
+						to [out = 30, in =-90]
+					(1,0.5);
+					
+					\draw [t]
+					(0,-3.5) 
+						to
+					(0,-1.5);			
+			
+					\draw [s]
+					(0.75,-2.25) 
+						to [out=-90, in =150 ] 
+					(1,-2.5)
+						to [out = 30, in =-90]
+					(2,-1);
+					
+					\draw [s] (1,-2.5) -- (1,-3.5);	
+					\draw[fill, color=red] (0.75,-2.25) circle (.08);
+					\draw[fill, color=red] (2,-1) circle (.08);
+				\end{tikzpicture}
+			\end{aligned}		
+			\quad
+			=
+			\quad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw [t] 
+					(-1,0.5) 
+						to [out = -90, in = 150]
+					(0,-1.5) 
+						to [out = 30, in =-90]
+					(1,0.5);
+					
+					\draw [t]
+					(0,-3.5) 
+						to
+					(0,-1.5);		
+			
+
+					\draw [s] (1,-2.5) -- (1,-3.5);	
+					\draw[fill, color=red] (1,-2.5) circle (.08);
+				\end{tikzpicture}
+			\end{aligned}		
+			\quad
+			=
+			\quad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw [t] 
+					(-1,0.5) 
+						to [out = -90, in = 150]
+					(0,-1.5) 
+						to [out = 30, in =-90]
+					(1,0.5);
+					
+					\draw [t]
+					(0,-2.5) 
+						to
+					(0,-1.5);	
+
+					\draw [ts]
+					(0,-2.5)
+						to
+					(0,-3.5);						
+					
+					\draw[fill, color=red, ] (0,-2.5) circle (.08);				
+					
+
+				\end{tikzpicture}
+			\end{aligned}
+		\end{equation}
+		\begin{equation} % check unit
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw [ts]
+					(-1,-0.5) 
+						to
+					(-1,-2);
+					
+					\draw [t] 
+					(-1,0.5) 
+						to
+					(-1,-0.5);	
+					\draw[fill, color=red, ] (-1,-0.5) circle (.08);
+					\draw[fill, color=teal] (-1,0.5) circle (.08);	
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad
+			=
+			\qquad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\path (-1,0.5) node (S) {};
+					\path (0.5,-0.5) node (T) {};
+					
+					\draw [s]
+					(T.center)
+						to 
+					(0.5,-2);
+					
+					\draw [t] 
+					(S.center) 
+						to
+					 (-1,-2) ;	
+					
+					\draw[fill, color=red] (T) circle (.08);
+					\draw[fill, color=teal] (S) circle (.08);
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad 
+			=
+			\qquad 
+			\begin{aligned}
+				\begin{tikzpicture}
+					\path (-1,-0.5) node (S) {};
+					\path (0.5,-0.5) node (T) {};
+
+					\draw[white]
+					(-1,0.5) to (S);
+					
+					\draw [s]
+					(T.center)
+						to 
+					(0.5,-2);
+					
+					\draw [t] 
+					(S.center) 
+						to
+					 (-1,-2) ;	
+					
+					\draw[fill, color=red] (T) circle (.08);
+					\draw[fill, color=teal] (S) circle (.08);
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad
+			=
+			\qquad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\path (-1,-0.5) node (ST) {};
+
+					\draw[white]
+					(-1,0.5) to (ST);		
+
+					
+					\draw [ts] 
+					(ST.center) 
+						to
+					 (-1,-2) ;	
+
+					\draw[fill, color=violet] (ST) circle (.08);
+				\end{tikzpicture}
+			\end{aligned}				
+		\end{equation}		
+
+		Finally, we verify that $m$ satisfies the middle unitary law
+		\begin{equation} % check middle unit law
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw [t] 
+					(-1,0) 
+						to [out = -90, in = 150]
+					(0,-2.5) 
+						to [out = 30, in =-90]
+					(1,-1);
+					
+					\draw [t]
+					(0,-3) 
+						to
+					(0,-2.5);			
+			
+					\draw [s]
+					(0,-1) 
+						to [out=-90, in =150 ] 
+					(1,-2.5)
+						to [out = 30, in =-90]
+					(2,0);
+					
+					\draw [s] (1,-2.5) -- (1,-3);
+					
+					\draw[fill, color=red] (0,-1) circle (.08);		
+					\draw[fill, color=teal] (1,-1) circle (.08);				
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad
+			=
+			\qquad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw [t] 
+					(-1,0) 
+						to [out = -90, in = 150]
+					(0,-2.5) 
+						to [out = 30, in =-90]
+					(0.25,-2.25);
+					
+					\draw [t]
+					(0,-3) 
+						to
+					(0,-2.5);			
+			
+					\draw [s]
+					(0.75,-2.25) 
+						to [out=-90, in =150 ] 
+					(1,-2.5)
+						to [out = 30, in =-90]
+					(2,0);
+					
+					\draw [s] (1,-2.5) -- (1,-3);
+					
+					\draw[fill, color=red] (0.75,-2.25) circle (.08);		
+					\draw[fill, color=teal] (0.25,-2.25) circle (.08);				
+				\end{tikzpicture}
+			\end{aligned}	
+			\qquad
+			=
+			\qquad	
+			\begin{aligned}
+				\begin{tikzpicture}					
+					\draw [t] (0,-3) -- (0,0);			
+					
+					\draw [s] (1,0) to (1,-3);					
+				\end{tikzpicture}
+			\end{aligned}				
+		\end{equation}
+
+		\end{proof}
+
+		\begin{lemma}[$2 \longrightarrow 1$]
+		A multiplication $m: TSTS \To TS$ satistfying the middle unitary law and such that $T\eta^S$ and $\eta^T S$ are monad morphisms gives rise to a distributive law.
+		\end{lemma}
+		\begin{proof}
+			Define $\ell:ST \To TS$ via
+			\begin{equation} \label{eq:ell_using_m} % ell def using m
+				\begin{aligned}
+					\begin{tikzpicture}
+						\node at (-1,0) {$\ell$};
+						
+						\draw [t]
+						(1,2) 
+							to [out = -90, in = 90]
+						(-1,-2);
+
+						\draw [s] 
+						(-1,2) 
+							to [out = -90, in = 90 ] 
+						(1,-2);						
+					\end{tikzpicture}
+				\end{aligned}
+				\qquad
+				:=
+				\qquad
+				\begin{aligned}
+					\begin{tikzpicture}
+						\draw [t] 
+						(-0.5,-1) 
+							to [out = -90, in = 150]
+						(0,-2.5) 
+							to [out = 30, in =-90]
+						(1,0);
+						
+						\draw [t]
+						(0,-4) 
+							to
+						(0,-2.5);			
+				
+						\draw [s]
+						(0,0) 
+							to [out=-90, in =150 ] 
+						(1,-2.5)
+							to [out = 30, in =-90]
+						(1.5,-1);
+						
+						\draw [s] (1,-2.5) -- (1,-4);
+						
+						\draw[fill, color=red] (1.5,-1) circle (.08);		
+						\draw[fill, color=teal] (-0.5,-1) circle (.08);
+
+						\draw[rounded corners, fill = violet, fill opacity = 0.2]  (-1,-1.5) rectangle (2,-3);
+						\node at (1.75,-2.75) {$m$};	
+					\end{tikzpicture}
+				\end{aligned}
+				\qquad
+				=
+				\qquad
+				\begin{aligned}
+					\begin{tikzpicture}
+						\draw [ts] 
+						(-1,-1) 
+							to [out = -90, in = 150]
+						(0,-2.5) 
+							to [out = 30, in =-90]
+						(1,-1);
+						
+						\draw [ts]
+						(0,-3.5) 
+							to
+						(0,-2.5);		
+						
+						\draw [s]
+						(-1,0.5)
+							to
+						(-1,-1);		
+						
+						\draw [t]
+						(1,0.5)
+							to
+						(1,-1);
+						
+						\draw[fill, color=teal, ] (-1,-1) circle (.08);
+						\draw[fill, color=red, ] (1,-1) circle (.08);						
+					\end{tikzpicture}
+				\end{aligned}
+				\qquad .
+			\end{equation}
+
+		In light of (\ref{eq:m_def}), we have drawn additional lines inside $m$ to serve as a reminder of what $m$ ought to \emph{behave} like.  Doing so makes it easy to believe that this might yield a distributive law. We prove that $\ell$ is in fact a distributive law, keeping in mind that we have to treat $m$ as a black (or purple) box.
+
+		The equalities in (\ref{eq:dist_units}) follow from the unitality of the monad morphisms $\eta^T S$ and $T \eta^S$. We illustrate only the proof of the first equality:
+		\begin{equation}
+			\begin{aligned}
+				\begin{tikzpicture}			
+						\draw [t]
+						(1,2) 
+							to [out = -90, in = 90]
+						(-1,-2);
+
+						\draw [s] 
+						(-0.5,1) 
+							to [out = -90, in = 90 ] 
+						(1,-2);	
+
+						\draw[fill, color=red] (-0.5,1) circle (.08);
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad
+			=
+			\qquad
+			\begin{aligned}
+				\begin{tikzpicture}			
+					\draw [ts] 
+					(-1,-1) 
+						to [out = -90, in = 150]
+					(0,-2.5) 
+						to [out = 30, in =-90]
+					(1,-1);
+					
+					\draw [ts]
+					(0,-3.5) 
+						to
+					(0,-2.5);		
+					
+					\draw [s]
+					(-1,0)
+						to
+					(-1,-1);		
+					
+					\draw [t]
+					(1,0.5)
+						to
+					(1,-1);
+					
+					\draw[fill, color=teal, ] (-1,-1) circle (.08);
+					\draw[fill, color=red, ] (1,-1) circle (.08);
+					\draw[fill, color=red] (-1,0) circle (.08);
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad
+			=
+			\qquad		
+			\begin{aligned}
+				\begin{tikzpicture}			
+					\draw [ts] 
+					(-1,-1) 
+						to [out = -90, in = 150]
+					(0,-2.5) 
+						to [out = 30, in =-90]
+					(1,-1);
+					
+					\draw [ts]
+					(0,-3.5) 
+						to
+					(0,-2.5);		
+
+					\draw [t]
+					(1,0.5)
+						to
+					(1,-1);
+					
+
+					\draw[fill, color=red, ] (1,-1) circle (.08);
+					\draw[fill, color=violet] (-1,-1) circle (.08);
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad
+			=
+			\qquad		
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw [ts]
+					(1,-3.5) 
+						to
+					(1,-1.5);		
+
+					\draw [t]
+					(1,0.5)
+						to
+					(1,-1.5);
+					
+
+					\draw[fill, color=red, ] (1,-1.5) circle (.08);					
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad
+			=
+			\qquad			
+			\begin{aligned}
+				\begin{tikzpicture}			
+					\draw [t]
+					(-1,2) 
+						to [out = down, in = up]
+					(-1,-2);
+
+					\draw [s] 
+					(1,-0.5) 
+						to [out = down, in =up ] 
+					(1,-2);	
+
+					\draw[fill, color=red] (1,-0.5) circle (.08);					
+				\end{tikzpicture}
+			\end{aligned}
+		\end{equation}
+
+		Before proving (\ref{eq:SST}), we note that the monad morphisms $\eta^T S$ and $T \eta^S$ give rise to left and right actions of both $T$ and $S$ on $TS$:
+
+		\begin{equation}
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw [ts] 
+					(-0.5,-2) 
+						to [out = -90, in = 150]
+					(0,-2.5) 
+						to [out = 30, in =-90]
+					(0.5,-1);
+					
+					\draw [ts]
+					(0,-3) 
+						to
+					(0,-2.5);		
+
+					\draw [t]
+					(-0.5,-1)
+						to
+					(-0.5,-2);					
+
+					\draw[fill, color=red, ] (-0.5,-2) circle (.08);
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad
+			;
+			\qquad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw [ts] 
+					(-0.5,-2) 
+						to [out = -90, in = 150]
+					(0,-2.5) 
+						to [out = 30, in =-90]
+					(0.5,-1);
+					
+					\draw [ts]
+					(0,-3) 
+						to
+					(0,-2.5);		
+
+					\draw [s]
+					(-0.5,-1)
+						to
+					(-0.5,-2);					
+
+					\draw[fill, color=teal, ] (-0.5,-2) circle (.08);
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad
+			;
+			\qquad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw [ts] 
+					(-0.5,-1) 
+						to [out = -90, in = 150]
+					(0,-2.5) 
+						to [out = 30, in =-90]
+					(0.5,-2);
+					
+					\draw [ts]
+					(0,-3) 
+						to
+					(0,-2.5);		
+
+					\draw [t]
+					(0.5,-1)
+						to
+					(0.5,-2);					
+
+					\draw[fill, color=red, ] (0.5,-2) circle (.08);
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad
+			;
+			\qquad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw [ts] 
+					(-0.5,-1) 
+						to [out = -90, in = 150]
+					(0,-2.5) 
+						to [out = 30, in =-90]
+					(0.5,-2);
+					
+					\draw [ts]
+					(0,-3) 
+						to
+					(0,-2.5);		
+
+					\draw [s]
+					(0.5,-1)
+						to
+					(0.5,-2);					
+
+					\draw[fill, color=teal, ] (0.5,-2) circle (.08);
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad
+			.								
+		\end{equation}
+		But $\mu^T$ and $\mu^S$ also induce \emph{left} $T$ and \emph{right} $S$ actions on $TS$:
+		\begin{equation}
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw [t] 
+					(-0.5,-1) 
+						to [out = -90, in = 150]
+					(0,-2.5) 
+						to [out = 30, in =-90]
+					(0.5,-1);
+					
+					\draw [t]
+					(0,-3) 
+						to
+					(0,-2.5);		
+
+					\draw [s]
+					(1,-1)
+						to
+					(1,-3);						
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad
+			;
+			\qquad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw [s] 
+					(-0.5,-1) 
+						to [out = -90, in = 150]
+					(0,-2.5) 
+						to [out = 30, in =-90]
+					(0.5,-1);
+					
+					\draw [s]
+					(0,-3) 
+						to
+					(0,-2.5);		
+
+					\draw [t]
+					(-1,-1)
+						to
+					(-1,-3);					
+				\end{tikzpicture}
+			\end{aligned}			
+		\end{equation}
+
+		In fact, both right $S$ actions are the same, as we show below: (a) follows from the middle unitary law; (b) from the associativity of $m$; (c) is due to $\eta^T S$ being a monad morphism; (d) is the middle unitary law again.
+		% \begin{equation*} % proof of the associativity law
+		% 	\begin{aligned}
+		% 		\begin{tikzpicture}
+		% 			\draw [t] 
+		% 			(-1,1) 
+		% 				to [out = -90, in = 150]
+		% 			(0,-2.5) 
+		% 				to [out = 30, in =-90]
+		% 			(1,-1);
+					
+		% 			\draw [t]
+		% 			(0,-4) 
+		% 				to
+		% 			(0,-2.5);			
+			
+		% 			\draw [s]
+		% 			(0,1) 
+		% 				to [out=-90, in =150 ] 
+		% 			(1,-2.5)
+		% 				to [out = 30, in =-90]
+		% 			(2,1);
+					
+		% 			\draw [s] (1,-2.5) -- (1,-4);						
+
+		% 			\draw[fill, color=teal] (1,-1) circle (.08);
+
+		% 			\draw[rounded corners, fill = violet, fill opacity = 0.3]  (-1.25,-1.5) rectangle (2.25,-3);						
+		% 		\end{tikzpicture}
+		% 	\end{aligned}
+		% 	\quad
+		% 	\overset{(a)}{=}
+		% 	\quad
+		% 	\begin{aligned}
+		% 		\begin{tikzpicture}
+		% 				\path (-1,-0.5)  node (v1) {};
+		% 				\path (0,-0.5)  node (v2) {};
+
+		% 				\draw [t] 
+		% 				(v1.center) 
+		% 					to [out = -90, in = 150]
+		% 				(0,-2.5) 
+		% 					to [out = 30, in =-90]
+		% 				(1,0.5);
+						
+		% 				\draw [t]
+		% 				(0,-4) 
+		% 					to
+		% 				(0,-2.5);			
+		% 				\draw [t]
+		% 				(-1.5,1)
+		% 					to [out=-90, in =150]
+		% 				(v1.center)
+		% 					to [out=30, in =-90]
+		% 				(0,0.5);
+
+		% 				\draw [s]
+		% 				(-1,0.5)
+		% 					to [out=-90, in =150]
+		% 				(v2.center)
+		% 					to [out=30, in =-90]
+		% 				(0.5,1);
+
+		% 				\draw [s]
+		% 				(v2.center) 
+		% 					to [out=-90, in =150 ] 
+		% 				(1,-2.5)
+		% 					to [out = 30, in =-90]
+		% 				(2,1);
+		% 				\draw [s] (1,-2.5) -- (1,-4);
+
+		% 				\draw[rounded corners, fill = violet, fill opacity = 0.3]  (-1.25,-1.5) rectangle (2.25,-3);			 						
+		%  				\draw[rounded corners, fill = violet, fill opacity = 0.3]  (-1.5,0) rectangle (0.5,-1);							
+		% 				\draw[fill, color=teal] (1,0.5) circle (.08);
+		% 				\draw[fill, color=teal] (0,0.5) circle (.08);
+		% 				\draw[fill, color=red] (-1,0.5) circle (.08);			
+		% 		\end{tikzpicture}
+		% 	\end{aligned}
+		% 	\quad
+		% 	\overset{(b)}{=}
+		% 	\quad
+		% 	\begin{aligned}
+		% 		\begin{tikzpicture}
+		% 				\path (-1,1) node (v1) {};
+		% 				\path (0,0.5) node (v2) {};
+		% 				\path (1,-0.5) node (v3) {};
+		% 				\path (2,-0.5) node (v4) {};
+						
+		% 				\draw [t] 
+		% 				(v1.center)
+		% 					to [out = -90, in = 150]
+		% 				(0,-2.5) 
+		% 					to [out = 30, in =-90]
+		% 				(v3.center);
+						
+		% 				\draw [t]
+		% 				(0,-4) 
+		% 					to
+		% 				(0,-2.5);
+						
+		% 				\draw [t]
+		% 				(0.5,0.5)
+		% 					to [out=-90, in =150]
+		% 				(v3.center)
+		% 					to [out=30, in =-90]
+		% 				(2,0.5);
+
+		% 				\draw [s]
+		% 				(1,1)
+		% 					to [out=-90, in =150]
+		% 				(v4.center)
+		% 					to [out=30, in =-90]
+		% 				(2.5,1);
+
+		% 				\draw [s]
+		% 				(v2.center) 
+		% 					to [out=-90, in =150 ] 
+		% 				(1,-2.5)
+		% 					to [out = 30, in =-90]
+		% 				(v4.center) ;
+		% 				\draw [s] (1,-2.5) -- (1,-4);							
+		%  				\draw[rounded corners, fill = violet, fill opacity = 0.3]  (0.5,0) rectangle (2.5,-1);							
+		% 				\draw[rounded corners, fill = violet, fill opacity = 0.3]  (-1.25,-1.5) rectangle (2.25,-3);			 
+		% 				\draw[fill, color=teal] (2,0.5) circle (.08);
+		% 				\draw[fill, color=teal] (0.5,0.5) circle (.08);
+		% 				\draw[fill, color=red] (0,0.5) circle (.08);	
+		% 		\end{tikzpicture}
+		% 	\end{aligned}
+		% 	\quad
+		% 	\overset{(c)}{=}
+		% 	\quad
+		% 	\begin{aligned}
+		% 		\begin{tikzpicture}
+		% 				\path (-1,1) node (v1) {};
+		% 				\path (0,-0.5) node (v2) {};
+		% 				\path (1,-0.5) node (v3) {};
+		% 				\path (2,-0.5) node (v4) {};
+						
+		% 				\draw [t] 
+		% 				(v1.center)
+		% 					to [out = -90, in = 150]
+		% 				(0,-2.5) 
+		% 					to [out = 30, in =-90]
+		% 				(v3.center);
+						
+		% 				\draw [t]
+		% 				(0,-4) 
+		% 					to
+		% 				(0,-2.5);		
+
+		% 				\draw [s]
+		% 				(1.5,1)
+		% 					to [out=-90, in =150]
+		% 				(v4.center)
+		% 					to [out=30, in =-90]
+		% 				(2.5,1);
+
+		% 				\draw [s]
+		% 				(v2.center) 
+		% 					to [out=-90, in =150 ] 
+		% 				(1,-2.5)
+		% 					to [out = 30, in =-90]
+		% 				(v4.center) ;
+		% 				\draw [s] (1,-2.5) -- (1,-4);						
+
+		% 				\draw[rounded corners, fill = violet, fill opacity = 0.3]  (-1.25,-1.5) rectangle (2.25,-3);			 
+		% 				\draw[fill, color=teal] (1,-0.5) circle (.08);
+		% 				\draw[fill, color=red] (0,-0.5) circle (.08);		
+									
+		% 		\end{tikzpicture}
+		% 	\end{aligned}
+		% 	\quad
+		% 	\overset{(d)}{=}
+		% 	\quad
+		% 	\begin{aligned}
+		% 		\begin{tikzpicture}
+		% 				\path (0.5,1) node (v2) {};
+		% 				\path (2.5,1) node (v4) {};					
+
+						
+		% 				\draw [t]
+		% 				(-0.5,-4.5) 
+		% 					to
+		% 				(-0.5,1);						
+						
+		% 				\draw [s]
+		% 				(v2.center) 
+		% 					to [out=-90, in =150 ] 
+		% 				(1.5,-1)
+		% 					to [out = 30, in =-90]
+		% 				(v4.center) ;				
+		% 				\draw [s] (1.5,-1) -- (1.5,-4.5);						
+		% 		\end{tikzpicture}
+		% 	\end{aligned}											
+		% \end{equation*}
+		\begin{equation} \label{eq:right_S}
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw[s]
+					(2,0)
+						to
+					(2,-1.5);
+			
+					\draw [ts]
+					(0,0) 
+						to [out=-90, in =150 ] 
+					(1,-3)
+						to [out = 30, in =-90]
+					(2,-1.5);
+					
+					\draw [ts] (1,-3) -- (1,-4);				
+					
+					\draw[fill, color=teal, ] (2,-1.5) circle (.08);	
+				\end{tikzpicture}
+			\end{aligned}
+			\quad
+			\overset{(a)}{=}
+			\quad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw[s]
+					(2,0)
+						to
+					(2,-1.5);
+					\draw[s]
+					(1,0)
+						to
+					(1,-1);		
+
+					\draw[t]
+					(-1,0)
+						to
+					(-1,-1);			
+
+					
+					\draw [ts] 
+					(-1,-1) 
+						to [out = -90, in = 150]
+					(0,-2)
+						to [out = 30, in =-90]
+					(1,-1);			
+					
+
+			
+					\draw [ts]
+					(0,-2) 
+						to [out=-90, in =150 ] 
+					(1,-3)
+						to [out = 30, in =-90]
+					(2,-1.5);
+					
+					\draw [ts] (1,-3) -- (1,-4);				
+					
+					\draw[fill, color=teal, ] (1,-1) circle (.08);
+					\draw[fill, color=red, ] (-1,-1) circle (.08);
+					\draw[fill, color=teal, ] (2,-1.5) circle (.08);	
+				\end{tikzpicture}
+			\end{aligned}
+			\quad
+			\overset{(b)}{=}
+			\quad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw[s]
+					(2,0)
+						to
+					(2,-1);
+					\draw[s]
+					(0,0)
+						to
+					(0,-1);		
+
+					\draw[t]
+					(-1,0)
+						to
+					(-1,-1.5);			
+
+					
+					\draw [ts] 
+					(0,-1) 
+						to [out = -90, in = 150]
+					(1,-2)
+						to [out = 30, in =-90]
+					(2,-1);			
+					
+
+			
+					\draw [ts]
+					(-1,-1.5) 
+						to [out=-90, in =150 ] 
+					(0,-3)
+						to [out = 30, in =-90]
+					(1,-2);
+					
+					\draw [ts] (0,-3) -- (0,-4);				
+					
+					\draw[fill, color=teal, ] (0,-1) circle (.08);
+					\draw[fill, color=red, ] (-1,-1.5) circle (.08);
+					\draw[fill, color=teal, ] (2,-1) circle (.08);		
+				\end{tikzpicture}
+			\end{aligned}
+			\quad
+			\overset{(c)}{=}
+			\quad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw [s] 
+					(0,0) 
+						to [out = -90, in = 150]
+					(1,-1.5)
+						to [out = 30, in =-90]
+					(2,0);			
+					
+					\draw[t]
+					(-1,0)
+						to
+					(-1,-2);		
+					
+					\draw[s]
+					(1,-1.5)
+						to
+					(1,-2);
+			
+					\draw [ts]
+					(-1,-2) 
+						to [out=-90, in =150 ] 
+					(0,-3)
+						to [out = 30, in =-90]
+					(1,-2);
+					
+					\draw [ts] (0,-3) -- (0,-4);				
+					
+					\draw[fill, color=teal, ] (1,-2) circle (.08);
+					\draw[fill, color=red, ] (-1,-2) circle (.08);					
+				\end{tikzpicture}
+			\end{aligned}
+			\quad
+			\overset{(d)}{=}
+			\quad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw [s]
+					(0,0) 
+						to [out=-90, in =150 ] 
+					(1,-1.5)
+						to [out = 30, in =-90]
+					(2,0);				
+
+					
+					\draw[s]
+					(1,-3.5)
+						to 
+					(1,-1.5);	
+
+					\draw[t]
+					(-1,0)
+						to 
+					(-1,-3.5);
+				\end{tikzpicture}
+			\end{aligned}	
+		\end{equation}
+		Likewise, both left $T$ actions are the same. Similar use of the associativity of $m$ and the middle unitary law shows that carrying out the left $S$ then left $T$ actions, or right $T$ then right $S$ actions, both yield $m$:
+		\begin{equation} \label{eq:both_action}
+			\begin{aligned}
+				\begin{tikzpicture}[xscale=-1]
+					\draw [ts]
+					(0,0) 
+						to [out=-90, in =150 ] 
+					(1,-1)
+						to [out = 30, in =-90]
+					(2,0);
+
+					\draw[ts]
+					(1,-2)
+						to 
+					(1,-1);	
+
+					\draw [ts]
+					(-1,2) 
+						to [out=-90, in =150 ] 
+					(0,0)
+						to [out = 30, in =-90]
+					(1,1);
+					
+					\draw[s]
+					(1,2) -- (1,1);
+					\draw[t]
+					(2,2) -- (2,0);			
+
+					\draw[fill, color=teal, ] (1,1) circle (.08);
+					\draw[fill, color=red, ] (2,0) circle (.08);						
+				\end{tikzpicture}
+			\end{aligned}		
+			\quad
+			=
+			\quad
+			\begin{aligned}
+				\begin{tikzpicture}[xscale=-1]
+					\draw [ts]
+					(0,2) 
+						to [out=-90, in =150 ] 
+					(1,-1)
+						to [out = 30, in =-90]
+					(2,0);
+
+					\draw[ts]
+					(1,-2)
+						to 
+					(1,-1);	
+
+					\draw [ts]
+					(1,1) 
+						to [out=-90, in =150 ] 
+					(2,0)
+						to [out = 30, in =-90]
+					(3,1);
+					
+					\draw[s]
+					(1,2) -- (1,1);
+					\draw[t]
+					(3,2) -- (3,1);			
+
+					\draw[fill, color=teal, ] (1,1) circle (.08);
+					\draw[fill, color=red, ] (3,1) circle (.08);						
+				\end{tikzpicture}
+			\end{aligned}		
+			\quad
+			=
+			\quad			
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw [ts]
+					(-1,1.5) 
+						to [out=-90, in =150 ] 
+					(0,-1.5)
+						to [out = 30, in =-90]
+					(1,1.5);
+
+					\draw[ts]
+					(0,-2.5)
+						to 
+					(0,-1.5);						
+				\end{tikzpicture}
+			\end{aligned}	
+			\quad
+			=
+			\quad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw [ts]
+					(0,2) 
+						to [out=-90, in =150 ] 
+					(1,-1)
+						to [out = 30, in =-90]
+					(2,0);
+
+					\draw[ts]
+					(1,-2)
+						to 
+					(1,-1);	
+
+					\draw [ts]
+					(1,1) 
+						to [out=-90, in =150 ] 
+					(2,0)
+						to [out = 30, in =-90]
+					(3,1);
+					
+					\draw[t]
+					(1,2) -- (1,1);
+					\draw[s]
+					(3,2) -- (3,1);			
+
+					\draw[fill, color=red, ] (1,1) circle (.08);
+					\draw[fill, color=teal, ] (3,1) circle (.08);					
+				\end{tikzpicture}
+			\end{aligned}		
+			\quad
+			=
+			\quad	
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw [ts]
+					(0,0) 
+						to [out=-90, in =150 ] 
+					(1,-1)
+						to [out = 30, in =-90]
+					(2,0);
+
+					\draw[ts]
+					(1,-2)
+						to 
+					(1,-1);	
+
+					\draw [ts]
+					(-1,2) 
+						to [out=-90, in =150 ] 
+					(0,0)
+						to [out = 30, in =-90]
+					(1,1);
+					
+					\draw[t]
+					(1,2) -- (1,1);
+					\draw[s]
+					(2,2) -- (2,0);			
+
+					\draw[fill, color=red, ] (1,1) circle (.08);
+					\draw[fill, color=teal, ] (2,0) circle (.08);					
+				\end{tikzpicture}
+			\end{aligned}
+		\end{equation}		
+
+		We now prove that $\ell$ satisfies (\ref{eq:SST}): (a)\footnote{To make (a) easier to parse, it might be helpful to trace the path of the two scarlet wires and one teal wire as they enter and exit the purple sleeves in the second diagram. The result should agree with the first diagram.} uses the definition of $\ell$, followed by the right $S$ action in (\ref{eq:right_S}); (b) uses (\ref{eq:both_action}); (c) uses associativity of $m$; (d) uses the middle unitary law; (e) is again the definition of $\ell$.
+   		\begin{equation}
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw [s]
+					(5.5,-1.5) 
+						to [out=-90, in =150 ] 
+					(6,-2.5)
+						to [out = 30, in =-90]
+					(6.5,-1);
+					
+					\draw[s]
+					(6,-2.5) -- (6,-3);	
+
+					\draw[t]
+					(6.5,2.5)
+						to [out = -90, in =90]
+					(4.5,-1.5)
+						to
+					(4.5,-3);		
+					
+					\draw[s]
+					(5.5,2.5)
+						to [out = -90, in =90]
+					(6.5,-1);
+					\draw[s]
+					(4.5,2.5)
+						to [out = -90, in =90]
+					(5.5,-1.5);					
+				\end{tikzpicture}
+			\end{aligned}
+			\quad
+			\overset{(a)}{=}
+			\quad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw [ts]
+					(0,-1.5) 
+						to [out=-90, in =150 ] 
+					(0.5,-2.5)
+						to [out = 30, in =-90]
+					(1.5,-1);
+
+					\draw[ts]
+					(0.5,-3)
+						to 
+					(0.5,-2.5);	
+					\draw[ts]
+					(1,0.5)
+						to 
+					(1,1);						
+
+					\draw [ts]
+					(0.5,2) 
+						to [out=-90, in =150 ] 
+					(1,1)
+						to [out = 30, in =-90]
+					(1.5,2);
+					
+					\draw[s]
+					(0.5,2.5) -- (0.5,2);
+					\draw[t]
+					(1.5,2.5) -- (1.5,2);			
+					\draw [ts]
+					(-0.5,-0.5) 
+						to [out=-90, in =150 ] 
+					(0,-1.5)
+						to [out = 30, in =-90]
+					(0.5,-0.5);
+					
+					\draw[s]
+					(-0.5,2.5) -- (-0.5,-0.5);						
+					\draw[t]
+					(1,0.5) 
+						to [out = -90, in =90]
+					(0.5,-0.5);	
+					\draw[s]
+					(1,0.5)
+						to [out = -90, in =90]
+					(1.5,-1);					
+
+
+					\draw[fill, color=teal, ] (-0.5,-0.5) circle (.08);
+					\draw[fill, color=red, ] (0.5,-0.5) circle (.08);
+
+					\draw[fill, color=teal, ] (0.5,2) circle (.08);
+					\draw[fill, color=red, ] (1.5,2) circle (.08);
+					\draw[fill, color=teal, ] (1.5,-1) circle (.08);			
+				\end{tikzpicture}
+			\end{aligned}
+			\quad
+			\overset{(b)}{=}
+			\quad			
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw[ts]
+					(4.5,-2.5)
+						to 
+					(4.5,-1.5);						
+
+					\draw [ts]
+					(5,1.5) 
+						to [out=-90, in =150 ] 
+					(5.5,0)
+						to [out = 30, in =-90]
+					(6,1.5);
+					
+					\draw[s]
+					(5,3) -- (5,1.5);
+					\draw[t]
+					(6,3) -- (6,1.5);			
+					\draw [ts]
+					(4,0) 
+						to [out=-90, in =150 ] 
+					(4.5,-1.5)
+						to [out = 30, in =-90]
+					(5.5,0);
+					
+					\draw[s]
+					(4,3) -- (4,0);
+
+					\draw[fill, color=teal, ] (4,0) circle (.08);
+					\draw[fill, color=teal, ] (5,1.5) circle (.08);
+					\draw[fill, color=red, ] (6,1.5) circle (.08);				
+				\end{tikzpicture}
+			\end{aligned}
+			\quad
+			\overset{(c)}{=}
+			\quad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw[ts]
+					(5,-2.5)
+						to 
+					(5,-1.5);					
+
+					\draw [ts]
+					(4,1.5) 
+						to [out=-90, in =150 ] 
+					(4.5,0)
+						to [out = 30, in =-90]
+					(5,1.5);
+					
+					\draw[s]
+					(5,3) -- (5,1.5);
+					\draw[t]
+					(6,3) -- (6,1);			
+					\draw [ts]
+					(4.5,0) 
+						to [out=-90, in =150 ] 
+					(5,-1.5)
+						to [out = 30, in =-90]
+					(6,1);
+					
+					\draw[s]
+					(4,3) -- (4,1.5);
+
+					\draw[fill, color=teal, ] (4,1.5) circle (.08);
+					\draw[fill, color=teal, ] (5,1.5) circle (.08);
+					\draw[fill, color=red, ] (6,1) circle (.08);					
+				\end{tikzpicture}
+			\end{aligned}
+			\quad
+			\overset{(d)}{=}
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw[ts]
+					(5,-3)
+						to 
+					(5,-1.5);					
+
+					\draw [s]
+					(4,2.5) 
+						to [out=-90, in =150 ] 
+					(4.5,1)
+						to [out = 30, in =-90]
+					(5,2.5);
+					
+					\draw[s]
+					(4.5,1) -- (4.5,0);
+					\draw[t]
+					(5.5,2.5) -- (5.5,0);			
+					\draw [ts]
+					(4.5,0) 
+						to [out=-90, in =150 ] 
+					(5,-1.5)
+						to [out = 30, in =-90]
+					(5.5,0);
+					
+					\draw[fill, color=teal, ] (4.5,0) circle (.08);
+					\draw[fill, color=red, ] (5.5,0) circle (.08);				
+				\end{tikzpicture}
+			\end{aligned}
+			\quad
+			\overset{(e)}{=}
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw [s]
+					(4,2.5) 
+						to [out=-90, in =150 ] 
+					(4.5,1)
+						to [out = 30, in =-90]
+					(5,2.5);
+					
+					\draw[s]
+					(4.5,1) -- (4.5,0);
+					\draw[t]
+					(5.5,2.5) -- (5.5,0);			
+
+					\draw[t]
+					(5.5,0)
+						to [out = -90, in =90]
+					(4.5,-1.5)
+						to
+					(4.5,-3);				
+					
+					
+					\draw[s]
+					(4.5,0)
+						to [out = -90, in =90]
+					(5.5,-1.5)
+						to
+					(5.5,-3);			
+				\end{tikzpicture}
+			\end{aligned}	
+			\quad .										
+		\end{equation}
+
+		The proof that $\ell$ satisfies (\ref{eq:STT}) is similar. Thus $\ell$ is a distributive law.
+		\end{proof}	
+		% \begin{equation} \label{eq:assoc_m_mu_S} % associativity between m and \mu^S
+		% 	\begin{aligned}
+		% 		\begin{tikzpicture}
+		% 			\draw [t] 
+		% 			(-1,0) 
+		% 				to [out = -90, in = 150]
+		% 			(0,-1.5);
+					
+		% 			\draw [s]
+		% 			(0,-1.5) 
+		% 				to [out = 30, in =-90]
+		% 			(1,0);			
+					
+		% 			\draw[s]
+		% 			(2,0)
+		% 				to
+		% 			(2,-1.5);
+			
+		% 			\draw [ts]
+		% 			(0,-1.5) 
+		% 				to [out=-90, in =150 ] 
+		% 			(1,-3)
+		% 				to [out = 30, in =-90]
+		% 			(2,-1.5);
+					
+		% 			\draw [ts] (1,-3) -- (1,-4);				
+					
+		% 			\draw[fill, color=teal, ] (2,-1.5) circle (.08);	
+		% 		\end{tikzpicture}
+		% 	\end{aligned}
+		% 	\quad
+		% 	=
+		% 	\quad
+		% 	\begin{aligned}
+		% 		\begin{tikzpicture}
+		% 			\draw [t] 
+		% 			(-1,0) 
+		% 				to [out = -90, in = 150]
+		% 			(0,-2.5) 
+		% 				to [out = 30, in =-90]
+		% 			(1,-1);
+					
+		% 			\draw [t]
+		% 			(0,-4) 
+		% 				to
+		% 			(0,-2.5);			
+			
+		% 			\draw [s]
+		% 			(0,0) 
+		% 				to [out=-90, in =150 ] 
+		% 			(1,-2.5)
+		% 				to [out = 30, in =-90]
+		% 			(2,0);
+					
+		% 			\draw [s] (1,-2.5) -- (1,-4);						
+
+		% 			\draw[fill, color=teal] (1,-1) circle (.08);
+
+		% 			\draw[rounded corners, fill = violet, fill opacity = 0.3]  (-1.25,-1.5) rectangle (2.25,-3);
+		% 		\end{tikzpicture}
+		% 	\end{aligned}
+		% 	\quad
+		% 	=
+		% 	\quad
+		% 	\begin{aligned}
+		% 		\begin{tikzpicture}
+		% 			\draw [t]
+		% 			(-1,-4) 
+		% 				to
+		% 			(-1,0);			
+			
+		% 			\draw [s]
+		% 			(0,0) 
+		% 				to [out=-90, in =150 ] 
+		% 			(1,-1.5)
+		% 				to [out = 30, in =-90]
+		% 			(2,0);
+					
+		% 			\draw [s] (1,-1.5) -- (1,-4);
+		% 		\end{tikzpicture}
+		% 	\end{aligned}
+		% 	\quad
+		% 	=
+		% 	\quad
+		% 	\begin{aligned}
+		% 		\begin{tikzpicture}
+		% 			\draw [s]
+		% 			(0,0) 
+		% 				to [out=-90, in =150 ] 
+		% 			(1,-1.5)
+		% 				to [out = 30, in =-90]
+		% 			(2,0);				
+
+					
+		% 			\draw[s]
+		% 			(0,-3)
+		% 				to [out = 30, in =-90]
+		% 			(1,-1.5);	
+
+		% 			\draw[t]
+		% 			(-1,0)
+		% 				to [out = -90, in =150]
+		% 			(0,-3);
+					
+		% 			\draw[ts]
+		% 			(0,-3)
+		% 				to
+		% 			(0,-4);
+		% 		\end{tikzpicture}
+		% 	\end{aligned}	
+		% \end{equation}
+
+		\begin{lemma}[$1 \iff 2$]
+			The constructions $(1 \longrightarrow 2)$ and $(2 \longrightarrow 1)$ are mutually inverse.
+		\end{lemma}
+		\begin{proof}
+			Start with a distributive law $\ell$, define $m$ using (\ref{eq:m_def}), then define $\tilde{\ell}$ using (\ref{eq:ell_using_m}). The resulting $\tilde{\ell}$ is shown below, and reduces to $\ell$ by unitality of $\eta^T$ and $\eta^S$:
+			\begin{equation}
+				\tilde{\ell}
+				\quad
+				=
+				\quad
+				\begin{aligned}
+					\begin{tikzpicture}
+						\draw [t] 
+						(-0.5,-1) 
+							to [out = -90, in = 150]
+						(0,-2.5) 
+							to [out = 30, in =-90]
+						(1,0);
+						
+						\draw [t]
+						(0,-3.5) 
+							to
+						(0,-2.5);			
+				
+						\draw [s]
+						(0,0) 
+							to [out=-90, in =150 ] 
+						(1,-2.5)
+							to [out = 30, in =-90]
+						(1.5,-1);
+						
+						\draw [s] (1,-2.5) -- (1,-3.5);
+						
+						\draw[fill, color=red] (1.5,-1) circle (.08);		
+						\draw[fill, color=teal] (-0.5,-1) circle (.08);
+						
+						\node at (0.5,-1.5) {$\ell$};	
+					\end{tikzpicture}
+				\end{aligned}
+				\quad
+				=
+				\quad
+				\begin{aligned}
+					\begin{tikzpicture}
+						\draw [t] 
+						(-0.5,-3.5) 
+							to [out = 90, in =-90]
+						(1,0);						
+	
+				
+						\draw [s]
+						(-0.5,0) 
+							to [out=-90, in =90 ] 
+						(1,-3.5);
+					\end{tikzpicture}
+				\end{aligned}
+				\quad.
+			\end{equation}
+			Conversely, start with $m$, define $\ell$ using (\ref{eq:ell_using_m}), then define $\tilde{m}$ using (\ref{eq:m_def}). The resulting $\tilde{m}$ again reduces to $m$ by repeated application of (\ref{eq:both_action}):
+			\begin{equation}
+				\tilde{m}
+				\quad
+				=
+				\quad
+				\begin{aligned}
+					\begin{tikzpicture}
+						\draw [ts] 
+						(1.5,-1.5) 
+							to [out = -90, in = 150]
+						(2,-2.5) 
+							to [out = 30, in =-90]
+						(2.5,-1.5);
+
+						
+						\draw [t] 
+						(1,-3) 
+							to [out = -90, in = 150]
+						(1.5,-4) 
+							to [out = 30, in =-90]
+						(2,-3);		
+
+						\draw [s] 
+						(2,-3) 
+							to [out = -90, in = 150]
+						(2.5,-4) 
+							to [out = 30, in =-90]
+						(3,-3);							
+						
+						\draw [ts]
+						(2,-3) 
+							to
+						(2,-2.5);		
+						
+						\draw [s]
+						(1.5,-1)
+							to
+						(1.5,-1.5);		
+						
+						\draw [t]
+						(2.5,-1)
+							to
+						(2.5,-1.5);
+
+						\draw [s]
+						(3,-1)
+							to
+						(3,-3);		
+						
+						\draw [t]
+						(1,-1)
+							to
+						(1,-3);
+
+						\draw [s]
+						(2.5,-4)
+							to
+						(2.5,-4.5);		
+						
+						\draw [t]
+						(1.5,-4)
+							to
+						(1.5,-4.5);
+						
+						
+						\draw[fill, color=teal, ] (1.5,-1.5) circle (.08);
+						\draw[fill, color=red, ] (2.5,-1.5) circle (.08);				
+						
+						\node at (2,-2) {$m$};
+					\end{tikzpicture}
+				\end{aligned}
+				\quad
+				=
+				\quad
+				\begin{aligned}
+					\begin{tikzpicture}
+						\draw [ts] 
+						(1.5,-1.5) 
+							to [out = -90, in = 150]
+						(2,-2.5) 
+							to [out = 30, in =-90]
+						(2.5,-1.5);
+
+						\draw [ts] 
+						(1.5,-3.5) 
+							to [out = -90, in = 150]
+						(2,-4) 
+							to [out = 30, in =-90]
+						(3,-3);	
+						
+						\draw [ts] 
+						(1,-2.5) 
+							to [out = -90, in = 150]
+						(1.5,-3.5) 
+							to [out = 30, in =-90]
+						(2,-2.5);		
+
+						\draw [s]
+						(1.5,-1)
+							to
+						(1.5,-1.5);		
+						
+						\draw [t]
+						(2.5,-1)
+							to
+						(2.5,-1.5);
+
+						\draw [s]
+						(3,-1)
+							to
+						(3,-3);		
+						
+						\draw [t]
+						(1,-1)
+							to
+						(1,-2.5);
+
+						\draw [ts]
+						(2,-4)
+							to
+						(2,-4.5);	
+
+						
+						
+						\draw[fill, color=teal, ] (1.5,-1.5) circle (.08);
+						\draw[fill, color=red, ] (2.5,-1.5) circle (.08);						
+						\draw[fill, color=red, ] (1,-2.5) circle (.08);	
+						\draw[fill, color=teal, ] (3,-3) circle (.08);						
+					\end{tikzpicture}
+				\end{aligned}
+				\quad
+				=
+				\quad
+				\begin{aligned}	
+					\begin{tikzpicture}
+						\draw [ts] 
+						(1.5,-1) 
+							to [out = -90, in = 150]
+						(2,-2.5) 
+							to [out = 30, in =-90]
+						(2.5,-1.5);
+
+						\draw [ts] 
+						(2,-2.5) 
+							to [out = -90, in = 150]
+						(2.5,-3.5) 
+							to [out = 30, in =-90]
+						(3,-2.5);			
+						
+						\draw [t]
+						(2.5,-1)
+							to
+						(2.5,-1.5);
+
+						\draw [s]
+						(3,-1)
+							to
+						(3,-2.5);		
+
+						\draw [ts]
+						(2.5,-3.5)
+							to
+						(2.5,-4.5);	
+						
+						\draw[fill, color=red, ] (2.5,-1.5) circle (.08);	
+						\draw[fill, color=teal, ] (3,-2.5) circle (.08);									
+					\end{tikzpicture}
+				\end{aligned}
+				\quad
+				=
+				\quad
+				\begin{aligned}
+					\begin{tikzpicture}
+						\draw [ts] 
+						(1.5,-1) 
+							to [out = -90, in = 150]
+						(2.5,-3.5) 
+							to [out = 30, in =-90]
+						(3.5,-1);		
+						\draw [ts]
+						(2.5,-3.5)
+							to
+						(2.5,-4.5);	
+					\end{tikzpicture}
+				\end{aligned}				
+				\quad.
+			\end{equation}			
+		Thus distributive laws of $S$ over $T$ are in bijective correspondence with multiplications on $TS$.
+		\end{proof}
+	\subsection{Liftings and extensions}
+		\label{lift}
+		Let $S,T$ be monads on $\cX$ in a $2$-category $\cK$. In this section, we assume that $\cK$ admits the construction of algebras, hence contains EM objects $\cX^S$ for any monad $(\cX,Se)$, along with the `free-forgetful' adjunction
+		\begin{equation}
+			\begin{aligned}
+				\begin{tikzcd}
+					\phantom{^S}\cX \ar[r,bend left,"F^S",""{name=A, below}] 
+					& 
+					\cX^S \ar[l,bend left,"U^S",""{name=B,above}] \ar[from=A, to=B, symbol=\dashv]
+				\end{tikzcd}			
+			\end{aligned}
+		\end{equation}
+		such that $S = U^S F^S$. This composite will be denoted:
+		\begin{equation} \label{eq:UF}% UF = S
+			\begin{aligned}
+				\begin{tikzpicture}	
+					\path (0,0) node (S) {$S$};	
+					\draw [s]
+					(S) 
+						to
+					(0,-3);	
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad
+			=
+			\qquad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\path (-1,0) node (U) {$U^S$};
+					\path (1,0) node (F) {$F^S$};
+
+					\draw [s]
+					(F)
+						to 
+					(1,-3);
+					
+					\draw [s] 
+					(U) 
+						to 
+					(-1,-3);	
+					\fill[very nearly transparent, magenta] (U.south) rectangle (1,-3);					
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad
+			,
+		\end{equation}	
+		where the red region is $\cX^S$, and the white regions are $\cX$. As $S, U^S, F^S$ are each surrounded by different combinations of red and white regions, we can use the same red string to denote all three of them without ambiguity. 
+
+		There is a canonical action $U^S \varepsilon^S : SU^S \To U^S$ induced by the counit of the adjunction $F^S \dashv U^S$:
+		\begin{equation} \label{eq:U_action}
+			\begin{aligned}
+				\begin{tikzpicture}
+						\path (-1,0) node (U) {};
+						\path (0,0) node (F) {};
+						\path (0,-1.5) node {};		
+
+						\draw [s] 
+						(U.center) 
+							to 
+						(-1,-3);	
+
+						\draw[s0]
+						(-2.5,0)
+							to [out = -90, in =90]
+						(-1,-2);	
+				
+
+						\fill[very nearly transparent, magenta] (U) rectangle (0,-3);						
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad
+			:=
+			\qquad
+			\begin{aligned}
+				\begin{tikzpicture}
+						\path (-1,0) node (U) {};
+						
+						\draw [s] 
+						(U.center) 
+							to 
+						(-1,-1.5)
+							to [out =-90, in =-90]
+						(-2,0);	
+
+						\draw[s]
+						(-2.5,0)
+							to [out = -90, in =90]
+						(-1.5,-3);	
+
+						\fill[very nearly transparent, magenta]
+						(-2.5,0)
+							to [out=-90, in =90]
+						(-1.5,-3)
+							to
+						(0,-3)
+							to
+						(0,0)
+							to
+						(U.center)
+							to
+						(-1,-1.5)
+							to [out=-90, in =-90]
+						(-2,0);									
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad ,
+		\end{equation}			
+		and the universal property of $\cX^S$ says that any left $S$-action factors through this. 
+		More precisely, there is a bijection\footnote{In fact, there is an equivalence of categories. But we don't need the category structure here.}:
+		\begin{equation}
+			\left\{
+			\begin{aligned}
+				\text{Functors } \t{G}: \cY \to \cX^S
+			\end{aligned}
+			\right\}
+			\qquad
+			\cong
+			\qquad
+			\left\{
+			\begin{aligned}
+				\text{Functors } G&: \cY \to \cX \\
+				\text{with $S$-action } \sigma&: SG \To G
+			\end{aligned}
+			\right\}.	
+		\end{equation}
+		The associated $G$ and $\t{G}$ satisfy 
+		\begin{equation}
+			\begin{tikzcd}
+					& \phantom{^{S}} \cX ^S \ar[d, "U^S"]
+				\\
+				\cY \ar[ur,  "\tilde{G}"] \ar[r, "G"'] & \cX
+			\end{tikzcd}\qquad,
+		\end{equation}	
+		and further, $\sigma$ factors as:
+		\begin{equation}
+			\begin{aligned}
+				\begin{tikzpicture}
+					\path (-1,0.5) node (U) {$G$};
+					\path (0,-1.5) node {$\cY$};
+					\path (-2.5,0.5) node (S) {$S$};
+					
+
+					\draw[s0]
+					(S)
+						to [out = -90, in =90]
+					(-1,-2);	
+
+					\draw [f0] 
+					(U)
+						to 
+					(-1,-3);								
+
+					\path (-1.25,-1.75) node {$\sigma$};	
+					\fill[nearly transparent, gray] (U.south) rectangle (1,-3);			
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad
+			=			
+			\begin{aligned}
+				\begin{tikzpicture}
+						\path (-1,0.5) node (U) {$U^S$};
+						\path (-2.5,0.5) node (S) {$S$};
+						\path (0.5, 0.5) node (G) {$\tilde{G}$};
+
+						\draw[s]
+						(S)
+							to [out = -90, in =90]
+						(-1,-2);		
+
+						\draw [s0] 
+						(U)
+							to 
+						(-1,-3);	
+						
+						\draw [f]
+						(G)
+							to
+						(0.5,-3);		
+						\fill[very nearly transparent, magenta] (U.south) rectangle (0.5,-3);					
+						\fill[nearly transparent, gray] (G.south) rectangle (2,-3);
+				\end{tikzpicture}
+			\end{aligned}		
+			\qquad.
+		\end{equation}		
+
+		\begin{definition}
+			A \emph{lift} of $T$ to $\cX^S$ is a monad $(\t{T}, \t{\eta}^T, \t{\mu}^T)$ on $\cX^S$ such that
+			\begin{align}
+				U^S \t{T} &= TU^S, & U^S \t{\eta}^T &= \eta^T U^S, & U^S \t{\mu}^T &= \mu^T U^S.
+			\end{align}
+		\end{definition}
+
+		The equation $U^S \t{T} = TU^S$ can be expressed diagrammatically by saying that we have an \emph{invertible} $2$-cell
+		\begin{equation} \label{eq:TUUT}
+			\begin{aligned}
+				\begin{tikzpicture}
+					\path (-0.5,0) node (U) {$U^S$};
+					\path (1,0) node (tT) {$\tilde{T}$};
+					\path (2,0) node (x) {$\phantom{U^S}$};
+					\path (-0.5,-3.75) node {$T$};
+
+					\draw [t] 
+					(tT)
+						to [out = -90, in =90]
+					(-0.5,-3.5);					
+				
+			
+					\draw [s]
+					(U)
+						to [out=-90, in =90 ] 
+					(1,-3.5);		
+
+					
+					\fill[very nearly transparent, magenta] (U.south)
+						to [out=-90, in =90]
+					(1,-3.5)
+						to
+					(2,-3.5)
+						to
+					(x.south);									
+				\end{tikzpicture}
+			\end{aligned}
+			,
+			\qquad
+			\text{ with inverse }
+			\qquad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\path (-0.5,0) node (U) {$T$};
+					\path (1,0) node (tT) {$U^S$};
+					\path (2,0) node (x) {$\phantom{U^S}$};
+					\path (-0.5,-3.75) node {};
+					\path (1,-3.75) node {$\tilde{T}$};
+
+					\draw [t]
+					(U)
+						to [out=-90, in =90 ] 
+					(1,-3.5);					
+					
+					\draw [s] 
+					(tT)
+						to [out = -90, in =90]
+					(-0.5,-3.5);		
+
+					\fill[very nearly transparent, magenta] (tT.south)
+						to [out=-90, in =90]
+					(-0.5,-3.5)
+						to
+					(2,-3.5)
+						to
+					(x.south);								
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad .			
+		\end{equation}
+		Again, we will use the same string for $T$ and $\t{T}$, as the context will make it clear which we are referring to.
+
+		\begin{lemma}[$1 \longrightarrow 3$]
+			A distributive law $\ell:ST \To TS$ gives rise to a lift $\t{T}$ of $T$ to $\cX^S$.
+		\end{lemma}
+		\begin{proof}		
+
+
+			We want an endofunctor $\t{T}: \cX^S \to \cX^S$ such that:
+			\begin{equation}
+				\begin{tikzcd}
+						& \phantom{^{S}} \cX ^S \ar[d, "U^S"]
+					\\
+					\cX^S \ar[ur,  dashed, "\tilde{T}"] \ar[r, "TU^S"'] & \cX
+				\end{tikzcd}
+			\end{equation}				
+			By the universal property of $\cX^S$, it suffices to produce a left $S$-action on $TU^S$. 		
+			Combining the canonical action on $U^S$ with the distributive law, we get an action on $TU^S$:
+			\begin{equation} \label{eq:dist_action}
+					\begin{tikzpicture}
+						\path (-1,0.5) node (U) {};
+						\path (0,-1) node (F) {$\cX^S$};
+						\path (-1,1) node {$U^S$};
+						\path (-1.5,1) node {$T \phantom{^S}$};
+						\path (-3,1) node {$S \phantom{^S}$};				
+
+						\draw[t]
+						(-1.5,0.5) 
+							to [out = -90, in=90]
+						(-2,-1.5)
+							to [out=-90, in =90]
+						(-2,-3);
+
+						\draw[s]
+						(-3,0.5)
+							to [out = -90, in =90]
+						(-1,-2);	
+
+						\draw [s0] 
+						(U.center) 
+							to 
+						(-1,-3);							
+						\fill[very nearly transparent, magenta] (U) rectangle (1,-3);							
+					\end{tikzpicture}
+			\end{equation}
+			This gives an endofunctor $\t{T}$ satisfying (\ref{eq:TUUT}). 			
+			We can then define $\t{\eta}^T$ and $\t{\mu}^T$ by `pulling' $\eta^T$ and $\mu^T$ under $U^S$, and it is easy to check that this gives a monad $(\t{T},\t{\eta}^T,\t{\mu}^T)$ that lifts $(T,\eta^T,\mu^T)$.
+		\end{proof}
+
+		Note that in the preceeding construction, the universal property also tells us that
+		\begin{equation}
+			\begin{aligned}
+				\begin{tikzpicture}
+					\path (-1,0) node (U) {};
+					\path (0,0) node (F) {};
+					\path  node {};
+					
+					\draw[t]
+					(-1.5,0) 
+						to [out = -90, in=90]
+					(-1.5,-3);
+
+
+					\draw[s]
+					(-2.5,0)
+						to [out = -90, in =90]
+					(-1,-2);	
+
+
+					\draw [s0] 
+					(U.center) 
+						to 
+					(-1,-3);							
+
+					\fill[very nearly transparent, magenta] (U) rectangle (0,-3);										
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad
+			=
+			\begin{aligned}
+				\begin{tikzpicture}
+					\path (-1,0) node (U) {};
+					\path (1,0) node (F) {};
+					\path  node {};
+
+					\draw[t]
+					(0,0) 
+						to [out = -90, in=90]
+					(0,-3);
+					
+					\draw[s]
+					(-2.5,0)
+						to [out = -90, in =90]
+					(-1,-2);	
+
+					\draw [s0] 
+					(U.center) 
+						to 
+					(-1,-3);								
+
+					\fill[very nearly transparent, magenta] (U) rectangle (1,-3);										
+				\end{tikzpicture}
+			\end{aligned}				
+		\end{equation}
+		We may combine this with (\ref{eq:TUUT}) and the invertibility of (\ref{eq:U_action}) to express this as:
+		\begin{equation} \label{eq:univ_TU}
+			\begin{aligned}
+				\begin{tikzpicture}
+					\path (-1,0) node (U) {};
+					\path (0,0) node (F) {};
+					\path  node {};
+					
+					\draw[t]
+					(-1.5,0) 
+						to [out = -90, in=90]
+					(-1.5,-3);
+
+
+					\draw[s]
+					(-2.5,0)
+						to [out = -90, in =90]
+					(-1,-2);	
+
+
+					\draw [s0] 
+					(U.center) 
+						to 
+					(-1,-3);							
+
+					\fill[very nearly transparent, magenta] (U) rectangle (0,-3);							
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad
+			=
+			\begin{aligned}
+				\begin{tikzpicture}
+					\path (-1,0) node (U) {};
+					\path (0.5,0) node (F) {};
+					\path  node {};
+
+					\draw[t]
+					(-1.5,0) 
+						to [out = -90, in=90]
+					(-0.5,-1)
+						to
+					(-0.5,-2)
+						to [out = -90, in =90]
+					(-1.5,-3);
+						
+					\draw [s] 
+					(U.center) 
+						to 
+					(-1,-3);	
+
+					\draw[s0]
+					(-2.5,0)
+						to [out = -90, in =90]
+					(-1,-2);		
+
+					
+					\fill[very nearly transparent, magenta] (U) rectangle (0,-3);					
+				\end{tikzpicture}
+			\end{aligned}
+			\quad
+			=
+			\quad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw[t]
+					(-1.5,0) 
+						to [out = -90, in=90]
+					(-0.5,-1)
+						to
+					(-0.5,-1.5) 
+						to [out = -90, in=90]
+					(-2,-3);	
+
+					\path (-1,0) node (U) {};
+					
+					\draw [s] 
+					(U.center) 
+						to 
+					(-1,-1.5)
+						to [out =-90, in =-90]
+					(-2,0);	
+
+					\draw[s]
+					(-2.5,0)
+						to [out = -90, in =90]
+					(-1.5,-3);	
+
+					\fill[very nearly transparent, magenta]
+					(-2.5,0)
+						to [out=-90, in =90]
+					(-1.5,-3)
+						to
+					(0,-3)
+						to
+					(0,0)
+						to
+					(U.center)
+						to
+					(-1,-1.5)
+						to [out=-90, in =-90]
+					(-2,0);					
+
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad.				
+		\end{equation}
+
+
+		\begin{lemma}[$3 \longrightarrow 1$]
+			A lift $\t{T}$ of $T$ to $\cX^S$ gives a distributive law $\ell:ST \To TS$.
+		\end{lemma}
+		\begin{proof}			
+			Define $\ell:ST \To TS$ via:
+			\begin{equation} \label{eq:dist_from_lift}
+				\begin{aligned}
+					\begin{tikzpicture}
+						\node at (-1,0) {};
+						
+						\draw [t]
+						(1,2) 
+							to [out = -90, in = 90]
+						(-1,-2.5);
+
+						\draw [s] 
+						(-1,2) 
+							to [out = -90, in = 90 ] 
+						(1,-2.5);							
+					\end{tikzpicture}
+				\end{aligned}
+				\qquad
+				:=
+				\qquad
+				\begin{aligned}
+					\begin{tikzpicture}
+						\draw [t]
+						(1.5,2) 
+							to [out = -90, in = 90]
+						(2.5,0)
+							to [out=-90, in =90]
+						(1,-2.5);
+						
+						\draw [s] 
+						(0.5,2) 
+							to [out = -90, in = -110 ] 
+						(2,0.5)
+							to [out = 70, in = 180]
+						(2.5,1.5)
+							to [out = 0, in = 90]
+						(3,0.5)
+							to [out=-90, in =90]
+						(3,-2.5);	
+						
+						\draw [s] 
+						(-0.5,2) 
+							to [out = -90, in = 90 ] 
+						(2,-2.5);
+
+						\fill[very nearly transparent, magenta]
+						(0.5,2) 
+							to [out = -90, in = -110 ] 
+						(2,0.5)
+							to [out = 70, in = 180]
+						(2.5,1.5)
+							to [out = 0, in = 90]
+						(3,0.5)
+							to [out=-90, in =90]
+						(3,-2.5)
+							to
+						(2,-2.5) 
+							to [out= 90, in =-90]
+						(-0.5,2);																			
+					\end{tikzpicture}
+				\end{aligned}
+			\end{equation}
+			It is easy to check that this satisfies the requirements of a distributive law. 
+		\end{proof}
+
+		Observe that in the preceding proof, we get a distributive law of $S = U^S F^S$ over $T$ by using only $2$-cells between $T,\t{T}$ and $U^S$. Thanks to the unit of $S$, we did not need $F^S$ to `interact' directly with $T$ or $\t{T}$! 
+
+		Further, the proof did not use the universal property of $\cX^S$, merely that the adjunction $F^S \dashv U^S$ gives rise to $S$. We could have replaced $F^S, U^S$ with any adjunction that gives $S$. In particular, this would work if the red region were just the Kleisli category $\cX_S$, interpreted as the subcategory of $\cX^S$ consisting of free $S$-algebras. In that case, the lemma says that in order to get a distributive law of $S$ over $T$, it suffices to define a lift of $T$ over just the \emph{free} $S$-algebras! This is what Beck does in \cite{beck1969distributive}.
+
+		\begin{lemma}[$1 \iff 3$]
+			The constructions $(1 \longrightarrow 3)$ and $(3 \longrightarrow 1)$ are mutually inverse.
+		\end{lemma} 
+		\begin{proof}
+			Starting with a distributive law, we obtain a lift $\t{T}$ that induces another distributive law. By (\ref{eq:univ_TU}), the new distributive law is equivalent to the original one:
+			\begin{equation}
+				\begin{aligned}
+					\begin{tikzpicture}
+						\draw [t]
+						(1.5,2) 
+							to [out = -90, in = 90]
+						(2.5,0)
+							to [out=-90, in =90]
+						(1,-2.5);
+
+						\draw [s] 
+						(0.5,2) 
+							to [out = -90, in = -110 ] 
+						(2,0.5)
+							to [out = 70, in = 180]
+						(2.5,1.5)
+							to [out = 0, in = 90]
+						(3,0.5)
+							to [out=-90, in =90]
+						(3,-2.5);	
+						
+						\draw [s] 
+						(-0.5,2) 
+							to [out = -90, in = 90 ] 
+						(2,-2.5);
+
+						
+						\fill[very nearly transparent, magenta]
+						(0.5,2) 
+							to [out = -90, in = -110 ] 
+						(2,0.5)
+							to [out = 70, in = 180]
+						(2.5,1.5)
+							to [out = 0, in = 90]
+						(3,0.5)
+							to [out=-90, in =90]
+						(3,-2.5)
+							to
+						(2,-2.5) 
+							to [out= 90, in =-90]
+						(-0.5,2);						
+
+					\end{tikzpicture}
+				\end{aligned}
+				\qquad
+				=
+				\qquad
+				\begin{aligned}
+					\begin{tikzpicture}
+						% \draw [t]
+						% (1.5,2) 
+						% 	to [out = -90, in = 90]
+						% (0,-2.5);
+						
+
+						% \draw [s] 
+						% (-0.5,2) 
+						% 	to [out = -90, in = 90 ] 
+						% (2,-1);		
+
+						% \draw [s0] 
+						% (2,-2.5) to
+						% (2,0.5)
+						% 	to [out = 90, in = 180]
+						% (2.5,1.5)
+						% 	to [out = 0, in = 90]
+						% (3,0.5)
+						% 	to [out=-90, in =90]
+						% (3,-2.5);							
+
+						% \fill[very nearly transparent, magenta]
+						% (2,-2.5) 
+						% 	to
+						% (2,0.5)
+						% 	to [out = 90, in = 180]
+						% (2.5,1.5)
+						% 	to [out = 0, in = 90]
+						% (3,0.5)
+						% 	to [out=-90, in =90]
+						% (3,-2.5);	
+						\draw [t]
+						(1.5,2) 
+							to [out = -90, in = 90]
+						(0,-2.5);
+						
+
+						\draw [s] 
+						(-0.5,2) 
+							to [out = -90, in = 90 ] 
+						(2,-1);		
+
+						\draw [s0] 
+						(2,-2.5) to
+						(2,1);
+						
+						\draw[fill, red] (2,1) circle [radius=0.08];															
+					\end{tikzpicture}
+				\end{aligned}
+				\qquad
+				=
+				\qquad
+				\begin{aligned}
+					\begin{tikzpicture}
+						\draw [t]
+						(1.5,2) 
+							to [out = -90, in = 90]
+						(-0.5,-2.5);
+
+						
+						\draw [s] 
+						(-0.5,2) 
+							to [out = -90, in = 90 ] 
+						(1.5,-2.5);						
+					\end{tikzpicture}
+				\end{aligned}
+				\qquad.
+			\end{equation} 
+			Conversely, given a lift $\t{T}$, we may produce a distributive law via (\ref{eq:dist_from_lift}), which in turn yields another lift $\t{\t{T}}$. By definition of being lifts, $U^S \t{T} = T U^S = U^S  \t{\t{T}}$. So to show $\t{T} = \t{\t{T}}$, it suffices to show that the $S$-actions they induce on $T U^S$ are the same. But this is easy to see: 
+			\begin{equation}
+				\begin{aligned}
+					\begin{tikzpicture}
+						\draw [t]
+						(1.5,2) 
+							to [out = -90, in = 90]
+						(2.5,0)
+							to [out=-90, in =90]
+						(1,-2.5)
+							to
+						(1,-3.5);
+						
+						\draw [s] 
+						(0.5,2) 
+							to [out = -90, in = -110 ] 
+						(2,0.5)
+							to [out = 70, in = 180]
+						(2.5,1.5)
+							to [out = 0, in = 90]
+						(3,0.5)
+							to [out=-90, in =90]
+						(3,-1)
+							to [out = -90, in =180]
+						(3.5,-1.5)
+							to [out=0, in =-90]
+						(4,-1)
+							to
+						(4,2);	
+						
+						\draw [s] 
+						(-0.5,2) 
+							to [out = -90, in = 90 ] 
+						(2,-2.5)
+							to
+						(2,-3.5);		
+
+						\fill[very nearly transparent, magenta]
+						(0.5,2) 
+							to [out = -90, in = -110 ] 
+						(2,0.5)
+							to [out = 70, in = 180]
+						(2.5,1.5)
+							to [out = 0, in = 90]
+						(3,0.5)
+							to 
+						(3,-1)
+							to [out=-90, in =180]
+						(3.5,-1.5)
+							to [out = 0, in =-90]
+						(4,-1)
+							to
+						(4,2)
+							to
+						(5,2)
+							to
+						(5,-3.5)
+							to
+						(2,-3.5)
+							to
+						(2,-2.5) 
+							to [out= 90, in =-90]
+						(-0.5,2);								
+					\end{tikzpicture}
+				\end{aligned}
+				\qquad
+				=
+				\qquad
+				\begin{aligned}
+					\begin{tikzpicture}
+					\draw[t]
+					(-5,2) 
+						to [out = -90, in=90]
+					(-4,0)
+						to [out = -90, in=90]
+					(-5.5,-2.5)
+						to
+					(-5.5,-3.5);					
+
+					\path (-4.5,2) node (U) {};
+					
+					\draw [s] 
+					(U.center) 
+						to 
+					(-4.5,0.5)
+						to [out =-90, in =-90]
+					(-6,2);	
+
+					\draw[s]
+					(-7,2)
+						to [out = -90, in =90]
+					(-4.5,-2.5)
+						to
+					(-4.5,-3.5);	
+
+					\fill[very nearly transparent, magenta]
+					(-7,2)
+						to [out=-90, in =90]
+					(-4.5,-2.5)
+						to
+					(-4.5,-3.5)
+						to					
+					(-2,-3.5)
+						to
+					(-2,2)
+						to
+					(U.center)
+						to
+					(-4.5,0.5)
+						to [out=-90, in =-90]
+					(-6,2);										
+					\end{tikzpicture}
+				\end{aligned}
+				\qquad
+				.								
+			\end{equation}
+			On the LHS we have the $S$-action induced by $\t{\t{T}}$ (via (\ref{eq:dist_action})), while on the RHS we have the original action.
+		\end{proof}
+
+		\begin{remark} (Extensions to the Kleisli category)
+		Since a Kleisli object in $\cK$ is simply an EM object for the corresponding monad in $\cK^{op}$, all the above results hold for Kleisli objects as well if $\cK^{op}$ admits the construction of algebras.
+		\end{remark}
+
+	\subsection{Monads over monads}
+		\label{mndmnd}
+		Finally, we sketch a proof that distributive laws are precisely monads in the category of monads in $\cK$. In fact, there is an equivalence of categories
+		\begin{equation}
+			\cat{Dist}(\cK) \cong \cat{Mnd}(\cat{Mnd}(\cK)).
+		\end{equation}
+
+		\cite{hyland2006combining}
+
+\section{Algebras over the composite monad}
+	\label{alg}
+
+\section{Distributive laws and adjoint functors}
+	\label{dist_adjoint}
+
+\section{Misc.\ diagrams}
+	\[
+		\begin{tikzpicture}[scale=2]
+		\node (A) at (-2,0) {$\cY$};
+		\node (B) at (1,0) {$\cX$};
+		\node (C) at (1,2) {$\cX^S$};
+		\node at (-0.5,0) {$\quad \Downarrow \phi$};
+		\node at (-0.5,1) {\rotatebox{40}{$ \quad \;\;\; \Downarrow \tilde{\phi}$}};
+
+		\path[->,font=\scriptsize]
+		(A) edge [bend left = 10] node[above] {$G$} (B)
+		edge [bend right=10] node[below] {$G'$} (B);	
+
+		\path[->,font=\scriptsize]
+		(A) edge [bend left=10] node[above] {\rotatebox{40}{$\t{G}$}} (C)
+		edge [bend right=10] node[right] {\rotatebox{40}{$\t{G}'$}} (C);	
+
+		\path[->,font=\scriptsize] 
+		(C) edge node[right]{$U^S$} (B);
+		\end{tikzpicture}
+	\]
+
+$$
+\begin{tikzpicture}[scale=1.2]
+						\draw [t]
+						(1.5,2.5) 
+							to [out = -90, in = 90]
+						(2.5,0)
+							to [out=-90, in =90]
+						(1,-2.5);
+						
+						\draw [s] 
+						(0.5,2.5) 
+							to [out = -90, in = -110 ] 
+						(2,0.5)
+							to [out = 70, in = 180]
+						(2.5,2)
+							to [out = 0, in = 90]
+						(3,0.5)
+							to [out=-90, in =90]
+						(3,-2.5);	
+						
+						\draw [s] 
+						(-0.5,2.5) 
+							to [out = -90, in = 90 ] 
+						(2,-2.5);
+
+						\fill[very nearly transparent, magenta]
+						(0.5,2.5) 
+							to [out = -90, in = -110 ] 
+						(2,0.5)
+							to [out = 70, in = 180]
+						(2.5,2)
+							to [out = 0, in = 90]
+						(3,0.5)
+							to [out=-90, in =90]
+						(3,-2.5)
+							to
+						(2,-2.5) 
+							to [out= 90, in =-90]
+						(-0.5,2.5);	
+						
+						\path(-0.5,3) node {$U^S$};
+						\path(0.5,3) node {$F^S$};
+						\path(1.5,3) node {$T$};
+						\path(2.2,-0.35) node {$\tilde{T}$};
+						\path(1.3,-1.35) node {$\chi$};
+						\path(2.45,1.2) node {$\chi^{-1}$};
+\end{tikzpicture}
+$$	
+
+	\[
+		\begin{aligned}
+			\begin{tikzpicture}[scale= 1.5]
+				\path (-1,0) node (U) {};
+				\path (1,0) node (F) {};
+				\path (-1,0.5) node {$U^{TS}$};
+				\path (-2.5,0.5) node {$TS$};
+				\path (0,-1.5) node {$\cX^{TS}$};
+				\path (-1.25,-1.75) node {$\varepsilon$};
+				
+				\fill[nearly transparent, violet] (U) rectangle (1,-3);					
+
+				\draw [ts] 
+				(U.center) 
+					to 
+				(-1,-3);	
+
+				\draw[ts]
+				(-2.5,0)
+					to [out = -90, in =90]
+				(-1,-2);				
+			
+			\end{tikzpicture}
+		\end{aligned}
+		\quad
+		=
+		\quad	
+		\begin{aligned}
+			\begin{tikzpicture}[scale= 1.5]
+				\path (-1,0) node (U) {};
+				\path (-2,0.5) node {$S$};
+				\path (-3,0.5) node {$T$};
+				\path (-1,0.5) node {$U^{TS}$};
+				\path (-3.5,-1) node {$T \eta^S$};
+				\path (-1.5,-1) node {$\eta^T S$};								
+				
+				\fill[nearly transparent, violet] (U) rectangle (0,-3);		
+
+				\draw [ts] 
+				(U.center) 
+					to 
+				(-1,-3);	
+				
+				\draw[s]
+				(-2,-1) -- (-2,0);
+				\draw[t]
+				(-3,-1) -- (-3,0);				
+
+				\draw[ts]
+				(-2,-1)
+					to [out = -90, in =90]
+				(-1,-2);	
+
+				\draw[ts]
+				(-3,-1)
+					to [out = -90, in =90]
+				(-1,-3);	
+				\draw[fill, color=red, ] (-3,-1) circle (.08);				
+				\draw[fill, color=teal, ] (-2,-1) circle (.08);					
+			\end{tikzpicture}
+		\end{aligned}
+		\quad
+		=
+		\quad
+		\begin{aligned}
+			\begin{tikzpicture}[scale= 1.5]
+				\path (-1,0) node (U) {};
+				\path (0,0) node (F) {};
+				\path (-2,0.5) node {$S$};
+				\path (-3,0.5) node {$T$};
+				\path (-1,0.5) node {$U^{TS}$};				
+				\path (-0.75,-2.75) node {$\tau$};
+				\path (-0.75,-1.5) node {$\sigma$};
+				
+			
+
+		
+				\draw[s]
+				(-2,0)
+					to [out = -90, in =90]
+				(-1,-1.5);	
+
+				\draw[t]
+				(-3,0)
+					to [out = -90, in =90]
+				(-1,-3);		
+
+				\draw [ts] 
+				(U.center) 
+					to 
+				(-1,-3);	
+				\fill[nearly transparent, violet] (U) rectangle (0,-3);					
+			\end{tikzpicture}
+		\end{aligned}
+	\]	
+
+	\[
+		\begin{aligned}
+			\begin{tikzpicture}[scale=1.5]
+				\path (-1,0) node (U) {};			
+
+		
+				\draw[t]
+				(-2,0)
+					to [out = -90, in =90]
+				(-1,-1.5);	
+
+				\draw[s]
+				(-3,0)
+					to [out = -90, in =90]
+				(-1,-3);		
+
+				\draw [ts] 
+				(U.center) 
+					to 
+				(-1,-3);	
+				\fill[nearly transparent, violet] (U) rectangle (0,-3);						
+			\end{tikzpicture}
+		\end{aligned}
+		\quad
+		=
+		\quad
+		\begin{aligned}
+			\begin{tikzpicture}[scale=1.5]
+				\path (-1,0) node (U) {};				
+
+				\draw[t]
+				(-2,-1.5) 
+					to [out= 90, in = -90] 
+				(-1.5,0);		
+				\draw[s]
+				(-1,-2) 
+					to [out= 90, in = -90]
+				(-2.5,0);
+
+				\draw[t]
+				(-2,-1.5)
+					to [out = -90, in =90]
+				(-1,-3);	
+
+				\draw [ts] 
+				(U.center) 
+					to 
+				(-1,-3);			
+				\fill[nearly transparent, violet] (U) rectangle (0,-3);					
+									
+			\end{tikzpicture}
+		\end{aligned}		
+	\]
+
+	\[
+		\begin{tikzcd}
+						&	(\cX^S)^{\t{T}} \ar[d, "U^{\t{T}}"] \ar[dr, dashed, "\Phi"]	&
+			\\
+			\cX^{TS} \ar[ur, dashed, "\Phi^{-1}"] \ar[r, dashed, "\tilde{U}^{TS}"] \ar[dr, "U^{TS}"'] 	&	\cX^S  \ar[d, "U^S"] 	& 		\cX^{TS} \ar[dl, "U^{TS}"]
+			\\
+						&	\cX 			&
+		\end{tikzcd}
+	\]	
+
+	\[
+		\begin{tikzpicture}[scale = 1.5]
+			\path (-1,0) node {$U^S$};
+			\path (0,0) node {$U^{\tilde{T}}$};
+			\path (-2,0) node {$S$};
+			\path (-2.5,0) node {${{T}}$};			
+			\path (-0.5,-3) node {${\tilde{T}}$};	
+			\path (0.75,-1) node {$(\cX^{S})^{\tilde{T}}$};	
+			\path (-0.5,-1) node {${\cX^S}$};	
+
+
+			\draw[t]
+			(-2.5,-0.5)
+				to [out=-90, in =90]
+			(-2.5,-1)
+				to [out = -90, in =90]
+			(0,-3.5);		
+			\draw [t0] 
+			(0,-0.5) 
+				to 
+			(0,-3.5);				
+
+			\draw[s]
+			(-2,-0.5)
+				to [out = -90, in =90]
+			(-1,-2)
+				to
+			(-1,-3.5);		
+			\draw[s0]
+			(-1,-0.5)
+				to
+			(-1,-3);			
+
+			\fill[very nearly transparent, cyan] (0,-0.5) rectangle (1.5,-3.5);					
+			\fill[very nearly transparent, magenta] (-1,-0.5) rectangle (1.5,-3.5);						
+		\end{tikzpicture}
+	\]	
+
+	\[
+		\begin{aligned}
+			\begin{tikzcd}
+							&	\cX^{TS} \ar[dr, "\hat{U}^{TS}"] \ar[dl, shift left, "U^{\t{T}}"]	&
+				\\
+				\cX^S \ar[ur, shift left, "F^{\t{T}}"] \ar[dr, shift left, "U^{S}"] 	&		& 		\cX^T \ar[dl, shift left, "U^T"]
+				\\
+							&	\cX \ar[ul, shift left, "F^S"]	\ar[ur, shift left, "F^T"]	&
+			\end{tikzcd}
+		\end{aligned}
+		%\qquad
+		%\onslide<2->{		
+		% \begin{aligned}
+		% 	\begin{tikzpicture}[scale=2.5, font = \scriptsize]
+		% 		\draw[t] 
+		% 			(-0.5,3) -- (1,1.5) 
+		% 				to [out=-45, in =45]
+		% 			(1,1) -- (-2,-2);
+		% 		\draw[t] 
+		% 			(-1.5,3) -- (0,1.5) 
+		% 				to [out=-45,in=45]
+		% 			(0,1) -- (-3,-2);
+		%		
+		% 		\draw [s]
+		% 			(-3,3) -- (-1,1) 
+		% 				to [out=-45, in =-135]
+		% 			(-0.5,1) -- (0.5,2) 
+		% 				to [out=45, in =135]
+		% 			(1.5,2) 
+		% 				to [out=-45, in =45]
+		% 			(1.5,1) -- (0.5,0) 
+		% 				to [out=-135, in =135]
+		% 			(0.5,-0.5) -- (2,-2);
+		% 		\draw[s] (-4,3) -- (1,-2);
+		%
+		% 		\fill[nearly transparent, teal]
+		% 			(-0.5,3) -- (1,1.5) 
+		% 				to [out=-45, in =45]
+		% 			(1,1) -- (-2,-2)
+		% 				to
+		% 			(-3,-2) -- (0,1)
+		% 				to [out=45, in =-45]
+		% 			(0,1.5) -- (-1.5,3);
+		%
+		% 		\fill[nearly transparent, red]
+		% 			(-3,3) -- (-1,1) 
+		% 				to [out=-45, in =-135]
+		% 			(-0.5,1) -- (0.5,2) 
+		% 				to [out=45, in =135]
+		% 			(1.5,2) 
+		% 				to [out=-45, in =45]
+		% 			(1.5,1) -- (0.5,0) 
+		% 				to [out=-135, in =135]
+		% 			(0.5,-0.5) -- (2,-2)
+		% 				-- (1,-2) --  (-4,3);
+		%
+		% 		\path (-4,3.5) node {$U^S$};
+		% 		\path (-3,3.5) node {$F^S$};	
+		% 		\path (-1.5,3.5) node {$U^T$};
+		% 		\path (-0.5,3.5) node {$F^T$};	
+		% 		\path (0.1,1.85) node {$U'$};		
+		% 		\path (-0.7,0.5) node {$U^{\tilde{T}}$};	
+		% 		\path (0,-0.25) node {$F^{\tilde{T}}$};					
+		% 	\end{tikzpicture}
+		% \end{aligned}
+		%}
+	\]	
+	\[
+		\begin{aligned}
+			\begin{tikzpicture}[scale=1.5]
+				\draw[t] 
+					(0,3) -- (1,2) 
+						to [out=-45, in =45]
+					(1,-0.5) -- (-0.5,-2);
+				\draw[t] 
+					(-1.5,3) -- (0,1.5) 
+						to [out=-45,in=45]
+					(0,0) -- (-2,-2);
+				
+				\draw [s]
+					(-3,3) -- (-1,1) 
+						to [out=-45, in =-135]
+					(-0.5,1) -- (1.5,3) 
+						to [out=45, in =90]
+					(2,2.9001) 
+						to [out=-90, in =90]
+					(2,1.5) -- (2,1.5) 
+						to [out=-90, in =90]
+					(2,-2) -- (2,-2);
+				\draw[s] (-4.5,3) -- (0.5,-2);
+
+				\fill[very nearly transparent, cyan]
+					(0,3) -- (1,2) 
+						to [out=-45, in =45]
+					(1,-0.5) -- (-0.5,-2)
+						to
+					(-2,-2) -- (0,0)
+						to [out=45, in =-45]
+					(0,1.5) -- (-1.5,3);
+
+				\fill[very nearly transparent, magenta]
+					(-3,3) -- (-1,1) 
+						to [out=-45, in =-135]
+					(-0.5,1) -- (1.5,3) 
+						to [out=45, in =90]
+					(2,2.9001) 
+						to [out=-90, in =90]
+					(2,1.5) -- (2,1.5) 
+						to [out=-90, in =90]
+					(2,-2) -- (2,-2)
+						-- (0.5,-2) --  (-4.5,3);
+
+				\path (-4.5,3.2336) node {$U^S$};
+				\path (-3,3.2336) node {$F^S$};						
+				\path (-1.5,3.2336) node {$U^T$};
+				\path (0,3.2336) node {$F^T$};					
+				\path (0.6333,1.75) node {$\hat{U}^{TS}$};		
+				\path (1.4334,2.5999) node {$U^S$};	
+				\path (0,0.5) node {$U^{\tilde{T}}$};	
+				\path (1.25,0.5) node {$F^{\tilde{T}}$};	
+
+				\draw [cyan, thick] (-0.75,-0.75) circle [radius=0.15];
+				\draw [cyan, thick] (0,1.5) circle [radius=0.15];	
+				\draw [magenta, thick] (0,-1.5) circle [radius = 0.15];
+				\draw [magenta, thick] (0.75,2.25) circle [radius = 0.15];								
+			\end{tikzpicture}
+		\end{aligned}
+	\]		
+
+\[
+			\begin{tikzpicture}[scale=2]
+				\draw[t] 
+					(2.5,2.5) -- (-1,-1);
+				\draw[t] 
+					(0.5,2.5) -- (-3,-1);
+				
+				\draw [s]
+					(-1,2.5) -- (2.5,-1);
+				\draw[s] (-3,2.5) -- (0.5,-1);
+
+				\fill[very nearly transparent, cyan]
+					(2.5,2.5) -- (-1,-1)
+						to
+					(-3,-1) -- (0.5,2.5);
+
+				\fill[very nearly transparent, magenta]
+					(-1,2.5)  -- (2.5,-1)
+						-- (0.5,-1) --  (-3,2.5);
+				
+				\path (-1.5,0.75) node {$u$};
+				\path  (1,0.75) node {$f$};
+				\path (-0.25,-0.5)node {$e^{-1}$};
+				\path  (-0.25,2) node {$e'$};
+
+				\path (-3,2.7669) node {$\color{gray} U^S$};
+				\path (-1,2.7669) node {$\color{gray} F^S$};						
+				\path (0.5,2.7669) node {$\color{gray} U^T$};
+				\path (2.5,2.7669) node {$\color{gray} F^T$};					
+				\path (-0.9334,0.0666) node {$\color{gray} \hat{U}^{TS}$};		
+				\path (0.4667,1.4667) node {$\color{gray} \hat{F}^{TS}$};		
+				\path (-0.85,1.35) node {$\color{gray} U^{\tilde{T}}$};	
+				\path (0.35,0.15) node {$\color{gray} F^{\tilde{T}}$};				
+			\end{tikzpicture}
+\]	
+
+\[
+	\begin{aligned}
+\begin{tikzpicture}[scale=1.5]
+	\draw[t]
+	(0,1) -- (-2.5,-1);
+	\draw[f]
+	(-1.85,1) -- (-1.85,-1);
+	\draw[s]
+	(-2.5,1) -- (0,-1);
+\end{tikzpicture}	
+	\end{aligned}
+	\quad
+	=
+	\quad
+	\begin{aligned}
+\begin{tikzpicture}[scale=1.5]
+	\draw[t]
+	(0,1) -- (-2.5,-1);
+	\draw[f]
+	(-0.65,1) -- (-0.65,-1);
+	\draw[s]
+	(-2.5,1) -- (0,-1);
+\end{tikzpicture}	
+	\end{aligned}	
+\]
+
+\[
+	\begin{aligned}
+	\begin{tikzcd}
+		\cX^S \ar[r, "\t{T}"] \ar[d,"U^S"']		& \cX^S \ar[d, "U^S"]
+		\\
+		\cX \ar[r, "T"]		& \cX
+	\end{tikzcd}
+	\end{aligned}
+	\qquad
+	\begin{aligned}
+	\begin{tikzcd}
+				&			& \cX^S \ar[d, "U^S"]
+		\\
+		\cX^S \ar[urr, "\t{T}"] \ar[r, "U^S"']	&	\cX \ar[r, "T"']	& \cX
+	\end{tikzcd}
+	\end{aligned}
+\]
+\[
+\begin{tikzpicture}[scale=1.5]
+
+	\draw[s] 
+	(-1,3.5) -- (-1,0.5) 
+		to [out=-90, in =180] 
+	(-0.5,0) 
+		to [out=0, in =-90]
+	(0,0.5) 
+		-- 
+	(0,1.5) 
+		to [out=90, in =180]
+	(0.5,2) 
+		to  [out=0, in =90]
+	(1,1.5) -- (1,-1.5);
+	
+	\fill [very nearly transparent, magenta]
+	(-2.5,3.5)--
+	(-1,3.5) -- (-1,0.5) 
+		to [out=-90, in =180] 
+	(-0.5,0) 
+		to [out=0, in =-90]
+	(0,0.5) 
+		-- 
+	(0,1.5) 
+		to [out=90, in =180]
+	(0.5,2) 
+		to  [out=0, in =90]
+	(1,1.5) -- (1,-1.5)
+	-- (-2.5,-1.5);	
+	\draw[dotted, gray] (-2.5,2.5) -- (3,2.5);
+	\draw[dotted, gray] (-2.5,1.5) -- (3,1.5);
+	\draw[dotted, gray] (-2.5,0.5) -- (3,0.5);
+	\draw[dotted, gray] (-2.5,-0.5) -- (3,-0.5);
+	
+	\path (0,3) node {$\cX$};
+	\path (-2,3) node {$\cY$};
+	\path (-1,3.8) node {$F$};
+	\path (1,-1.8) node {$F$};
+	\path (-0.2,1) node {$U$};
+	\path (0.5,2.2) node {$\eta$};
+	\path (-0.5,-0.2) node {$\varepsilon$};
+	
+	\path (2,3) node (F) {$F$};
+	\path (2,1) node (FUF) {$FUF$};
+	\path (2,-1) node (F2) {$F$};
+	\path (2.5,2) node {$F \eta$};
+	\path (2.5,0) node {$\varepsilon F$};
+	
+	\draw[-implies, double equal sign distance] (F) -- (FUF);
+	\draw[-implies, double equal sign distance] (FUF) -- (F2);	
+	
+	\draw[->, gray] (-0.5,3) to[out=150, in =30] (-1.5,3);
+\end{tikzpicture}
+\]
+
+ $\eta: 1_{\mathbf{X}} \Rightarrow UF$
+
+ $\varepsilon: FU \Rightarrow 1_{\mathbf{Y}}$
+
+\[
+	\begin{tikzcd}
+		d \ar[d, mapsto]	& 	\mathcal{D} \ar[d, "Y"'] \ar[r, "F"]	&	\mathcal{C}	&	\text{colim}^W F \,\cong\, \int^d W(d) \cdot F(d) 
+		\\
+		\mathcal{D}(-,d) & {[\mathcal{D}^{op}, \mathcal{V}]} \ar[ur, "\hat{F} = \text{Lan}_Y F"'] & & W \,\cong\, \int^d W(d) \cdot \mathcal{D}(-,d) \ar[u, mapsto]
+	\end{tikzcd}
+\]	
+
+\[
+\begin{aligned}
+	\begin{tikzcd}
+		\mathcal{D} \ar[rr, "F"] \ar[dd, "p"'] \ar[dr, "Y"'] & & \mathcal{C} 
+		\\
+		& {[\mathcal{D}^{op}, \mathcal{V}]} \ar[ur, "\text{Lan}_Y F"'] &
+		\\
+		\mathcal{D}' \ar[ur, "p^* \circ Y' " '] & &
+	\end{tikzcd}
+\end{aligned}
+\quad
+\cong
+\quad
+\begin{aligned}
+	\begin{tikzcd}
+		\mathcal{D} \ar[rr, "F"] \ar[dd, "p"'] & & \mathcal{C} 
+		\\
+		& \phantom{[\mathcal{D}^{op}, \mathcal{V}]} &
+		\\
+		\mathcal{D}' \ar[uurr, "\text{Lan}_p F" '] & &
+	\end{tikzcd}
+\end{aligned}
+\]	
+
+\[
+	\begin{tikzcd}
+		X \ar[d, Rightarrow] \\ Y
+	\end{tikzcd}
+\]	
+
+\pagebreak
+\appendix
+\section{String diagrams}
+	This is a quick review of string diagrams. Throughout, we work in a $2$-category $\cK$ (for example, the category of categories, $\Cat$) containing
+	\begin{itemize}
+		\item $0$-cells $\cX,\cY,\cZ,\dots$  (`categories'),
+		\item $1$-cells $F,G,\dots$ ('functors'),
+		\item $2$-cells $\eta, \mu, \dots$ ('natural transformations').
+	\end{itemize}
+
+	In diagrammatic calculus, $0$-cells are denoted by \emph{regions}, $1$-cells by \emph{lines} between regions, and $2$-cells by \emph{points/nodes} on lines. Thus, the following two diagrams denote the same thing:
+	\begin{equation*}
+		\begin{aligned}
+			\begin{tikzcd}
+				\cX 
+					\arrow[r, bend left, "F"{name=U}]
+					\arrow[r, bend right, "G"{name=D, below}]
+				& \cY
+					\arrow[Rightarrow, "\eta", from=U, to=D]
+			\end{tikzcd}
+			\qquad
+			\qquad
+			\begin{tikzpicture}
+				\path (0.5,0) node {$\cX$};
+				\path (-1.5,0) node {$\cY$};
+				\path (-0.5,1.5) node (F) {$F$};
+				\path (-0.5,-1.5) node (G) {$G$};
+				\path (-0.5,0) node (e) {$\eta$};
+				
+				\draw[black]
+					(F) to (e) to (G);
+					
+				\draw [black] (-0.5,0) circle [radius=0.32];
+			\end{tikzpicture}
+		\end{aligned}
+	\end{equation*}
+	All string diagrams in this paper should be read from \emph{right to left} and \emph{top to bottom}. This is to agree with the common convention of writing the composite of $G:\cY \to \cZ$ and $F: \cX \to \cY$ as
+	\begin{equation*}
+		GF \quad = \quad \cZ \xleftarrow{G} \cY \xleftarrow{F} \cX \quad = \quad
+		\begin{aligned}
+			\begin{tikzpicture}
+				\node at (0,0) (G) {$G$};
+				\node at (2,0) (F) {$F$};
+
+				\node at (-1,-1.5) {$\cZ$};
+				\node at (1,-1.5) {$\cY$};
+				\node at (3,-1.5) {$\cX$};
+
+				\draw
+				(G) -- (0,-3);
+				\draw
+				(F) -- (2,-3);
+			\end{tikzpicture}
+		\end{aligned}.
+	\end{equation*}	
+	In Beck's paper, this composite would be written $FG$.
+
+	In practice, many $2$-cells will not be drawn using nodes, but instead indicated by certain configurations of input and output lines. For example:
+	\begin{equation*}
+		\begin{aligned}
+			\begin{tikzpicture}
+				\draw[black]
+					(0,2)
+						to [out=-90, in =150]
+					(0.5,1)
+						to [out=30, in =-90]
+					(1,2);		
+				\draw[black]
+					(0.5,1) -- (0.5,0);						
+			\end{tikzpicture}
+		\end{aligned}
+		\quad
+		\text{ instead of }
+		\quad
+		\begin{aligned}
+			\begin{tikzpicture}
+				\draw[black]
+					(0,2)
+						to [out=-90, in =150]
+					(0.5,1)
+						to [out=30, in =-90]
+					(1,2);		
+				\draw[black]
+					(0.5,1) -- (0.5,0);
+				\draw [black, fill=white] (0.5,1) circle [radius=0.2];					
+			\end{tikzpicture}
+		\end{aligned}
+		\qquad
+		\text{, and }
+		\qquad
+		\begin{aligned}
+			\begin{tikzpicture}
+				\draw[f]
+					(1,2)
+						to [out=-90, in =90]
+					(0,0);						
+				\draw[f]
+					(0,2)
+						to [out=-90, in =90]
+					(1,0);							
+			\end{tikzpicture}
+		\end{aligned}
+		\quad
+		\text{ instead of }
+		\quad
+		\begin{aligned}
+			\begin{tikzpicture}
+				\draw[f]
+					(1,2)
+						to [out=-90, in =90]
+					(0,0);						
+				\draw[f]
+					(0,2)
+						to [out=-90, in =90]
+					(1,0);
+				\draw [black, fill=white] (0.5,1) circle [radius=0.2];												
+			\end{tikzpicture}
+		\end{aligned}		
+		\qquad .
+	\end{equation*}
+	Identity $1$-cells or $2$-cells are also not drawn:
+	\begin{equation*}
+		\begin{aligned}
+			\begin{tikzpicture}
+				\path (0.5,0) node {$\cX$};
+				\path (1,1.5) node {$\phantom{1_{\cX}}$};						
+				\fill[nearly transparent, gray] (2,-0.5) rectangle (0,1);					
+			\end{tikzpicture}
+		\end{aligned}
+		\quad
+		\text{ instead of }
+		\quad
+		\begin{aligned}
+			\begin{tikzpicture}
+				\path (0.5,0) node {$\cX$};
+				\path (1,1.5) node {$1_{\cX}$};
+				\draw[black] (1,1) -- (1,-0.5);
+				\fill[nearly transparent, gray] (2,-0.5) rectangle (0,1);					
+			\end{tikzpicture}
+		\end{aligned}
+		\qquad
+		\text{, and }
+		\qquad
+		\begin{aligned}
+			\begin{tikzpicture}
+				\path (1,1.5) node {$F$};
+				\draw[black] (1,1) -- (1,-0.5);						
+			\end{tikzpicture}
+		\end{aligned}
+		\quad
+		\text{ instead of }
+		\quad
+		\begin{aligned}
+			\begin{tikzpicture}
+				\path (1,1.5) node {$F$};
+
+				\draw[black] (1,1) -- (1,-0.5);
+				\draw[black, fill=white] (1,0.25) circle [radius=0.2];
+				\path (0.5,0.25) node {$1_F$};										
+			\end{tikzpicture}
+		\end{aligned}		
+		\qquad .
+	\end{equation*}
+	As much as possible, we will rely on the color of $0$- and $1$-cells and the shape of $2$-cells for identification, omitting their names when the context allows.
+
+	String diagrams may be concatenated vertically and horizontally, in the same way that $2$-cells in a $2$-category have horizontal and vertical composition. For example, the identity $2$-cell $T = 1_T: T \To T$ may be composed horizontally with the $2$-cell $\mu: TT \To T$ to obtain $T \mu: TTT \To TT$:
+	\begin{equation*}
+		\begin{tikzpicture}
+			\draw[t]
+			(0.5,-1)
+				to [out=-90, in =150]
+			(1,-2)
+				to [out=30, in =-90]
+			(1.5,-1);
+			
+			\draw[t]
+			(1,-2) -- (1,-2.5);		
+
+			\draw[t]
+			(-0.5,-1) -- (-0.5,-2.5);
+		\end{tikzpicture}
+	\end{equation*}
+	This may then be composed vertically with $\mu$ to obtain:
+	\begin{equation*}
+		\begin{aligned}
+			\begin{tikzcd}
+				TTT \ar[d, Rightarrow, "T \mu"] \\ TT \ar[d, Rightarrow, "\mu"] \\ T
+			\end{tikzcd}
+		\end{aligned}
+		\qquad
+		\qquad
+		\begin{aligned}
+			\begin{tikzpicture}
+				\draw[t]
+				(3.5,0)
+					to [out=-90, in = 150]
+				(4,-1)
+					to [out = 30, in =-90]
+				(4.5,0);
+				
+				\draw[t]
+				(2.5,0)
+					to [out=-90, in =150]
+				(3.5,-2)
+					to [out=30, in =-90]
+				(4,-1);
+				
+				\draw[t]
+				(3.5,-2) -- (3.5,-2.5);	
+						
+				\path (2.5,0.5) node {$T$};
+				\path (3.5,0.5) node {$T$};
+				\path (4.5,0.5) node {$T$};	
+				\path (5.5,-1) node {$T \mu$};	
+				\path (5.5,-2) node {$\mu$};	
+				
+				\draw[dashed] (2,-1.5) -- (6,-1.5);					
+			\end{tikzpicture}
+		\end{aligned}
+	\end{equation*}
+
+	Finally, we outline a general procedure for translating a commutative diagram into a series of equalities of string diagrams:
+	\begin{enumerate}
+		\item Treat the commutative diagram as a directed graph. Identify the source and sink of this graph.
+		\item For every directed path from source to sink, draw the corresponding string diagram.
+		\item For every region bounded by two directed paths, write `=' between the corresponding string diagrams.
+	\end{enumerate}
+	As an example, consider the following commutative diagram, found at the top of p.98 in Beck's paper \cite{beck1969distributive}:
+	\begin{equation}
+		\begin{tikzcd}
+					& & TST  \ar[ddrr, "TST\eta^S", blue, Rightarrow]	& &
+			\\
+					& & (3)	& &
+			\\
+			STT \ar[uurr,"\ell T", blue, Rightarrow] \ar[rr, "\eta^T ST \eta^S T \eta^S"', Rightarrow] \ar[dd,"S \mu^T"' ,red, Rightarrow]	& & TSTSTS \ar[rr, "mTS"', Rightarrow] \ar[dd, "TSm", Rightarrow]	& & TSTS \ar[dd, "m", blue, Rightarrow]
+			\\
+				& (1) & & (2) &
+			\\
+			ST  \ar[rr, "\eta^T ST \eta^S", red, Rightarrow]	 & & TSTS 	\ar[rr, "m", red, Rightarrow]	& & TS
+		\end{tikzcd}
+	\end{equation}
+	This has source $STT$ at the top-left, sink $TS$ at the bottom right, and 4 directed paths from source to sink related by 3 `commuting regions'. 
+
+	We get the following equality of 4 string diagrams, starting with the red path on the left, ending with the blue path on the right, and with equalities labelled to indicate which commuting regions they correspond to:
+	\begin{equation}
+		\begin{aligned}
+			\begin{tikzpicture}
+				\draw[t]
+				(0,0)
+					to [out=-90, in =150]
+				(0.5,-1)
+					to [out=30, in =-90]
+				(1,0);
+				\draw[t]
+				(-1.5,-1.5)
+					to [out=-90, in =150]
+				(-0.5,-3)
+					to [out=30, in =-90]
+				(0.5,-1);	
+				\draw[s]
+				(-1,0)
+					to [out=-90, in =150]
+				(0.5,-3)
+					to [out=30, in =-90]
+				(1.5,-1.5);
+				
+				\draw[s]
+				(0.5,-3) -- (0.5,-4);
+				\draw[t]
+				(-0.5,-3) -- (-0.5,-4);	
+				
+				\draw[fill, color=red] (1.5,-1.5) circle (.08);
+				\draw[fill, color=teal] (-1.5,-1.5) circle (.08);
+				
+				\path (-1,0.5) node {$S$};
+				\path (0,0.5) node {$T$};
+				\path (1,0.5) node {$T$};
+				\path (-2,-1.5) node {$\eta^T$};
+				\path (2,-1.5) node {$\eta^S$};	
+				\path (0,-1) node {$\mu^T$};
+				\path (-2,-3) node {$m$};		
+				
+				\draw[rounded corners, dashed, black] (1.5,-3.25) rectangle (-1.5,-2.25);					
+			\end{tikzpicture}
+		\end{aligned}
+		\quad
+		\overset{(1)}{=}
+		\quad
+		\begin{aligned}
+			\begin{tikzpicture}
+				\draw[t]
+				(0,0)
+					to [out=-90, in =150]
+				(0.5,-1.5)
+					to [out=30, in =-90]
+				(1.5,0);
+				\draw[t]
+				(-1.5,-0.5)
+					to [out=-90, in =150]
+				(-0.5,-3)
+					to [out=30, in =-90]
+				(0.5,-1.5);	
+
+				\draw[s]
+				(1,-0.5)
+					to [out=-90, in =150]
+				(1.5,-1.5)
+					to [out=30, in =-90]
+				(2,-0.5);						
+				\draw[s]
+				(-1,0)
+					to [out=-90, in =150]
+				(0.5,-3)
+					to [out=30, in =-90]
+				(1.5,-1.5);						
+				\draw[s]
+				(0.5,-3) -- (0.5,-4);
+				\draw[t]
+				(-0.5,-3) -- (-0.5,-4);	
+				
+				\draw[fill, color=red] (2,-0.5) circle (.08);
+				\draw[fill, color=red] (1,-0.5) circle (.08);						
+				\draw[fill, color=teal] (-1.5,-0.5) circle (.08);
+				
+				\path (-1,0.5) node {$S$};
+				\path (0,0.5) node {$T$};
+				\path (1,0.5) node {$T$};						
+			\end{tikzpicture}
+		\end{aligned}
+		\quad
+		\overset{(2)}{=}
+		\quad				
+		\begin{aligned}
+			\begin{tikzpicture}
+				\draw[t]
+				(-1.5,-0.5)
+					to [out=-90, in =150]
+				(-1,-1.5)
+					to [out=30, in =-90]
+				(0,0);
+				\draw[t]
+				(-1,-1.5)
+					to [out=-90, in =150]
+				(-0.5,-3)
+					to [out=30, in =-90]
+				(1,0);	
+
+				\draw[s]
+				(-1,0)
+					to [out=-90, in =150]
+				(0,-1.5)
+					to [out=30, in =-90]
+				(0.5,-0.5);						
+				\draw[s]
+				(0,-1.5)
+					to [out=-90, in =150]
+				(0.5,-3)
+					to [out=30, in =-90]
+				(1.5,-0.5);						
+				\draw[s]
+				(0.5,-3) -- (0.5,-4);
+				\draw[t]
+				(-0.5,-3) -- (-0.5,-4);	
+				
+				\draw[fill, color=red] (0.5,-0.5) circle (.08);
+				\draw[fill, color=red] (1.5,-0.5) circle (.08);						
+				\draw[fill, color=teal] (-1.5,-0.5) circle (.08);
+				
+				\path (-1,0.5) node {$S$};
+				\path (0,0.5) node {$T$};
+				\path (1,0.5) node {$T$};							
+			\end{tikzpicture}
+		\end{aligned}
+		\quad
+		\overset{(3)}{=}
+		\quad
+		\begin{aligned}
+			\begin{tikzpicture}
+				\draw[t]
+				(0,0)
+					to [out=-90, in =150]
+				(-0.5,-3)
+					to [out=30, in =-90]
+				(1,0);
+
+				\draw[s]
+				(-1,0)
+					to [out=-90, in =150]
+				(0.5,-3)
+					to [out=30, in =-90]
+				(1.5,-1);						
+		
+				\draw[s]
+				(0.5,-3) -- (0.5,-4);
+				\draw[t]
+				(-0.5,-3) -- (-0.5,-4);	
+				
+				\draw[fill, color=red] (1.5,-1) circle (.08);
+			
+				
+				\path (-1,0.5) node {$S$};
+				\path (0,0.5) node {$T$};
+				\path (1,0.5) node {$T$};
+				\path (-1,-1.75) node {$\ell$};					
+			\end{tikzpicture}
+		\end{aligned}	
+		\qquad.			
+	\end{equation}
+
+\vfill
+\pagebreak
+\section{The formal theory of monads}
+	In this appendix, we translate some aspects of the formal theory of monads into string diagrams. Our main references are \cite{street1972formal}, but we also borrow some notions from \cite{macdonald2004aspects} and \cite{kelly1974review}. We begin with the object around which the rest of the section is centered.
+
+	\subsection{The category of monads}
+		\begin{definition} A \emph{triple} or \emph{monad} ($\cX, T, \eta, \mu$) in a $2$-category $\cK$ consists of
+			\begin{itemize}
+				\item a $0$-cell $\cX$,
+				\item a $1$-cell $T: \cX \to \cX$,
+					\begin{equation*}
+						\begin{tikzpicture}
+							\draw[t]
+							(1,-1) -- (1,-2.5);	
+							
+							\path (0.5,-1.75) node {$\cX$};
+							\path (1.5,-1.75) node {$\cX$};
+							\path (1,-0.5) node {$T$};						
+						\end{tikzpicture}
+					\end{equation*}
+				\item two $2$-cells $\eta: 1_\cX \To T$ and $\mu: TT \To T$
+					\begin{equation*}	
+						\eta
+						\quad =  \quad
+						\begin{aligned}
+							\begin{tikzpicture}
+								\draw[t]
+								(1,-1.5) -- (1,-2.5);
+								
+								\draw[fill, color = teal] (1,-1.5) circle[radius=0.08];								
+							\end{tikzpicture}
+						\end{aligned}
+						\qquad
+						,
+						\qquad
+						\mu
+						\quad =  \quad
+						\begin{aligned}
+							\begin{tikzpicture}
+								\draw[t]
+								(0.5,-1)
+									to [out=-90, in =150]
+								(1,-2)
+									to [out=30, in =-90]
+								(1.5,-1);
+								
+								\draw[t]
+								(1,-2) -- (1,-2.5);									
+							\end{tikzpicture}
+						\end{aligned}
+					\end{equation*}
+			\end{itemize}
+			such that
+			\begin{equation}
+				\begin{aligned}
+					\begin{tikzpicture}
+						\draw[t]
+						(0.5,-1)
+							to [out=-90, in =150]
+						(1,-2)
+							to [out=30, in =-90]
+						(1.5,-0.5);
+						
+						\draw[t]
+						(1,-2) -- (1,-2.5);	
+						
+						\draw[fill, color=teal, ] (0.5,-1) circle (.08);					
+					\end{tikzpicture}
+				\end{aligned}
+				\quad
+				=
+				\quad
+				\begin{aligned}
+					\begin{tikzpicture}
+						\draw[t]
+						(1,-0.5) -- (1,-2.5);								
+					\end{tikzpicture}
+				\end{aligned}
+				\quad
+				=
+				\quad
+				\begin{aligned}
+					\begin{tikzpicture}
+						\draw[t]
+						(0.5,-0.5)
+							to [out=-90, in =150]
+						(1,-2)
+							to [out=30, in =-90]
+						(1.5,-1);
+						
+						\draw[t]
+						(1,-2) -- (1,-2.5);	
+						
+						\draw[fill, color=teal, ] (1.5,-1) circle (.08);								
+					\end{tikzpicture}
+				\end{aligned}				
+				\qquad
+				\text{and}
+				\qquad
+				\begin{aligned}
+					\begin{tikzpicture}
+						\draw[t]
+						(0,0)
+							to [out=-90, in = 150]
+						(0.5,-1)
+							to [out = 30, in =-90]
+						(1,0);
+						
+						\draw[t]
+						(0.5,-1)
+							to [out=-90, in =150]
+						(1,-2)
+							to [out=30, in =-90]
+						(2,0);
+						
+						\draw[t]
+						(1,-2) -- (1,-2.5);			
+					\end{tikzpicture}
+				\end{aligned}
+				\quad
+				=
+				\quad
+				\begin{aligned}
+					\begin{tikzpicture}
+						\draw[t]
+						(1,0)
+							to [out=-90, in = 150]
+						(1.5,-1)
+							to [out = 30, in =-90]
+						(2,0);
+						
+						\draw[t]
+						(0,0)
+							to [out=-90, in =150]
+						(1,-2)
+							to [out=30, in =-90]
+						(1.5,-1);
+						
+						\draw[t]
+						(1,-2) -- (1,-2.5);				
+					\end{tikzpicture}
+				\end{aligned}	
+				\qquad.
+			\end{equation}
+			We may also call this a monad \emph{on} $\cX$. Thus, a monad on $\cX$ is a monoid in the monoidal\footnote{The fact that $(\cat{End}(\cX),\circ, 1_\cX)$ is not a \emph{braided} monoidal category is the reason why distributive laws are required!} category $(\cat{End}(\cX), \circ, 1_\cX)$.
+
+			We will variously use $(\cX, T)$, $(T, \eta,\mu)$, or often simply $T$, to refer to the monad $(\cX,T,\eta,\mu)$.
+		\end{definition}	
+
+		\begin{definition}
+			Let $(T,\eta,\mu), (T',\eta', \mu')$ be monads on $\cX$. A \emph{monad map} is a $2$-cell $\phi: T \To T'$ such that
+			\begin{equation}	
+				\begin{aligned}
+					\begin{tikzpicture}
+						\draw [vt]
+						(-3,-2) 
+							to
+						(-3,-3.5);
+						
+						\draw [t] 
+						(-3,-0.5) 
+							to
+						(-3,-2);	
+						\draw[fill, color=red, ] (-3,-2) circle (.08);
+						\draw[fill, color=teal] (-3,-0.5) circle (.08);	
+						\path (-3.5,-2) node {$\phi$};					
+						\path (-2.5,-2.75) node {$T'$};
+						\path (-2.5,-1.25) node {$T$};
+						\path (-3,0) node {$\eta$};					
+					\end{tikzpicture}
+				\end{aligned}
+				\quad
+				=
+				\quad
+				\begin{aligned}
+					\begin{tikzpicture}
+						\path (-1,-0.5) node (ST) {};
+
+						\draw[white]
+						(-1,1.75) to (ST);		
+
+						
+						\draw [vt] 
+						(ST.center) 
+							to
+						 (-1,-2) ;	
+
+						\draw[fill, color=vioteal] (ST) circle (.08);
+						\path (-1,0) node {$\eta'$};	
+					\end{tikzpicture}
+				\end{aligned}				
+				\qquad
+				\text{ and }
+				\qquad				
+				\begin{aligned}
+					\begin{tikzpicture}
+						\draw [t] 
+						(-1,0) 
+							to [out = -90, in = 150]
+						(0,-1.5) 
+							to [out = 30, in =-90]
+						(1,0);
+						
+						\draw [t]
+						(0,-2.5) 
+							to
+						(0,-1.5);	
+
+						\draw [vt]
+						(0,-2.5)
+							to
+						(0,-3.5);						
+						
+						\draw[fill, color=red, ] (0,-2.5) circle (.08);
+						\path (0,-1.25) node {$\mu$};
+					\end{tikzpicture}
+				\end{aligned}
+				\quad
+				=
+				\quad
+				\begin{aligned}
+					\begin{tikzpicture}
+						\draw [vt] 
+						(-1,-1) 
+							to [out = -90, in = 150]
+						(0,-2.5) 
+							to [out = 30, in =-90]
+						(1,-1);
+						
+						\draw [vt]
+						(0,-3.5) 
+							to
+						(0,-2.5);		
+						
+						\draw [t]
+						(-1,0)
+							to
+						(-1,-1);		
+						
+						\draw [t]
+						(1,0)
+							to
+						(1,-1);
+						
+						\draw[fill, color=red, ] (-1,-1) circle (.08);
+						\draw[fill, color=red, ] (1,-1) circle (.08);
+						\path (0.1,-2.22) node {$\mu'$};
+					\end{tikzpicture}			
+				\end{aligned}		
+				\qquad.				
+			\end{equation}	
+		\end{definition}
+		This is the definition of a map of monads/triples that is used in \cite{beck1969distributive} as well as \cite{kelly1974review}, and which agrees with the definition of a monoid homomorphism between monoids in a monoidal category.
+		\begin{definition} The category $\Mnd(\cX)$ is the category of monads on $\cX$ and monad maps between them.
+		\end{definition}
+
+		There is a more general notion of a morphism between monads in \cite{street1972formal}, where we allow $T$ and $T'$ to be monads on \emph{different} $0$-cells:
+		\begin{definition}
+			Let $(\cX, T)$ and $(\cY, T')$ be monads in $\cK$. A \emph{lax morphism of monads}, or \emph{monad functor}, $(F,\phi): (\cX,T) \to (\cY,T')$ consists of a $1$-cell $F: \cX \to \cY$ and a $2$-cell $\phi: T'F \To FT$ such that
+			\begin{equation}
+				\begin{aligned}
+					\begin{tikzpicture}[xscale=-1]
+						\draw[t]
+						(-2,-0.5) 
+							to [out = -90, in=90]
+						(-3.5,-3);
+						\draw[fill, color=teal] (-2,-0.5) circle (.08);							
+						
+						\draw[s]
+						(-3.5,0)
+							to [out = -90, in =90]
+						(-1.5,-3);								
+
+						\fill[very nearly transparent, magenta]
+						(-3.5, 0)
+							to [out=-90, in =90]
+						(-1.5, -3)
+							to
+						(-0.5,-3)
+							to
+						(-0.5,0);			
+
+						\path (-3.5,0.5) node {$F$};
+						\path (-2.5,-2.5) node {$\cX$};
+						\path (-3.5,-3.5) node {$T$};
+						\path (-1.75,-1) node {$T'$};
+						\path (-1,-2.5) node {$\cY$};
+						\path (-3,-1.5) node {$\phi$};								
+					\end{tikzpicture}
+				\end{aligned}
+				\quad
+				=
+				\quad
+				\begin{aligned}
+					\begin{tikzpicture}[xscale=-1]
+					\draw[t]
+					(-3.5,-2)
+						to [out = -90, in =90]
+					(-3.5,-3);
+						
+
+					\draw[s]
+					(-2.5,0)
+						to [out = -90, in =90]
+					(-2.5,-3);	
+					
+					\draw[fill, color=teal] (-3.5,-2) circle (.08);		
+					\fill[very nearly transparent, magenta]
+					(-2.5,0)
+						to [out=-90, in =90]
+					(-2.5,-3)
+						to
+					(-1,-3)
+						to
+					(-1,0);			
+					\end{tikzpicture}
+				\end{aligned}			
+				\qquad
+				\text{ and }
+				\qquad
+				\begin{aligned}
+					\begin{tikzpicture}[xscale=-1]
+						\draw[t]	
+						(-2.5,0.5)	
+							to [out=-90, in =150]
+						(-2,-0.5)
+							to [out=30, in = -90]	
+						(-1.5,0.5);
+
+						\draw[t]
+						(-2,-0.5)
+							to [out = -90, in =90]
+						(-3.5,-3);		
+						
+						\draw[s]
+						(-3.5,0.5)
+							to
+						(-3.5,0)
+							to [out = -90, in =90]
+						(-1.5,-3);										
+						\fill[very nearly transparent, magenta]
+						(-3.5,0.5) 
+							to
+						(-3.5,0)
+							to [out=-90, in =90]
+						(-1.5, -3)
+							to
+						(-0.5,-3)
+							to
+						(-0.5,0.5);	
+
+					\end{tikzpicture}
+				\end{aligned}
+				\quad
+				=
+				\begin{aligned}
+					\begin{tikzpicture}[xscale=-1]
+						\draw[t]	
+						(-2.5,0.5)	
+							to [out=-90, in =150]
+						(-3.5,-2.5)
+							to [out=30, in = -90]	
+						(-1.5,0.5);
+						
+				
+						\draw[t]
+						(-3.5,-2.5)
+							to 
+						(-3.5,-3);					
+
+						\draw[s]
+						(-3.5,0.5)
+							to
+						(-3.5,0)
+							to [out = -90, in =90]
+						(-1.5,-3);			
+
+						\fill[very nearly transparent, magenta]
+						(-3.5,0.5) 
+							to
+						(-3.5,0)
+							to [out=-90, in =90]
+						(-1.5, -3)
+							to
+						(-0.5,-3)
+							to
+						(-0.5,0.5);						
+					\end{tikzpicture}
+				\end{aligned}					
+				\qquad.							
+			\end{equation}
+			An \emph{oplax morphism of monads}, or \emph{monad opfunctor}, $(F,\phi):(\cX,T) \to (\cY, T')$ consists of $F: \cX \to \cY$ and $\phi: FT \To T'F$ such that
+			\begin{equation}
+				\begin{aligned}
+					\begin{tikzpicture}
+						\draw[t]
+						(-2,-0.5) 
+							to [out = -90, in=90]
+						(-3.5,-3);
+						\draw[fill, color=teal] (-2,-0.5) circle (.08);							
+						
+						\draw[s]
+						(-3.5,0)
+							to [out = -90, in =90]
+						(-1.5,-3);								
+
+						\fill[very nearly transparent, magenta]
+						(-3.5, 0)
+							to [out=-90, in =90]
+						(-1.5, -3)
+							to
+						(-4.5,-3)
+							to
+						(-4.5,0);	
+
+						\path (-3.5,0.5) node {$F$};
+						\path (-2.5,-2.5) node {$\cY$};
+						\path (-3.5,-3.5) node {$T'$};
+						\path (-1.75,-1) node {$T$};
+						\path (-1,-2.5) node {$\cX$};
+						\path (-3,-1.5) node {$\phi$};									
+					\end{tikzpicture}
+				\end{aligned}
+				\quad
+				=
+				\quad
+				\begin{aligned}
+					\begin{tikzpicture}
+					\draw[t]
+					(-3.5,-2)
+						to [out = -90, in =90]
+					(-3.5,-3);
+						
+
+					\draw[s]
+					(-2.5,0)
+						to [out = -90, in =90]
+					(-2.5,-3);	
+					
+					\draw[fill, color=teal] (-3.5,-2) circle (.08);		
+					\fill[very nearly transparent, magenta]
+					(-2.5,0)
+						to [out=-90, in =90]
+					(-2.5,-3)
+						to
+					(-4.5,-3)
+						to
+					(-4.5,0);			
+					\end{tikzpicture}
+				\end{aligned}			
+				\qquad
+				\text{ and }
+				\qquad
+				\begin{aligned}
+					\begin{tikzpicture}
+						\draw[t]	
+						(-2.5,0.5)	
+							to [out=-90, in =150]
+						(-2,-0.5)
+							to [out=30, in = -90]	
+						(-1.5,0.5);
+
+						\draw[t]
+						(-2,-0.5)
+							to [out = -90, in =90]
+						(-3.5,-3);		
+						
+						\draw[s]
+						(-3.5,0.5)
+							to
+						(-3.5,0)
+							to [out = -90, in =90]
+						(-1.5,-3);										
+						\fill[very nearly transparent, magenta]
+						(-3.5,0.5) 
+							to
+						(-3.5,0)
+							to [out=-90, in =90]
+						(-1.5, -3)
+							to
+						(-4.5,-3)
+							to
+						(-4.5,0.5);	
+
+					\end{tikzpicture}
+				\end{aligned}
+				\quad
+				=
+				\begin{aligned}
+					\begin{tikzpicture}
+						\draw[t]	
+						(-2.5,0.5)	
+							to [out=-90, in =150]
+						(-3.5,-2.5)
+							to [out=30, in = -90]	
+						(-1.5,0.5);
+						
+				
+						\draw[t]
+						(-3.5,-2.5)
+							to 
+						(-3.5,-3);					
+
+						\draw[s]
+						(-3.5,0.5)
+							to
+						(-3.5,0)
+							to [out = -90, in =90]
+						(-1.5,-3);			
+
+						\fill[very nearly transparent, magenta]
+						(-3.5,0.5) 
+							to
+						(-3.5,0)
+							to [out=-90, in =90]
+						(-1.5, -3)
+							to
+						(-4.5,-3)
+							to
+						(-4.5,0.5);							
+					\end{tikzpicture}
+				\end{aligned}					
+				\qquad.							
+			\end{equation}
+			A \emph{monad (op)functor transformation} $\sigma: (F,\phi) \To (F',\phi')$ between monad (op)functors is a $2$-cell $\sigma: F \To F'$ such that
+			\begin{equation}
+				\begin{aligned}
+					\begin{tikzpicture}[xscale=-1]
+						\path (-1.5,-3.5) node {$F'$};
+						\path (-3.5,0.5) node {$F$};
+						\path (-3.5,-1) node {$\sigma$};				
+						
+
+						\draw[t]
+						(-1.5,0) 
+							to [out = -90, in=90]
+						(-3.5,-3);
+						
+
+						\draw[s]
+						(-3.5,0)
+							to [out = -90, in =90]
+						(-1.5,-3);	
+
+
+						\fill[very nearly transparent, magenta]
+						(-3.5, 0)
+							to [out=-90, in =90]
+						(-1.5, -3)
+							to
+						(-0.5,-3)
+							to
+						(-0.5,0);				
+
+						\draw[fill, color=red] (-3.08,-1) circle (.08);			
+					\end{tikzpicture}
+				\end{aligned}
+				\quad
+				=
+				\quad
+				\begin{aligned}
+					\begin{tikzpicture}[xscale=-1]
+						\path (-1.5,-3.5) node {$F'$};
+						\path (-3.5,0.5) node {$F$};			
+
+						\draw[t]
+						(-1.5,0) 
+							to [out = -90, in=90]
+						(-3.5,-3);
+						
+					
+
+						\draw[s]
+						(-3.5,0)
+							to [out = -90, in =90]
+						(-1.5,-3);	
+						\fill[very nearly transparent, magenta]
+						(-3.5, 0)
+							to [out=-90, in =90]
+						(-1.5, -3)
+							to
+						(-0.5,-3)
+							to
+						(-0.5,0);					
+
+						\draw[fill, color=red] (-1.93,-2) circle (.08);	
+					\end{tikzpicture}
+				\end{aligned}		
+				\qquad \qquad
+				\left(
+				\begin{aligned}
+					\begin{tikzpicture}
+						\path (-1.5,-3.5) node {$F'$};
+						\path (-3.5,0.5) node {$F$};
+						\path (-3.5,-1) node {$\sigma$};				
+						
+
+						\draw[t]
+						(-1.5,0) 
+							to [out = -90, in=90]
+						(-3.5,-3);
+						
+
+						\draw[s]
+						(-3.5,0)
+							to [out = -90, in =90]
+						(-1.5,-3);	
+
+
+						\fill[very nearly transparent, magenta]
+						(-3.5, 0)
+							to [out=-90, in =90]
+						(-1.5, -3)
+							to
+						(-4.5,-3)
+							to
+						(-4.5,0);				
+
+						\draw[fill, color=red] (-3.08,-1) circle (.08);			
+					\end{tikzpicture}	
+				\end{aligned}
+				\quad
+				=
+				\quad
+				\begin{aligned}
+					\begin{tikzpicture}
+						\path (-1.5,-3.5) node {$F'$};
+						\path (-3.5,0.5) node {$F$};			
+
+						\draw[t]
+						(-1.5,0) 
+							to [out = -90, in=90]
+						(-3.5,-3);
+						
+					
+
+						\draw[s]
+						(-3.5,0)
+							to [out = -90, in =90]
+						(-1.5,-3);	
+						\fill[very nearly transparent, magenta]
+						(-3.5, 0)
+							to [out=-90, in =90]
+						(-1.5, -3)
+							to
+						(-4.5,-3)
+							to
+						(-4.5,0);					
+
+						\draw[fill, color=red] (-1.93,-2) circle (.08);		
+					\end{tikzpicture}
+				\end{aligned}			
+				\right).
+			\end{equation}
+		\end{definition}
+
+		Thus, for monads $T, T'$ on the same $\cX$, if $(1_{\cX}, \phi):(\cX,T) \to (\cX,T')$ is a monad \emph{op}functor, then $\phi: T \To T'$ is a monad \emph{map}, and vice versa. This also gives rise to a monad \emph{functor} $(1_{\cX}, \phi):(\cX,T') \to (\cX,T)$, but note the opposite variance (from $T'$ to $T$)!
+
+		\begin{definition}
+		The $2$-category of monads, monad functors and monad functor transformations is $\Mnd(\cK)$. 
+		Similarly, the $2$-category of monads, monad \emph{op}functors and monad opfunctor transformations is $\Mnd^{op}(\cK)$. 
+		\end{definition}
+
+		Let $\cK^{op}$ denote the $2$-category obtained by reversing the $1$-cells of $\cK^{op}$. Monads in $\cK$ are the same thing as monads in $\cK^{op}$, so $\Mnd(\cK)$ and $\Mnd(\cK^{op})$ have the same $0$-cells. By definition, these are also the $0$-cells of $\Mnd^{op}(\cK)$). In fact, it is not hard to see that 
+		\begin{equation}
+			\Mnd^{op}(\cK) = \big(\Mnd(\cK^{op})\big)^{op}.
+		\end{equation}
+
+		Where possible, we work with $\Mnd^{op}(\cK)$ instead of $\Mnd(\cK)$. Part of the reason is that monad maps have the same `variance' as monad opfunctors: for $\cX$ a 0-cell of $\cK$, $\Mnd(\cX)$ is a subcategory of $\Mnd^{op}(\cK)$ (treated as a $1$-category), \emph{not} $\Mnd(\cK)$.
+
+		We could also consider monads in $\cK^{co}$, the $2$-category obtained by reversing $2$-cells of $\cK$. These are \emph{co}monads in $\cK$, and we may define the corresponding categories $\cat{CoMnd}(\cX), \cat{CoMnd}(\cK), \cat{CoMnd}^{op}(\cK)$. To learn about the formal theory of comonads, their co-algebras, and distributive laws between them, simply read all diagrams in this paper from \emph{bottom to top}.
+
+	\vfill
+	\pagebreak
+	\subsection{Adjunctions in a $2$-category}
+		\begin{definition} An \emph{adjunction} $(F,U,\eta, \varepsilon)$ in $\cK$ consists of
+			\begin{itemize}
+				\item $1$-cells $F: \cX \to \cY$ and $U: \cY \to \cX$
+					\begin{equation*}
+						\begin{aligned}
+							\begin{tikzpicture}
+								\draw[s]
+								(1,-1) -- (1,-2.5);	
+								
+								\path (0.5,-1.75) node {$\cY$};
+								\path (1.5,-1.75) node {$\cX$};
+								\path (1,-0.5) node {$F$};	
+								
+								\fill[very nearly transparent, magenta] (0,-1) rectangle (1,-2.5);						
+							\end{tikzpicture}								
+						\end{aligned}
+						\qquad
+						,
+						\qquad
+						\begin{aligned}
+							\begin{tikzpicture}
+								\draw[s]
+								(1,-1) -- (1,-2.5);	
+
+								\path (1,-0.5) node {$U$};	
+								
+								\fill[very nearly transparent, magenta] (2,-1) rectangle (1,-2.5);									
+							\end{tikzpicture}								
+						\end{aligned}							
+					\end{equation*}
+				\item $2$-cells $\eta: 1_\cX \To UF$ and $\varepsilon: FU \To 1_\cY$
+					\begin{equation*}
+						\begin{aligned}
+							\begin{tikzpicture}
+								\draw[s]
+								(1,-2) -- (1,-1)
+									to [out= 90, in =180]
+								(1.5, -0.5)
+									to [out = 0, in =90]
+								(2,-1) -- (2,-2);	
+									
+								
+								\fill[very nearly transparent, magenta]
+								(1,-2) -- (1,-1)
+									to [out= 90, in =180]
+								(1.5, -0.5)
+									to [out = 0, in =90]
+								(2,-1) -- (2,-2);	
+								
+								\path (1.5,-0.25) node {$\eta$};										
+							\end{tikzpicture}
+						\end{aligned}
+						\qquad
+						,
+						\quad
+						\begin{aligned}
+							\begin{tikzpicture}
+								\draw[s]
+								(1,-1) -- (1,-2)
+									to [out= -90, in =180]
+								(1.5,-2.5)
+									to [out = 0, in =-90]
+								(2,-2) -- (2,-1);	
+									
+								
+								\fill[very nearly transparent, magenta]
+								(0.5,-3) -- (0.5,-1)-- (1,-1) -- (1,-2)
+									to [out= -90, in =180]
+								(1.5,-2.5)
+									to [out = 0, in =-90]
+								(2,-2) --(2,-1)-- (2.5,-1)--(2.5,-3);	
+								
+								\path (1.5,-2.25) node {$\varepsilon$};											
+							\end{tikzpicture}
+						\end{aligned}							
+					\end{equation*}
+			\end{itemize}
+			such that
+			\begin{equation}\label{eq:adjunction}
+				\begin{aligned}
+					\begin{tikzpicture}[scale=2]
+						\draw[s]
+						(1,-1) -- (1,-2)
+							to [out= -90, in =180]
+						(1.25,-2.25)
+							to [out = 0, in =-90]
+						(1.5,-2)
+							to [out= 90, in =180]
+						(1.75,-1.75)
+							to [out=0, in =90]
+						(2,-2) -- (2,-3);
+						
+						\fill[very nearly transparent, magenta]									
+						(1,-1) -- (1,-2)
+							to [out= -90, in =180]
+						(1.25,-2.25)
+							to [out = 0, in =-90]
+						(1.5,-2)
+							to [out= 90, in =180]
+						(1.75,-1.75)
+							to [out=0, in =90]
+						(2,-2) -- (2,-3) 
+						--(0.5,-3) -- (0.5,-1);							
+					\end{tikzpicture}
+				\end{aligned}
+				\quad
+				=
+				\quad
+				\begin{aligned}
+					\begin{tikzpicture}[scale=2]
+						\draw[s]
+						(1.5,-1) -- (1.5,-3);
+						
+						\fill[very nearly transparent, magenta]									
+						(1.5,-1) -- (1.5,-3) --(0.5,-3) -- (0.5,-1);							
+					\end{tikzpicture}
+				\end{aligned}
+				\qquad
+				\text{and}
+				\qquad
+				\begin{aligned}
+					\begin{tikzpicture}[yscale=-1, scale=2]
+						\draw[s]
+						(1,-1) -- (1,-2)
+							to [out= -90, in =180]
+						(1.25,-2.25)
+							to [out = 0, in =-90]
+						(1.5,-2)
+							to [out= 90, in =180]
+						(1.75,-1.75)
+							to [out=0, in =90]
+						(2,-2) -- (2,-3);
+						
+						\fill[very nearly transparent, magenta]									
+						(1,-1) -- (1,-2)
+							to [out= -90, in =180]
+						(1.25,-2.25)
+							to [out = 0, in =-90]
+						(1.5,-2)
+							to [out= 90, in =180]
+						(1.75,-1.75)
+							to [out=0, in =90]
+						(2,-2) -- (2,-3) 
+						--(2.5,-3) -- (2.5,-1);							
+					\end{tikzpicture}
+				\end{aligned}
+				\quad
+				=
+				\quad
+				\begin{aligned}
+					\begin{tikzpicture}[scale=2]
+						\draw[s]
+						(1.5,-1) -- (1.5,-3);
+						
+						\fill[very nearly transparent, magenta]									
+						(1.5,-1) -- (1.5,-3) --(2.5,-3) -- (2.5,-1);							
+					\end{tikzpicture}
+				\end{aligned}									
+				\qquad.
+			\end{equation}
+			We call $F$ the \emph{left adjoint}, $U$ the \emph{right adjoint}, and we write $F \dashv U$. We also call $\eta$ the \emph{unit} of the adjunction, and $\varepsilon$ the \emph{counit}.
+		\end{definition}
+		In (\ref{eq:adjunction}), we have dropped all labels, but this should not cause any confusion: $\cX$ and $\cY$ can be identified by their colours,  $F$ and $U$ by the colored regions that they border, and $\eta$ and $\varepsilon$ by their shapes. 
+
+		Let $(F,U,\eta,\varepsilon)$ be an adjunction, where $F: \cX \to \cY$. Using the properties of the unit and counit, it is easy to see that we obtain a monad on $\cX$\footnote{In fact, we also get a \emph{co}monad $FU$ on $\cY$.}:
+		\begin{equation*}
+			(UF, \eta, U \varepsilon F)
+			\qquad
+			=
+			\qquad
+			\left(
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw[s]
+					(1.5,-0.5) -- (1.5,-3);
+					\draw[s]
+					(1,-0.5) -- (1,-3);							
+					\fill[very nearly transparent, magenta]									
+					(1.5,-0.5) -- (1.5,-3) --(1,-3) -- (1,-0.5);						
+				\end{tikzpicture}
+			\end{aligned}
+			\quad
+			,
+			\quad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw[s]
+					(1.5,-3) -- (1.5,-2)
+						to [out=90, in =180]
+					(1.75,-1.75)
+						to [out= 0, in =90]
+					(2,-2) -- (2,-3);	
+					\fill[very nearly transparent, magenta]
+					(1.5,-3) -- (1.5,-2)
+						to [out=90, in =180]
+					(1.75,-1.75)
+						to [out= 0, in =90]
+					(2,-2) -- (2,-3);
+					
+					\fill[white] (1.5,-0.5) rectangle (2,-1);						
+				\end{tikzpicture}
+			\end{aligned}
+			\quad
+			,
+			\quad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw[s]
+					(1,-0.5) -- (1,-1.5)
+						to [out=-90, in =90]
+					(1.5,-2.5) -- (1.5,-3);
+					\draw[s]
+					(2.5,-0.5) --(2.5,-1.5)
+						to [out=-90, in =90]
+					(2,-2.5) -- (2,-3);		
+					\draw[s]
+					(1.5,-0.5) -- (1.5,-1.5)
+						to [out=-90, in =180]
+					(1.75,-1.75)
+						to [out= 0, in =-90]
+					(2,-1.5) -- (2,-0.5);									
+					
+					\fill[very nearly transparent, magenta]
+					(1.5,-0.5) -- (1.5,-1.5)
+						to [out=-90, in =180]
+					(1.75,-1.75)
+						to [out= 0, in =-90]
+					(2,-1.5) -- (2,-0.5) -- (2.5,-0.5) --(2.5,-1.5)
+						to [out=-90, in =90]
+					(2,-2.5) -- (2,-3)--(1.5,-3) --(1.5,-2.5) 
+						to [out=90, in =-90]
+					(1,-1.5) -- (1,-0.5);						
+				\end{tikzpicture}
+			\end{aligned}										
+			\right)
+		\end{equation*}
+		Further, a pair of composable adjunctions
+		\begin{equation}
+			\begin{tikzcd}
+				\cX \ar[r,bend left,"F",""{name=A, below}] 
+				& 
+				\cY \ar[l,bend left,"U",""{name=B,above}] \ar[from=A, to=B, symbol=\dashv] \ar[r, bend left, "F'", ""{name=C, below}]
+				&
+				\cZ \ar[l, bend left, "U'", ""{name=D,above}] \ar[from=C, to = D, symbol = \dashv]
+			\end{tikzcd}		
+		\end{equation}
+		give rise to a composite adjunction
+		\begin{equation}
+			\begin{tikzcd}
+				\cX \ar[r,bend left,"F'F",""{name=A, below}] 
+				& 
+				\cZ \ar[l,bend left,"UU'",""{name=B,above}] \ar[from=A, to=B, symbol=\dashv]
+			\end{tikzcd}			
+		\end{equation}
+		which in turn yields a monad $UU'F'F$ on $\cX$. The unit and counit of the composite adjunction are given by
+		\begin{equation}
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw[t] 
+					(-1,-0.5) -- (-1,0.5) 
+						to [out=90, in =180] 
+					(-0.5,1) 
+						to [out=0, in =90] 
+					(0,0.5) -- (0,-0.5);
+					\draw[s] 
+					(-1.5,-0.5) -- (-1.5,0.5)
+							to [out=90, in =180] 
+					(-0.5,1.5) 
+						to [out=0, in =90]
+					(0.5,0.5) -- (0.5,-0.5);
+
+					\fill[very nearly transparent, cyan]
+					(-1,-0.5) -- (-1,0.5) 
+						to [out=90, in =180] 
+					(-0.5,1) 
+						to [out=0, in =90] 
+					(0,0.5) -- (0,-0.5);
+
+					\fill[very nearly transparent, magenta]
+					(-1.5,-0.5) -- (-1.5,0.5)
+							to [out=90, in =180] 
+					(-0.5,1.5) 
+						to [out=0, in =90]
+					(0.5,0.5) -- (0.5,-0.5);	
+					
+	
+					
+					\path (-0.5,0.5) node {$\eta'$};
+					\path (-0.5,1.75) node {$\eta$};					
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad
+			\text{and}
+			\qquad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw[s]
+					(-0.5,2) -- (-0.5,1) 
+						to [out=-90, in =180]
+					(0,0.5) 
+						to [out=0, in =-90]
+					(0.5,1) -- (0.5,2);
+
+					\draw[t]
+					(-1,2) -- (-1,1) 
+						to [out=-90, in =180]
+					(0,0) 
+						to [out=0, in =-90]
+					(1,1) -- (1,2);
+
+					\fill[very nearly transparent, cyan]
+					(-1,2) node (v1) {} -- (-1,1) 
+						to [out=-90, in =180]
+					(0,0) 
+						to [out=0, in =-90]
+					(1,1) -- (1,2) -- (1.5,2) -- (1.5,-0.5) -- (-1.5,-0.5) -- (-1.5,2) -- (v1);
+
+					\fill[very nearly transparent, magenta]
+					(-0.5,2) node (v1) {} -- (-0.5,1) 
+						to [out=-90, in =180]
+					(0,0.5) 
+						to [out=0, in =-90]
+					(0.5,1) -- (0.5,2) -- (1.5,2) -- (1.5,-0.5) -- (-1.5,-0.5) -- (-1.5,2) -- (v1);
+
+
+
+					\path (0,1) node {$\varepsilon$};
+					\path (0,-0.25) node {$\varepsilon'$};				
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad.			
+		\end{equation}
+
+		\begin{definition}
+			Suppose we have the following pair of adjunctions between $\cX$ and $\cY$:
+			\begin{equation}
+				\begin{aligned}
+					\begin{tikzcd}
+						\cX \ar[r,bend left,"F",""{name=A, below}] 
+						& 
+						\cY \ar[l,bend left,"U",""{name=B,above}] \ar[from=A, to=B, symbol=\dashv]
+					\end{tikzcd}	
+				\end{aligned}
+				\qquad
+				,
+				\qquad
+				\begin{aligned}
+					\begin{tikzcd}
+						\cX \ar[r,bend left,"F'",""{name=A, below}] 
+						& 
+						\cY \ar[l,bend left,"U'",""{name=B,above}] \ar[from=A, to=B, symbol=\dashv]
+					\end{tikzcd}	
+				\end{aligned}
+			\end{equation}
+			along with $2$-cells $u: U \To U'$ and $f: F' \To F$. Then $u$ and $f$ are said to be \emph{adjoint} if
+			\begin{equation}
+				\begin{aligned}
+					\begin{tikzpicture}[yscale=-1]
+						\draw[t]
+						(1,-1) -- (1,-3)
+							to [out= -90, in =180]
+						(1.5,-3.5)
+							to [out = 0, in =-90]
+						(2,-3) -- (2,-2.5);
+						\draw[s]
+						(2,-2.5) -- (2,-2)
+							to [out= 90, in =180]
+						(2.5,-1.5)
+							to [out=0, in =90]
+						(3,-2) -- (3,-4);
+						
+						\fill[nearly transparent, gray]									
+						(1,-1) -- (1,-3)
+							to [out= -90, in =180]
+						(1.5,-3.5)
+							to [out = 0, in =-90]
+						(2,-3) -- (2,-2.5) -- (2,-2)
+							to [out= 90, in =180]
+						(2.5,-1.5)
+							to [out=0, in =90]
+						(3,-2) -- (3,-4) 
+						--(5,-4) -- (5,-1);		
+						
+						\draw[fill, color = black] (2,-2.5) circle[radius=0.08];
+						\path (2.25,-2.5) node {$f$};
+						\path (3,-4.5) node {$U$};
+						\path (1,-0.5) node {$U'$};											
+					\end{tikzpicture}
+				\end{aligned}
+				\quad
+				=
+				\quad
+				\begin{aligned}
+					\begin{tikzpicture}[yscale=-1]
+						\draw[t]
+						(1,-1) -- (1,-2.5);
+						\draw[s]
+						(1,-2.5) -- (1,-4);
+						
+						\fill[nearly transparent, gray]									
+						(1,-1) rectangle (3,-4);		
+						
+						\draw[fill, color = black] (1,-2.5) circle[radius=0.08];
+						\path (0.75,-2.5) node {$u$};
+						\path (1,-4.5) node {$U$};
+						\path (1,-0.5) node {$U'$};								
+					\end{tikzpicture}
+				\end{aligned}
+				\qquad
+				\text{and}
+				\qquad
+				\begin{aligned}
+					\begin{tikzpicture}
+						\draw[t]
+						(1,-1) -- (1,-3)
+							to [out= -90, in =180]
+						(1.5,-3.5)
+							to [out = 0, in =-90]
+						(2,-3) -- (2,-2.5);
+						\draw[s]
+						(2,-2.5) -- (2,-2)
+							to [out= 90, in =180]
+						(2.5,-1.5)
+							to [out=0, in =90]
+						(3,-2) -- (3,-4);
+						
+						\fill[nearly transparent, gray]									
+						(1,-1) -- (1,-3)
+							to [out= -90, in =180]
+						(1.5,-3.5)
+							to [out = 0, in =-90]
+						(2,-3) -- (2,-2.5) -- (2,-2)
+							to [out= 90, in =180]
+						(2.5,-1.5)
+							to [out=0, in =90]
+						(3,-2) -- (3,-4) 
+						--(-1,-4) -- (-1,-1);		
+						
+						\draw[fill, color = black] (2,-2.5) circle[radius=0.08];
+						\path (1.75,-2.5) node {$u$};
+						\path (3,-4.5) node {$F$};
+						\path (1,-0.5) node {$F'$};						
+						\path (4,-2.5) node {$\cX$};
+						\path (0,-2.5) node {$\cY$};						
+					\end{tikzpicture}
+				\end{aligned}
+				\quad
+				=
+				\quad
+				\begin{aligned}
+					\begin{tikzpicture}
+						\draw[t]
+						(1,-1) -- (1,-2.5);
+						\draw[s]
+						(1,-2.5) -- (1,-4);
+						
+						\fill[nearly transparent, gray]									
+						(1,-1) rectangle (-1,-4);		
+						
+						\draw[fill, color = black] (1,-2.5) circle[radius=0.08];
+						\path (1.25,-2.5) node {$f$};
+						\path (1,-4.5) node {$F$};
+						\path (1,-0.5) node {$F'$};								
+					\end{tikzpicture}
+				\end{aligned}													
+				\qquad.
+			\end{equation}
+			If $u$ and $f$ are adjoint, then specifying one determines the other.
+		\end{definition}
+
+		Consider the following square of 4 adjunctions where $F_i \dashv U_i$ and $ F'_i \dashv U'_i$:
+		\begin{equation}
+			\begin{tikzcd}
+							&	\cZ \ar[dr, shift left, "U'_0"] \ar[dl, shift left, "U'_1"]	&
+				\\
+				\cY_0 \ar[ur, shift left, "F'_1"] \ar[dr, shift left, "U_0"] 	&		& 		\cY_1 \ar[dl, shift left, "U_1"] \ar[ul, shift left, "F'_0"]
+				\\
+							&	\cX \ar[ul, shift left, "F_0"]	\ar[ur, shift left, "F_1"]	&
+			\end{tikzcd}
+		\end{equation}
+		This yields a pair of composite adjoints between $\cX$ and $\cZ$:
+		\begin{equation}
+			\begin{aligned}
+				\begin{tikzcd}
+					\cX \ar[r,bend left,"F'_1 F_0",""{name=A, below}] 
+					& 
+					\cZ \ar[l,bend left,"U_0 U'_1",""{name=B,above}] \ar[from=A, to=B, symbol=\dashv]
+				\end{tikzcd}	
+			\end{aligned}
+			\qquad
+			,
+			\qquad
+			\begin{aligned}
+				\begin{tikzcd}
+					\cX \ar[r,bend left,"F'_0 F_1",""{name=A, below}] 
+					& 
+					\cZ \ar[l,bend left,"U_1 U'_0",""{name=B,above}] \ar[from=A, to=B, symbol=\dashv]
+				\end{tikzcd}	
+			\end{aligned}
+			\qquad.
+		\end{equation}
+		Suppose we have $u: U_0 U'_1 \To U_1 U'_0: \cZ \to \cX$ and $f: F'_0 F_1 \To F'_1 F_0: \cX \to \cZ$ such that $u$ and $f$ are adjoint:
+		\begin{equation}
+			\begin{aligned}
+				\begin{tikzpicture}[yscale=-1]
+					\draw[t]
+					(1.5,-4) --(1.5,-2)
+						to [out=90, in =0]					
+					(0.5,-1) 
+						to [out=180, in =90]
+					(-0.5,-2)
+						to [out=-90, in =90]
+					(0,-2.5) 					
+						to[out=-90, in =0] 
+					(-1,-3.5)
+						to [out=180, in =-90]
+					(-2,-2.5) -- (-2,-0.5);				
+					\draw[s]
+					(1,-4) -- (1,-2)
+						to [out=90, in =0]
+					(0.5,-1.5)
+						to [out=180, in =0]
+					(-1,-3)
+						to [out=180, in =-90]
+					(-1.5,-2.5) -- (-1.5,-0.5);
+
+					\fill[very nearly transparent, cyan]	
+					(2.5,-4) --					
+					(1.5,-4) --(1.5,-2)
+						to [out=90, in =0]					
+					(0.5,-1) 
+						to [out=180, in =90]
+					(-0.5,-2)
+						to [out=-90, in =90]
+					(0,-2.5) 					
+						to[out=-90, in =0] 
+					(-1,-3.5)
+						to [out=180, in =-90]
+					(-2,-2.5) -- (-2,-0.5) -- (2.5,-0.5);
+
+					\fill[very nearly transparent, magenta]		
+					(2.5,-4)--					
+					(1,-4) -- (1,-2)
+						to [out=90, in =0]
+					(0.5,-1.5)
+						to [out=180, in =0]
+					(-1,-3)
+						to [out=180, in =-90]
+					(-1.5,-2.5) -- (-1.5,-0.5) -- (2.5,-0.5);		
+							
+
+					\path (0,-2) node {$f$};
+					\path (1.5,-4.5) node {$U'_1$};
+					\path (-1.5,0) node {$U'_0$};						
+					\path (1,-4.5) node {$U_0$};
+					\path (-2,0) node {$U_1$};		
+					\path (-2.5,-3.5) node {$\cX$};						
+					\path (1.5,-1) node {$\cZ$};									
+				\end{tikzpicture}
+			\end{aligned}
+			\quad
+			=
+			\,
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw[t]
+					(1,-0.5) to[out=-90, in =90] (-1,-4);
+					\draw[s]
+					(-1,-0.5) to[out=-90, in =90] (1,-4);
+					
+					\fill[very nearly transparent, cyan]									
+					(1,-0.5) 
+						to[out=-90, in =90] 
+					(-1,-4) -- (2,-4) --(2,-0.5);		
+					\fill[very nearly transparent, magenta]									
+					(-1,-0.5) 
+						to[out=-90, in =90] 
+					(1,-4) -- (2,-4) --(2,-0.5);							
+
+					\path (-0.5,-2.25) node {$u$};
+					\path (1,-4.5) node {$U'_0$};
+					\path (1,0) node {$U'_1$};						
+					\path (-1,-4.5) node {$U_1$};
+					\path (-1,0) node {$U_0$};						
+					%\path (-1.5,-2.5) node {$\cX$};						
+					\path (0,-1) node {$\cY_0$};	
+					\path (0,-3.5) node {$\cY_1$};	
+					%\path (1.5,-2.5) node {$Z$};						
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad
+			;
+			\qquad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw[t]
+					(1,-4) -- (1,-2)
+						to [out=90, in =0]
+					(0.5,-1.5)
+						to [out=180, in =0]
+					(-1,-3)
+						to [out=180, in =-90]
+					(-1.5,-2.5) -- (-1.5,-0.5);
+					\draw[s]
+					(1.5,-4) --(1.5,-2)
+						to [out=90, in =0]					
+					(0.5,-1) 
+						to [out=180, in =90]
+					(-0.5,-2)
+						to [out=-90, in =90]
+					(0,-2.5) 					
+						to[out=-90, in =0] 
+					(-1,-3.5)
+						to [out=180, in =-90]
+					(-2,-2.5) -- (-2,-0.5);
+					
+					\fill[very nearly transparent, cyan]		
+					(-3,-4)--					
+					(1,-4) -- (1,-2)
+						to [out=90, in =0]
+					(0.5,-1.5)
+						to [out=180, in =0]
+					(-1,-3)
+						to [out=180, in =-90]
+					(-1.5,-2.5) -- (-1.5,-0.5) -- (-3,-0.5);		
+					\fill[very nearly transparent, magenta]	
+					(-3,-4) --					
+					(1.5,-4) --(1.5,-2)
+						to [out=90, in =0]					
+					(0.5,-1) 
+						to [out=180, in =90]
+					(-0.5,-2)
+						to [out=-90, in =90]
+					(0,-2.5) 					
+						to[out=-90, in =0] 
+					(-1,-3.5)
+						to [out=180, in =-90]
+					(-2,-2.5) -- (-2,-0.5) -- (-3,-0.5);						
+
+					\path (-0.5,-2.5) node {$u$};
+					\path (1.5,-4.5) node {$F_0$};
+					\path (-1.5,0) node {$F_1$};						
+					\path (1,-4.5) node {$F'_1$};
+					\path (-2,0) node {$F'_0$};										
+				\end{tikzpicture}			
+			\end{aligned}
+			\,
+			=
+			\quad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw[t]
+					(1,-0.5) to[out=-90, in =90] (-1,-4);
+					\draw[s]
+					(-1,-0.5) to[out=-90, in =90] (1,-4);
+					
+					\fill[very nearly transparent, cyan]									
+					(1,-0.5) 
+						to[out=-90, in =90] 
+					(-1,-4) -- (-2,-4) --(-2,-0.5);		
+					\fill[very nearly transparent, magenta]									
+					(-1,-0.5) 
+						to[out=-90, in =90] 
+					(1,-4) -- (-2,-4) --(-2,-0.5);							
+
+					\path (0.5,-2.25) node {$f$};
+					\path (1,-4.5) node {$F_0$};
+					\path (1,0) node {$F_1$};						
+					\path (-1,-4.5) node {$F'_1$};
+					\path (-1,0) node {$F'_0$};							
+				\end{tikzpicture}
+			\end{aligned}		
+			\quad.							
+		\end{equation}
+		Then we may define a $2$-cell $e: F_1 U_0 \To U'_0 F'_1: \cY_0 \to \cY_1$ using either $u$ or $f$:
+		\begin{equation}
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw[t]
+					(-1,-0.5) to[out=-90, in =90] (1,-4);
+					\draw[s]
+					(1,-0.5) to[out=-90, in =90] (-1,-4);
+					
+					\fill[very nearly transparent, cyan]									
+					(-1,-0.5) 
+						to[out=-90, in =90] 
+					(1,-4) -- (-1.5,-4) --(-1.5,-0.5);		
+					\fill[very nearly transparent, magenta]									
+					(1,-0.5) 
+						to[out=-90, in =90] 
+					(-1,-4) -- (1.5,-4) --(1.5,-0.5);							
+
+					\path (0,-2) node {$e$};
+					\path (-1,-4.5) node {$U'_0$};
+					\path (-1,0) node {$F_1$};						
+					\path (1,-4.5) node {$F'_1$};
+					\path (1,0) node {$U_0$};								
+				\end{tikzpicture}
+			\end{aligned}
+			\qquad
+			:=
+			\qquad
+			\begin{aligned}
+				\begin{tikzpicture}
+					\draw[t]
+					(1.5,-4) 
+						to[out=90, in =70] 
+					(0.25,-2.25) 
+						to [out=-110, in =-90]
+					(-1,-0.5);
+					
+					\draw[s]
+					(-0.5,-0.5) to[out=-90, in =90] (1,-4);
+
+					\fill[very nearly transparent, cyan]									
+					(1.5,-4) 
+						to[out=90, in =70] 
+					(0.25,-2.25) 
+						to [out=-110, in =-90]
+					(-1,-0.5)-- (-1.5,-0.5) --(-1.5,-4);		
+					\fill[very nearly transparent, magenta]									
+					(-0.5,-0.5) 
+						to[out=-90, in =90] 
+					(1,-4) -- (2,-4) --(2,-0.5);							
+
+					\path (0,-2.25) node {$u$};
+					\path (1,-4.5) node {$U'_0$};
+					\path (-1,0) node {$F_1$};						
+					\path (1.5,-4.5) node {$F'_1$};
+					\path (-0.5,0) node {$U_0$};										
+				\end{tikzpicture}			
+			\end{aligned}
+			\quad
+			=
+			\quad
+			\begin{aligned}
+				\begin{tikzpicture}[yscale=-1]
+					\draw[t]
+					(-0.5,-0.5) to[out=-90, in =90] (1,-4);				
+					\draw[s]
+					(1.5,-4) 
+						to[out=90, in =70] 
+					(0.25,-2.25) 
+						to [out=-110, in =-90]
+					(-1,-0.5);
+					
+
+
+					\fill[very nearly transparent, magenta]									
+					(1.5,-4) 
+						to[out=90, in =70] 
+					(0.25,-2.25) 
+						to [out=-110, in =-90]
+					(-1,-0.5)-- (2,-0.5) --(2,-4);		
+					\fill[very nearly transparent, cyan]									
+					(-0.5,-0.5) 
+						to[out=-90, in =90] 
+					(1,-4) -- (-1.5,-4) --(-1.5,-0.5);							
+
+					\path (0.5,-2.25) node {$f$};
+					\path (-1,0) node {$U'_0$};
+					\path (1,-4.5) node {$F_1$};						
+					\path (-0.5,0) node {$F'_1$};
+					\path (1.5,-4.5) node {$U_0$};								
+				\end{tikzpicture}
+			\end{aligned}		
+			\quad.				
+		\end{equation}
+		If $u,f$ are invertible $2$-cells, we may use their inverses $u^{-1},f^{-1}$ to construct $e': F_0U_1 \To U'_1 F'_0$ in a similar fashion. Finally, if $e$ is invertible, its inverse is $e^{-1}: U'_0F'_1 \To F_1 U_0$.  We summarize these $2$-cells into the following diagram:
+		\begin{equation}
+			\begin{tikzpicture}
+				\draw[t] 
+					(3,2.5) -- (-1.5,-2);
+				\draw[t] 
+					(0.5,2.5) -- (-4,-2);
+				
+				\draw [s]
+					(-1.5,2.5) -- (3,-2);
+				\draw[s] (-4,2.5) -- (0.5,-2);
+
+				\fill[very nearly transparent, cyan]
+					(3,2.5) -- (-1.5,-2)
+						to
+					(-4,-2) -- (0.5,2.5);
+
+				\fill[very nearly transparent, magenta]
+					(-1.5,2.5)  -- (3,-2)
+						-- (0.5,-2) --  (-4,2.5);
+				
+				\path (-2.25,0.25) node {$u$};
+				\path  (1.25,0.25) node {$f$};
+				\path (-0.5,-1.5)node {$e^{-1}$};
+				\path  (-0.5,2) node {$e'$};
+				\path  (-4,3) node {$U_0$};
+				\path  (-1.5,3) node {$F_0$};
+				\path  (0.5,3) node {$U_1$};
+				\path  (3,3) node {$F_1$};
+				\path  (-1.5,-0.5) node {$U'_0$};
+				\path  (0.5,1) node {$F'_0$};
+				\path  (-1.5,1) node {$U'_1$};
+				\path  (0.5,-0.5) node {$F'_1$};					
+			\end{tikzpicture}		
+		\end{equation}
+		When drawn in this manner, it is easy to believe that such a square of 4 adjunctions, with $u,f, e$ invertible\footnote{Since $f$ is adjoint to $u$, it will be invertible if $u$ is. So we would only need to check invertibility of $u$ and $e$.}, leads to a distributive law.
+	% \vfill
+	% \pagebreak
+	\subsection{Algebras for a monad}
+		\begin{definition} 
+			Let $(\cX,S,\eta^S,\mu^S)$ be a monad. 
+			An \emph{incoming} or \emph{left $S$-algebra} $(G,\lambda)$ consists of a $1$-cell $G: \cY \to \cX$ and a  $2$-cell $\lambda: SG \To G$
+			\begin{equation}
+				\begin{tikzpicture}
+					\path (-1,0.5) node (U) {$G$};
+					\path (0,-1.5) node {$\cY$};
+					\path (-2.5,-1.5) node {$\cX$};
+					\path (-2.5,0.5) node (S) {$S$};
+					
+
+					\draw[s0]
+					(S)
+						to [out = -90, in =90]
+					(-1,-2);	
+
+					\draw [f0] 
+					(U)
+						to 
+					(-1,-3);								
+
+					\path (-1.25,-1.75) node {$\lambda$};	
+					\fill[nearly transparent, gray] (U.south) rectangle (1,-3);			
+				\end{tikzpicture}				
+			\end{equation}
+			such that
+			\begin{equation}
+				\begin{aligned}
+					\begin{tikzpicture}
+						\draw[s0]
+						(-2,-0.5)
+							to [out = -90, in =90]
+						(-1,-2);	
+
+						\draw [f0] 
+						(-1,0.5)
+							to 
+						(-1,-3);								
+						
+						\fill[nearly transparent, gray] (-1,0.5) rectangle (1,-3);		
+						\draw[fill, color=red] (-2,-0.5) circle (.08);			
+					\end{tikzpicture}							
+				\end{aligned}
+				\quad
+				=
+				\quad
+				\begin{aligned}
+					\begin{tikzpicture}
+						\draw [f0] 
+						(-1,0.5)
+							to 
+						(-1,-3);								
+						
+						\fill[nearly transparent, gray] (-1,0.5) rectangle (1,-3);						
+					\end{tikzpicture}							
+				\end{aligned}
+				\qquad
+				\text{ and }					
+				\qquad
+				\begin{aligned}
+					\begin{tikzpicture}
+						\draw[s0]
+						(-3,0.5)
+							to [out = -90, in =150]
+						(-2.5,-0.5)
+							to [out=30, in =-90]
+						(-2,0.5);	
+						\draw[s0]
+						(-2.5,-0.5)
+							to [out = -90, in =90]
+						(-1,-2);	
+						
+
+						\draw [f0] 
+						(-1,0.5)
+							to 
+						(-1,-3);								
+						
+						\fill[nearly transparent, gray] (-1,0.5) rectangle (1,-3);				
+					\end{tikzpicture}							
+				\end{aligned}
+				\quad
+				=
+				\quad
+				\begin{aligned}
+					\begin{tikzpicture}
+						\draw[s0]
+						(-2,0.5)
+							to [out = -90, in =90]
+						(-1,-1);	
+						\draw[s0]
+						(-3,0.5)
+							to [out = -90, in =90]
+						(-1,-2.5);	
+						
+
+						\draw [f0] 
+						(-1,0.5)
+							to 
+						(-1,-3);								
+						
+						\fill[nearly transparent, gray] (-1,0.5) rectangle (1,-3);			
+					\end{tikzpicture}							
+				\end{aligned}
+			\end{equation}
+			We call $\lambda$ a \emph{left action} of $S$ on $G$. To emphasize the source of $G$, we may call $G$ an $S$-algebra \emph{from $\cY$}.
+
+			Similarly, an \emph{outgoing} or \emph{right $S$-algebra} $(G,\rho)$ consists of $G: \cX \to \cY$ and $\rho: GS \To G$
+			\begin{equation}
+				\begin{tikzpicture}[xscale=-1]
+					\path (-1,0.5) node (U) {$G$};
+					\path (0,-1.5) node {$\cY$};
+					\path (-2.5,-1.5) node {$\cX$};
+					\path (-2.5,0.5) node (S) {$S$};
+					
+
+					\draw[s0]
+					(S)
+						to [out = -90, in =90]
+					(-1,-2);	
+
+					\draw [f0] 
+					(U)
+						to 
+					(-1,-3);								
+
+					\path (-1.25,-1.75) node {$\rho$};	
+					\fill[nearly transparent, gray] (U.south) rectangle (1,-3);			
+				\end{tikzpicture}				
+			\end{equation}			
+			satisfying the analogous equalities: 
+			\begin{equation}
+				\begin{aligned}
+					\begin{tikzpicture}[xscale=-1]
+						\draw[s0]
+						(-2,-0.5)
+							to [out = -90, in =90]
+						(-1,-2);	
+
+						\draw [f0] 
+						(-1,0.5)
+							to 
+						(-1,-3);								
+						
+						\fill[nearly transparent, gray] (-1,0.5) rectangle (1,-3);		
+						\draw[fill, color=red] (-2,-0.5) circle (.08);			
+					\end{tikzpicture}							
+				\end{aligned}
+				\quad
+				=
+				\quad
+				\begin{aligned}
+					\begin{tikzpicture}[xscale=-1]
+						\draw [f0] 
+						(-1,0.5)
+							to 
+						(-1,-3);								
+						
+						\fill[nearly transparent, gray] (-1,0.5) rectangle (1,-3);						
+					\end{tikzpicture}							
+				\end{aligned}
+				\qquad
+				\text{ and }					
+				\qquad
+				\begin{aligned}
+					\begin{tikzpicture}[xscale=-1]
+						\draw[s0]
+						(-3,0.5)
+							to [out = -90, in =150]
+						(-2.5,-0.5)
+							to [out=30, in =-90]
+						(-2,0.5);	
+						\draw[s0]
+						(-2.5,-0.5)
+							to [out = -90, in =90]
+						(-1,-2);	
+						
+
+						\draw [f0] 
+						(-1,0.5)
+							to 
+						(-1,-3);								
+						
+						\fill[nearly transparent, gray] (-1,0.5) rectangle (1,-3);				
+					\end{tikzpicture}							
+				\end{aligned}
+				\quad
+				=
+				\quad
+				\begin{aligned}
+					\begin{tikzpicture}[xscale=-1]
+						\draw[s0]
+						(-2,0.5)
+							to [out = -90, in =90]
+						(-1,-1);	
+						\draw[s0]
+						(-3,0.5)
+							to [out = -90, in =90]
+						(-1,-2.5);	
+						
+
+						\draw [f0] 
+						(-1,0.5)
+							to 
+						(-1,-3);								
+						
+						\fill[nearly transparent, gray] (-1,0.5) rectangle (1,-3);			
+					\end{tikzpicture}							
+				\end{aligned}
+			\end{equation}			
+			We call $\rho$ a \emph{right $S$-action}, and $G$ an $S$-algebra \emph{to} $\cY$.
+		\end{definition}
+
+		\begin{example}
+			Let $F \dashv U$, and let $S = UF$ be the resulting monad. Then $U$ is a left $S$-algebra, with a canonical left action $U \varepsilon : SU \To U$ induced by the counit of the adjunction:
+			\begin{equation}
+				\begin{aligned}
+					\begin{tikzpicture}
+							\path (-1,0) node (U) {};
+							\path (0,0) node (F) {};
+							\path (0,-1.5) node {};		
+
+							\draw [s] 
+							(U.center) 
+								to 
+							(-1,-3);	
+
+							\draw[s0]
+							(-2.5,0)
+								to [out = -90, in =90]
+							(-1,-2);	
+					
+
+							\fill[very nearly transparent, magenta] (U) rectangle (0,-3);						
+					\end{tikzpicture}
+				\end{aligned}
+				\qquad
+				:=
+				\qquad
+				\begin{aligned}
+					\begin{tikzpicture}
+							\path (-1,0) node (U) {};
+							
+							\draw [s] 
+							(U.center) 
+								to 
+							(-1,-1.5)
+								to [out =-90, in =-90]
+							(-2,0);	
+
+							\draw[s]
+							(-2.5,0)
+								to [out = -90, in =90]
+							(-1.5,-3);	
+
+							\fill[very nearly transparent, magenta]
+							(-2.5,0)
+								to [out=-90, in =90]
+							(-1.5,-3)
+								to
+							(0,-3)
+								to
+							(0,0)
+								to
+							(U.center)
+								to
+							(-1,-1.5)
+								to [out=-90, in =-90]
+							(-2,0);									
+					\end{tikzpicture}
+				\end{aligned}
+				\qquad .						
+			\end{equation}
+			The diagrams that prove that this is an action are very similar to those that prove that $UF$ is a monad.
+
+			Similarly, $F$ is a right $S$-algebra with a canonical right action $\varepsilon F: FS \To F$.			
+		\end{example}
+		
+		\begin{definition}
+			Let $(\cX,S)$ be a monad, and fix a $0$-cell $\cY$. Let $(G,\lambda)$, $(G', \lambda')$ be left $S$-algebras such that $G,G': \cY \to \cX$. 
+			A \emph{morphism of left $S$-algebras from $\cY$} is a $2$-cell $\sigma: G \To G'$ such that
+			\begin{equation}
+				\begin{aligned}
+					\begin{tikzpicture}
+						\path (-1,0.5) node (U) {$G$};
+						\path (-1,-3) node (V) {$G'$};
+						\path (1,-3) node (W) {\phantom{$G'$}};
+						\path (-2.5,0.5) node (S) {$S$};
+						
+
+						\draw[s0]
+						(S)
+							to [out = -90, in =90]
+						(-1,-2);	
+
+						\draw [f0] 
+						(U)
+							to 
+						(V);								
+
+						\path (-0.5,-2) node {$\lambda'$};
+						\path (-0.5,-1) node {$\sigma$};						
+						\fill[nearly transparent, gray] (U.south) rectangle (W.north);
+						\draw[fill, black] (-1,-1) circle [radius=0.08];			
+					\end{tikzpicture}
+				\end{aligned}	
+				\quad
+				=
+				\quad
+				\begin{aligned}
+					\begin{tikzpicture}
+					\path (-1,0.5) node (U) {$G$};
+					\path (-1,-3) node (V) {$G'$};
+					\path (1,-3) node (W) {\phantom{$G'$}};
+					\path (-2.5,0.5) node (S) {$S$};
+					
+
+					\draw[s0]
+					(S)
+						to [out = -90, in =90]
+					(-1,-1.5);	
+
+					\draw [f0] 
+					(U)
+						to 
+					(V);								
+
+					\path (-0.5,-1) node {$\lambda$};	
+					\path (-0.5,-2) node {$\sigma$};						
+					\fill[nearly transparent, gray] (U.south) rectangle (W.north);
+					\draw[fill, black] (-1,-2) circle [radius=0.08];			
+					\end{tikzpicture}
+				\end{aligned}	
+				\quad.							
+			\end{equation}
+			Left $S$-algebras from $\cY$ and their morphisms form a category, which we call $\Alg^S(\cY)$.
+
+			We may define morphisms of right $S$-algebras to $\cY$ in a similar manner. They form a category $\Alg_S(\cY)$.
+		\end{definition}
+
+		For each $0$-cell $\cY$ in $\cK$, the identity $1$-cell $1_{\cY}$ is a monad on $\cY$. A left $S$-algebra $(G,\lambda)$ is precisely a monad functor $(G,\lambda): (\cY,1_\cY) \to (\cX,S)$. Similarly, a right $S$-algebra $(G,\rho)$ is precisely a monad opfunctor $(G,\rho): (\cX,S) \to (\cY,1_\cY)$. Morphisms of left or right $S$-algebras are then monad (op)functor transformations. Thus, we could have defined the $1$-categories of left and right algebras via:
+		\begin{align}
+			\Alg^S(\cY) &:= \Mnd(\cK)\big((\cY,1_\cY), (\cX, S)\big), \\
+			\Alg_S(\cY) &:= \Mnd^{op}(\cK)\big((\cX, S), (\cY,1_\cY)\big) .
+		\end{align}
+
+	\subsection{`Extension of scalars' for monads}
+
+
+
+\bibliography{biblio}
+\bibliographystyle{plain}
+
+\end{document}
