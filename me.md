@@ -6,7 +6,7 @@ description: "About me"
 
 ## Liang Ze Wong <img align="right" src="/images/photo.jpg" width="150" />
 
-I am a fourth-year [math](http://www.math.washington.edu/){:target="_blank"} PhD student at the University of Washington, Seattle. My advisor is [James Zhang](https://www.math.washington.edu/~zhang/){:target="_blank"}.
+I am a fourth-year math PhD student at the University of Washington, Seattle. My advisor is [James Zhang](https://www.math.washington.edu/~zhang/){:target="_blank"}.
 
 My research interests are in category theory, categorical homotopy theory, homotopy type theory, and non-commutative algebra.
 I am currently working on Grothendieck fibrations in enriched category theory and in homotopy type theory. Other things I'm interested in, but haven't had time to pursue: monads, monoidal categories, Hopf-algebra-type structures in such categories, string diagrams.
