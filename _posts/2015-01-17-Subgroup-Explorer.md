@@ -40,14 +40,12 @@ def are_subgroups(cc1,cc2):
 
 @interact
 def subgroup_class_lattices(Cardinality= 6):
-    group_list = {Cardinality: {}}
-    for G_gap in gap.AllSmallGroups(Cardinality):
-        G = PermutationGroup(list(gap.GeneratorsOfGroup(G_gap.AsPermGroup())))
-        group_list[Cardinality][G.structure_description()] = str(G.gens())
+    group_list = [(G_gap, str(i+1) + ". " + str(G_gap.StructureDescription()) ) for i, G_gap in enumerate(gap.AllSmallGroups(Cardinality)) ]
+
     @interact
-    def group_select(Group = selector(values = group_list[Cardinality].keys())):
+    def group_select(Group = selector(values = group_list )):
         # Generate group
-        G = PermutationGroup(gap(group_list[Cardinality][Group]))
+        G = PermutationGroup(gap_group = Group.AsPermGroup() )
         
         # Poset of conjugacy classes
         sub_classes = subgroup_conj_classes(G)
