@@ -6,10 +6,10 @@ description: "About me"
 
 ## Liang Ze Wong <img align="right" src="/images/photo.jpg" width="150" />
 
-I am a fourth-year math PhD student at the University of Washington, Seattle. My advisor is [James Zhang](https://www.math.washington.edu/~zhang/){:target="_blank"}.
+I am a fifth-year math PhD student at the University of Washington, Seattle. My advisor is [James Zhang](https://www.math.washington.edu/~zhang/){:target="_blank"}.
 
 My research interests are in category theory, categorical homotopy theory, homotopy type theory, and non-commutative algebra.
-I am currently working on Grothendieck fibrations in enriched category theory and in homotopy type theory. Other things I'm interested in, but haven't had time to pursue: monads, monoidal categories, Hopf-algebra-type structures in such categories, string diagrams.
+I am currently working on Grothendieck fibrations in enriched category theory and in homotopy type theory. 
 
 I used to write simple snippets of code for this site, mostly in Python/Sage. 
 
@@ -34,7 +34,7 @@ I had the priviledge of participating in the following meetings:
 
 ### Publications
 - S. Cho, C. Knapp, C. Newstead and L.Z. Wong, *Weak equivalences between categories of models of type theory*, (in preparation).
-- J. Beardsley and L.Z. Wong, *The enriched Grothendieck construction*, (in preparation).
+- J. Beardsley and L.Z. Wong, [*The enriched Grothendieck construction*](https://arxiv.org/abs/1804.03829){:target="_blank"}.
 - A. Chirvasitu, S.P. Smith and L.Z. Wong, [*Noncommutative geometry of homogenized
 quantum sl(2,C)*](https://msp.org/pjm/2018/292-2/p04.xhtml), Pacific Journal of Mathematics 292 (2018), no. 2, 305-354.
 - L.Z. Wong, H.L.Chen, [S.W.Lin](http://www1.i2r.a-star.edu.sg/~lins/){:target="_blank"} and D.C.L. Chen, [*Imputing Missing Values in Sensor Networks using Sparse Data Representations*](http://dx.doi.org/10.1145/2641798.2641816){:target="_blank"}, ACM [MSWiM 2014](http://mswimconf.com/2014/){:target="_blank"}.
