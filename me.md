@@ -34,8 +34,7 @@ I had the priviledge of participating in the following meetings:
 
 ### Publications
 - J. Beardsley and L.Z. Wong, [*The enriched Grothendieck construction*](https://www.sciencedirect.com/science/article/pii/S0001870818305012?dgcid=author){:target="_blank"}. Advances in Mathematics, 344 (2019), 234-261.
-- J. Beardsley and L.Z. Wong, [*The Operadic Nerve, Relative Nerve, and the Grothendieck Construction
-*](https://arxiv.org/abs/1808.08020){:target="_blank"}
+- J. Beardsley and L.Z. Wong, [*The Operadic Nerve, Relative Nerve, and the Grothendieck Construction*](https://arxiv.org/abs/1808.08020){:target="_blank"}
 - S. Cho, C. Knapp, C. Newstead and L.Z. Wong, *Weak equivalences between categories of models of type theory*, (in preparation).
 - A. Chirvasitu, S.P. Smith and L.Z. Wong, [*Noncommutative geometry of homogenized
 quantum sl(2,C)*](https://msp.org/pjm/2018/292-2/p04.xhtml), Pacific Journal of Mathematics 292 (2018), no. 2, 305-354.
