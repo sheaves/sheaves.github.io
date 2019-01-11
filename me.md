@@ -33,8 +33,10 @@ I had the priviledge of participating in the following meetings:
 - *Distributive laws, strings attached*, Category Theory 2017, UBC Vancouver.
 
 ### Publications
+- J. Beardsley and L.Z. Wong, [*The enriched Grothendieck construction*](https://www.sciencedirect.com/science/article/pii/S0001870818305012?dgcid=author){:target="_blank"}. Advances in Mathematics, 344 (2019), 234-261.
+- J. Beardsley and L.Z. Wong, [*The Operadic Nerve, Relative Nerve, and the Grothendieck Construction
+*](https://arxiv.org/abs/1808.08020){:target="_blank"}
 - S. Cho, C. Knapp, C. Newstead and L.Z. Wong, *Weak equivalences between categories of models of type theory*, (in preparation).
-- J. Beardsley and L.Z. Wong, [*The enriched Grothendieck construction*](https://arxiv.org/abs/1804.03829){:target="_blank"}.
 - A. Chirvasitu, S.P. Smith and L.Z. Wong, [*Noncommutative geometry of homogenized
 quantum sl(2,C)*](https://msp.org/pjm/2018/292-2/p04.xhtml), Pacific Journal of Mathematics 292 (2018), no. 2, 305-354.
 - L.Z. Wong, H.L.Chen, [S.W.Lin](http://www1.i2r.a-star.edu.sg/~lins/){:target="_blank"} and D.C.L. Chen, [*Imputing Missing Values in Sensor Networks using Sparse Data Representations*](http://dx.doi.org/10.1145/2641798.2641816){:target="_blank"}, ACM [MSWiM 2014](http://mswimconf.com/2014/){:target="_blank"}.
