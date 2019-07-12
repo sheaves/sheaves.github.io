@@ -34,15 +34,23 @@ I had the priviledge of participating in the following meetings:
 
 ## 2019
 
-- The Grothendieck construction in enriched, internal and $\infty$-category theory
+- The Grothendieck construction in enriched, internal and $\infty$-category theory  
   [PhD thesis](http://sheaves.github.io/slides/thesis.pdf){:target="_blank"}
-- A co-reflection of cubical sets into simplicial sets, with applications to model structures
-  *with Chris Kapulkin and Zachery Lindsey*
-  [preprint](https://arxiv.org/abs/1906.09203){:target="_blank"} (to appear in New York Journal of Mathematics)
-- The enriched Grothendieck construction
-  *with Jonathan Beardsley*
-  [preprint](https://arxiv.org/abs/1804.03829){:target="_blank"} [Advances in Mathematics, 344 (2019), 234-261](https://www.sciencedirect.com/science/article/pii/S0001870818305012?dgcid=author){:target="_blank"}, Advances in Mathematics, 344 (2019), 234-261.
-- J. Beardsley and L.Z. Wong, [*The Operadic Nerve, Relative Nerve, and the Grothendieck Construction*](http://www.tac.mta.ca/tac/volumes/34/13/34-13abs.html){:target="_blank"}, Theory and Applications of Categories, 34 (2019), 349-374.
+  
+- A co-reflection of cubical sets into simplicial sets, with applications to model structures  
+  *with Chris Kapulkin and Zachery Lindsey*    
+  [arXiv](https://arxiv.org/abs/1906.09203){:target="_blank"} (to appear in New York Journal of Mathematics)
+  
+- The enriched Grothendieck construction  
+  *with Jonathan Beardsley*    
+  [arXiv](https://arxiv.org/abs/1804.03829){:target="_blank"}, [Advances in Mathematics, 344 (2019), 234-261](https://www.sciencedirect.com/science/article/pii/S0001870818305012?dgcid=author){:target="_blank"}.
+  
+- The Operadic Nerve, Relative Nerve, and the Grothendieck Construction  
+  *with Jonathan Beardsley*  
+  [arXiv](https://arxiv.org/abs/1808.08020){:target="_blank"}, [Theory and Applications of Categories, 34 (2019), 349-374](http://www.tac.mta.ca/tac/volumes/34/13/34-13abs.html){:target="_blank"}.
+
+## Older
+
 - A. Chirvasitu, S.P. Smith and L.Z. Wong, [*Noncommutative geometry of homogenized
 quantum sl(2,C)*](https://msp.org/pjm/2018/292-2/p04.xhtml){:target="_blank"}, Pacific Journal of Mathematics 292 (2018), no. 2, 305-354.
 - L.Z. Wong, H.L. Chen, S.W. Lin and D.C.L. Chen, [*Imputing Missing Values in Sensor Networks using Sparse Data Representations*](http://dx.doi.org/10.1145/2641798.2641816){:target="_blank"}, ACM [MSWiM 2014](http://mswimconf.com/2014/){:target="_blank"}.
