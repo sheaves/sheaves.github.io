@@ -35,36 +35,36 @@ I had the priviledge of participating in the following meetings:
 #### 2019
 
 - The Grothendieck construction in enriched, internal and $\infty$-category theory  
-  [PhD thesis](http://sheaves.github.io/slides/thesis.pdf){:target="_blank"}
+  \[[PhD thesis](http://sheaves.github.io/slides/thesis.pdf){:target="_blank"}\]
   
 - A co-reflection of cubical sets into simplicial sets, with applications to model structures  
   *with Chris Kapulkin and Zachery Lindsey*    
-  [arXiv](https://arxiv.org/abs/1906.09203){:target="_blank"} (to appear in New York Journal of Mathematics)
+  \[[arXiv](https://arxiv.org/abs/1906.09203){:target="_blank"}\] \[to appear in New York Journal of Mathematics\]
   
 - The enriched Grothendieck construction  
   *with Jonathan Beardsley*    
-  [arXiv](https://arxiv.org/abs/1804.03829){:target="_blank"}, [Advances in Mathematics, 344 (2019), 234-261](https://www.sciencedirect.com/science/article/pii/S0001870818305012?dgcid=author){:target="_blank"}.
+  \[[arXiv](https://arxiv.org/abs/1804.03829){:target="_blank"}\] \[[Advances in Mathematics, 344 (2019), 234-261](https://www.sciencedirect.com/science/article/pii/S0001870818305012?dgcid=author){:target="_blank"}\]
   
 - The Operadic Nerve, Relative Nerve, and the Grothendieck Construction  
   *with Jonathan Beardsley*  
-  [arXiv](https://arxiv.org/abs/1808.08020){:target="_blank"}, [Theory and Applications of Categories, 34 (2019), 349-374](http://www.tac.mta.ca/tac/volumes/34/13/34-13abs.html){:target="_blank"}.
+  \[[arXiv](https://arxiv.org/abs/1808.08020){:target="_blank"}\] \[[Theory and Applications of Categories, 34 (2019), 349-374](http://www.tac.mta.ca/tac/volumes/34/13/34-13abs.html){:target="_blank"}\]
 
 #### Older
 
 - Noncommutative geometry of homogenized quantum $\mathfrak{sl}(2,\mathbb{C})$  
   *with Alex Chirvasitu and S. Paul Smith*  
-  [arXiv](https://arxiv.org/abs/1607.00481){:target="_blank"}, [Pacific Journal of Mathematics 292 (2018), no. 2, 305-354](https://msp.org/pjm/2018/292-2/p04.xhtml){:target="_blank"}
+  \[[arXiv](https://arxiv.org/abs/1607.00481){:target="_blank"}\] \[[Pacific Journal of Mathematics 292 (2018), no. 2, 305-354](https://msp.org/pjm/2018/292-2/p04.xhtml){:target="_blank"}\]
 
 - Imputing Missing Values in Sensor Networks using Sparse Data Representations  
   *with Huiling Chen, Shaowei Lin and Daniel C.L. Chen*  
-  [MSWiM 2014](http://dx.doi.org/10.1145/2641798.2641816){:target="_blank"}
+  \[[MSWiM 2014](http://dx.doi.org/10.1145/2641798.2641816){:target="_blank"}\]
 
 - An Ordinal Potential Function for Network Selection in Heterogeneous Wireless Networks  
   *with Tony Q.S. Quek and Michael Padilla*  
-  [ICASSP 2014](http://dx.doi.org/10.1109/ICASSP.2014.6854780){:target="_blank"}
+  \[[ICASSP 2014](http://dx.doi.org/10.1109/ICASSP.2014.6854780){:target="_blank"}\]
 
 - Irredundant Generating Sets of Finite Nilpotent Groups  
-  [Senior thesis](http://www.math.cornell.edu/files/Research/SeniorTheses/wongLiangThesis.pdf){:target="_blank"} (advised by [R. Keith Dennis](http://www.math.cornell.edu/m/People/Faculty/dennis){:target="_blank"})
+  \[[Senior thesis](http://www.math.cornell.edu/files/Research/SeniorTheses/wongLiangThesis.pdf){:target="_blank"}\] (advised by [R. Keith Dennis](http://www.math.cornell.edu/m/People/Faculty/dennis){:target="_blank"})
 
 ### Selected Slides and Posters
 
