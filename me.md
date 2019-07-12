@@ -32,7 +32,7 @@ I had the priviledge of participating in the following meetings:
 
 ### Publications
 
-## 2019
+#### 2019
 
 - The Grothendieck construction in enriched, internal and $\infty$-category theory  
   [PhD thesis](http://sheaves.github.io/slides/thesis.pdf){:target="_blank"}
@@ -49,13 +49,22 @@ I had the priviledge of participating in the following meetings:
   *with Jonathan Beardsley*  
   [arXiv](https://arxiv.org/abs/1808.08020){:target="_blank"}, [Theory and Applications of Categories, 34 (2019), 349-374](http://www.tac.mta.ca/tac/volumes/34/13/34-13abs.html){:target="_blank"}.
 
-## Older
+#### Older
 
-- A. Chirvasitu, S.P. Smith and L.Z. Wong, [*Noncommutative geometry of homogenized
-quantum sl(2,C)*](https://msp.org/pjm/2018/292-2/p04.xhtml){:target="_blank"}, Pacific Journal of Mathematics 292 (2018), no. 2, 305-354.
-- L.Z. Wong, H.L. Chen, S.W. Lin and D.C.L. Chen, [*Imputing Missing Values in Sensor Networks using Sparse Data Representations*](http://dx.doi.org/10.1145/2641798.2641816){:target="_blank"}, ACM [MSWiM 2014](http://mswimconf.com/2014/){:target="_blank"}.
-- L.Z. Wong, T.Q.S. Quek and M. Padilla, [*An Ordinal Potential Function for Network Selection in Heterogeneous Wireless Networks*](http://dx.doi.org/10.1109/ICASSP.2014.6854780){:target="_blank"}, IEEE [ICASSP 2014](http://www.icassp2014.org/home.html){:target="_blank"}.
-- L.Z. Wong, [*Irredundant Generating Sets of Finite Nilpotent Groups*](http://www.math.cornell.edu/files/Research/SeniorTheses/wongLiangThesis.pdf){:target="_blank"},  senior thesis, advised by [R. Keith Dennis](http://www.math.cornell.edu/m/People/Faculty/dennis){:target="_blank"}, 2012.
+- Noncommutative geometry of homogenized quantum $\mathfrak{sl}(2,\mathbb{C})$  
+  *with Alex Chirvasitu and S. Paul Smith*  
+  [arXiv](https://arxiv.org/abs/1607.00481){:target="_blank"}, [Pacific Journal of Mathematics 292 (2018), no. 2, 305-354](https://msp.org/pjm/2018/292-2/p04.xhtml){:target="_blank"}
+
+- Imputing Missing Values in Sensor Networks using Sparse Data Representations  
+  *with Huiling Chen, Shaowei Lin and Daniel C.L. Chen*  
+  [MSWiM 2014](http://dx.doi.org/10.1145/2641798.2641816){:target="_blank"}
+
+- An Ordinal Potential Function for Network Selection in Heterogeneous Wireless Networks  
+  *with Tony Q.S. Quek and Michael Padilla*  
+  [ICASSP 2014](http://dx.doi.org/10.1109/ICASSP.2014.6854780){:target="_blank"}
+
+- Irredundant Generating Sets of Finite Nilpotent Groups  
+  [Senior thesis](http://www.math.cornell.edu/files/Research/SeniorTheses/wongLiangThesis.pdf){:target="_blank"} (advised by [R. Keith Dennis](http://www.math.cornell.edu/m/People/Faculty/dennis){:target="_blank"})
 
 ### Selected Slides and Posters
 
