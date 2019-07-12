@@ -31,7 +31,7 @@ I had the priviledge of participating in the following meetings:
 - [Kan Extension Seminar II](http://www.math.jhu.edu/~eriehl/kanII/)
   \[[blog post](https://golem.ph.utexas.edu/category/2017/02/distributive_laws.html){:target="_blank"}, [long slides](http://sheaves.github.io/slides/kan-dist-long.pdf){:target="_blank"}, [short slides](http://sheaves.github.io/slides/kan-dist-short.pdf){:target="_blank"}\]
 
-### Papers
+### <a name="papers"></a>Papers
 
 #### In Progress
 - Minimal Schemas for a Category  
