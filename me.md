@@ -10,8 +10,8 @@ I recently graduated with a PhD in Mathematics from the University of Washington
 
 Starting Fall 2019, I will be a research scientist at the Institute of High Performance Computing in Singapore.
 
-My research interests are in category theory, homotopy type theory, and non-commutative algebra.
-Specifically, I am interested in Grothendieck fibrations, enriched category theory, Hopf algebras and cubical sets. 
+My research interests are in category theory, homotopy theory and non-commutative algebra.
+Specifically: Grothendieck fibrations, enriched category theory, Hopf algebras and cubical sets. 
 
 I used to write simple snippets of code for this site, mostly in Python/Sage. 
 
@@ -29,25 +29,34 @@ I had the priviledge of participating in the following meetings:
 - [MIT Talbot Workshop 2018](http://math.mit.edu/conferences/talbot/index.php?year=2018)
 - [AMS Mathematics Research Community in Homotopy Type Theory](http://www.ams.org/programs/research-communities/2017MRC-1)
 - [Kan Extension Seminar II](http://www.math.jhu.edu/~eriehl/kanII/)
+  \[[blog post](https://golem.ph.utexas.edu/category/2017/02/distributive_laws.html){:target="_blank"}, [long slides](http://sheaves.github.io/slides/kan-dist-long.pdf){:target="_blank"}, [short slides](http://sheaves.github.io/slides/kan-dist-short.pdf){:target="_blank"}\]
 
 ### Publications
+
+#### In Progress
+- Minimal Schemas for a Category  
+  \[[draft](http://sheaves.github.io/slides/act.pdf){:target="_blank"}\] \[[poster](http://sheaves.github.io/slides/ACT2019.pdf){:target="_blank"}\]
+
+- Weak Equivalences between Categories of Models of Type Theory  
+  *with Simon Cho, Cory Knapp and Clive Newstead*  
+  \[[slides](http://sheaves.github.io/slides/JMM-hott.pdf){:target="_blank"}\]
 
 #### 2019
 
 - The Grothendieck construction in enriched, internal and $\infty$-category theory  
-  \[[PhD thesis](http://sheaves.github.io/slides/thesis.pdf){:target="_blank"}\]
+  \[[PhD thesis](http://sheaves.github.io/slides/thesis.pdf){:target="_blank"}\] \[[slides](http://sheaves.github.io/slides/Final.pdf){:target="_blank"}\]
   
 - A co-reflection of cubical sets into simplicial sets, with applications to model structures  
   *with Chris Kapulkin and Zachery Lindsey*    
-  \[[arXiv](https://arxiv.org/abs/1906.09203){:target="_blank"}\] \[to appear in New York Journal of Mathematics\]
+  \[[arXiv](https://arxiv.org/abs/1906.09203){:target="_blank"}\] \[[slides](http://sheaves.github.io/slides/oslo-hott.pdf){:target="_blank"}\] \[to appear in New York Journal of Mathematics\]
   
 - The enriched Grothendieck construction  
   *with Jonathan Beardsley*    
-  \[[arXiv](https://arxiv.org/abs/1804.03829){:target="_blank"}\] \[[Advances in Mathematics, 344 (2019), 234-261](https://www.sciencedirect.com/science/article/pii/S0001870818305012?dgcid=author){:target="_blank"}\]
+  \[[arXiv](https://arxiv.org/abs/1804.03829){:target="_blank"}\] \[[slides 1](http://sheaves.github.io/slides/fibrations-comodules.pdf){:target="_blank"}, [2](http://sheaves.github.io/slides/Shanghai.pdf){:target="_blank"}, [3](http://sheaves.github.io/slides/JMM-fibrations.pdf){:target="_blank"}\] \[[Advances in Mathematics, 344 (2019), 234-261](https://www.sciencedirect.com/science/article/pii/S0001870818305012?dgcid=author){:target="_blank"}\]
   
 - The Operadic Nerve, Relative Nerve, and the Grothendieck Construction  
   *with Jonathan Beardsley*  
-  \[[arXiv](https://arxiv.org/abs/1808.08020){:target="_blank"}\] \[[Theory and Applications of Categories, 34 (2019), 349-374](http://www.tac.mta.ca/tac/volumes/34/13/34-13abs.html){:target="_blank"}\]
+  \[[arXiv](https://arxiv.org/abs/1808.08020){:target="_blank"}\] \[[slides](http://sheaves.github.io/slides/Western-nerve.pdf){:target="_blank"}\] \[[Theory and Applications of Categories, 34 (2019), 349-374](http://www.tac.mta.ca/tac/volumes/34/13/34-13abs.html){:target="_blank"}\]
 
 #### Older
 
@@ -65,10 +74,3 @@ I had the priviledge of participating in the following meetings:
 
 - Irredundant Generating Sets of Finite Nilpotent Groups  
   \[[Senior thesis](http://www.math.cornell.edu/files/Research/SeniorTheses/wongLiangThesis.pdf){:target="_blank"}\] (advised by [R. Keith Dennis](http://www.math.cornell.edu/m/People/Faculty/dennis){:target="_blank"})
-
-### Selected Slides and Posters
-
-- *Weak equivalences between categories of models of type theory*, JMM 2018, San Diego.
-- *The enriched Grothendieck construction*, JMM 2018, San Diego.
-- *The enriched Grothendieck construction*, AMS Fall Sectional 2017, UC Riverside.
-- *Distributive laws, strings attached*, Category Theory 2017, UBC Vancouver.
