@@ -34,7 +34,7 @@ I had the priviledge of participating in the following meetings:
 ### <a name="papers"></a>Papers
 
 #### In Progress
-- <a name="papers"></a>Minimal Schemas for a Category  
+- <a name="minimal"></a>Minimal Schemas for a Category  
   \[[draft](http://sheaves.github.io/slides/act.pdf){:target="_blank"}\] \[[poster](http://sheaves.github.io/slides/ACT2019.pdf){:target="_blank"} for [ACT 2019](http://www.cs.ox.ac.uk/ACT2019/){:target="_blank"}\]
 
 - Weak Equivalences between Categories of Models of Type Theory  
