@@ -28,14 +28,14 @@ I used to write simple snippets of code for this site, mostly in Python/Sage.
 I had the priviledge of participating in the following meetings:
 - [MIT Talbot Workshop 2018](http://math.mit.edu/conferences/talbot/index.php?year=2018)
 - [AMS Mathematics Research Community in Homotopy Type Theory](http://www.ams.org/programs/research-communities/2017MRC-1)
-- [Kan Extension Seminar II](http://www.math.jhu.edu/~eriehl/kanII/)  
+- [Kan Extension Seminar II](http://www.math.jhu.edu/~eriehl/kanII/)
   \[[long slides](http://sheaves.github.io/slides/kan-dist-long.pdf){:target="_blank"}, [short slides](http://sheaves.github.io/slides/kan-dist-short.pdf){:target="_blank"}\]
 
 ### Publications
 
 #### In Progress
 - Minimal Schemas for a Category  
-  \[[poster](http://sheaves.github.io/slides/ACT2019.pdf){:target="_blank"}\]
+  \[[draft](http://sheaves.github.io/slides/act.pdf){:target="_blank"}\] \[[poster](http://sheaves.github.io/slides/ACT2019.pdf){:target="_blank"}\]
 
 - Weak Equivalences between Categories of Models of Type Theory  
   *with Simon Cho, Cory Knapp and Clive Newstead*  
@@ -52,7 +52,7 @@ I had the priviledge of participating in the following meetings:
   
 - The enriched Grothendieck construction  
   *with Jonathan Beardsley*    
-  \[[arXiv](https://arxiv.org/abs/1804.03829){:target="_blank"}\] \[[slides 1](http://sheaves.github.io/slides/fibrations-comodules.pdf){:target="_blank"}, [2](http://sheaves.github.io/slides/Shanghai.pdf){:target="_blank"}, [3](http://sheaves.github.io/slides/JMM-fibrations.pdf){:target="_blank"} \] \[[Advances in Mathematics, 344 (2019), 234-261](https://www.sciencedirect.com/science/article/pii/S0001870818305012?dgcid=author){:target="_blank"}\]
+  \[[arXiv](https://arxiv.org/abs/1804.03829){:target="_blank"}\] \[[slides 1](http://sheaves.github.io/slides/fibrations-comodules.pdf){:target="_blank"}, [2](http://sheaves.github.io/slides/Shanghai.pdf){:target="_blank"}, [3](http://sheaves.github.io/slides/JMM-fibrations.pdf){:target="_blank"}\] \[[Advances in Mathematics, 344 (2019), 234-261](https://www.sciencedirect.com/science/article/pii/S0001870818305012?dgcid=author){:target="_blank"}\]
   
 - The Operadic Nerve, Relative Nerve, and the Grothendieck Construction  
   *with Jonathan Beardsley*  
