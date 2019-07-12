@@ -73,4 +73,4 @@ I had the priviledge of participating in the following meetings:
   \[[ICASSP 2014](http://dx.doi.org/10.1109/ICASSP.2014.6854780){:target="_blank"}\]
 
 - Irredundant Generating Sets of Finite Nilpotent Groups  
-  \[[Senior thesis](http://www.math.cornell.edu/files/Research/SeniorTheses/wongLiangThesis.pdf){:target="_blank"}\] (advised by [R. Keith Dennis](http://www.math.cornell.edu/m/People/Faculty/dennis){:target="_blank"})
+  \[[Senior thesis](http://sheaves.github.io/slides/senior-thesis.pdf){:target="_blank"}\] (advised by R. Keith Dennis)
