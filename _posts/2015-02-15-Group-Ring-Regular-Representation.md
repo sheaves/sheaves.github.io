@@ -190,7 +190,7 @@ def decompose(rho,G,H):
     edges = []
     for g in G:
         edges += (P.conjugate_transpose()*rho(g)*P).nonzero_positions()
-    graph = Graph(edges, multiedges = False, loops = False)
+    graph = Graph(edges, multiedges = False, loops = True)
     subrep_indices = sorted(graph.connected_components(), key=lambda x: x[0])    
     
     return P,subrep_indices  
