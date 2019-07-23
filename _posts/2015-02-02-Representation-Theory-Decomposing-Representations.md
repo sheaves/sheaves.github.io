@@ -142,7 +142,7 @@ Observe that $P^{-1} \rho(g) P$ has the same block-diagonal form for each $g \in
 edges = []
 for g in G:
     edges += (P.conjugate_transpose()*rho(g)*P).nonzero_positions()
-graph = Graph(edges, multiedges = False, loops = False)
+graph = Graph(edges, multiedges = False, loops = True)
 subrep_indices = graph.connected_components()
 subdivisions = graph.vertices()[1:]
 for l in subrep_indices:
@@ -222,7 +222,7 @@ def decompose(rho,G,H):
     edges = []
     for g in G:
         edges += (P.conjugate_transpose()*rho(g)*P).nonzero_positions()
-    graph = Graph(edges, multiedges = False, loops = False)
+    graph = Graph(edges, multiedges = False, loops = True)
     subrep_indices = sorted(graph.connected_components(), key=lambda x: x[0])    
     
     return P,subrep_indices  
