@@ -8,7 +8,7 @@ description: "About me"
 
 I recently graduated with a PhD in Mathematics from the University of Washington, Seattle. My advisor was [James Zhang](https://www.math.washington.edu/~zhang/){:target="_blank"}. 
 
-Starting Fall 2019, I will be a research scientist at the Institute of High Performance Computing in Singapore.
+Starting Fall 2019, I will be a research scientist at the [Institute of High Performance Computing](https://www.a-star.edu.sg/ihpc){:target="_blank"} in Singapore.
 
 My research interests are in category theory, homotopy theory and non-commutative algebra.
 Specifically: Grothendieck fibrations, enriched category theory, Hopf algebras and cubical sets. 
@@ -48,7 +48,7 @@ I had the priviledge of participating in the following meetings:
   
 - A co-reflection of cubical sets into simplicial sets, with applications to model structures  
   *with Chris Kapulkin and Zachery Lindsey*    
-  \[[arXiv](https://arxiv.org/abs/1906.09203){:target="_blank"}\] \[[slides](http://sheaves.github.io/slides/oslo-hott.pdf){:target="_blank"}\] \[to appear in New York Journal of Mathematics\]
+  \[[arXiv](https://arxiv.org/abs/1906.09203){:target="_blank"}\] \[[slides](http://sheaves.github.io/slides/oslo-hott.pdf){:target="_blank"}\] \[[New York Journal of Mathematics, 25 (2019), 627-641](http://nyjm.albany.edu/j/2019/25-29.html){:target="_blank"}\]
   
 - The enriched Grothendieck construction  
   *with Jonathan Beardsley*    
