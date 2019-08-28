@@ -42,7 +42,9 @@ I had the priviledge of participating in the following meetings:
   \[[slides](http://sheaves.github.io/slides/JMM-hott.pdf){:target="_blank"}\]
 
 #### 2019
-
+- Smash Products for Non-cartesian Internal Prestacks  
+  \[[arXiv](https://arxiv.org/abs/1907.09666){:target="_blank"}\]
+  
 - The Grothendieck construction in enriched, internal and $\infty$-category theory  
   \[[PhD thesis](http://sheaves.github.io/slides/thesis.pdf){:target="_blank"}\] \[[slides](http://sheaves.github.io/slides/Final.pdf){:target="_blank"}\]
   
