@@ -75,10 +75,10 @@ How can we compute $\mathbf{A}^{-1}$?
 
 While there are formulas for inverting small matrices by hand, doing this is not practical for larger matrices. Instead, we will use the Python programming language as a calculator:
 
+*(click "Evaluate" to run the code)*
 
-```python
-""" Python code """
-
+<div class="python">
+  <script type="text/x-sage">
 import numpy as np
 
 A = np.array([[ 2,  4,  2],
@@ -88,12 +88,8 @@ A = np.array([[ 2,  4,  2],
 A_inv = np.linalg.inv(A)
 
 print(A_inv)
-```
-
-    [[ 3.5  8.   5. ]
-     [-2.  -5.  -3. ]
-     [ 1.   2.   1. ]]
-    
+  </script>
+</div>
 
 Don't worry about the code for now. All you need to know is that the inverse of $\mathbf{A}$ has been computed (`A_inv` in the code above), and is given by:
 
