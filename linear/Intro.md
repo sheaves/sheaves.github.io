@@ -1,4 +1,6 @@
-# Linear Algebra for Fun and Profit
+---
+title: Linear Algebra for Fun and Profit
+---
 
 **Lecture 1 : 31 March 2020**
 
