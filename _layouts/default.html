@@ -44,6 +44,8 @@
     <link rel="stylesheet" type="text/css" href="https://sagecell.sagemath.org/static/sagecell_embed.css">
     <!-- Cell definitions -->
     <script>$(function () {
+    // Basic Python cell. Use <div class = "python">
+    sagecell.makeSagecell({inputLocation: '.python', languages : ['python']});        
     // Basic Sage cell. Use <div class = "sage">
     sagecell.makeSagecell({inputLocation: '.sage'});
     // Auto evaluate Sage. Use <div class="auto">
