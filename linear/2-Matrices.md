@@ -2,7 +2,7 @@
 title: Matrices
 ---
 
-** Lecture 2 : 20 April 2020 **
+**Lecture 2 : 20 April 2020**
 
 In this lecture, we will introduce the main characters in our story: matrices.
 
@@ -20,7 +20,7 @@ Above we have a **4 × 3 matrix** or **(4,3)-matrix**, pronounced "4-by-3 matrix
 
 More generally, we can talk about m × n or (m,n)-matrices, where m and n are integers.
 
-We always write the number of *rows* followed by the number of *column*. To help you remember this, think of **R**emote **C**ontrol : **R**ows and **C**olumns.
+We always write the number of *rows* followed by the number of *columns*. To help you remember this, think of **R**emote **C**ontrol : **R**ows and **C**olumns.
 
 
 
