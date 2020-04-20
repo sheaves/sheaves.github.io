@@ -107,7 +107,7 @@ A = np.array([[  1,   2,   3],
               [  7,   8,   9],
               [0.5,  -1,   6]])
 
-A.shape
+print(A.shape)
   </script>
 </div>
 
@@ -135,7 +135,7 @@ A = np.array([[  1,   2,   3],
 
 B = np.array([[1,0,0], [0,1,0], [0,0,1], [1,1,1]])
 
-A + B
+print(A + B)
   </script>
 </div>
 
@@ -155,7 +155,7 @@ A = np.array([[  1,   2,   3],
               [  7,   8,   9],
               [0.5,  -1,   6]])
 
-2.5 * A
+print(2.5 * A)
   </script>
 </div>
 
@@ -174,7 +174,7 @@ A = np.array([[1,2,3], [4,5,6]])
 
 B = np.array([[1,2,3],[4,5,6],[7,8,9]])
 
-A @ B
+print(A @ B)
   </script>
 </div>
 
@@ -189,7 +189,7 @@ A = np.array([[1,2,3], [4,5,6]])
 
 B = np.array([[1,2,3],[4,5,6],[7,8,9]])
 
-np.dot(A,B)
+print(np.dot(A,B))
   </script>
 </div>
 
@@ -205,7 +205,7 @@ import numpy as np
 
 A = np.array([[1,2,3], [4,5,6]])
 
-A + 1
+print(A + 1)
   </script>
 </div>
 
@@ -217,7 +217,7 @@ import numpy as np
 A = np.array([[1,2,3], [4,5,6]])
 B = np.array([[1,0,2], [-2,1,0]])
 
-A * B
+print(A * B)
   </script>
 </div>
 
@@ -237,7 +237,7 @@ Each cell might have more than one error, but the error messages will only show 
   <script type="text/x-sage">
 A = np.array([[1,2,3], [4,5,6]])
 
-A
+print(A)
   </script>
 </div>
 
@@ -248,7 +248,7 @@ import numpy as np
 
 A = np.array([1,2,3], [4,5,6])
 
-A
+print(A)
   </script>
 </div>
 
@@ -260,7 +260,7 @@ import numpy as np
 
 A = np.array([[1,1,1], [1,1]])
 
-A.shape
+print(A.shape)
   </script>
 </div>
 
@@ -275,7 +275,7 @@ import numpy as np
 A = np.array([[1,2], [3,4]])
 B = np.array([[1,0],[0,1]])
 
-A * B
+print(A * B)
   </script>
 </div>
 
