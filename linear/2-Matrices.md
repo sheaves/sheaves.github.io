@@ -230,7 +230,7 @@ It's ok to use them, but make sure it's what you want!
 (The cells cannot be evaluated in the slides)
 Each of the code cells below contains some errors. Can you modify the code in each cell so that it works? 
 
-Each cell might have more than one error, but the error messages will only show the first error encountered. Feel free to delete  or make up some entries if you need.
+Feel free to delete  or make up some entries if you need.
 
 #### Question 1
 <div class="python">
