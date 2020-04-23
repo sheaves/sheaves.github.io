@@ -34,17 +34,15 @@ print("The solution is x =", x)
 </script>
 </div>
 
-We've discussed almost everything in this code except ```b = np.array([16,-5,-3])```. This is how we define **vectors** in Python. Notice that we only use _one_ set of square brackets. 
-
-(Of course, we could also have defined $b$ as a $3 \times 1$ matrix: ```b = np.array([[16], [-5], [-3]])```. But defining it as a vector is easier.)
+We've discussed almost everything in this code except ```b = np.array([16,-5,-3])``` in line 7. This is how we define **vectors** in Python. Notice that we only use _one_ set of square brackets. 
 
 If you want, you can also check that your solution works, by computing ```A @ x``` and comparing it with ```b```.
 
 ## Instructions
 
-For each of the puzzles below, copy the above code into your Spyder editor and modify ```A``` and ```b``` to suit your problem. The point is to get you used to *setting up the puzzle as a matrix equation*, and *defining the matrix in Python*, not so much in finding the answer.
+For each of the puzzles below, copy the above code into your Spyder editor and modify ```A``` and ```b``` to suit your problem. The point is to get used to *setting up the puzzle as a matrix equation*, and *defining the matrix in Python*, not so much in finding the answer.
 
-You can use a separate file for each puzzle, or put them in the same file. If you put them in the same file, try to use different names for ```A``` and ```b``` in each puzzle. Email me your code for at least 2 of the puzzles below.
+You can use a separate file for each puzzle, or put them in the same file. If you put them in the same file, try to use different names for ```A``` and ```b``` in each puzzle. **Email me your code for at least 2 of the puzzles below.**
 
 ## 1. Square Dance
 
@@ -69,10 +67,9 @@ The numbers in each square are the sums of the numbers in their adjacent circles
 
 Again, it's more important to set up the matrix ```A``` than to actually find solutions to all three triangles.
 
-Does our method work for squares? Pentagons? Hexagons? Can you guess which numbers it works for?
+**Bonus**: Does our method work for squares? Pentagons? Hexagons? Can you guess which polygons it works for?
 
 ![](https://nzmaths.co.nz/sites/default/files/images/arithm76.jpg)
-
 
 
 ## 3. Animal Crossing
