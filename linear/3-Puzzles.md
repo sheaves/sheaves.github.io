@@ -74,7 +74,9 @@ Again, it's more important to set up the matrix ```A``` than to actually find so
 
 ## 3. Animal Crossing
 
-Only do this if you're very free. The solution is already there, so the important part is not finding the solution, but setting up the matrix. The numbers on the sides are the sums of the respective rows and columns.
+Only do this if you're very free. The solution is already there, so the important part is not finding the solution, but setting up the matrix. The numbers on the sides are the sums of the respective rows and columns. 
+
+**Hint:** If there are too many equations to form a square matrix, try dropping one of them.
 
 <div>
 <img src="https://media.istockphoto.com/vectors/mathematics-educational-game-for-children-math-puzzle-system-of-vector-id1003527122" width="600"/>
