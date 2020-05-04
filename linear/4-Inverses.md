@@ -23,7 +23,7 @@ import numpy as np
 
 I = np.eye(4)
 print(I)
-```
+```python
 
     [[1. 0. 0. 0.]
      [0. 1. 0. 0.]
@@ -77,7 +77,7 @@ You can define a diagonal matrix using ```np.diag```, followed by a list of entr
 ```python
 M = np.diag([1,2,3,4])
 print(M)
-```
+```python
 
     [[1 0 0 0]
      [0 2 0 0]
@@ -93,7 +93,7 @@ To help you, you can use the following matrix $N$ to compute $MN$ and $NM$ to he
 ```python
 N = np.ones((4,4))
 print(N)
-```
+```python
 
     [[1. 1. 1. 1.]
      [1. 1. 1. 1.]
