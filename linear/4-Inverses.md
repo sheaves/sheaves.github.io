@@ -273,7 +273,7 @@ Write down the matrix $F$ corresponding to $f$.
 
 ## 5. Non-invertible matrices
 
-**Question 5**: Write up some non-invertible functions $f:[n] \to [m]$ and their corresponding matrices. Try to have at least one with $n < m$ and one with $n > m$. Sum up the number of $1$s in each *row* of those matrices, then do this also for the invertible $f$ in 4(a).
+**Question 5**: Write up two non-invertible functions $f:[n] \to [m]$ and their corresponding matrices: try to have one with $n < m$ and one with $n > m$. Sum up the number of $1$s in each *row* of those matrices, then do this also for the invertible $f$ in 4(a).
 
 How can you tell if a function is invertible, just by looking at its matrix?
 
