@@ -32,9 +32,9 @@ print(A)
      [4 5 6 7]]
     
 
-The above code produces a $4 \times 5$ matrix whose $(i,j)^{th}$ entry is $i - j$. 
+The above code produces a $4 \times 5$ matrix whose $(i,j)^{th}$ entry is $i - j$. If you understand everything in the above code, you can skip to the homework at the end. 
 
-Let's go through the code and explain the new features.
+Otherwise, let's go through the code and explain the new features.
 
 ## Functions: ```def```...```return```
 
@@ -124,10 +124,13 @@ As we see in the last example above, lists can also be nested in other lists. Th
 
 ```python
 # All ones
-all_ones = [[ 1 for i in range(4) ] for j in range(5)]
+all_ones = [[ 1 for i in range(4)] for j in range(5)]
+row_num =  [[ j for i in range(4)] for j in range(5)]
+col_num =  [[ i for i in range(4)] for j in range(5)]
 
-A = np.array(all_ones)
-print(A)
+print(np.array(all_ones))
+print(np.array(row_num))
+print(np.array(col_num))
 ```
 
     [[1 1 1 1]
@@ -135,40 +138,18 @@ print(A)
      [1 1 1 1]
      [1 1 1 1]
      [1 1 1 1]]
-    
-
-
-```python
-# Row number
-A = np.array([[ j for i in range(4)] for j in range(5)])
-
-print(A)
-```
-
     [[0 0 0 0]
      [1 1 1 1]
      [2 2 2 2]
      [3 3 3 3]
-     [4 4 4 4]]
-    
-
-
-```python
-# Column number
-A = np.array([[ i for i in range(4)] for j in range(5)])
-
-print(A)
-```
-
+     [4 4 4 4]]    
     [[0 1 2 3]
      [0 1 2 3]
      [0 1 2 3]
      [0 1 2 3]
-     [0 1 2 3]]
-    
+     [0 1 2 3]]     
 
 These examples are all quite simple, so there was no need to define the function ```a(i,j)``` separately. Here's a slightly more complicated example that uses logic statements:
-
 
 ```python
 # Identity matrix
@@ -214,6 +195,7 @@ Do this in the following steps:
 1. Find a vector $u$ such that ```u @ v``` gives the value $p(4)$. (Here Python will treat ```u``` as a row vector, and ```v``` as a column vector). The vector ```v``` is the solution you just found, so you just have to decide what the entries of $u$ are.
 
 **Question 2** Do this only if you have time. Now you are given
+
 $$
     \begin{matrix}
         q(0) & = & -4
