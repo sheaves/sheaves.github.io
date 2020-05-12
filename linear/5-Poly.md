@@ -211,6 +211,7 @@ $$
         q(4) & = & 40
     \end{matrix}
 $$
+
 and you want to compute $q(3)$. Repeat what you did above, with the necessary modifications.
 
 *(Hint: You might want to replace one of the ranges with your own list)*
