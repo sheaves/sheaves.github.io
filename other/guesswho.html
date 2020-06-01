@@ -13078,8 +13078,645 @@ div#notebook {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Guess-Who-Solver">Guess Who Solver<a class="anchor-link" href="#Guess-Who-Solver">&#182;</a></h1><p>This script implements a strategy for the game of <a href="https://en.wikipedia.org/wiki/Guess_Who%3F">Guess Who?</a> using the concept of <a href="https://en.wikipedia.org/wiki/Conditional_mutual_information">conditional mutual information</a>.</p>
-<p>For the sake of demonstration, we will use a simplified Guess Who set-up with only 6 names and 5 features or characteristics, as shown in the following dataframe:
-<em>(1 represents 'Yes', 0 represents 'No')</em></p>
+<p>We first run through a demo of how the strategy works. The Python functions that are used in the demo will be shown at the end.</p>
+<h2 id="Demo">Demo<a class="anchor-link" href="#Demo">&#182;</a></h2><p>We will use a simplified Guess Who set-up with only 6 names and 5 features or characteristics, as shown in the following dataframe:</p>
+<p><em>(1 represents 'Yes', 0 represents 'No')</em></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[10]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Female</th>
+      <th>Glasses</th>
+      <th>Short Hair</th>
+      <th>Brown Eyes</th>
+      <th>Headgear</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alice</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bob</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Charles</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Diane</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Emma</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Fred</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Intuitively, we should first query the features that divide the dataset into half. These are <code>Female</code> and <code>Short Hair</code>.</p>
+<p>Our intuition agrees with the conditional mutual information between each feature and the set of all names. <code>Female</code> and <code>Short Hair</code> have the highest CMI, assuming we don't know the values of any of the features:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">known_features</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">features_by_cmi</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">known_features</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Known features: {}
+
+Rows matching known features:
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Female</th>
+      <th>Glasses</th>
+      <th>Short Hair</th>
+      <th>Brown Eyes</th>
+      <th>Headgear</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alice</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bob</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Charles</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Diane</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Emma</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Fred</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Conditional mutual information of remaining features:
+
+Short Hair  : 1.000
+Female      : 1.000
+Headgear    : 0.918
+Glasses     : 0.918
+Brown Eyes  : 0.918
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Suppose we have some prior information that the person in question has brown eyes. This information changes the mutual information provided by the remaining features. In fact, <code>Female</code> now becomes the least informative, since 3 of the 4 people with brown eyes are female.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">known_features</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Brown Eyes&#39;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+<span class="n">features_by_cmi</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">known_features</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Known features: {&#39;Brown Eyes&#39;: 1}
+
+Rows matching known features:
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Female</th>
+      <th>Glasses</th>
+      <th>Short Hair</th>
+      <th>Brown Eyes</th>
+      <th>Headgear</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alice</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bob</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Diane</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Emma</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Conditional mutual information of remaining features:
+
+Headgear    : 1.000
+Short Hair  : 1.000
+Glasses     : 1.000
+Female      : 0.811
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Since <code>Headgear</code> has one of the highest CMIs, let's query that next. Suppose we get the answer 0. We then see that asking about <code>Glasses</code> will offer us no information at all, since both remaining candidates wear glasses.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">known_features</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Brown Eyes&#39;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Headgear&#39;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+<span class="n">features_by_cmi</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">known_features</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Known features: {&#39;Brown Eyes&#39;: 1, &#39;Headgear&#39;: 0}
+
+Rows matching known features:
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Female</th>
+      <th>Glasses</th>
+      <th>Short Hair</th>
+      <th>Brown Eyes</th>
+      <th>Headgear</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>Bob</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Diane</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Conditional mutual information of remaining features:
+
+Short Hair  : 1.000
+Female      : 1.000
+Glasses     : 0.000
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Finally, we ask about <code>Short Hair</code> and get the answer 0. Since there is only one row remaining, we have found the answer!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">known_features</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Brown Eyes&#39;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Headgear&#39;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Short Hair&#39;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+<span class="n">features_by_cmi</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">known_features</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Known features: {&#39;Brown Eyes&#39;: 1, &#39;Headgear&#39;: 0, &#39;Short Hair&#39;: 0}
+
+Rows matching known features:
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Female</th>
+      <th>Glasses</th>
+      <th>Short Hair</th>
+      <th>Brown Eyes</th>
+      <th>Headgear</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3</th>
+      <td>Diane</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Conditional mutual information of remaining features:
+
+Glasses     : 0.000
+Female      : 0.000
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Python-script">Python script<a class="anchor-link" href="#Python-script">&#182;</a></h2><p>We now show the scripts that were used to create the above demo. If you're running this as an IPython notebook, you have to run all the following code cells first, before running the demo above!</p>
+<p>First we define the dataframe that we will be using:</p>
 
 </div>
 </div>
@@ -13220,7 +13857,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We first define a function that lets us filter this dataframe by specifying the values of certain features.</p>
+<p>We then define a function that lets us filter this dataframe by specifying the values of certain features, and another function that returns the probability of observing a particular combination of known features and names.</p>
 
 </div>
 </div>
@@ -13235,6 +13872,14 @@ div#notebook {
         <span class="k">return</span> <span class="n">df</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">df</span><span class="p">[</span><span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">&amp;</span><span class="n">y</span><span class="p">,</span> <span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span> <span class="o">==</span> <span class="n">val</span>  <span class="k">for</span> <span class="n">feature</span><span class="p">,</span><span class="n">val</span> <span class="ow">in</span> <span class="n">known_features</span><span class="o">.</span><span class="n">items</span><span class="p">()])]</span> 
+    
+<span class="k">def</span> <span class="nf">prob</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">known_features</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="n">filtered_df</span> <span class="o">=</span> <span class="n">filter_by_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">known_features</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">filtered_df</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">filtered_df</span><span class="p">[</span><span class="n">filtered_df</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span><span class="p">])</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>    
 </pre></div>
 
     </div>
@@ -13245,7 +13890,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The <code>known_features</code> are passed in as a Python dictionary, keyed by features, with values 0 or 1. For example, we filter the original dataframe by selecting only those rows that have a 1 for <code>'Female'</code> and 0 for <code>'Short Hair'</code>:</p>
+<p>If we filter by the features <code>{'Female' : 1, 'Short Hair' : 0}</code>, we obtain the following two rows:</p>
 
 </div>
 </div>
@@ -13333,33 +13978,6 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We next define a function for computing the probability of a particular combination of known features, and optionally a name.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">prob</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">known_features</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-    <span class="n">filtered_df</span> <span class="o">=</span> <span class="n">filter_by_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">known_features</span><span class="p">)</span>
-    
-    <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">filtered_df</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">filtered_df</span><span class="p">[</span><span class="n">filtered_df</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span><span class="p">])</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <p>Since the filtered dataset has only 2 rows out of the original 6, the probability of observing this combination of known features is $1/3$:</p>
 
 </div>
@@ -13367,7 +13985,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">prob</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">known_features</span><span class="p">)</span>
@@ -13383,7 +14001,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[5]:</div>
+    <div class="prompt output_prompt">Out[4]:</div>
 
 
 
@@ -13408,7 +14026,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">prob</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="p">{},</span> <span class="s1">&#39;Alice&#39;</span><span class="p">)</span>
@@ -13424,7 +14042,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[6]:</div>
+    <div class="prompt output_prompt">Out[5]:</div>
 
 
 
@@ -13444,15 +14062,16 @@ div#notebook {
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Finally, we define a function that computes the mutual information between a single feature and the set of all names, conditioned on the knowing the values of some other features:</p>
 $$
-I(X,Y | z) = \Sigma_{x \in X} \Sigma_{y \in Y} p(x,y|z) \log \frac{p(x,y|z)}{p(x|z) p(y|z)}
+I(X,Y | z) = \Sigma_{x \in X} \Sigma_{y \in Y} p(x,y|z) \log_2 \frac{p(x,y|z)}{p(x|z) p(y|z)}
 $$<p>Here $Y$ is the set of all names, and each $y$ is one particular name. $X = {0,1}$ is the set of values for one particular feature, so each $x$ is either $0$ or $1$. The symbol $z$ stands for a particular combination of values for some of the other features that are not $X$.</p>
+<p>The value $I(X,Y|z)$ tells us the number of bits of information that knowing about the value of $X$ tells us about the value of $Y$, given that we already know $z$.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">conditional_mutual_info</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">feature</span><span class="p">,</span> <span class="n">known_features</span><span class="p">):</span>
@@ -13466,7 +14085,7 @@ $$<p>Here $Y$ is the set of all names, and each $y$ is one particular name. $X =
                 <span class="n">p_val</span>     <span class="o">=</span> <span class="n">prob</span><span class="p">(</span><span class="n">filtered_df</span><span class="p">,</span> <span class="p">{</span><span class="n">feature</span><span class="p">:</span> <span class="n">val</span><span class="p">})</span>
                 <span class="n">p_name</span>    <span class="o">=</span> <span class="n">prob</span><span class="p">(</span><span class="n">filtered_df</span><span class="p">,</span> <span class="p">{},</span> <span class="n">name</span><span class="p">)</span>
                 
-                <span class="n">cmi_sum</span> <span class="o">+=</span> <span class="n">p_valname</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span> <span class="n">p_valname</span><span class="o">/</span><span class="p">(</span><span class="n">p_val</span> <span class="o">*</span> <span class="n">p_name</span><span class="p">)</span> <span class="p">)</span>
+                <span class="n">cmi_sum</span> <span class="o">+=</span> <span class="n">p_valname</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span> <span class="n">p_valname</span><span class="o">/</span><span class="p">(</span><span class="n">p_val</span> <span class="o">*</span> <span class="n">p_name</span><span class="p">)</span> <span class="p">)</span>
         
     <span class="k">return</span> <span class="n">cmi_sum</span>
 </pre></div>
@@ -13486,7 +14105,7 @@ $$<p>Here $Y$ is the set of all names, and each $y$ is one particular name. $X =
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">features_by_cmi</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">known_features</span><span class="p">):</span>
@@ -13496,8 +14115,10 @@ $$<p>Here $Y$ is the set of all names, and each $y$ is one particular name. $X =
     <span class="n">order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">cmi</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Known features: </span><span class="si">{}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">known_features</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Conditional mutual information of remaining features:&#39;</span><span class="p">)</span>
-    <span class="p">[</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">: </span><span class="si">{:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">remaining_features</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">cmi</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">order</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Rows matching known features:&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">filter_by_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">known_features</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Conditional mutual information of remaining features:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="p">[</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:12}</span><span class="s2">: </span><span class="si">{:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">remaining_features</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">cmi</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">order</span><span class="p">]</span>
 </pre></div>
 
     </div>
@@ -13508,7 +14129,7 @@ $$<p>Here $Y$ is the set of all names, and each $y$ is one particular name. $X =
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Running this on our original dataset with no known features, we see that <code>'Female'</code> and <code>''Short Hair'</code> provide us the most mutual information at the start. This agrees with our intuition that we should start by asking questions that divide the possible names into half.</p>
+<p>Trying this on the above set of known features, we see that asking about <code>Headgear</code> or <code>Glasses</code> next would give us 1 bit of information about the name, whereas asking about <code>Brown Eyes</code> tells us nothing:</p>
 
 </div>
 </div>
@@ -13518,9 +14139,7 @@ $$<p>Here $Y$ is the set of all names, and each $y$ is one particular name. $X =
 <div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">known_features</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="n">features_by_cmi</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">known_features</span><span class="p">)</span>
-<span class="n">filter_by_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">known_features</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">features_by_cmi</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">known_features</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13537,25 +14156,20 @@ $$<p>Here $Y$ is the set of all names, and each $y$ is one particular name. $X =
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Known features: {}
+<pre>Known features: {&#39;Female&#39;: 1, &#39;Short Hair&#39;: 0}
 
-Conditional mutual information of remaining features:
-Short Hair: 0.693
-Female: 0.693
-Headgear: 0.637
-Glasses: 0.637
-Brown Eyes: 0.637
+Rows matching known features:
 </pre>
 </div>
 </div>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[9]:</div>
+    <div class="prompt"></div>
 
 
 
-<div class="output_html rendered_html output_subarea output_execute_result">
+<div class="output_html rendered_html output_subarea ">
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -13593,24 +14207,6 @@ Brown Eyes: 0.637
       <td>1</td>
     </tr>
     <tr>
-      <th>1</th>
-      <td>Bob</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Charles</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
       <th>3</th>
       <td>Diane</td>
       <td>1</td>
@@ -13619,60 +14215,12 @@ Brown Eyes: 0.637
       <td>1</td>
       <td>0</td>
     </tr>
-    <tr>
-      <th>4</th>
-      <td>Emma</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Fred</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
   </tbody>
 </table>
 </div>
 </div>
 
 </div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Suppose we have some prior information that the person in question has brown eyes. This information changes the mutual information provided by the remaining features. In fact, <code>Female</code> now becomes the least informative, since 3 of the 4 people with brown eyes are female.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">known_features</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Brown Eyes&#39;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
-<span class="n">features_by_cmi</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">known_features</span><span class="p">)</span>
-<span class="n">filter_by_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">known_features</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
 
 <div class="output_area">
 
@@ -13680,292 +14228,13 @@ Brown Eyes: 0.637
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Known features: {&#39;Brown Eyes&#39;: 1}
+<pre>Conditional mutual information of remaining features:
 
-Conditional mutual information of remaining features:
-Headgear: 0.693
-Short Hair: 0.693
-Glasses: 0.693
-Female: 0.562
+Headgear    : 1.000
+Glasses     : 1.000
+Brown Eyes  : 0.000
 </pre>
 </div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[10]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Name</th>
-      <th>Female</th>
-      <th>Glasses</th>
-      <th>Short Hair</th>
-      <th>Brown Eyes</th>
-      <th>Headgear</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Alice</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Bob</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Diane</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Emma</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Next we ask about <code>Headgear</code>. Suppose we get the answer 0. We see that asking about <code>Glasses</code> next will offer us no information at all, since both remaining candidates wear glasses.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">known_features</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Brown Eyes&#39;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Headgear&#39;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
-<span class="n">features_by_cmi</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">known_features</span><span class="p">)</span>
-<span class="n">filter_by_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">known_features</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Known features: {&#39;Brown Eyes&#39;: 1, &#39;Headgear&#39;: 0}
-
-Conditional mutual information of remaining features:
-Short Hair: 0.693
-Female: 0.693
-Glasses: 0.000
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[11]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Name</th>
-      <th>Female</th>
-      <th>Glasses</th>
-      <th>Short Hair</th>
-      <th>Brown Eyes</th>
-      <th>Headgear</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1</th>
-      <td>Bob</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Diane</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Finally, we ask about <code>Short Hair</code> and get the answer 0. Since there is only one row remaining, we have found the answer!</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">known_features</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Brown Eyes&#39;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Headgear&#39;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Short Hair&#39;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
-<span class="n">features_by_cmi</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">known_features</span><span class="p">)</span>
-<span class="n">filter_by_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">known_features</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Known features: {&#39;Brown Eyes&#39;: 1, &#39;Headgear&#39;: 0, &#39;Short Hair&#39;: 0}
-
-Conditional mutual information of remaining features:
-Glasses: 0.000
-Female: 0.000
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[12]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Name</th>
-      <th>Female</th>
-      <th>Glasses</th>
-      <th>Short Hair</th>
-      <th>Brown Eyes</th>
-      <th>Headgear</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>3</th>
-      <td>Diane</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
 </div>
 
 </div>
