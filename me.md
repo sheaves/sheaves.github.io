@@ -8,9 +8,9 @@ description: "About me"
 
 I recently graduated with a PhD in Mathematics from the University of Washington, Seattle. My advisor was [James Zhang](https://www.math.washington.edu/~zhang/){:target="_blank"}. 
 
-Starting Fall 2019, I will be a research scientist at the [Institute of High Performance Computing](https://www.a-star.edu.sg/ihpc){:target="_blank"} in Singapore.
+I am currently a research scientist at the [Institute of High Performance Computing](https://www.a-star.edu.sg/ihpc){:target="_blank"} in Singapore. I am working on various applied problems in psychometrics, causal learning and graph embeddings. 
 
-My research interests are in category theory, homotopy theory and non-commutative algebra.
+My academic research interests are in category theory, homotopy theory and non-commutative algebra.
 Specifically: Grothendieck fibrations, enriched category theory, Hopf algebras and cubical sets. 
 
 I used to write simple snippets of code for this site, mostly in Python/Sage. 
