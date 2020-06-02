@@ -6,9 +6,9 @@ description: "About me"
 
 ## Liang Ze Wong <img align="right" src="/images/photo.jpg" width="150" />
 
-I recently graduated with a PhD in Mathematics from the University of Washington, Seattle. My advisor was [James Zhang](https://www.math.washington.edu/~zhang/){:target="_blank"}. 
-
 I am currently a research scientist at the [Institute of High Performance Computing](https://www.a-star.edu.sg/ihpc){:target="_blank"} in Singapore. I am working on various applied problems in psychometrics, causal learning and graph embeddings. 
+
+I received my PhD in Mathematics from the University of Washington, Seattle. My advisor was [James Zhang](https://www.math.washington.edu/~zhang/){:target="_blank"}. 
 
 My academic research interests are in category theory, homotopy theory and non-commutative algebra.
 Specifically: Grothendieck fibrations, enriched category theory, Hopf algebras and cubical sets. 
