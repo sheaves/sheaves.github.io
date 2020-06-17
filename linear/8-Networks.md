@@ -79,6 +79,8 @@ Choose **two** of the situations from Question 1 (you can choose the situation y
 2. Is it directed or undirected?
 3. When is there an edge from one vertex to another?
 
+There may not be one right answer for these questions. It all depends on how you want to represent the situation.
+
 ### Question 3
 For the situations that you chose in Question 2, draw a simple example of a graph that represents it, and its corresponding adjacency matrix. (An example will do: You don't have to draw your whole friend network, or include real names!)
 
