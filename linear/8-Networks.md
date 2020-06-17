@@ -82,8 +82,8 @@ Choose **two** of the situations from Question 1 (you can choose the situation y
 ### Question 3
 For the situations that you chose in Question 2, draw a simple example of a graph that represents it, and its corresponding adjacency matrix. (An example will do: You don't have to draw your whole friend network, or include real names!)
 
-### Discussion Question
-This is for discussion during our next Zoom meeting: What situation would you be interested in representing with graphs? This does not need to be any of the above situations. You can also think about what situations you might want to study for SSEF.
-
 ### Bonus Question
 This is just something for you to think about. Suppose you want to use a graph to represent JC students and the subjects they are taking. How would you do it with graphs? (If you did come up with a graph, you can use this for Questions 1,2,3 if you want.)
+
+### Discussion Question
+This is for discussion during our next Zoom meeting: What situation would you be interested in representing with graphs? This does not need to be any of the above situations. You can also think about what situations you might want to study for SSEF.
