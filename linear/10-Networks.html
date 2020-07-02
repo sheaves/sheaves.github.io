@@ -13077,7 +13077,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In this exercise, you will use the Python library <a href="https://networkx.github.io/documentation/latest/tutorial.html">Networkx</a> to analyze different graphs and networks.</p>
+<h1 id="Networks">Networks<a class="anchor-link" href="#Networks">&#182;</a></h1><p>In this exercise, you will use the Python library <a href="https://networkx.github.io/documentation/latest/tutorial.html">Networkx</a> to analyze different graphs and networks.</p>
 <p>Here's a quick recap of how to compute the eigenvalues and eigenvectors of the adjacency matrix of a graph.</p>
 
 </div>
@@ -13309,7 +13309,8 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Homework">Homework<a class="anchor-link" href="#Homework">&#182;</a></h1><p>Choose one of the following two questions to do.</p>
+<h1 id="Homework">Homework<a class="anchor-link" href="#Homework">&#182;</a></h1><p>Choose one of the following two questions to do. You only have to submit answers for the "Code this" and "Answer this" portion, but I hope you also try the "Think about this first" part.</p>
+<p>You can submit your answers to the "Answer this" part as comments in your code. Or you can write it out or type it in the email if you prefer.</p>
 
 </div>
 </div>
@@ -13511,15 +13512,8 @@ Look at the eigenvector corresponding to the smallest (i.e. most negative) eigen
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Think about this first</strong>: This graph represents the results of an informal tournament, where teams need not play the same number of games. There is a directed arrow from X to Y if X beat Y in a match. Looking at the graph (or at <code>matches_won</code> in the code defining the graph), which would you say is the strongest team? The weakest team?</p>
 <p><strong>Code this</strong>:
-Now use what you've learned to get the eigenvalues and eigenvectors of (the adjacency matrix of) <code>G</code>. <strong>Since the adjacency matrix is not symmetric, you have to use <code>np.linalg.eig</code></strong> instead of <code>np.linalg.eigh</code>.</p>
+Now use what you've learned to get the eigenvalues and eigenvectors of (the adjacency matrix of) <code>G</code>.</p>
 <p><strong>Answer this</strong>: Look at the eigenvector corresponding to the largest eigenvalue, and see which entries are assigned to which nodes (the entries are arranged according to <code>G.nodes</code>). How can you use this eigenvector to rank teams?</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 
 </div>
 </div>
