@@ -120,8 +120,3 @@ A more detailed introduction: [Dynamical systems and matrix algebra](http://www.
 # 5. Other ideas
 
 If you have any other ideas or areas that you think you would like to explore, do let me know!
-
-
-```python
-
-```
