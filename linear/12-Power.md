@@ -41,7 +41,7 @@ For this question, the following formulas might be helpful:
 
 ## Question 2
 
-Now suppose that $u_1, u_2, \dots u_n$ are all the eigenvectors of $A$, with corresponding eigenvalues $\lambda_1, \lambda_2, \dots, \lambda_n$. (i.e. if $d,E = eig(A)$ is the eigendecomposition of $A$, then $u_i$'s are the columns of $E$ and $\lambda_i$'s are the entries of $d$).
+Now suppose that $u_1, u_2, \dots u_n$ are all the eigenvectors of $A$, with corresponding eigenvalues $\lambda_1,\dots, \lambda_n$.
 
 Suppose also that $\|\lambda_1\| > \|\lambda_i\|$ for all other $i$.
 
