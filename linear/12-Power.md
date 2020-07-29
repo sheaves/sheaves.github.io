@@ -11,7 +11,7 @@ Throughout, let $A$ denote an $n \times n$ matrix. The power method is given by 
 - Define future $v_i$'s via the recurrence relation:
 
 $$
-v_{i+1} = \frac{Av_i}{\|Av_i\|},
+v_{i+1} = \frac{Av_i}{|Av_i|},
 $$
 
 where $\|w\|$ denotes the *length* or *norm* of the vector $w$.
@@ -19,7 +19,7 @@ where $\|w\|$ denotes the *length* or *norm* of the vector $w$.
 Under appropriate conditions on $A$ (that you will discover in the homework), the sequence $v_0, v_1, v_2, \dots$ converges to some vector $v$ which satisfies
 
 $$
-v = \frac{Av}{\|Av\|}.
+v = \frac{Av}{|Av|}.
 $$
 
 # Homework
