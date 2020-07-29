@@ -33,6 +33,7 @@ For example, can we find a way to include commuter preferences like fewer transf
 
 We could also aim to answer questions such as: 
 
+- How has the connectivity of various MRT stations changed through each upgrade, from the 1980s till now?
 - How much will connectivity improve if we close up the circle line? 
 - What's the best way to route 5 buses to connect 20 stations?
 - Is it better to have a hub-and-spoke network or a network with concentric circles?
