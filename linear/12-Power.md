@@ -11,15 +11,15 @@ Throughout, let $A$ denote an $n \times n$ matrix. The power method is given by 
 - Define future $v_i$'s via the recurrence relation:
 
 $$
-v_{i+1} = \frac{Av_i}{|Av_i|},
+v_{i+1} = \frac{Av_i}{\|Av_i\|},
 $$
 
-where $|w|$ denotes the *length* or *norm* of the vector $w$.
+where $\|w\|$ denotes the *length* or *norm* of the vector $w$.
 
 Under appropriate conditions on $A$ (that you will discover in the homework), the sequence $v_0, v_1, v_2, \dots$ converges to some vector $v$ which satisfies
 
 $$
-v = \frac{Av}{|Av|}.
+v = \frac{Av}{\|Av\|}.
 $$
 
 # Homework
@@ -31,11 +31,11 @@ Questions 1 and 2 are due on 11 Aug (Tuesday). Question 3 is due on 17 Aug (Mond
 For this question, the following formulas might be helpful:
 - Scalars can be moved in and out of matrix products: $A\,(cv) = c\, Av$
 - Scalars can be moved in and out of dot products: $v \cdot (cw) = c (v \cdot w) = (cv) \cdot w$
-- Formula for the norm: $|v| = \sqrt{v \cdot v}$
+- Formula for the norm: $\|v\| = \sqrt{v \cdot v}$
 
-**a)** Show that any $v$ satisfying $v = \frac{Av}{|Av|}$ is an eigenvector of $A$. What is the corresponding eigenvalue?
+**a)** Show that any $v$ satisfying $v = \frac{Av}{\|Av\|}$ is an eigenvector of $A$. What is the corresponding eigenvalue?
 
-**b)** Let $v$ be the vector from (a). Use the formula for the norm and the fact that $v$ is an eigenvector to show that $|Av| = v \cdot Av$. 
+**b)** Let $v$ be the vector from (a). Use the formula for the norm and the fact that $v$ is an eigenvector to show that $\|Av\| = v \cdot Av$. 
 
 **c)** Returning to the power method, give a formula for $v_{i+1}$ in terms of only $A$ and $v_0$. (This should also tell you why the method is called the *power* method).
 
@@ -43,7 +43,7 @@ For this question, the following formulas might be helpful:
 
 Now suppose that $u_1, u_2, \dots u_n$ are all the eigenvectors of $A$, with corresponding eigenvalues $\lambda_1, \lambda_2, \dots, \lambda_n$. (i.e. if $d,E = eig(A)$ is the eigendecomposition of $A$, then $u_i$'s are the columns of $E$ and $\lambda_i$'s are the entries of $d$).
 
-Suppose also that $|\lambda_1| > |\lambda_i|$ for all other $i$.
+Suppose also that $\|\lambda_1\| > \|\lambda_i\|$ for all other $i$.
 
 Let $v_0 = c_1 u_1 + c_2 u_2 + \dots + c_n u_n$ for some scalars $c_1,\dots, c_n$. 
 
