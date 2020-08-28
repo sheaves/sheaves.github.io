@@ -25,7 +25,7 @@ I used to write simple snippets of code for this site, mostly in Python/Sage.
 
 ### Workshops and Seminars
 
-I had the priviledge of participating in the following meetings:
+I had the privilege of participating in the following meetings:
 - [MIT Talbot Workshop 2018](http://math.mit.edu/conferences/talbot/index.php?year=2018)
 - [AMS Mathematics Research Community in Homotopy Type Theory](http://www.ams.org/programs/research-communities/2017MRC-1)
 - [Kan Extension Seminar II](http://www.math.jhu.edu/~eriehl/kanII/)
