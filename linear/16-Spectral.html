@@ -13079,7 +13079,8 @@ div#notebook {
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Spectral-Graph-Theory">Spectral Graph Theory<a class="anchor-link" href="#Spectral-Graph-Theory">&#182;</a></h1><p>Biologists use microscopes to study cells and microorganisms. Astronomers use telescopes to study the stars. But what does a mathematician use to study networks?</p>
 <p>There are many tools and "instruments" for studying networks, but one of the most powerful is <em>spectral graph theory</em>.</p>
-<p>Although you may not have heard of "spectral graph theory", you already know what graphs are, and what the spectrum - or set of eigenvalues - of a matrix is. Put together, spectral graph theory just means the study of graphs by inspecting the spectra of  matrices associated with graphs. Many properties of a graph or network can be seen just by observing its spectrum.</p>
+<p>Although you may not have heard of "spectral graph theory", you already know what graphs are, and I've mentioned before what the <strong>spectrum</strong> of a matrix is: it's the set of eigenvalues of the matrix.</p>
+<p>Put together, spectral graph theory just means the study of graphs by inspecting the spectrum of matrices associated with graphs. Many properties of a graph or network can be seen just by observing the spectrum of its matrices.</p>
 <p>Over the next few weeks, you'll be introduced to 4 different matrices associated with a graph:</p>
 <ul>
 <li>The adjacency matrix $A$</li>
@@ -13204,11 +13205,14 @@ $$<p>where $p(i)$ is the probability that the ant is at node $i$. Since these ar
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Question-3">Question 3<a class="anchor-link" href="#Question-3">&#182;</a></h3><p>This question is about matrices in general, and has only one part. We will apply this result to graphs next time, but for now you can just think of these are arbitrary matrices.</p>
+<h3 id="Question-3">Question 3<a class="anchor-link" href="#Question-3">&#182;</a></h3><p>This question is about matrices in general, and their spectrum. We will apply this result to graphs next time, but for now you can just think of these are arbitrary matrices.</p>
+<p>Let $M$ be a square matrix, and let $I$ denote the identity matrix of the same shape.</p>
+<p><strong>a)</strong> If $v$ is an eigenvector of $M$ with corresponding eigenvalue $\lambda$, show that $v$ is also an eigenvector of $M + I$. What is its eigenvalue?</p>
+<p><strong>b)</strong> More generally, show that $v$ is an eigenvector of $aM + bI$, where $a$ and $b$ are constants. What is the corresponding eigenvalue?</p>
 <p>Let $A$ and $B$ be square matrices of the same shape. We say that $A$ and $B$ are <strong>similar</strong> if there is some invertible matrix $P$ such that</p>
 $$
     A = P^{-1} B P.
-$$<p><strong>a)</strong> Suppose $\lambda$ is an eigenvalue of $A$, with corresponding eigenvector $v$. If $A$ and $B$ are similar, show that $\lambda$ is also an eigenvalue of $B$. What is the corresponding eigenvector?</p>
+$$<p><strong>c)</strong> Suppose $\lambda$ is an eigenvalue of $A$, with corresponding eigenvector $v$. If $A$ and $B$ are similar, show that $\lambda$ is also an eigenvalue of $B$. What is the corresponding eigenvector?</p>
 
 </div>
 </div>
@@ -13224,23 +13228,10 @@ $$<p><strong>a)</strong> Suppose $\lambda$ is an eigenvalue of $A$, with corresp
 </ul>
 <p>Note that I only wrote what the nodes are, but not what the edges are. This is because there can be more than one way of representing these things as graphs! Can you think of a few?</p>
 <p>Also, you can play one level of the <strong>Mini Metro</strong> game here for free: <a href="https://www.coolmathgames.com/0-mini-metro-london">https://www.coolmathgames.com/0-mini-metro-london</a></p>
-<p>It's a game about building a metro/MRT network to connect people in a city. If you do play the game, are there some strategies you adopt? (e.g. are circles or hub-and-spokes better?)</p>
+<p>It's a game about building a metro/MRT network to connect people in a city. If you do play the game, take a screenshot of your high score! Are there some strategies you adopt? (e.g. are circles or hub-and-spokes better?)</p>
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
-</div>
-</div>
-
 </div>
     </div>
   </div>
