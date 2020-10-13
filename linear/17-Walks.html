@@ -13089,9 +13089,10 @@ div#notebook {
 <p>To see why this is the case, let's recall a fact that I told you a while back: if $M$ is a <em>symmetric</em> $n \times n$ matrix, then $M$ has $n$ real eigenvalues.</p>
 <p>Unfortunately, we can't apply this fact to our walk graph $W$, because $W$ is not symmetric. But there is a symmetric matrix that is closely related to $W$.</p>
 <h2 id="Question-1">Question 1<a class="anchor-link" href="#Question-1">&#182;</a></h2><p>Let $N = D^{-\frac{1}{2}} A D^{-\frac{1}{2}}$. This is sometimes called the <strong>normalized</strong> adjacency matrix.</p>
-<p><strong>a)</strong> Show that $N$ is <em>symmetric</em> i.e. show that $N^\top = N$, where $N^\top$ is the transpose of $N$. You may use the fact that $A$ and $D$ are symmetric.</p>
+<p><strong>a)</strong> Show that $N$ is <em>symmetric</em> i.e. show that $N^\top = N$, where $N^\top$ is the transpose of $N$. You may use the fact that $A$ and $D$ are symmetric, and that $(XY)^\top = Y^\top X^\top$ for any two matrices $X$ and $Y$.</p>
+<p>This implies that $N$ has $n$ real eigenvalues.</p>
 <p><strong>b)</strong> Show that $N$ and $W$ are <em>similar</em> i.e. show that there is an invertible matrix $P$ such that $N = P^{-1} W P$.</p>
-<p><strong>c)</strong> Combine all the facts you know so far (from parts a) and b), the paragraphs above, and last week's homework) to show that $W$ has $n$ real eigenvalues.</p>
+<p><strong>c)</strong> Combine all the facts you know so far to show that $W$ has $n$ real eigenvalues.</p>
 <p>There is another matrix associated with the random walk matrix, known as the <strong>lazy</strong> walk matrix:</p>
 $$
     \hat{W} := \frac{1}{2}I + \frac{1}{2} W.
@@ -13167,7 +13168,7 @@ $$<p>The interpretation of this matrix is as follows: at every node, we flip a c
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>a)</strong> Complete the code below to produce a function that takes a graph $G$ and returns random walk matrix $W$. <em>(Hint: look at Questions 1c and 2b from last week)</em></p>
+<p><strong>a)</strong> Write a function that takes a graph $G$ and returns the random walk matrix $W$. I've provided some guides for this first part. <em>(Hint: look at Questions 1c and 2b from last week)</em></p>
 
 </div>
 </div>
@@ -13194,7 +13195,7 @@ $$<p>The interpretation of this matrix is as follows: at every node, we flip a c
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>b)</strong> Write a function that takes a graph $G$ and returns the lazy random walk matrix $\hat{W}$. You may use the function <code>walk(G)</code> that you have defined.</p>
+<p><strong>b)</strong> Write a function that takes a graph $G$ and returns the lazy random walk matrix $\hat{W}$.</p>
 
 </div>
 </div>
@@ -13218,7 +13219,7 @@ $$<p>The interpretation of this matrix is as follows: at every node, we flip a c
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>c)</strong> Write a function that takes a graph $G$ and returns the matrix $N$. You may use any of the functions you've defined previously.</p>
+<p><strong>c)</strong> Write a function that takes a graph $G$ and returns the matrix $N$.</p>
 
 </div>
 </div>
@@ -13242,7 +13243,7 @@ $$<p>The interpretation of this matrix is as follows: at every node, we flip a c
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>d)</strong> Write a function that takes a graph $G$ and returns the matrix $\hat{N}$. You may use any of the functions you've defined previously.</p>
+<p><strong>d)</strong> Write a function that takes a graph $G$ and returns the matrix $\hat{N}$.</p>
 
 </div>
 </div>
@@ -13266,7 +13267,7 @@ $$<p>The interpretation of this matrix is as follows: at every node, we flip a c
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>e)</strong> Write two functions that take a graph $G$ and returns the eigenvalues of the lazy random walk matrix $\hat{W}$. The first function should use <code>W_lazy(G)</code> while the second function should use <code>N_lazy(G)</code>.</p>
+<p><strong>e)</strong> Write two functions that take a graph $G$ and returns the eigenvalues of the lazy random walk matrix $\hat{W}$. The first function should use <code>W_lazy(G)</code> and <code>np.eigenvals</code> while the second function should use <code>N_lazy(G)</code> and <code>np.eigenvalsh</code>.</p>
 
 </div>
 </div>
@@ -13276,7 +13277,7 @@ $$<p>The interpretation of this matrix is as follows: at every node, we flip a c
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">lazy_eigs_direct</span><span class="p">(</span><span class="n">G</span><span class="p">):</span> <span class="c1"># use W_lazy(G), which is NOT symmetric</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">lazy_eigs_direct</span><span class="p">(</span><span class="n">G</span><span class="p">):</span> <span class="c1"># use W_lazy(G), which is NOT symmetric, and np.eigenvals</span>
     <span class="o">???</span>
     <span class="k">return</span> <span class="err">?</span><span class="o">??</span>
 </pre></div>
@@ -13291,7 +13292,7 @@ $$<p>The interpretation of this matrix is as follows: at every node, we flip a c
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">lazy_eigs</span><span class="p">(</span><span class="n">G</span><span class="p">):</span> <span class="c1"># use N_lazy(G), which is symmetric</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">lazy_eigs</span><span class="p">(</span><span class="n">G</span><span class="p">):</span> <span class="c1"># use N_lazy(G), which is symmetric, and np.eigenvalsh</span>
     <span class="o">???</span>
     <span class="k">return</span> <span class="err">?</span><span class="o">??</span>
 </pre></div>
@@ -13339,7 +13340,7 @@ $$<p>The interpretation of this matrix is as follows: at every node, we flip a c
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Some-examples-of-graphs">Some examples of graphs<a class="anchor-link" href="#Some-examples-of-graphs">&#182;</a></h1><p>In this question, we will see some toy examples of graphs, and compute the eigenvalues of lazy walks on those graphs using <code>lazy_eigs</code>. All of these graphs will have $10$ nodes to allow them to be compared more directly, but the actual number of nodes isn't that important.</p>
-<p>Run the cells below to see what the graphs look like:</p>
+<p>First, run the cells below to see what the graphs look like:</p>
 <h3 id="Path-graph">Path graph<a class="anchor-link" href="#Path-graph">&#182;</a></h3>
 </div>
 </div>
@@ -13469,7 +13470,7 @@ $$<p>The interpretation of this matrix is as follows: at every node, we flip a c
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Question-3">Question 3<a class="anchor-link" href="#Question-3">&#182;</a></h2><p><strong>a)</strong> Look at the graphs above, and sort them from "least connected" to "most connected". There is no right or wrong answer for this question. I just want to see what your intuition is.</p>
-<p><strong>b)</strong> Modify the cells above to also print out <code>lazy_eigs</code> for each of these graphs (in addition to drawing them). Look at all the eigenvalues. Are there any patterns? Does any of the eigenvalues seem to agree with your intuition on which is most or least connected?</p>
+<p><strong>b)</strong> Add a line to the cells above to also print out <code>lazy_eigs</code> for each of these graphs. Are there any patterns you notice about the eigenvalues? Does anything seem to agree with your intuition on which is most or least connected?</p>
 <p>(Make sure that you've run the following line of code, for nicer formatting of the printed eigenvalues)</p>
 
 </div>
