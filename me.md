@@ -6,7 +6,7 @@ description: "About me"
 
 ## Liang Ze Wong <img align="right" src="/images/photo.jpg" width="150" />
 
-I am currently a research scientist at the [Institute of High Performance Computing](https://www.a-star.edu.sg/ihpc){:target="_blank"} in Singapore, working on various applied problems in psychometrics, causal learning and graph embeddings. 
+I am currently a research scientist at the [Institute of High Performance Computing](https://www.a-star.edu.sg/ihpc){:target="_blank"} in Singapore, working on psychometrics, causal learning and graph embeddings. 
 
 I received my PhD in Mathematics from the University of Washington, Seattle. My advisor was [James Zhang](https://www.math.washington.edu/~zhang/){:target="_blank"}. 
 
@@ -31,17 +31,16 @@ I had the privilege of participating in the following meetings:
 - [Kan Extension Seminar II](http://www.math.jhu.edu/~eriehl/kanII/)
   \[[blog post](https://golem.ph.utexas.edu/category/2017/02/distributive_laws.html){:target="_blank"}, [long slides](http://sheaves.github.io/slides/kan-dist-long.pdf){:target="_blank"}, [short slides](http://sheaves.github.io/slides/kan-dist-short.pdf){:target="_blank"}\]
 
-### <a name="papers"></a>Papers
+### <a name="papers"></a>Papers and talks
 
-#### In Progress
+#### 2020
+- <a name="minimal"></a>Cubes with connections from algebraic weak factorization systems  
+  \[[slides](http://sheaves.github.io/slides/cylinders.pdf){:target="_blank"}\] \[[TeX](http://sheaves.github.io/slides/cylinders.tex){:target="_blank"} for [Western Topology Seminar](https://jdc.math.uwo.ca/topology/index.html){:target="_blank"}\]  
+
+#### 2019
 - <a name="minimal"></a>Minimal Schemas for a Category  
   \[[draft](http://sheaves.github.io/slides/act.pdf){:target="_blank"}\] \[[poster](http://sheaves.github.io/slides/ACT2019.pdf){:target="_blank"} for [ACT 2019](http://www.cs.ox.ac.uk/ACT2019/){:target="_blank"}\]
 
-- Weak Equivalences between Categories of Models of Type Theory  
-  *with Simon Cho, Cory Knapp and Clive Newstead*  
-  \[[slides](http://sheaves.github.io/slides/JMM-hott.pdf){:target="_blank"}\]
-
-#### 2019
 - Smash Products for Non-cartesian Internal Prestacks  
   \[[arXiv](https://arxiv.org/abs/1907.09666){:target="_blank"}\]
   
@@ -61,6 +60,10 @@ I had the privilege of participating in the following meetings:
   \[[arXiv](https://arxiv.org/abs/1808.08020){:target="_blank"}\] \[[slides](http://sheaves.github.io/slides/Western-nerve.pdf){:target="_blank"}\] \[[Theory and Applications of Categories, 34 (2019), 349-374](http://www.tac.mta.ca/tac/volumes/34/13/34-13abs.html){:target="_blank"}\]
 
 #### Older
+
+- Weak Equivalences between Categories of Models of Type Theory  
+  *with Simon Cho, Cory Knapp and Clive Newstead*  
+  \[[slides](http://sheaves.github.io/slides/JMM-hott.pdf){:target="_blank"}\]
 
 - Noncommutative geometry of homogenized quantum $\mathfrak{sl}(2,\mathbb{C})$  
   *with Alex Chirvasitu and S. Paul Smith*  
