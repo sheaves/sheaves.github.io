@@ -1,0 +1,909 @@
+\documentclass[compress]{beamer}
+%\documentclass[notes]{beamer}
+\usepackage[utf8]{inputenc}
+ 
+% Theming
+
+	\usetheme{Frankfurt}
+	% Remove header bar
+	\setbeamertemplate{headline}{}		
+
+	% Turn off navigation symbols
+	\setbeamertemplate{navigation symbols}{}
+
+	% Table of contents at every section
+	\AtBeginSection[]
+	{
+	  \begin{frame}<beamer>{Outline}
+	    \tableofcontents[currentsection]
+	  \end{frame}
+	}
+
+	% Citation
+	% https://tex.stackexchange.com/a/6015/149868
+	% \usepackage[backend=bibtex]{biblatex}
+	% \bibliography{biblio}		
+	% \setbeamerfont{footnote}{size=\tiny}
+
+	% Text color
+	\usepackage{xcolor}
+
+	% For strike through
+	% https://tex.stackexchange.com/a/23712/149868
+	\usepackage[normalem]{ulem}
+
+	% Table settings
+	%\setlength{\arrayrulewidth}{1mm}
+	\setlength{\tabcolsep}{18pt}
+	\renewcommand{\arraystretch}{1.5}	
+
+	\usepackage{array}
+
+	\usepackage{csquotes}
+
+	% Checks and Crosses
+	\usepackage{pifont}% http://ctan.org/pkg/pifont
+	\newcommand{\cmark}{\ding{51}}%
+	\newcommand{\xmark}{\ding{55}}%
+
+% Math macros
+	\usepackage{amsmath,amssymb,amsthm}
+	\usepackage{mathtools}
+	\let\amssquare\square
+
+	\usepackage{bbm} %for blackboard bold numbers
+
+	% for Warning sign: 
+	% https://tex.stackexchange.com/questions/159669/how-to-print-a-warning-sign-triangle-with-exclamation-point
+	% \usepackage{fontawesome}
+	% \usepackage{fourier}
+
+	\usepackage{tikz-cd}
+	\tikzset{ % "visible on" tag
+	    invisible/.style={opacity=0},
+	    visible on/.style={alt={#1{}{invisible}}},
+	    alt/.code args={<#1>#2#3}{%
+	      \alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}}%
+	  }
+	}
+	\tikzset{% for drawing adjunctions
+	    symbol/.style={%
+	        draw=none,
+	        every to/.append style={%
+	            edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
+	    }
+	}
+
+	\usepackage{tikz}
+
+	\usetikzlibrary{decorations.pathmorphing} % for squiggly
+
+	%% Theorem environments
+		% http://www.maths.tcd.ie/~dwilkins/LaTeXPrimer/Theorems.html
+		% \newtheorem{theorem}{Theorem}[section]
+		% \newtheorem{lemma}[theorem]{Lemma}
+		\newtheorem{proposition}[theorem]{Proposition}
+		% \newtheorem{corollary}[theorem]{Corollary}
+
+		% % \newenvironment{proof}[1][Proof]{\begin{trivlist}
+		% % \item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+		% \newenvironment{definition}[1][Definition]{\begin{trivlist}
+		% \item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+		% \newenvironment{example}[1][Example]{\begin{trivlist}
+		% \item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+		% \newenvironment{remark}[1][Remark]{\begin{trivlist}
+		% \item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+
+	%%% Categories
+		\newcommand{\cat}[1]{\mathbf{#1}}
+		\newcommand{\Set}{\cat{Set}}
+		\newcommand{\sSet}{\cat{sSet}}
+		\newcommand{\cSet}{\cat{cSet}}
+		\newcommand{\Fun}{\cat{Fun}}
+
+	%%% Variable categories
+		\newcommand{\varcat}[1]{\mathcal{#1}}
+		\newcommand{\A}{\varcat{A}}
+		\newcommand{\B}{\varcat{B}}
+		\newcommand{\C}{\varcat{C}}
+		\newcommand{\D}{\varcat{D}}
+		\newcommand{\E}{\varcat{E}}
+
+		\newcommand{\Q}{\mathcal{Q}}
+		
+		\renewcommand{\L}{\mathcal{L}}
+		\newcommand{\R}{\mathcal{R}}		
+
+		\newcommand{\I}{\mathbb{I}}		
+
+		\newcommand{\To}{\Rightarrow}
+
+		\newcommand{\N}{\mathsf{N}}
+
+		% \newcommand{\ii}{{\scriptscriptstyle \cdot \to \cdot}}
+		% \newcommand{\iii}{{\scriptscriptstyle \cdot\to \cdot \to \cdot}}
+		% \newcommand{\ii}{\mathbf{2}}
+		% \newcommand{\iii}{\mathbf{3}}
+		\newcommand{\ii}{{\scriptscriptstyle [1]}}
+		\newcommand{\iii}{{\scriptscriptstyle [2]}}
+
+	%%% Tildes
+		\renewcommand{\t}[1]{\tilde{#1}}
+
+	%%% Others
+
+		\newcommand{\Cube}{\amssquare} % the cube category
+
+		\newcommand{\op}{\mathsf{op}}
+		\newcommand{\1}{\mathbf{1}}
+		\newcommand{\cod}{\cat{cod}}
+		\newcommand{\Id}{\mathsf{Id}}
+		\newcommand{\Ob}{\mathsf{Ob}}
+		\newcommand{\Hom}{\mathsf{Hom}}	
+		\newcommand{\Ho}{\mathsf{Ho}}
+
+		\newcommand{\Cyl}{\mathsf{Cy}}
+
+		\newcommand{\xto}[1]{\xrightarrow{#1}}
+
+		\newcommand{\coCart}{\cat{coCart}}
+
+
+
+
+%Information to be included in the title page:
+\title{Cubes with connections \\ from algebraic weak factorization systems}
+\author{Liang Ze Wong \\ (work in progress with Chris Kapulkin)}
+%\institute{}
+\date{Western Topology Seminar\\ 11 Nov 2020}
+
+\begin{document}
+ 
+\frame{\titlepage}
+
+\begin{frame}{Outline}
+	\begin{itemize}  \setlength{\itemsep}{15pt}
+		\item The interval, homotopies, and cubes
+		\item Weak factorization systems
+			\begin{itemize}
+				\item Functorial
+				\item Algebraic
+			\end{itemize}
+		\item Cylinders from functorial and algebraic WFS
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{The Interval and Homotopies}
+	The interval $\I = [0,1]$ allows us to define \emph{homotopies}: 
+	\pause \vfill
+	\begin{block}{}
+	A homotopy from $f$ to $g$ is a function $H$ fitting into the diagram:
+	\[
+		\begin{tikzcd}[sep = large]
+			X \ar[dr, "i_0"'] \ar[drr, bend left, "f"] & &
+			\\
+			& X \times \I \ar[r, "H"] & Y
+			\\
+			X \ar[ur, "i_1"] \ar[urr, bend right, "g"'] & &
+		\end{tikzcd}
+	\]
+	\end{block}
+	\pause
+	From there, we can define \emph{homotopy equivalences} between objects:
+	\pause
+	\vfill
+	$\to$ first example of \emph{weak equivalences} encountered in math
+\end{frame}
+
+\begin{frame}[fragile]{The Interval and Higher-dimensional Geometry}
+	The interval is also the $1$-dim version of various $n$-dim objects:
+	\pause \vfill
+	\begin{centering}
+		  \includegraphics[width=\linewidth]{tetracubeball.png}
+	\end{centering}
+	\pause \vfill
+	Today, we will focus on \emph{cubes}.
+\end{frame}
+
+\begin{frame}{Why cubes?}
+	\begin{proposition}
+		Higher-dimensional cubes are more appealing and intuitive than simplices and balls.
+	\end{proposition}
+	\pause
+	\begin{block}{Proof.}
+	\centering
+		  \includegraphics[width=0.75\linewidth]{tesseract.png}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Simplices vs cubes}
+	The \emph{simplex category} $\Delta$ does have the advantage of simplicity:
+	\begin{itemize}
+		\item objects are $[n] = \{0 \leq 1 \leq \dots \leq n \}$
+		\item morphisms are all order-preserving maps
+			\begin{itemize}
+				\item generated by faces and degeneracies
+			\end{itemize}
+	\end{itemize}	
+	\pause
+	\vfill
+	By contrast, the \emph{cube category} $\Cube$ requires some choices:
+	\begin{itemize}
+		\item objects are $[1]^n = \{0 \leq 1\}^n$
+		\item morphisms are {\color{red}some subset of} order-preserving maps
+			\begin{itemize}
+				\item generated by faces and degeneracies, and possibly $\dots$
+				\item connections
+				\item symmetries
+				\item diagonals
+			\end{itemize}
+	\end{itemize}	
+\end{frame}
+
+\begin{frame}[fragile]{Simplices vs cubes}
+	Generators for maps in $\Cube$:
+	\pause
+	\begin{itemize}[<+->]
+		\item \emph{face} and \emph{degeneracy} maps 
+		\item \emph{connections} (max \& min)
+		\item \emph{diagonals} and \emph{symmetries}
+	\end{itemize}
+	\vfill
+	\[
+		\begin{tikzpicture}		
+			\node (00) at (-0.5,0.5) {$\cdot$};
+			\node  (01) at (1.5,0.5) {$\cdot$};
+			\node  (10) at (-0.5,2.5) {$\cdot$};
+			\node (11) at (1.5,2.5) {$\cdot$};
+			\draw[->] (00) -- (01);
+			\draw[->] (00) -- (10);
+			\draw[->] (01) -- (11);
+			\draw[->] (10) -- (11);
+
+			% Faces and degeneracies
+			\node (0) at (-2.5,0.5) {{\visible<2>{$\cdot$}}};
+			\node (1) at (-2.5,2.5) {{\visible<2>{$\cdot$}}};
+			\draw[->, visible on = <2>] (0) -- (1);
+
+			\node (0') at (-0.5,-1.5) {{\visible<2>{$\cdot$}}};
+			\node (1') at (1.5,-1.5) {{\visible<2>{$\cdot$}}};
+			\draw[->, visible on = <2>] (0') -- (1');	
+
+			\draw[->, visible on = <2>, blue] (-2,1.75) -- ++(1,0);
+			\draw[<-, visible on = <2>, green] (-2,1.25) -- ++(1,0);
+			\draw[->, visible on = <2>, blue] (0.25,-1) -- ++(0,1);
+			\draw[<-, visible on = <2>, green] (0.75,-1) -- ++(0,1);		
+
+			% Connections
+			\node (c0) at (1.5,-1.5) {{\visible<3-4>{$\cdot$}}};
+			\node (c1) at (3.5,0.5) {{\visible<3-4>{$\cdot$}}};
+			\draw[->, visible on = <3-4>] (c0) -- (c1);
+
+			\draw[red, dashed, visible on = <3>]  plot[smooth, tension=.4] coordinates {(-0.5,3) (-1,2.5) (1.5,0) (2,0.5) (2,2.5) (1.5,3) (-0.5,3)};
+			\draw[->, red, visible on = <3>] (00) -- (c0);
+			\draw[<-, red, visible on = <3>] (c1) -- ++(-1.5,1.5);	
+
+			% Symmetries
+			\draw[<->, brown, visible on = <5>] (10.south east) .. controls (1,2) .. (01.north west);
+
+			% Diagonals
+			\draw[->, dashed, visible on = <4>] (00) -- (11);
+			\draw[->, brown, visible on = <4>] (2.25,-0.25) .. controls (2,1) .. (0.75,1.25);						
+		\end{tikzpicture}
+	\]
+\end{frame}
+
+\begin{frame}{Cubes with connections}
+	The case for faces, degeneracies \emph{and connections}: \\~\\
+	\pause
+	\begin{itemize}[<+->] \setlength{\itemsep}{15pt}
+		\item $\Cube$ is a generalized Reedy category
+		\item $\Cube$ is a strict test category
+		\item There is a co-reflective embedding\footnote{Kapulkin-Lindsey-W. 2019} $\sSet \hookrightarrow \cSet$ 
+		\item It's exactly what we get from \emph{algebraic} weak factorization systems (this talk)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Interlude: Embedding $\sSet$ into $\cSet$}
+	As long as $\Cube$ has faces and degeneracies, we can define certain quotients of the standard cubes in $\cSet$:
+	\pause
+	\begin{tikzpicture}
+		\node at (-4,6) {$Q^0$};
+		\node at (-3,6) {$=$};
+		\node at (-2,6) {$\cdot$};
+
+		\node at (1.75,6) {$Q^1$};
+		\node at (2.75,6) {$=$};
+		\node (v13) at (4,6) {$\cdot$};
+		\node (v14) at (6,6) {$\cdot$};
+		\draw[->]  (v13) edge (v14);
+
+		\node at (-4,4) {$Q^2$};
+		\node at (-3,4) {$=$};
+
+		\node (v9) at (-1,3) {$\cdot$};
+		\node (v10) at (-1,5) {$\cdot$};
+		\node (v11) at (1,3) {$\cdot$};
+		\node (v12) at (1,5) {$\cdot$};
+		\draw[->]  (v9) edge (v10);
+		\draw[->]  (v9) edge (v11);
+		\draw  (v11) edge[double] (v12);
+		\draw[->]  (v10) edge (v12);
+
+		\node at (2.75,4) {$=$};
+
+		\node (w9) at (4,3) {$\cdot$};
+		\node (w10) at (4,5) {$\cdot$};
+		\node (w11) at (6,3.75) {$\cdot$};
+		\node (w12) at (6,4.25) {$\cdot$};
+		\draw[->]  (w9) edge (w10);
+		\draw[->]  (w9) edge (w11);
+		\draw  (w11) edge[double] (w12);
+		\draw[->]  (w10) edge (w12);
+
+		\node at (-4,0.5) {$Q^3$};
+		\node at (-3,0.5) {$=$};
+
+		\node (v1) at (-1.5,-1) {$\cdot$};
+		\node (v2) at (-1.5,1) {$\cdot$};
+		\node (v5) at (0.5,1) {$\cdot$};
+		\node (v3) at (0.5,-1) {$\cdot$};
+		\node (v4) at (-0.5,2) {$\cdot$};
+		\node (v6) at (1.5,2) {$\cdot$};
+		\node (v7) at (1.5,0) {$\cdot$};
+		\node (v8) at (-0.5,0) {$\cdot$};
+		\draw[->]  (v1) edge (v2);
+		\draw[->]  (v1) edge (v3);
+		\draw  (v2) edge[double] (v4);
+		\draw[->, red]  (v2) edge (v5);
+		\draw[->, red]  (v4) edge (v6);
+		\draw  (v5) edge[double] (v6);
+		\draw  (v3) edge[double] (v5);
+		\draw  (v3) edge[double] (v7);
+		\draw  (v7) edge[double] (v6);
+		\draw[->]  (v1) edge (v8);
+		\draw[->]  (v8) edge (v7);
+		\draw[->]  (v8) edge (v4);
+		\path[fill=blue, opacity = 0.2] (v5.center) -- (v6.center) -- (v7.center) -- (v3.center) -- (v5.center);
+
+		\node at (2.75,0.5) {$=$};
+
+		\node (w1) at (4,-1) {$\cdot$};
+		\node (w2) at (4.5,1.5) {$\cdot$};
+		\node (w5) at (6.5,0) {$\cdot$};
+		\node (w3) at (6.5,-0.5) {$\cdot$};
+		\node (w4) at (4.75,1.75) {$\cdot$};
+		\node (w6) at (6.75,0.25) {$\cdot$};
+		\node (w7) at (6.75,-0.25) {$\cdot$};
+		\node (w8) at (5,0) {$\cdot$};
+		\draw[->]  (w1) edge (w2);
+		\draw[->]  (w1) edge (w3);
+		\draw  (w2) edge[double] (w4);
+		\draw[->, red]  (w2) edge (w5);
+		\draw[->, red]  (w4) edge (w6);
+		\draw  (w5) edge[double] (w6);
+		\draw  (w3) edge[double] (w5);
+		\draw  (w3) edge[double] (w7);
+		\draw  (w7) edge[double] (w6);
+		\draw[->]  (w1) edge (w8);
+		\draw[->]  (w8) edge (w7);
+		\draw[->]  (w8) edge (w4);
+		\path[fill=blue, opacity = 0.2] (w5.center) -- (w6.center) -- (w7.center) -- (w3.center) -- (w5.center);
+	\end{tikzpicture}
+\end{frame}
+
+\begin{frame}[fragile]{Interlude: Embedding $\sSet$ into $\cSet$}
+	But we need connections to get all the "simplicial degeneracies" between $Q^n$s:
+	\pause
+	\[
+		\begin{tikzpicture}
+			% Delta 2
+			\node(1) at (-0.5,2) {$\cdot$};
+			\node(0) at (-2,-0.5) {$\cdot$};
+			\node(2) at (1,-0.5) {$\cdot$};
+			\node(2x) at (1,0) {$\cdot$};
+
+			\draw[->] (0) -- (1);
+			\draw[->] (0) -- (2);
+			\draw[->] (1) -- (2x);		
+			\draw (2) edge[double] (2x);			
+
+			% Delta 1
+			\node(0') at (-2,-3) {$\cdot$};
+			\node(1') at (1,-3) {$\cdot$};
+			\draw[->] (0') -- (1');
+		
+			% Degeneracy maps
+			\node(c1) at (-1.25,0.75) {};
+			\draw[rotate around = { -30: (c1) }, dashed, green, visible on = <3>] (c1) ellipse (0.5 and 2);
+			\draw[<-, green, visible on = <3>] (0') -- ++(0,2);
+			\draw[->, green, visible on = <3>] (2) -- (1');
+
+			\node(c2) at (0.25,0.75) {};
+			\draw[rotate around = {30 : (c2) }, dashed, red, visible on = <5->] (c2) ellipse (0.5 and 2);
+			\draw[<-, red, visible on = <5->] (1') -- ++(0,2);	
+			\draw[->, red, visible on = <5->] (0) -- (0');
+		\end{tikzpicture}		
+	\]	
+\end{frame}
+
+\begin{frame}[fragile]{So far...}
+	\[
+		\begin{tikzcd}[column sep = small]
+			& \text{the interval} \ar[dl] \ar[dr] &
+			\\
+			\text{classical homotopy theory} \ar[d, rightsquigarrow, visible on = <3->] & & \text{cubes} \ar[d, rightsquigarrow, visible on = <2->]
+			\\
+			|[visible on=<3->]|\text{abstract homotopy theory} \ar[rr,  dashed, no head, "?" description, visible on = <4->] & & |[visible on=<2->]|\text{the cube category}
+			\\[-20pt]
+			|[visible on=<3->]|\text{(model categories)}
+		\end{tikzcd}
+	\]
+\end{frame}
+
+% \begin{frame}{Abstract homotopy theory}
+% 	Some approaches to abstract homotopy theory: \\~\\
+% 	\begin{itemize} \setlength{\itemsep}{15pt}
+% 		\item model categories
+% 		\item (co)fibration categories
+% 		\item categories with (co)cylinders
+% 	\end{itemize}
+% 	\pause \vfill
+% 	Many of these involve some notion of \emph{factorization} and/or of \emph{(co)cylinders}.
+% \end{frame}
+
+\begin{frame}[fragile]{Model categories}
+	A \emph{model category} has all limits and colimits, and classes of: \\~\\
+	\begin{itemize} \setlength{\itemsep}{15pt}
+		\item $\begin{tikzcd} \phantom{\cdot} \ar[r, "\sim"] & \phantom{\cdot} \end{tikzcd}$ \emph{weak equivalences}  satisfying 2-out-of-3
+		\item  $\begin{tikzcd} \phantom{\cdot} \ar[r, rightarrowtail] & \phantom{\cdot} \end{tikzcd}$ \emph{cofibrations} (nice injections)
+		\item  $\begin{tikzcd} \phantom{\cdot} \ar[r, two heads] & \phantom{\cdot} \end{tikzcd}$ \emph{fibrations} (nice surjections)
+	\end{itemize}
+	\pause \vfill
+	such that we have \emph{weak factorization systems}:
+	\[
+		\begin{tikzcd}[row sep = tiny]
+			(\phantom{\cdot} \ar[r, rightarrowtail, "\sim"] & \phantom{\cdot},
+			 \phantom{\cdot} \ar[r, two heads] & \phantom{\cdot})
+			 \\
+			(\phantom{\cdot} \ar[r, rightarrowtail] & \phantom{\cdot},
+			 \phantom{\cdot} \ar[r, two heads, "\sim"] & \phantom{\cdot})
+		\end{tikzcd}
+	\]
+\end{frame}
+
+\begin{frame}[fragile]{Weak Factorization Systems}
+	A \emph{weak factorization system (WFS)} on a category $\C$ consists of two classes of maps $\L, \R$ such that:
+	\pause
+	\begin{itemize}[<+->]
+		\item Every map in $\C$ factors as 
+		\[
+			\begin{tikzcd}
+				\cdot \ar[r, "\in\; \L"] & \cdot \ar[r, "\in \; \R"] & \cdot
+			\end{tikzcd}
+		\]
+		\item There exist lifts for squares of the following form:
+		\[
+		\begin{tikzcd}[sep = large]
+			\cdot \ar[r] \ar[d, "\L \; \ni"'] & \cdot \ar[d, "\in \; \R"]
+			\\
+			\cdot \ar[r] \ar[ur, dashed, "\exists", red] & \cdot
+		\end{tikzcd}
+		\]
+	\end{itemize}
+	\pause
+	Factorizations and lifts are \emph{not unique}!
+\end{frame}
+
+\begin{frame}[fragile]{Weak Factorization Systems}
+	An \emph{orthogonal} factorization system is one where lifts are unique:
+		\[
+		\begin{tikzcd}[sep = large]
+			\cdot \ar[r] \ar[d, "\L \; \ni"'] & \cdot \ar[d, "\in \; \R"]
+			\\
+			\cdot \ar[r] \ar[ur, dashed, "\exists\, !", red] & \cdot
+		\end{tikzcd}
+		\]
+	\pause
+	But OFS are hard to come by in homotopical contexts.
+	\pause \vfill
+
+	Intermediate versions:
+	\[
+		\begin{tikzcd}[row sep = tiny]
+			\cdot \ar[r, no head] & \cdot \ar[r, no head] & \cdot\ar[rr, no head] & & \cdot
+			\\
+			\text{weak} & {\color{red}\text{functorial}} & {\color{red}\text{algebraic}} & & \text{orthogonal}
+		\end{tikzcd}
+	\]
+\end{frame}
+
+\begin{frame}[fragile]{Weak Factorization Systems}
+	\begin{tabular}{r | c c}
+		& Factorizations & Lifts 
+		\\ \hline
+		weak & exist & exist 
+		\\ 
+		functorial & \onslide<2->{functorial}  & \onslide<2->{canonical} 
+		\\
+		algebraic & \onslide<3->{functorial}  & \onslide<3->{*} 
+		\\
+		orthogonal & unique & unique
+		\\[-8pt]
+		& {\scriptsize (up to iso)} &
+	\end{tabular}	
+	\vfill
+	\onslide<3->{* Uniqueness of lifts of a very specific kind}
+	\vfill
+	\onslide<4->{We will see how to get cylinders from these WFS}
+\end{frame}
+
+\begin{frame}[fragile]{Cylinders from WFS}
+	From now on, assume that $\C$ has coproducts and a WFS:
+	\[
+		\begin{tikzcd}[row sep = tiny]
+			(\phantom{\cdot} \ar[r, rightarrowtail] & \phantom{\cdot},
+			 \phantom{\cdot} \ar[r, two heads, "\sim"] & \phantom{\cdot})
+		\end{tikzcd}
+	\]
+	\pause \vfill
+	For each $X \in \C$, there is the \emph{co-diagonal} or \emph{fold} map:
+	\[
+		X \sqcup X \xto{\quad \nabla \quad} X
+	\]
+	\pause \vfill
+	Factoring $\nabla$ gives a \emph{cylinder object} for $X$:
+	\[
+		\begin{tikzcd}[column sep = large]
+			X \sqcup X \ar[r, rightarrowtail] & \Cyl X \ar[r, two heads, "\sim"] & X
+		\end{tikzcd}
+	\]
+	\pause \vfill
+	$\Cyl X$ is a substitute for $X \otimes \I$ in the absence of $\I$ or $\otimes$
+	\pause 
+
+	e.g. can define homotopies using $\Cyl X$
+\end{frame}
+
+\begin{frame}[fragile]{Cylinders from functorial WFS}
+	If we have a \emph{functorial} WFS, then $\Cyl$ becomes a functor as well:
+	\[	
+		\begin{tikzcd}
+			X \sqcup X \ar[r, "f \sqcup f"] \ar[d, "\nabla"'] & Y \sqcup Y \ar[d, "\nabla"]
+			\\
+			X \ar[r, "f", red] \ar[r, "f", visible on = <2->] & Y			
+		\end{tikzcd}
+		\quad \quad \mapsto \quad \quad
+		\begin{tikzcd}[row sep = large]
+			X \sqcup X \ar[r, "f \sqcup f"] \ar[d, rightarrowtail] \ar[d, rightarrowtail, "\partial_0 \sqcup \partial_1"', red, visible on = <2->] & Y \sqcup Y \ar[d, rightarrowtail] \ar[d, rightarrowtail, "\partial_0 \sqcup \partial_1", red, visible on = <2->]
+			\\
+			\Cyl X \ar[r, "\Cyl f", red]\ar[r, "\Cyl f", visible on = <2->] \ar[d, two heads, "\sim"] \ar[d, two heads, "\sim", "\sigma"', red, visible on = <2->] & \Cyl Y \ar[d, two heads, "\sim"'] \ar[d, two heads, "\sim"', "\sigma", red, visible on = <2->]
+			\\
+			X \ar[r, "f"] & Y
+		\end{tikzcd}
+	\]
+	\pause
+	And the left and right factorizations of $\nabla$ are components of \emph{face} and \emph{degeneracy} natural transformations:
+	\[
+		\partial_i \colon \Id \To \Cyl \quad \quad \quad \quad \sigma \colon \Cyl \To \Id
+	\]
+\end{frame}
+
+\begin{frame}[fragile]{Cylinders from functorial WFS}
+	Applying $\Cyl$ to the components of $\partial_i$ and $\sigma$, we get the \emph{cubical identities} for faces and degeneracies:
+	\[
+		\begin{tikzcd}[sep = large]
+			X \sqcup X \ar[r, "\partial_i \sqcup \partial_i"] \ar[d, "\partial_0 \sqcup \partial_1"'] & \Cyl X \sqcup \Cyl X \ar[r, "\sigma \sqcup \sigma"] \ar[d, "\partial_0 \circ \Cyl \sqcup \partial_1 \circ \Cyl" description] & X \sqcup X \ar[d, "\partial_0 \sqcup \partial_1"]
+			\\
+			\Cyl X \ar[r, "\Cyl \circ \partial_i"] \ar[d, "\sigma"'] & \Cyl^2 X \ar[r, "\Cyl \circ \sigma"] \ar[d, "\sigma \circ \Cyl" description] & \Cyl X \ar[d, "\sigma"]
+			\\
+			X \ar[r, "\partial_i"] & \Cyl \ar[r, "\sigma"] X & X
+		\end{tikzcd}
+	\]	
+	\begin{align*}
+		\sigma\; \partial_i &= \Id \\
+		(\partial_i \circ \Cyl)\; \partial_j &= (\Cyl \circ \partial_j)\; \partial_i \\
+		(\sigma \circ \Cyl) (\Cyl \circ \partial_i) = &\; \partial_i \;\sigma = (\Cyl \circ \sigma)(\partial_i \circ \Cyl) \\
+		\sigma\;(\Cyl \circ \sigma) &= \sigma\; (\sigma \circ \Cyl)
+	\end{align*}	
+\end{frame}
+
+\begin{frame}[fragile]{Cylinders from functorial WFS}
+	\begin{lemma}
+		A category $\C$ with coproducts and a functorial WFS has:
+		\begin{itemize}
+			\item a cylinder functor $\Cyl \colon \C \to \C$
+			\item faces $\partial_0, \partial_1 \colon \Id \To \Cyl$ 
+			\item degeneracies $\sigma \colon \Cyl \To \Id$ 
+		\end{itemize}
+		satisfying the cubical identities for faces and degeneracies.
+	\end{lemma}
+	\pause \vfill
+	Each $X \in \C$ gives a co-cubical object (without connections):
+	\[
+		\begin{tikzcd}
+			X \ar[r, shift left = 2] \ar[r, shift right = 2] & \Cyl X \ar[l] \ar[r, shift left = 2] \ar[r, shift left = 6] \ar[r, shift right = 2] \ar[r, shift right = 6] & \Cyl^2 X \ar[l, shift left = 4] \ar[l, shift right = 4] \ar[r, phantom, "\cdots"] & \cdots
+		\end{tikzcd}
+	\]
+\end{frame}
+
+\begin{frame}[fragile]{Cylinders from functorial WFS}
+	With the current setup (coproducts and functorial WFS), we can actually define connections:
+	\[
+		\begin{tikzpicture}[scale = 0.6]
+			\fill[lightgray](-4.9,-2.1) rectangle (-3.1,-3.9);
+			
+			\node (00) at (-5,2.5) {$\bullet$};
+			\node  (01) at (-3,2.5) {$\circ$};
+			\node  (10) at (-5,4.5) {$\circ$};
+			\node (11) at (-3,4.5) {$\circ$};
+			
+			\draw[-] (00) -- (10);
+			\draw[-] (01) -- (11);
+
+
+			\node (00) at (2,2.5) {$\bullet$};
+			\node (11) at (4,4.5) {$\circ$};
+			\draw[-] (00) -- (11);
+
+			\node (00) at (-5,-4) {$\bullet$};
+			\node  (01) at (-3,-4) {$\circ$};
+			\node  (10) at (-5,-2) {$\circ$};
+			\node (11) at (-3,-2) {$\circ$};
+			\draw[-] (00) -- (01);
+			\draw[-] (00) -- (10);
+			\draw[-] (01) -- (11);
+			\draw[-] (10) -- (11);	
+
+			\node (00) at (3,-3) {$\bullet$};
+			
+			\draw[>->] (-4,1.5) -- (-4,-1);
+			\draw[->>] (-2,-3) -- (1,-3) node[midway,above] {$\sim$};
+			\draw[->>] (3,1.5) -- (3,-1) node[midway,right] {$\sim$};
+			\draw[->] (-2,3.5) -- (1,3.5);
+			
+			\pause
+			\draw[green, dashed]  plot[smooth, tension=.4] coordinates {(-5,5) (-5.5,4.5) (-3,2) (-2.5,2.5) (-2.5,4.5) (-3,5) (-5,5)};
+			\draw[->, green] (-2.5,5) .. controls (0.5,5.5) .. (3.75,4.75);
+			
+			\pause
+			\draw[->, red, dashed] (-2.5,-1.5) -- (1.5,2) node[midway,above] {$\exists\,\gamma$};	
+		\end{tikzpicture}
+	\]
+	\onslide<4->{But we can't get some cubical identities without uniqueness of lifts.}
+\end{frame}
+
+\begin{frame}[fragile]{Cylinders from algebraic WFS}
+	In a functorial WFS, we have $L \colon \C^\ii \to \C^\ii$ and $R \colon \C^\ii \to \C^\ii$:
+	\[
+		\begin{tikzcd}	
+			X \ar[r, "f"] & Y
+		\end{tikzcd}
+		\quad \quad
+		\rightsquigarrow
+		\quad \quad
+		\begin{tikzcd}
+			X \ar[r, "Lf"] & \cdot \ar[r, "Rf"] & Y
+		\end{tikzcd}
+	\]
+	\pause
+	In an \emph{algebraic} WFS, $L$ is a \emph{comonad} and $R$ is a \emph{monad}. \\~\\
+	\pause 
+	Although we still don't have uniqueness of lifts in general, we have uniqueness of $R$-algebra homomorphisms out of \emph{free $R$-algebras}. \\~\\
+	\pause
+	$\to$ this is enough to make connections satisfy cubical identities!
+\end{frame}
+
+\begin{frame}[fragile]{Cylinders from algebraic WFS}
+	\begin{proposition}[Kapulkin-W.]
+		A category $\C$ with coproducts and an algebraic WFS has:
+		\begin{itemize}
+			\item a cylinder functor $\Cyl \colon \C \to \C$
+			\item faces $\partial_0, \partial_1 \colon \Id \To \Cyl$ 
+			\item degeneracies $\sigma \colon \Cyl \To \Id$ 
+			\item connections $\gamma_0, \gamma_1 \colon \Cyl^2 \To \Cyl$
+		\end{itemize}
+		satisfying the identities for faces, degeneracies and connections.
+	\end{proposition}
+	\pause \vfill
+	Each $X \in \C$ gives a co-cubical object with connections:
+	\[
+		\begin{tikzcd}
+			X \ar[r, shift left = 2] \ar[r, shift right = 2] & \Cyl X \ar[l] \ar[r, shift left = 2] \ar[r, shift left = 6] \ar[r, shift right = 2] \ar[r, shift right = 6] & \Cyl^2 X \ar[l, shift left = 4] \ar[l] \ar[l, shift right = 4] \ar[r, phantom, "\cdots"] & \cdots
+		\end{tikzcd}
+	\]
+\end{frame}
+
+\begin{frame}{Cubical enrichment from algebraic WFS}
+	\begin{corollary}
+		A category $\C$ with coproducts and an algebraic WFS is enriched over cubical sets, with
+		\[
+			\C(X,Y)_n := \C(\Cyl^n X, Y).	
+		\]
+	\end{corollary}
+	\pause \vfill
+	\begin{theorem}[Garner '09]
+		Let $\C$ be a cocomplete category satisfying a `smallness' condition (e.g. locally presentable).
+		Then any cofibrantly generated WFS can be upgraded to an algebraic WFS.
+	\end{theorem}
+	\pause \vfill
+	\begin{corollary}
+		Any category satisfying the above conditions is enriched over cubical sets.
+	\end{corollary}
+\end{frame}
+
+\begin{frame}{Final remarks}
+	\begin{itemize}[<+->]\setlength{\itemsep}{15pt}
+		\item The dual version also holds (with products \& path objects)
+		\item If $\C$ is an \emph{algebraic model category} (Riehl '11):
+			\begin{itemize}[<+->]
+		 		\item We get two enrichments: how are they related?
+				\item Is $\C$ an \emph{enriched model category}?
+			\end{itemize}
+		\item By quotienting cubes, can we make $\C$ \emph{simplicially} enriched?
+	\end{itemize}	
+\end{frame}
+
+\begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}Thank you!\par%
+  \end{beamercolorbox}
+  % \begin{center}
+  % Questions/comments?
+  % \end{center}
+  \vfill
+\end{frame}
+
+\begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}Background on functorial and algebraic WFS\par%
+  \end{beamercolorbox}
+  % \begin{center}
+  % Questions/comments?
+  % \end{center}
+  \vfill
+\end{frame}
+
+\begin{frame}[fragile]{Functorial factorizations}
+	A \emph{functorial factorization} on a category $\C$ is a functor
+	\[
+		\C^\ii \xto{\quad \quad} \C^\iii
+	\]
+	\[
+		\begin{tikzcd}
+			x \ar[d, "f"']
+			\\
+			y
+		\end{tikzcd}
+		\xmapsto{\quad \quad}
+		\begin{tikzcd}
+			x \ar[d, "Lf"]
+			\\
+			Ef \ar[d, "Rf"]
+			\\
+			y 
+		\end{tikzcd}
+	\]	
+	that is a section of the composition functor.
+	\pause \vfill
+	This gives rise to functors $L, R \colon \C^\ii \to \C^\ii$ and $E \colon \C^\ii \to \C$.
+	\pause \vfill
+	A WFS $(\L, \R)$ is \emph{functorial} if it has a functorial factorization with
+	\[
+		Lf \in \L \quad \quad \text{and} \quad \quad Rf \in \R.
+	\]
+\end{frame}
+
+\begin{frame}[fragile]{Functorial factorizations}
+	The endofunctor $R \colon \C^\ii \to \C^\ii$ is \emph{pointed}: \\~\\
+	\pause 
+	i.e. there is a natural transformation $\eta \colon \Id \To R$
+	\[
+		\eta_f =
+		\begin{tikzcd}
+			\cdot \ar[d, "f"'] \ar[r, "Lf"] & \cdot \ar[d, "Rf"]
+			\\
+			\cdot \ar[r, equals] & \cdot
+		\end{tikzcd}
+	\]
+	\pause
+	We can go further and ask for $\mu \colon RR \To R$ making $R$ a \emph{monad}.
+	\pause \vfill
+	Dually: \\~\\
+
+	$L \colon \C^\ii \to \C^\ii$ is \emph{co-pointed}, and we may ask if $L$ is a \emph{comonad}.
+\end{frame}
+
+\begin{frame}[fragile]{Algebraic weak factorization systems}
+	\begin{definition}[Grandis-Tholen `06, Garner `07]
+		An \emph{algebraic} WFS is a functorial WFS along with
+		\begin{itemize}
+			\item $\delta \colon L \To LL$ making $L$ a comonad
+			\item $\mu \colon RR \To R$ making $R$ a monad
+			\item such that $(\delta, \mu) \colon LR \To RL$ is a distributive law
+		\end{itemize}
+	\end{definition}
+		\[	
+			\begin{tikzcd}
+				\cdot \ar[r, equals] \ar[d, "Lf"'] & \cdot \ar[d, "LLf"]
+				\\
+				\cdot \ar[r, "\delta_f", red] \ar[d, "LRf"'] & \cdot \ar[d, "RLf"]
+				\\
+				\cdot \ar[r, "\mu_f"', red] \ar[d, "RRf"'] & \cdot \ar[d, "Rf"]
+				\\
+				\cdot \ar[r, equals] & \cdot
+			\end{tikzcd}
+		\]	
+\end{frame}
+
+\begin{frame}[fragile]{$R$-algebras and $L$-coalgebras}
+	Since $R$ is a monad, we can talk about $R$-algebras:
+	maps $g$ equipped with an action $\alpha \colon Rg \to g$.
+	\pause \vfill
+	Dually, \emph{$L$-coalgebras} have a co-action $\kappa \colon f \to Lf$.
+	\pause
+	\[
+		\begin{tikzcd}
+			\cdot \ar[r,equals] \ar[d, "f"'] & \cdot \ar[r, equals] \ar[d, "Lf"] & \cdot \ar[d, "f"]
+			\\
+			\cdot \ar[r, "\kappa", red] & \cdot \ar[r, "Rf"] & \cdot
+		\end{tikzcd}
+		\quad \quad \quad		
+		\begin{tikzcd}
+			\cdot \ar[d, "g"']  \ar[r, "Lg"] & \cdot \ar[r, "\alpha", red] \ar[d, "Rg"] & \cdot \ar[d, "g"]
+			\\
+			\cdot \ar[r, equals] & \cdot \ar[r, equals] & \cdot		
+		\end{tikzcd}
+	\]
+	\pause
+	This gives \emph{canonical} lifts of $L$-coalgebras against $R$-algebras!
+	\[
+		\begin{tikzcd}
+			\cdot \ar[r] \ar[d, "L\text{-coalg} \; \ni f"'] & \cdot \ar[d, "g \in \; R\text{-alg}"]
+			\\
+			\cdot \ar[r] \ar[ur, dashed, red] & \cdot
+		\end{tikzcd}
+		\quad \quad = \quad \quad
+		\begin{tikzcd}
+			\cdot \ar[r] \ar[d, "Lf"'] & \cdot \ar[d, "Lg"]
+			\\
+			\cdot \ar[r, red] \ar[d, "Rf"'] & \cdot \ar[d, "Rg"] \ar[u, bend left, "\alpha", red]
+			\\
+			\cdot \ar[r] \ar[u, bend right, "\kappa"', red] & \cdot
+		\end{tikzcd}
+	\]
+\end{frame}
+
+\begin{frame}[fragile]{Free algebras}
+	We can do even better for \emph{free} $R$-algebras: $Rf$ for any $f$, with action given by $\mu_f \colon RRf \to Rf$.
+	\pause
+	\vfill
+	For any commuting square where $g$ is an $R$-algebra: 
+	\[
+		\begin{tikzcd}
+			\cdot \ar[r] \ar[d, "f"'] & \cdot \ar[d, "g \in \; R\text{-alg}"]
+			\\
+			\cdot \ar[r] & \cdot
+		\end{tikzcd}
+	\]
+	there is a \emph{unique} $R$-algebra map $\varphi \colon Rf \to g$:
+	\[
+		\begin{tikzcd}
+			\cdot \ar[rr] \ar[dd, "f"'] \ar[dr, "Lf"] & & \cdot \ar[dd, "g"]
+			\\
+			& \cdot \ar[dl, "Rf"] \ar[ur, dashed, "\varphi", red] &
+			\\
+			\cdot \ar[rr] & & \cdot
+		\end{tikzcd}
+	\]
+	\pause
+	Warning: this is only unique \emph{as an $R$-algebra map}.
+\end{frame}
+
+
+\end{document}	
