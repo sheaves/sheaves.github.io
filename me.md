@@ -34,8 +34,9 @@ I had the privilege of participating in the following meetings:
 ### <a name="papers"></a>Papers and talks
 
 #### 2020
-- <a name="minimal"></a>Cubes with connections from algebraic weak factorization systems  
-  \[[slides](http://sheaves.github.io/slides/cylinders.pdf){:target="_blank"}\] \[[TeX](http://sheaves.github.io/slides/cylinders.tex){:target="_blank"} for [Western Topology Seminar](https://jdc.math.uwo.ca/topology/index.html){:target="_blank"}\]  
+- <a name="cubes"></a>Cubes with connections from algebraic weak factorization systems  
+  *with Chris Kapulkin*  
+  \[[slides](http://sheaves.github.io/slides/cylinders.pdf){:target="_blank"}  for [Western Topology Seminar](https://jdc.math.uwo.ca/topology/index.html){:target="_blank"}\]\[[TeX](http://sheaves.github.io/slides/cylinders.tex){:target="_blank"}\]  
 
 #### 2019
 - <a name="minimal"></a>Minimal Schemas for a Category  
