@@ -1,0 +1,108 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 500px;
+            height: 500px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"id": 3, "label": "mth24Bay_Lg_Scaled", "shape": "dot", "size": 10, "value": 0.1103047620471762}, {"id": 76, "label": "PH_Intellect", "shape": "dot", "size": 10, "value": 0.1127897870572368}, {"id": 8, "label": "brief54_inhibit", "shape": "dot", "size": 10, "value": 0.10938961980186071}, {"id": 75, "label": "PH_BehAdj", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 9, "label": "brief54_shift", "shape": "dot", "size": 10, "value": 0.11652890988190023}, {"id": 71, "label": "MASC_Total", "shape": "dot", "size": 10, "value": 0.13374087352003347}, {"id": 73, "label": "PH_InconResponse", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 74, "label": "PH_Total", "shape": "dot", "size": 10, "value": 0.12322672755647512}, {"id": 78, "label": "PH_AnxietyFree", "shape": "dot", "size": 10, "value": 0.10940187781047098}, {"id": 11, "label": "brief54_workingmem", "shape": "dot", "size": 10, "value": 0.11270382658171725}, {"id": 12, "label": "brief54_plan", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 80, "label": "PH_Happy", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 13, "label": "ITSEA_External_impulsive", "shape": "dot", "size": 10, "value": 0.10995302272669405}, {"id": 14, "label": "ITSEA_External_aggression", "shape": "dot", "size": 10, "value": 0.11594090998081559}, {"id": 21, "label": "ITSEA_Dysregulate_NegEmo", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 61, "label": "MASC_SepAnxiety", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 15, "label": "ITSEA_External_peeragg", "shape": "dot", "size": 10, "value": 0.10964432482068591}, {"id": 18, "label": "ITSEA_Internal_Anxiety", "shape": "dot", "size": 10, "value": 0.1098083800865624}, {"id": 24, "label": "ITSEA_Dysregulate_sensory", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 28, "label": "ITSEA_Comp_imitate", "shape": "dot", "size": 10, "value": 0.11138321686744652}, {"id": 27, "label": "ITSEA_Comp_mastery", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 60, "label": "CDI_Total", "shape": "dot", "size": 10, "value": 0.11852141224833111}, {"id": 29, "label": "ITSEA_Comp_empathy", "shape": "dot", "size": 10, "value": 0.11143530567899901}, {"id": 25, "label": "ITSEA_Comp_compliance", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 33, "label": "reason_f", "shape": "dot", "size": 10, "value": 0.1096845551771459}, {"id": 68, "label": "MASC_HarmAvoid", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 34, "label": "reason_m", "shape": "dot", "size": 10, "value": 0.10976346897399443}, {"id": 35, "label": "demopart_f", "shape": "dot", "size": 10, "value": 0.11008514396289272}, {"id": 38, "label": "authoritative_m", "shape": "dot", "size": 10, "value": 0.12379234008135113}, {"id": 37, "label": "authoritaive_f", "shape": "dot", "size": 10, "value": 0.12615681314426352}, {"id": 31, "label": "warmth_f", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 32, "label": "warmth_m", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 36, "label": "demopart_m", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 43, "label": "punitive_f", "shape": "dot", "size": 10, "value": 0.1111823000833904}, {"id": 44, "label": "punitive_m", "shape": "dot", "size": 10, "value": 0.11360697319763123}, {"id": 46, "label": "authoritarian_m", "shape": "dot", "size": 10, "value": 0.11920966524708905}, {"id": 45, "label": "authoritarian_f", "shape": "dot", "size": 10, "value": 0.12551792148857077}, {"id": 39, "label": "phycoer_f", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 41, "label": "verbalhos_f", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 40, "label": "phycoer_m", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 42, "label": "verbalhos_m", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 48, "label": "permissive_m", "shape": "dot", "size": 10, "value": 0.11065619456762897}, {"id": 47, "label": "permissive_f", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 49, "label": "parent_child_relationship_positive_affect_score", "shape": "dot", "size": 10, "value": 0.11361074419711624}, {"id": 54, "label": "CDI_NegativeMood", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 58, "label": "CDI_EmotionalScale", "shape": "dot", "size": 10, "value": 0.11764928120287141}, {"id": 51, "label": "parent_child_relationship_responsiveness_score", "shape": "dot", "size": 10, "value": 0.10952160822441254}, {"id": 55, "label": "CDI_NegativeSelfEsteem", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 59, "label": "CDI_FunctionalScale", "shape": "dot", "size": 10, "value": 0.1181800080811591}, {"id": 56, "label": "CDI_Ineffectiveness", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 57, "label": "CDI_InterpersonalProb", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 62, "label": "MASC_GAD", "shape": "dot", "size": 10, "value": 0.10992335824798567}, {"id": 70, "label": "MASC_PhySymptom", "shape": "dot", "size": 10, "value": 0.11951361101204172}, {"id": 69, "label": "MASC_SocialAnxiety", "shape": "dot", "size": 10, "value": 0.11973399236946186}, {"id": 63, "label": "MASC_RejectionSub", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 64, "label": "MASC_PerformanceSub", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 66, "label": "MASC_PanicSub", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 67, "label": "MASC_TenseSub", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 65, "label": "MASC_OCD", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 77, "label": "PH_Physical", "shape": "dot", "size": 10, "value": 0.10975995804312312}, {"id": 79, "label": "PH_Popular", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 72, "label": "PH_ResponseBias", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 0, "label": "mth24Bay_Cog_Raw", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 1, "label": "mth24Bay_Rec_Raw", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 2, "label": "mth24Bay_Exp_Raw", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 4, "label": "mth24Bay_Fine_Raw", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 5, "label": "mth24Bay_Gross_Raw", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 6, "label": "mth24Bay_Motor_Scaled", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 7, "label": "mth24Bay_SE_Raw", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 10, "label": "brief54_emocontrol", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 16, "label": "ITSEA_Internal_depression", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 17, "label": "ITSEA_Fear_composite", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 19, "label": "ITSEA_Internal_Separation", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 20, "label": "ITSEA_Internal_Novelty", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 22, "label": "ITSEA_Dysregulate_sleep", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 23, "label": "ITSEA_Dysregulate_eat", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 26, "label": "ITSEA_Comp_attention", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 30, "label": "ITSEA_Comp_prosocial", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 50, "label": "parent_child_relationship_negative_affect_score", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 52, "label": "parent_child_relationship_emotional_availability_score", "shape": "dot", "size": 10, "value": 0.10829784614845979}, {"id": 53, "label": "parent_child_relationship_autonomy_control_score", "shape": "dot", "size": 10, "value": 0.10829784614845979}]);
+        edges = new vis.DataSet([{"arrows": "to", "color": "lightblue", "from": 3, "to": 76, "value": 0.1779348401874921, "weight": 1}, {"arrows": "to", "color": "pink", "from": 8, "to": 75, "value": -0.10081212990185065, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 9, "to": 71, "value": 0.12933494928815706, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 9, "to": 73, "value": 0.1725651918625964, "weight": 1}, {"arrows": "to", "color": "pink", "from": 9, "to": 74, "value": -0.15799754919326578, "weight": 1}, {"arrows": "to", "color": "pink", "from": 9, "to": 78, "value": -0.2454739281396727, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 11, "to": 8, "value": 0.13453352220909162, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 11, "to": 12, "value": 0.14538673770226096, "weight": 1}, {"arrows": "to", "color": "pink", "from": 11, "to": 80, "value": -0.12556263507927953, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 13, "to": 71, "value": 0.1237599646742499, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 14, "to": 13, "value": 0.1345784217724166, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 14, "to": 21, "value": 0.2602681662160664, "weight": 1}, {"arrows": "to", "color": "pink", "from": 14, "to": 61, "value": -0.20351310742944628, "weight": 1}, {"arrows": "to", "color": "pink", "from": 14, "to": 80, "value": -0.10532835456454415, "weight": 1}, {"arrows": "to", "color": "pink", "from": 15, "to": 76, "value": -0.11937992394781292, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 18, "to": 24, "value": 0.13947959186851236, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 28, "to": 27, "value": 0.16360508737151885, "weight": 1}, {"arrows": "to", "color": "pink", "from": 28, "to": 60, "value": -0.11082916039743966, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 29, "to": 25, "value": 0.15226151667021987, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 29, "to": 28, "value": 0.13363773661182468, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 33, "to": 68, "value": 0.12804585483492786, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 34, "to": 80, "value": 0.1353325922590829, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 35, "to": 38, "value": 0.14437870818649956, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 37, "to": 31, "value": 0.5668740290995499, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 37, "to": 33, "value": 0.5565111298359453, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 37, "to": 35, "value": 0.5101302121274398, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 38, "to": 32, "value": 0.4498818396206587, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 38, "to": 34, "value": 0.49807481107375234, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 38, "to": 36, "value": 0.47603242204831686, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 43, "to": 44, "value": 0.2538976133016776, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 44, "to": 46, "value": 0.44536045279273945, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 45, "to": 39, "value": 0.5273086987569088, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 45, "to": 41, "value": 0.5422058407066377, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 45, "to": 43, "value": 0.5070468258928197, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 46, "to": 40, "value": 0.4916688690133391, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 46, "to": 42, "value": 0.5159060262131838, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 48, "to": 47, "value": 0.21776503439747427, "weight": 1}, {"arrows": "to", "color": "pink", "from": 49, "to": 54, "value": -0.14919136823027646, "weight": 1}, {"arrows": "to", "color": "pink", "from": 49, "to": 58, "value": -0.14452734558780297, "weight": 1}, {"arrows": "to", "color": "pink", "from": 49, "to": 60, "value": -0.1684787410301967, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 51, "to": 76, "value": 0.10849976800295094, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 58, "to": 54, "value": 0.4998458614890781, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 58, "to": 55, "value": 0.3636463857705983, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 59, "to": 56, "value": 0.5050901803330252, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 59, "to": 57, "value": 0.40740829347340385, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 60, "to": 58, "value": 0.40350183262237777, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 60, "to": 59, "value": 0.46339445491525605, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 62, "to": 70, "value": 0.13601062554808951, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 69, "to": 63, "value": 0.5518815831091484, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 69, "to": 64, "value": 0.5041085983876163, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 70, "to": 66, "value": 0.5477870173165413, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 70, "to": 67, "value": 0.48785360366190783, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 71, "to": 61, "value": 0.3485843143782193, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 71, "to": 62, "value": 0.5077927112698272, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 71, "to": 65, "value": 0.5128946861048578, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 71, "to": 68, "value": 0.22129333377117524, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 71, "to": 69, "value": 0.45564329960871797, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 71, "to": 70, "value": 0.2241927956555957, "weight": 1}, {"arrows": "to", "color": "pink", "from": 74, "to": 60, "value": -0.1361235415745667, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 74, "to": 75, "value": 0.21322926616683863, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 74, "to": 77, "value": 0.4331617403704152, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 74, "to": 78, "value": 0.1854474897578175, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 74, "to": 79, "value": 0.38995116587293494, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 76, "to": 74, "value": 0.36452651124070085, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 77, "to": 80, "value": 0.13500840013558632, "weight": 1}, {"arrows": "to", "color": "pink", "from": 78, "to": 72, "value": -0.10194400916318727, "weight": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
