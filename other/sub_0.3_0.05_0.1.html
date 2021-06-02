@@ -1,0 +1,108 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 500px;
+            height: 500px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "#8dd3c7", "id": 0, "label": "phycoer_f", "shape": "dot", "size": 10, "value": 0.11711023618648769}, {"color": "#ffffb3", "id": 25, "label": "ITSEA_Dysregulate_eat", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#8dd3c7", "id": 2, "label": "permissive_f", "shape": "dot", "size": 10, "value": 0.11699739370639672}, {"color": "#fb8072", "id": 41, "label": "mth41_DCCS.Emotion_PostScore", "shape": "dot", "size": 10, "value": 0.12054167525846356}, {"color": "#8dd3c7", "id": 3, "label": "punitive_m", "shape": "dot", "size": 10, "value": 0.11836855963297166}, {"color": "#ffffb3", "id": 26, "label": "ITSEA_Dysregulate_sensory", "shape": "dot", "size": 10, "value": 0.1196188936007345}, {"color": "#8dd3c7", "id": 5, "label": "verbalhos_m", "shape": "dot", "size": 10, "value": 0.1169437710006915}, {"color": "#ffffb3", "id": 23, "label": "ITSEA_Dysregulate_NegEmo", "shape": "dot", "size": 10, "value": 0.11994306333075176}, {"color": "#8dd3c7", "id": 6, "label": "verbalhos_f", "shape": "dot", "size": 10, "value": 0.11702277481714121}, {"color": "#ffffb3", "id": 14, "label": "ITSEA_Comp_prosocial", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#8dd3c7", "id": 7, "label": "phycoer_m", "shape": "dot", "size": 10, "value": 0.11831533675642113}, {"color": "#ffffb3", "id": 30, "label": "ITSEA_Internal_depression", "shape": "dot", "size": 10, "value": 0.11692831931607552}, {"color": "#8dd3c7", "id": 11, "label": "reason_f", "shape": "dot", "size": 10, "value": 0.11705170916725827}, {"color": "#ffffb3", "id": 31, "label": "ITSEA_External_peeragg", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#ffffb3", "id": 17, "label": "ITSEA_Comp_mastery", "shape": "dot", "size": 10, "value": 0.11840988642211042}, {"color": "#b3de69", "id": 68, "label": "CDI_NegativeSelfEsteem", "shape": "dot", "size": 10, "value": 0.12024637864258812}, {"color": "#ffffb3", "id": 19, "label": "ITSEA_Internal_Anxiety", "shape": "dot", "size": 10, "value": 0.12446963064267416}, {"color": "#ffffb3", "id": 18, "label": "ITSEA_Fear_composite", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#ffffb3", "id": 22, "label": "ITSEA_External_aggression", "shape": "dot", "size": 10, "value": 0.11991918760203762}, {"color": "#ffffb3", "id": 16, "label": "ITSEA_External_impulsive", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#fb8072", "id": 40, "label": "mth41_DCCS.Food_PostScore", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#ffffb3", "id": 27, "label": "ITSEA_Comp_compliance", "shape": "dot", "size": 10, "value": 0.1170305332959026}, {"color": "#ffffb3", "id": 15, "label": "ITSEA_Comp_empathy", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#ffffb3", "id": 29, "label": "ITSEA_Comp_imitate", "shape": "dot", "size": 10, "value": 0.11681616811534157}, {"color": "#bebada", "id": 35, "label": "mth24Bay_Exp_Raw", "shape": "dot", "size": 10, "value": 0.11733858686163907}, {"color": "#80b1d3", "id": 43, "label": "total_verbal_raw_score", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#bebada", "id": 36, "label": "mth24Bay_Rec_Raw", "shape": "dot", "size": 10, "value": 0.13147028292887225}, {"color": "#b3de69", "id": 57, "label": "PH_Intellect", "shape": "dot", "size": 10, "value": 0.12030655751872857}, {"color": "#b3de69", "id": 67, "label": "CDI_Ineffectiveness", "shape": "dot", "size": 10, "value": 0.12529446853724377}, {"color": "#b3de69", "id": 62, "label": "CDI_InterpersonalProb", "shape": "dot", "size": 10, "value": 0.11687393797926986}, {"color": "#b3de69", "id": 69, "label": "CDI_NegativeMood", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#b3de69", "id": 63, "label": "MASC_RejectionSub", "shape": "dot", "size": 10, "value": 0.11742154453020923}, {"color": "#b3de69", "id": 71, "label": "MASC_PerformanceSub", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#b3de69", "id": 64, "label": "MASC_GAD", "shape": "dot", "size": 10, "value": 0.1313420270572495}, {"color": "#b3de69", "id": 54, "label": "MASC_PanicSub", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#b3de69", "id": 60, "label": "MASC_TenseSub", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#b3de69", "id": 61, "label": "MASC_OCD", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#8dd3c7", "id": 1, "label": "permissive_m", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#8dd3c7", "id": 4, "label": "punitive_f", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#8dd3c7", "id": 8, "label": "demopart_m", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#8dd3c7", "id": 9, "label": "demopart_f", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#8dd3c7", "id": 10, "label": "reason_m", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#8dd3c7", "id": 12, "label": "warmth_m", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#8dd3c7", "id": 13, "label": "warmth_f", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#ffffb3", "id": 20, "label": "ITSEA_Internal_Separation", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#ffffb3", "id": 21, "label": "ITSEA_Internal_Novelty", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#ffffb3", "id": 24, "label": "ITSEA_Dysregulate_sleep", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#ffffb3", "id": 28, "label": "ITSEA_Comp_attention", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#bebada", "id": 32, "label": "mth24Bay_SE_Raw", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#bebada", "id": 33, "label": "mth24Bay_Gross_Raw", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#bebada", "id": 34, "label": "mth24Bay_Fine_Raw", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#bebada", "id": 37, "label": "mth24Bay_Cog_Raw", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#fb8072", "id": 38, "label": "mth41_StickerDelay_Mean", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#fb8072", "id": 39, "label": "mth41_SnackDelay_Mean", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#80b1d3", "id": 42, "label": "nonverbal_raw_score", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#80b1d3", "id": 44, "label": "SWM_Within_errors", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#80b1d3", "id": 45, "label": "SWM_Between_errors", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#fdb462", "id": 46, "label": "sst_ssrt_last_half", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#fdb462", "id": 47, "label": "sst_proportion_of_successful_stops_last_half", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#fdb462", "id": 48, "label": "parent_child_relationship_autonomy_control_score", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#fdb462", "id": 49, "label": "sst_mean_correct_rt_on_go_trials", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#fdb462", "id": 50, "label": "parent_child_relationship_responsiveness_score", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#fdb462", "id": 51, "label": "parent_child_relationship_negative_affect_score", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#fdb462", "id": 52, "label": "parent_child_relationship_positive_affect_score", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#fdb462", "id": 53, "label": "parent_child_relationship_emotional_availability_score", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#b3de69", "id": 55, "label": "PH_AnxietyFree", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#b3de69", "id": 56, "label": "PH_Physical", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#b3de69", "id": 58, "label": "PH_BehAdj", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#b3de69", "id": 59, "label": "MASC_HarmAvoid", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#b3de69", "id": 65, "label": "MASC_SepAnxiety", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#b3de69", "id": 66, "label": "PH_Popular", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#b3de69", "id": 70, "label": "searsc_totscore", "shape": "dot", "size": 10, "value": 0.11561720553081313}, {"color": "#b3de69", "id": 72, "label": "PH_Happy", "shape": "dot", "size": 10, "value": 0.11561720553081313}]);
+        edges = new vis.DataSet([{"arrows": "to", "color": "lightblue", "from": 0, "to": 25, "value": 0.1291356808720523, "weight": 1}, {"arrows": "to", "color": "pink", "from": 2, "to": 41, "value": -0.1144988380677639, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 3, "to": 26, "value": 0.2300099941855373, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 5, "to": 23, "value": 0.11059959892972558, "weight": 1}, {"arrows": "to", "color": "pink", "from": 6, "to": 14, "value": -0.12157094438279673, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 7, "to": 23, "value": 0.12145901113062181, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 7, "to": 30, "value": 0.10616030799514606, "weight": 1}, {"arrows": "to", "color": "pink", "from": 11, "to": 31, "value": -0.12407354336745449, "weight": 1}, {"arrows": "to", "color": "pink", "from": 17, "to": 68, "value": -0.2322465693206505, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 19, "to": 18, "value": 0.36246313085050125, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 19, "to": 30, "value": 0.27780465445107255, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 19, "to": 31, "value": 0.12224863430739141, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 22, "to": 16, "value": 0.12114268231371686, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 22, "to": 31, "value": 0.14064743618641704, "weight": 1}, {"arrows": "to", "color": "pink", "from": 22, "to": 40, "value": -0.11029827885158695, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 23, "to": 22, "value": 0.3607310795245184, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 26, "to": 19, "value": 0.3214991519826512, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 27, "to": 15, "value": 0.12224199318784021, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 29, "to": 15, "value": 0.10370105202109518, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 30, "to": 25, "value": 0.11340126923522298, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 35, "to": 43, "value": 0.14888625987134566, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 36, "to": 40, "value": 0.2633288018184205, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 36, "to": 41, "value": 0.6007494540646303, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 36, "to": 43, "value": 0.48150349179797164, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 41, "to": 40, "value": 0.4259287971060676, "weight": 1}, {"arrows": "to", "color": "pink", "from": 57, "to": 67, "value": -0.3742664814066815, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 62, "to": 69, "value": 0.108697701409311, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 63, "to": 71, "value": 0.15606146084504974, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 64, "to": 54, "value": 0.4103014206781363, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 64, "to": 60, "value": 0.28414973934803445, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 64, "to": 61, "value": 0.2229370956270924, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 64, "to": 63, "value": 0.4358855009421082, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 67, "to": 62, "value": 0.21758113085998818, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 67, "to": 68, "value": 0.43087402881131814, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 67, "to": 69, "value": 0.16893700868603015, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 68, "to": 62, "value": 0.28751653615610384, "weight": 1}, {"arrows": "to", "color": "lightblue", "from": 68, "to": 69, "value": 0.10974613375900487, "weight": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
