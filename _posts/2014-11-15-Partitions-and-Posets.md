@@ -45,7 +45,7 @@ In SAGE, you can get the set of all partitions of the $N$ element set {$1,2,\dot
 N = 3
 P = SetPartitions(N)
 for p in P:
-  print p
+  print(p)
   </script>
 </div>
 
@@ -62,10 +62,10 @@ N = 3
 P = SetPartitions(N)
 
 p = P[2] # take some partition
-print 'p = ' + str(p)
-print 'Its refinements are:'
+print('p = ' + str(p))
+print('Its refinements are:')
 for q in p.refinements():
-  print q
+  print(q)
   </script>
 </div>
 

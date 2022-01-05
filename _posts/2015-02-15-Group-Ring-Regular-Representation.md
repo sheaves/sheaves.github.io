@@ -50,7 +50,7 @@ Here, we're treating each $g \in G$ as a basis element of $FG$
   <script type="text/x-sage">
 for g in G:
     g = FG(g)
-    print "{} = {}".format(g.to_vector(),g)
+    print("{} = {}".format(g.to_vector(),g))
   </script>
 </div>
 
@@ -63,8 +63,8 @@ $$
 <div class="linked">
   <script type="text/x-sage">
 w = FG.random_element()  
-print 'w = {}'.format(w.to_vector())
-print 'v + w = {}'.format((v + w).to_vector())
+print('w = {}'.format(w.to_vector()))
+print('v + w = {}'.format((v + w).to_vector()))
   </script>
 </div>
 
@@ -78,7 +78,7 @@ $$
 
 <div class="linked">
   <script type="text/x-sage">
-print 'v * w = {}'.format((v * w).to_vector())
+print('v * w = {}'.format((v * w).to_vector()))
   </script>
 </div>
 
@@ -97,7 +97,7 @@ one can check that each $T_v$ is a linear transformation! We can thus represent 
   <script type="text/x-sage">
 for g in G:
     g = FG(g)
-    print "v*{} = {}".format(g.to_vector(),(v*g).to_vector())
+    print("v*{} = {}".format(g.to_vector(),(v*g).to_vector()))
 
 T = matrix([(v*FG(g)).to_vector() for g in G]).transpose()
 show(T)
@@ -212,7 +212,7 @@ def irr_decompose(rho,G,index = None):
         return H, [subrep_indices]
     else:
         P, subrep_indices = decompose(rho,G,H)
-        print [list(np.array(index)[subrep_index]) for subrep_index in subrep_indices]
+        print([list(np.array(index)[subrep_index]) for subrep_index in subrep_indices])
 
         new_subrep_indices = []
         new_P_list = []
@@ -243,7 +243,7 @@ def show_irreps(rho,G,P,irrep_indices):
 
 # Execute!
 P,irrep_indices = irr_decompose(rho,G)
-print irrep_indices
+print(irrep_indices)
 show_irreps(rho,G,P,irrep_indices)    
   </script>
 </div>

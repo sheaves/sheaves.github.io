@@ -88,9 +88,9 @@ E = x*dx^2
 F = -x
 H = -2*x*dx
 
-print H*E - E*H == 2*E
-print H*F - F*H == -2*F
-print E*F - F*E == H
+print(H*E - E*H == 2*E)
+print(H*F - F*H == -2*F)
+print(E*F - F*E == H)
   </script>
 </div>
 
@@ -115,9 +115,9 @@ E = (x*dx-c)*dx
 F = -x
 H = -2*x*dx + c
 
-print H*E - E*H == 2*E
-print H*F - F*H == -2*F
-print E*F - F*E == H
+print(H*E - E*H == 2*E)
+print(H*F - F*H == -2*F)
+print(E*F - F*E == H)
   </script>
 </div>
 
