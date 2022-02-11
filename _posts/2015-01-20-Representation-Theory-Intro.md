@@ -52,7 +52,7 @@ We can verify that this is indeed a group homomorphism (warning: There are 6 ele
   <script type="text/x-sage">
 for g in G:
     for h in G:
-        print triv(g*h) == triv(g)*triv(h)  
+        print(triv(g*h) == triv(g)*triv(h))
   </script>
 </div>
 
@@ -79,7 +79,7 @@ We can again verify that this is indeed a representation. Let's not print out al
 for g in G:
     for h in G:
         if triv(g*h) != triv(g)*triv(h):
-            print "This is not a representation!"
+            print("This is not a representation!")
   </script>
 </div>
 

@@ -47,7 +47,7 @@ Basic SageMath code can be inserted using HTML blocks:
 G = SymmetricGroup(3)
 
 for g in G:
-    print g
+    print(g)
 
 G.structure_description()
   </script>

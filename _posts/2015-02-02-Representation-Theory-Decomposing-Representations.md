@@ -244,7 +244,7 @@ def irr_decompose(rho,G,index = None):
         return H, [subrep_indices]
     else:
         P, subrep_indices = decompose(rho,G,H)
-        print [list(np.array(index)[subrep_index]) for subrep_index in subrep_indices]
+        print([list(np.array(index)[subrep_index]) for subrep_index in subrep_indices])
 
         new_subrep_indices = []
         new_P_list = []

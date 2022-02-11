@@ -68,7 +68,7 @@ Let's ignore the representation $\rho$ for now, and just look at the character $
 
 <div class="linked">
   <script type="text/x-sage">
-print "chi  g"  
+print("chi  g")
 table([[chi(g),g] for g in G])
   </script>
 </div>
@@ -77,7 +77,7 @@ This is succinct, but we can make it even shorter. From point 2 above, $\chi$ is
 
 <div class="linked">
   <script type="text/x-sage">
-print "chi  conjugacy class"
+print("chi  conjugacy class")
 table([[chi(C[0]),C.list()] for C in G.conjugacy_classes()])
   </script>
 </div>
@@ -107,11 +107,11 @@ This just goes to show how important the character of a group is. We can also ac
   <script type="text/x-sage">
 c = G.character(char_table[4])
 
-print "c(g) for each g in G:"
-print [c(g) for g in G]
+print("c(g) for each g in G:")
+print([c(g) for g in G])
 
-print "c(g) for each conjugacy class:"
-print [c(g) for g in G.conjugacy_classes_representatives()]
+print("c(g) for each conjugacy class:")
+print([c(g) for g in G.conjugacy_classes_representatives()])
   </script>
 </div>
 
@@ -125,11 +125,11 @@ c5 = G.character(char_table[4])
 
 c = c1 + c4 + c5
 
-print "c1 + c4 + c5:"
-print [c(g) for g in G.conjugacy_classes_representatives()]
+print("c1 + c4 + c5:")
+print([c(g) for g in G.conjugacy_classes_representatives()])
 
-print "chi:"
-print [chi(g) for g in G.conjugacy_classes_representatives()]
+print("chi:")
+print([chi(g) for g in G.conjugacy_classes_representatives()])
   </script>
 </div>
 
