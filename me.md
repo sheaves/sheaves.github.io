@@ -8,6 +8,8 @@ description: "About me"
 
 I am currently a research scientist at the [Institute of High Performance Computing](https://www.a-star.edu.sg/ihpc){:target="_blank"} in Singapore, working on psychometrics, causal learning and graph embeddings. 
 
+From Fall 2022, I am also an Adjunct Professor at the [NUS Business School](https://bschool.nus.edu.sg/){:target="_blank"}, teaching [Foundations of Business Analytics](https://nusmods.com/modules/DBA5106/foundation-in-business-analytics){:target="_blank"} for Masters of Science in Business Analytics (MSBA) students.
+
 I received my PhD in Mathematics from the University of Washington, Seattle. My advisor was [James Zhang](https://www.math.washington.edu/~zhang/){:target="_blank"}. 
 
 My academic research interests are in category theory, homotopy theory and non-commutative algebra.
