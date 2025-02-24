@@ -11,7 +11,7 @@ I am a mathematician, machine learning research scientist, computational social 
 From 2019 - 2024, I was a research scientist at the [Institute of High Performance Computing](https://www.a-star.edu.sg/ihpc){:target="_blank"} in Singapore, working primarily on using natural language processing (NLP) for social media analytics, stance detection, and topic modelling. 
 In Fall 2022 and 2023, I also taught the [Foundations of Business Analytics](https://nusmods.com/modules/DBA5106/foundation-in-business-analytics){:target="_blank"} core course for Masters of Science in Business Analytics (MSBA) students as a Adjunct Assistant Professor at the [NUS Business School](https://bschool.nus.edu.sg/){:target="_blank"}.
 
-I left IHPC at the end of 2024, and have been working on my own AI/NLP/LLM research. Since the start of 2025, I have written the following short papers:
+I left IHPC at the end of 2024 to spend more time on AI/NLP/LLM research. Since the start of 2025, I have written the following short papers:
 - [Paying attention to facts: quantifying the knowledge capacity of attention layers](https://arxiv.org/abs/2502.05076){:target="_blank"}
 - 'Generalization is hallucination' through the lens of tensor completions
 
