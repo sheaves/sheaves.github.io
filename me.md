@@ -18,10 +18,12 @@ I left IHPC at the end of 2024 to spend more time on AI/NLP/LLM research. Since 
 I am currently **open to work** and am seeking research scientist positions in interpretability, alignment and theory of large language models.
 
 ### History
-- 2019 - 2024: Institute of High Performance Computing, Singapore
+- 2019 - 2024: Institute of High Performance Computing, A*STAR, Singapore
 - 2014 - 2019: PhD in Mathematics, University of Washington, Seattle
-- 2012 - 2014: Institute for Infocomm Research, Singapore
+- 2012 - 2014: Institute for Infocomm Research, A*STAR, Singapore
 - 2009 - 2012: BA in Mathematics, Cornell University
+
+My graduate and undergraduate studies were funded by the [A*STAR National Science Scholarship](https://www.a-star.edu.sg/Scholarships/for-undergraduate-studies/national-science-scholarship-bs). 
 
 ## Mathematics background
 I received my PhD in Mathematics from the University of Washington, Seattle. My advisor was [James Zhang](https://www.math.washington.edu/~zhang/){:target="_blank"}. 
