@@ -30,8 +30,8 @@ My graduate and undergraduate studies were funded by the [A*STAR National Scienc
 At IHPC, I worked with an interdisciplinary group of social scientists, psychologists and engineers led by [Dr. Joe Simons](https://sites.google.com/view/joe-simons/).
 
 ### Workshops and Talks
-- _Applications of LLMs in Social Sciences_, AI Wednesdays (Government-wide Community of Practice for Artificial Intelligence), Singapore (October 2024)
-- _An Introductory Workshop on using LLMs in Social Science_. Summer Institute in Computational Social Science (SICSS), Singapore (June 2024).
+- *Applications of LLMs in Social Sciences*, [AI Wednesdays](https://go.gov.sg/aiweds) (Government-wide Community of Practice for Artificial Intelligence), Singapore (October 2024)
+- *An Introductory Workshop on using LLMs in Social Science*. [Summer Institute in Computational Social Science (SICSS), Singapore (June 2024)](https://sicss.io/2024/singapore/).
 
 ## Mathematics research
 I received my PhD in Mathematics from the University of Washington, Seattle. My advisor was [James Zhang](https://www.math.washington.edu/~zhang/){:target="_blank"}. 
@@ -51,10 +51,10 @@ I had the privilege of participating in the following meetings:
 ### <a name="papers"></a>Papers and talks
 
 #### 2024
-- Cofibration category of digraphs for path homology
-  *with Daniel Carranza, Brandon Doherty, Chris Kapulkin, Morgan Opie and Maru Sarazola* 
+- Cofibration category of digraphs for path homology  
+  *with Daniel Carranza, Brandon Doherty, Chris Kapulkin, Morgan Opie and Maru Sarazola*    
   \[[arXiv](https://arxiv.org/abs/1907.09666){:target="_blank"}\] \[[Algebraic Combinatorics, 7 no. 2 (2024)](https://alco.centre-mersenne.org/articles/10.5802/alco.341/){:target="_blank"}\]
-
+  
 #### 2020
 - <a name="cubes"></a>Cubes with connections from algebraic weak factorization systems  
   *with Chris Kapulkin*  
