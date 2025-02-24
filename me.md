@@ -16,7 +16,7 @@ I left IHPC at the end of 2024 to spend more time on AI/NLP/LLM research. Since 
 - [Paying attention to facts: quantifying the knowledge capacity of attention layers](https://arxiv.org/abs/2502.05076){:target="_blank"}
 - 'Generalization is hallucination' through the lens of tensor completions
 
-I am currently **open to work** and am seeking research scientist positions in interpretability, alignment and theory of large language models.
+I am currently **open to work** and am seeking research scientist positions in interpretability, alignment and theory of language models.
 
 ### History
 - 2019 - 2024: Institute of High Performance Computing, A*STAR, Singapore
