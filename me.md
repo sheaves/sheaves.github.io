@@ -18,7 +18,7 @@ I left IHPC at the end of 2024 to spend more time on AI/NLP/LLM research. Since 
 
 I am currently **open to work** and am seeking research scientist positions in interpretability, alignment and theory of language models.
 
-### History
+### Education and Employment History
 - 2019 - 2024: Institute of High Performance Computing, A*STAR, Singapore
 - 2014 - 2019: PhD in Mathematics, University of Washington, Seattle
 - 2012 - 2014: Institute for Infocomm Research, A*STAR, Singapore
@@ -26,21 +26,34 @@ I am currently **open to work** and am seeking research scientist positions in i
 
 My graduate and undergraduate studies were funded by the [A*STAR National Science Scholarship](https://www.a-star.edu.sg/Scholarships/for-undergraduate-studies/national-science-scholarship-bs). 
 
+## Computational Social Science and NLP research
+At IHPC, I worked with an interdisciplinary group of social scientists, psychologists and engineers led by [Dr. Joe Simons](https://sites.google.com/view/joe-simons/).
+
+### Workshops and Talks
+- _Applications of LLMs in Social Sciences_, AI Wednesdays (Government-wide Community of Practice for Artificial Intelligence), Singapore (October 2024)
+- _An Introductory Workshop on using LLMs in Social Science_. Summer Institute in Computational Social Science (SICSS), Singapore (June 2024).
+
 ## Mathematics research
 I received my PhD in Mathematics from the University of Washington, Seattle. My advisor was [James Zhang](https://www.math.washington.edu/~zhang/){:target="_blank"}. 
 
-My academic research interests are in category theory, homotopy theory and non-commutative algebra.
+My mathematical research interests are in category theory, homotopy theory, and non-commutative algebra.
 Specifically: Grothendieck fibrations, enriched category theory, Hopf algebras and cubical sets. 
 
 ### Workshops and Seminars
 
 I had the privilege of participating in the following meetings:
-- [MIT Talbot Workshop 2018](http://math.mit.edu/conferences/talbot/index.php?year=2018)
-- [AMS Mathematics Research Community in Homotopy Type Theory](http://www.ams.org/programs/research-communities/2017MRC-1)
-- [Kan Extension Seminar II](http://www.math.jhu.edu/~eriehl/kanII/)
+- [MIT Talbot Workshop 2018](http://math.mit.edu/conferences/talbot/index.php?year=2018){:target="_blank"}
+- [AMS Mathematics Research Community in Homotopy Type Theory](http://www.ams.org/programs/research-communities/2017MRC-1){:target="_blank"}
+- [Kan Extension Seminar II](http://www.math.jhu.edu/~eriehl/kanII/){:target="_blank"}
   \[[blog post](https://golem.ph.utexas.edu/category/2017/02/distributive_laws.html){:target="_blank"}, [long slides](http://sheaves.github.io/slides/kan-dist-long.pdf){:target="_blank"}, [short slides](http://sheaves.github.io/slides/kan-dist-short.pdf){:target="_blank"}\]
+- [Budapest Semesters in Mathematics, Fall 2011](https://budapestsemesters.com/){:target="_blank"}
 
 ### <a name="papers"></a>Papers and talks
+
+#### 2024
+- Cofibration category of digraphs for path homology
+  *with Daniel Carranza, Brandon Doherty, Chris Kapulkin, Morgan Opie and Maru Sarazola* 
+  \[[arXiv](https://arxiv.org/abs/1907.09666){:target="_blank"}\] \[[Algebraic Combinatorics, 7 no. 2 (2024)](https://alco.centre-mersenne.org/articles/10.5802/alco.341/){:target="_blank"}\]
 
 #### 2020
 - <a name="cubes"></a>Cubes with connections from algebraic weak factorization systems  
