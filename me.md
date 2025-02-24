@@ -9,6 +9,7 @@ description: "About me"
 I am a mathematician, machine learning research scientist, computational social scientist, data scientist, and full-stack programmer.
 
 From 2019 - 2024, I was a research scientist at the [Institute of High Performance Computing](https://www.a-star.edu.sg/ihpc){:target="_blank"} in Singapore, working primarily on using natural language processing (NLP) for social media analytics, stance detection, and topic modelling. 
+
 In Fall 2022 and 2023, I also taught the [Foundations of Business Analytics](https://nusmods.com/modules/DBA5106/foundation-in-business-analytics){:target="_blank"} core course for Masters of Science in Business Analytics (MSBA) students as a Adjunct Assistant Professor at the [NUS Business School](https://bschool.nus.edu.sg/){:target="_blank"}.
 
 I left IHPC at the end of 2024 to spend more time on AI/NLP/LLM research. Since the start of 2025, I have written the following short papers:
@@ -25,7 +26,7 @@ I am currently **open to work** and am seeking research scientist positions in i
 
 My graduate and undergraduate studies were funded by the [A*STAR National Science Scholarship](https://www.a-star.edu.sg/Scholarships/for-undergraduate-studies/national-science-scholarship-bs). 
 
-## Mathematics background
+## Mathematics research
 I received my PhD in Mathematics from the University of Washington, Seattle. My advisor was [James Zhang](https://www.math.washington.edu/~zhang/){:target="_blank"}. 
 
 My academic research interests are in category theory, homotopy theory and non-commutative algebra.
