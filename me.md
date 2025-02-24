@@ -4,26 +4,29 @@ title: CV
 description: "About me"
 ---
 
-## Liang Ze Wong <img align="right" src="/images/photo.jpg" width="150" />
+## Liang Ze Wong, PhD <img align="right" src="/images/photo.jpg" width="150" />
 
-I am currently a research scientist at the [Institute of High Performance Computing](https://www.a-star.edu.sg/ihpc){:target="_blank"} in Singapore, working on psychometrics, causal learning and graph embeddings. 
+I am a mathematician, machine learning research scientist, computational social scientist, data scientist, and full-stack programmer.
 
-From Fall 2022, I am also an Adjunct Professor at the [NUS Business School](https://bschool.nus.edu.sg/){:target="_blank"}, teaching [Foundations of Business Analytics](https://nusmods.com/modules/DBA5106/foundation-in-business-analytics){:target="_blank"} for Masters of Science in Business Analytics (MSBA) students.
+From 2019 - 2024, I was a research scientist at the [Institute of High Performance Computing](https://www.a-star.edu.sg/ihpc){:target="_blank"} in Singapore, working primarily on using natural language processing (NLP) for social media analytics, stance detection, and topic modelling. 
+In Fall 2022 and 2023, I also taught the [Foundations of Business Analytics](https://nusmods.com/modules/DBA5106/foundation-in-business-analytics){:target="_blank"} core course for Masters of Science in Business Analytics (MSBA) students as a Adjunct Assistant Professor at the [NUS Business School](https://bschool.nus.edu.sg/){:target="_blank"}.
 
+I left IHPC at the end of 2024, and have been working on my own AI/NLP/LLM research. Since the start of 2025, I have written the following short papers:
+- [Paying attention to facts: quantifying the knowledge capacity of attention layers](https://arxiv.org/abs/2502.05076){:target="_blank"}
+- 'Generalization is hallucination' through the lens of tensor completions
+I am currently **open to work** and am seeking research scientist positions in interpretability, alignment and theory of large language models.
+
+### History
+- 2019 - 2024: Institute of High Performance Computing, Singapore
+- 2014 - 2019: PhD in Mathematics, University of Washington, Seattle
+- 2012 - 2014: Institute for Infocomm Research, Singapore
+- 2009 - 2012: BA in Mathematics, Cornell University
+
+## Mathematics background
 I received my PhD in Mathematics from the University of Washington, Seattle. My advisor was [James Zhang](https://www.math.washington.edu/~zhang/){:target="_blank"}. 
 
 My academic research interests are in category theory, homotopy theory and non-commutative algebra.
 Specifically: Grothendieck fibrations, enriched category theory, Hopf algebras and cubical sets. 
-
-I used to write simple snippets of code for this site, mostly in Python/Sage. 
-
-### History
-
-- 2019 - Present: Institute of High Performance Computing, Singapore
-- 2014 - 2019: University of Washington, Seattle
-- 2012 - 2014: Institute for Infocomm Research, Singapore
-- Fall 2010: [Budapest Semesters in Math](http://www.budapestsemesters.com/){:target="_blank"}
-- 2009 - 2012: Cornell University
 
 ### Workshops and Seminars
 
