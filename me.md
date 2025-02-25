@@ -14,7 +14,7 @@ In Fall 2022 and 2023, I also taught the [Foundations of Business Analytics](htt
 
 I left IHPC at the end of 2024 to spend more time on AI/NLP/LLM research. Since the start of 2025, I have written the following short papers:
 - [Paying attention to facts: quantifying the knowledge capacity of attention layers](https://arxiv.org/abs/2502.05076){:target="_blank"}
-- 'Generalization is hallucination' through the lens of tensor completions
+- ['Generalization is hallucination' through the lens of tensor completions](https://arxiv.org/abs/2502.17305){:target="_blank"}
 
 I am currently **open to work** and am seeking research scientist positions in interpretability, alignment and theory of language models.
 
