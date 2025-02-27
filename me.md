@@ -23,6 +23,20 @@ I plan to write more about them on this site in the near future.
 
 I am currently **open to work** and am seeking research scientist positions in interpretability, alignment and theory of language models.
 
+### Other AI/ML papers
+- Dependently typed knowledge graphs  
+  *with Zhangsheng Lai, Aik Beng Ng, Simon See and Shaowei Lin*  
+  \[[arXiv:2003.03785](https://arxiv.org/pdf/2003.03785){:target="_blank"}\]
+
+- Imputing Missing Values in Sensor Networks using Sparse Data Representations  
+  *with Huiling Chen, Shaowei Lin and Daniel C.L. Chen*  
+  \[[MSWiM 2014](http://dx.doi.org/10.1145/2641798.2641816){:target="_blank"}\]
+
+- An Ordinal Potential Function for Network Selection in Heterogeneous Wireless Networks  
+  *with Tony Q.S. Quek and Michael Padilla*  
+  \[[ICASSP 2014](http://dx.doi.org/10.1109/ICASSP.2014.6854780){:target="_blank"}\]
+
+
 ### Education
 - 2014 - 2019: PhD in Mathematics, University of Washington, Seattle
 - 2009 - 2012: BA in Mathematics, Cornell University
@@ -95,14 +109,6 @@ Specifically: Grothendieck fibrations, enriched category theory, Hopf algebras a
 - Noncommutative geometry of homogenized quantum $\mathfrak{sl}(2,\mathbb{C})$  
   *with Alex Chirvasitu and S. Paul Smith*  
   \[[arXiv](https://arxiv.org/abs/1607.00481){:target="_blank"}\] \[[Pacific Journal of Mathematics 292 (2018), no. 2, 305-354](https://msp.org/pjm/2018/292-2/p04.xhtml){:target="_blank"}\]
-
-- Imputing Missing Values in Sensor Networks using Sparse Data Representations  
-  *with Huiling Chen, Shaowei Lin and Daniel C.L. Chen*  
-  \[[MSWiM 2014](http://dx.doi.org/10.1145/2641798.2641816){:target="_blank"}\]
-
-- An Ordinal Potential Function for Network Selection in Heterogeneous Wireless Networks  
-  *with Tony Q.S. Quek and Michael Padilla*  
-  \[[ICASSP 2014](http://dx.doi.org/10.1109/ICASSP.2014.6854780){:target="_blank"}\]
 
 - Irredundant Generating Sets of Finite Nilpotent Groups  
   \[[Senior thesis](http://sheaves.github.io/slides/senior-thesis.pdf){:target="_blank"}\] (advised by R. Keith Dennis)
