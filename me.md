@@ -43,7 +43,7 @@ I am currently **open to work** and am seeking research scientist positions in i
 
 My undergraduate and graduate studies were funded by the [A*STAR National Science Scholarship](https://www.a-star.edu.sg/Scholarships/for-undergraduate-studies/national-science-scholarship-bs). 
 
-## Computational Social Science and NLP research
+## Computational Social Science research
 At IHPC, I worked with an interdisciplinary group of social scientists, psychologists and engineers led by [Joe Simons](https://sites.google.com/view/joe-simons/), on applications of NLP and LLMs to social media analytics, stance detection, and topic modeling.
 
 ### Social science papers
