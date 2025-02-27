@@ -20,10 +20,8 @@ I plan to write more about them on this site in the near future.
 
 I am currently **open to work** and am seeking research scientist positions in interpretability, alignment and theory of language models.
 
-### Education and Employment History
-- 2019 - 2024: Institute of High Performance Computing, A*STAR, Singapore
+### Education
 - 2014 - 2019: PhD in Mathematics, University of Washington, Seattle
-- 2012 - 2014: Institute for Infocomm Research, A*STAR, Singapore
 - 2009 - 2012: BA in Mathematics, Cornell University
 
 My undergraduate and graduate studies were funded by the [A*STAR National Science Scholarship](https://www.a-star.edu.sg/Scholarships/for-undergraduate-studies/national-science-scholarship-bs). 
