@@ -13,8 +13,8 @@ From 2019 - 2024, I was a research scientist at the [Institute of High Performan
 In Fall 2022 and 2023, I also taught the [Foundations of Business Analytics](https://nusmods.com/modules/DBA5106/foundation-in-business-analytics){:target="_blank"} core course for Masters of Science in Business Analytics (MSBA) students as an Adjunct Assistant Professor at the [NUS Business School](https://bschool.nus.edu.sg/){:target="_blank"}.
 
 I left IHPC at the end of 2024 to spend more time on AI/NLP/LLM research. Since the start of 2025, I have written the following short papers:
-- Paying attention to facts: quantifying the knowledge capacity of attention layers [arXiv:2502.05076](https://arxiv.org/abs/2502.05076){:target="_blank"}
-- 'Generalization is hallucination' through the lens of tensor completions [arXiv:2502.17305](https://arxiv.org/abs/2502.17305){:target="_blank"}
+- Paying attention to facts: quantifying the knowledge capacity of attention layers \[[arXiv:2502.05076](https://arxiv.org/abs/2502.05076){:target="_blank"}\]
+- 'Generalization is hallucination' through the lens of tensor completions \[[arXiv:2502.17305](https://arxiv.org/abs/2502.17305){:target="_blank"}\]
 
 I plan to write more about them on this site in the near future.
 
@@ -38,9 +38,9 @@ At IHPC, I worked with an interdisciplinary group of social scientists, psycholo
 - Utilizing LLMs to conduct Thematic Analysis: A Case Study on Focus Groups Transcripts   
   *with Prasanta Bhattacharya, Brandon Loh, Hui Si Oh, Siti Amelia Juraimi, Nandini Anant, Arunika Pillay, Mary F-F. Chong, Anna Fogel, Florence Sheen and Aimee E. Pink*    
   \[in preparation\]
-- From traces to measures: LLMs as a tool for psychological measurement
-  *with Joe Simons, Prasanta Bhattacharya, Brandon Loh and Wei Gao*
-  \[[arXiv](https://arxiv.org/abs/2405.07447){:target="_blank"}\]
+- From traces to measures: LLMs as a tool for psychological measurement  
+  *with Joe Simons, Prasanta Bhattacharya, Brandon Loh and Wei Gao*  
+  \[[arXiv](https://arxiv.org/abs/2405.07447){:target="_blank"}\]    
 
 ### Talks
 - *Applications of LLMs in Social Sciences*, [AI Wednesdays](https://go.gov.sg/aiweds){:target="_blank"} (Government-wide Community of Practice for Artificial Intelligence), Singapore (October 2024)
