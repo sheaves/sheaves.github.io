@@ -16,6 +16,7 @@ I left IHPC at the end of 2024 to spend more time on AI/NLP/LLM research.
 
 Since the start of 2025, I have written the following short papers:
 - Paying attention to facts: quantifying the knowledge capacity of attention layers \[[arXiv:2502.05076](https://arxiv.org/abs/2502.05076){:target="_blank"}\]
+
 - 'Generalization is hallucination' through the lens of tensor completions \[[arXiv:2502.17305](https://arxiv.org/abs/2502.17305){:target="_blank"}\]
 
 I plan to write more about them on this site in the near future.
@@ -29,21 +30,24 @@ I am currently **open to work** and am seeking research scientist positions in i
 My undergraduate and graduate studies were funded by the [A*STAR National Science Scholarship](https://www.a-star.edu.sg/Scholarships/for-undergraduate-studies/national-science-scholarship-bs). 
 
 ## Computational Social Science and NLP research
-At IHPC, I worked with an interdisciplinary group of social scientists, psychologists and engineers led by [Joe Simons].(https://sites.google.com/view/joe-simons/), on applications of NLP and LLMs to social media analytics, stance detection, and topic modelling.
+At IHPC, I worked with an interdisciplinary group of social scientists, psychologists and engineers led by [Joe Simons](https://sites.google.com/view/joe-simons/), on applications of NLP and LLMs to social media analytics, stance detection, and topic modeling.
 
 ### Social science papers
 - Understanding Challenges and Emotions of Informal Caregivers of General Older Adults and People With ADRD: Comparative Study  
   *with Meng Xia Huang, Shirley Ho and Bryan Timothy*    
   \[Journal of Medical Internet Research, to appear (2025)\]
+  
 - Utilizing LLMs to conduct Thematic Analysis: A Case Study on Focus Groups Transcripts   
   *with Prasanta Bhattacharya, Brandon Loh, Hui Si Oh, Siti Amelia Juraimi, Nandini Anant, Arunika Pillay, Mary F-F. Chong, Anna Fogel, Florence Sheen and Aimee E. Pink*    
   \[in preparation\]
+  
 - From traces to measures: LLMs as a tool for psychological measurement  
   *with Joe Simons, Prasanta Bhattacharya, Brandon Loh and Wei Gao*  
   \[[arXiv](https://arxiv.org/abs/2405.07447){:target="_blank"}\]    
 
 ### Talks
 - *Applications of LLMs in Social Sciences*, [AI Wednesdays](https://go.gov.sg/aiweds){:target="_blank"} (Government-wide Community of Practice for Artificial Intelligence), Singapore (October 2024)
+ 
 - *An Introductory Workshop on using LLMs in Social Science*. [Summer Institute in Computational Social Science (SICSS)](https://sicss.io/2024/singapore/){:target="_blank"}, Singapore (June 2024).
 
 ## Mathematics research
