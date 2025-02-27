@@ -64,7 +64,7 @@ At IHPC, I worked with an interdisciplinary group of social scientists, psycholo
 ### Talks
 - *Applications of LLMs in Social Sciences*, [AI Wednesdays](https://go.gov.sg/aiweds){:target="_blank"} (Government-wide Community of Practice for Artificial Intelligence), Singapore (October 2024)
  
-- *An Introductory Workshop on using LLMs in Social Science*. [Summer Institute in Computational Social Science (SICSS)](https://sicss.io/2024/singapore/){:target="_blank"}, Singapore (June 2024).
+- *An Introductory Workshop on using LLMs in Social Science*. [Summer Institute in Computational Social Science (SICSS)](https://sicss.io/2024/singapore/schedule){:target="_blank"}, Singapore (June 2024).
 
 ## Mathematics research
 I received my PhD in Mathematics from the University of Washington, Seattle. My advisor was [James Zhang](https://www.math.washington.edu/~zhang/){:target="_blank"}. 
