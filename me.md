@@ -50,8 +50,8 @@ At IHPC, I worked with an interdisciplinary group of social scientists, psycholo
 
 ### Social science papers
 - Understanding Challenges and Emotions of Informal Caregivers of General Older Adults and People With ADRD: Comparative Study  
-  *with Meng Xia Huang, Shirley Ho and Bryan Timothy*    
-  \[Journal of Medical Internet Research, to appear (2025)\]
+  *with Nova Mengxia Huang, Shirley Ho and Bryan Timothy*    
+  \[[Journal of Medical Internet Research, 27 (2025)](https://www.jmir.org/2025/1/e54847){:target="_blank"}\]
   
 - Utilizing LLMs to conduct Thematic Analysis: A Case Study on Focus Groups Transcripts   
   *with Prasanta Bhattacharya, Brandon Loh, Hui Si Oh, Siti Amelia Juraimi, Nandini Anant, Arunika Pillay, Mary F-F. Chong, Anna Fogel, Florence Sheen and Aimee E. Pink*    
