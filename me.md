@@ -12,9 +12,11 @@ From 2019 - 2024, I was a research scientist at the [Institute of High Performan
 
 In Fall 2022 and 2023, I also taught the [Foundations of Business Analytics](https://nusmods.com/modules/DBA5106/foundation-in-business-analytics){:target="_blank"} core course for Masters of Science in Business Analytics (MSBA) students as an Adjunct Assistant Professor at the [NUS Business School](https://bschool.nus.edu.sg/){:target="_blank"}.
 
-I left IHPC at the end of 2024 to spend more time on AI/NLP/LLM research. 
+I left IHPC at the end of 2024 to spend more time on AI/NLP/LLM research. I am currently **open to work** and am seeking research scientist positions in interpretability, alignment and theory of language models.
 
+### Recent papers
 Since the start of 2025, I have written the following short papers:
+
 - Paying attention to facts: quantifying the knowledge capacity of attention layers  
   \[[arXiv:2502.05076](https://arxiv.org/abs/2502.05076){:target="_blank"}\]
 
@@ -22,8 +24,6 @@ Since the start of 2025, I have written the following short papers:
   \[[arXiv:2502.17305](https://arxiv.org/abs/2502.17305){:target="_blank"}\]
 
 I plan to write more about them on this site in the near future.
-
-I am currently **open to work** and am seeking research scientist positions in interpretability, alignment and theory of language models.
 
 ### Other AI/ML papers
 - Dependently typed knowledge graphs  
