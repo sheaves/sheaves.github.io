@@ -14,7 +14,8 @@ In Fall 2022 and 2023, I also taught the [Foundations of Business Analytics](htt
 
 I left IHPC at the end of 2024 to spend more time on AI/NLP/LLM research. I am currently **open to work** and am seeking research scientist positions in interpretability, alignment and theory of language models.
 
-### Recent papers
+### AI/ML papers
+
 Since the start of 2025, I have written the following short papers:
 
 - Paying attention to facts: quantifying the knowledge capacity of attention layers  
@@ -25,19 +26,24 @@ Since the start of 2025, I have written the following short papers:
 
 I plan to write more about them on this site in the near future.
 
-### Other AI/ML papers
-- Dependently typed knowledge graphs  
-  *with Zhangsheng Lai, Aik Beng Ng, Simon See and Shaowei Lin*  
-  \[[arXiv:2003.03785](https://arxiv.org/pdf/2003.03785){:target="_blank"}\]
+Back in 2014, I developed a sparse auto-encoder that could handle missing data:
 
 - Imputing Missing Values in Sensor Networks using Sparse Data Representations  
   *with Huiling Chen, Shaowei Lin and Daniel C.L. Chen*  
   \[[MSWiM 2014](http://dx.doi.org/10.1145/2641798.2641816){:target="_blank"}\]
 
+### Other ML-related papers
+
+- Dependently typed knowledge graphs  
+  *with Zhangsheng Lai, Aik Beng Ng, Simon See and Shaowei Lin*  
+  \[[arXiv:2003.03785](https://arxiv.org/pdf/2003.03785){:target="_blank"}\]
+
+- <a name="minimal"></a>Minimal Schemas for a Category  
+  \[[draft](http://sheaves.github.io/slides/act.pdf){:target="_blank"}\] \[[poster](http://sheaves.github.io/slides/ACT2019.pdf){:target="_blank"} for [ACT 2019](http://www.cs.ox.ac.uk/ACT2019/){:target="_blank"}\]
+
 - An Ordinal Potential Function for Network Selection in Heterogeneous Wireless Networks  
   *with Tony Q.S. Quek and Michael Padilla*  
   \[[ICASSP 2014](http://dx.doi.org/10.1109/ICASSP.2014.6854780){:target="_blank"}\]
-
 
 ### Education
 - 2014 - 2019: PhD in Mathematics, University of Washington, Seattle
@@ -46,7 +52,7 @@ I plan to write more about them on this site in the near future.
 My undergraduate and graduate studies were funded by the [A*STAR National Science Scholarship](https://www.a-star.edu.sg/Scholarships/for-undergraduate-studies/national-science-scholarship-bs). 
 
 ## Computational Social Science research
-At IHPC, I worked with an interdisciplinary group of social scientists, psychologists and engineers led by [Joe Simons](https://sites.google.com/view/joe-simons/), on applications of NLP and LLMs to social media analytics, stance detection, and topic modeling.
+From 2019-2024, I worked at IHPC with an interdisciplinary group of social scientists, psychologists and engineers led by [Joe Simons](https://sites.google.com/view/joe-simons/), on applications of NLP and LLMs to social media analytics, stance detection, and topic modeling.
 
 ### Social science papers
 - Understanding Challenges and Emotions of Informal Caregivers of General Older Adults and People With ADRD: Comparative Study  
@@ -67,7 +73,7 @@ At IHPC, I worked with an interdisciplinary group of social scientists, psycholo
 - *An Introductory Workshop on using LLMs in Social Science*. [Summer Institute in Computational Social Science (SICSS)](https://sicss.io/2024/singapore/schedule){:target="_blank"}, Singapore (June 2024).
 
 ## Mathematics research
-I received my PhD in Mathematics from the University of Washington, Seattle. My advisor was [James Zhang](https://www.math.washington.edu/~zhang/){:target="_blank"}. 
+In 2019, I received my PhD in Mathematics from the University of Washington, Seattle. My advisor was [James Zhang](https://www.math.washington.edu/~zhang/){:target="_blank"}. 
 
 My mathematical research interests are in category theory, homotopy theory, and non-commutative algebra.
 Specifically: Grothendieck fibrations, enriched category theory, Hopf algebras and cubical sets. 
@@ -81,9 +87,6 @@ Specifically: Grothendieck fibrations, enriched category theory, Hopf algebras a
 - <a name="cubes"></a>Cubes with connections from algebraic weak factorization systems  
   *with Chris Kapulkin*  
   \[[slides](http://sheaves.github.io/slides/cylinders.pdf){:target="_blank"}  for [Western Topology Seminar](https://jdc.math.uwo.ca/topology/index.html){:target="_blank"}\]\[[TeX](http://sheaves.github.io/slides/cylinders.tex){:target="_blank"}\]  
-
-- <a name="minimal"></a>Minimal Schemas for a Category  
-  \[[draft](http://sheaves.github.io/slides/act.pdf){:target="_blank"}\] \[[poster](http://sheaves.github.io/slides/ACT2019.pdf){:target="_blank"} for [ACT 2019](http://www.cs.ox.ac.uk/ACT2019/){:target="_blank"}\]
 
 - Smash Products for Non-cartesian Internal Prestacks  
   \[[arXiv](https://arxiv.org/abs/1907.09666){:target="_blank"}\]
