@@ -16,8 +16,8 @@ The overarching theme behind these papers is that tensors and tensor completions
 As I've only started doing this in 2025, everything is still quite preliminary. In particular, the results of these papers only hold for very simple toy models and synthetic datasets.
 
 Nevertheless, this line of inquiry has already yielded some interesting findings.
-For example, the [Paying attention to the facts](https://arxiv.org/abs/2502.05076){:target="_blank"} shows that transformers can store facts in their attention heads and not just their MLP layers. It also shows that we can increase model capacity without increasing the number of parameters by increasing the dimensions of the output-value weights at the expense of the key-query weights. 
-Meanwhile, ['Generalization is hallucination'](https://arxiv.org/abs/2502.17305){:target="_blank"} identifies a common mechanism that shows how training data gives rise to certain types of generalizations and hallucinations.
+For example, the ['Paying attention to the facts' paper](https://arxiv.org/abs/2502.05076){:target="_blank"} shows that transformers can store facts in their attention heads and not just their MLP layers. It also shows that we can increase model capacity without increasing the number of parameters by increasing the dimensions of the output-value weights at the expense of the key-query weights. 
+Meanwhile, the ['Generalization is hallucination' paper](https://arxiv.org/abs/2502.17305){:target="_blank"} identifies a common mechanism that shows how training data gives rise to certain types of generalizations and hallucinations.
 
 In this series of blog posts, I plan to explain and expand on some of the ideas in these papers, in the hopes of encouraging more research in this direction.
 In the next few posts, I will introduce tensors and their rank, relate them to language datasets and language models, talk about databases and ways of generating `random databases', and highlight the non-linear effects of argmax and softmax on rank.
@@ -48,11 +48,12 @@ knowledge capacity scaling laws](https://arxiv.org/abs/2404.05405){:target="_bla
 
 Despite the simplicity of facts, however, and despite the research that has gone into it, we still do not have a full picture of how facts are stored in language models.
 For example, papers about scaling laws of memorization capacity tend to quantify the size of a database of facts in terms of the number of facts contained. 
-However, this ignores the structure of facts and patterns among facts that might make a one database easier or harder to memorize than another database with the same number of facts.
+However, this ignores the structure of facts and patterns among facts that might make one database easier or harder to memorize than another database with the same number of facts.
 
 My sense is that the number of facts in a database is just a proxy for another measure of database size that better reflects the underlying properties of the database.
 While I have not uncovered this measure yet, I think my approach (in terms of tensors) has brought us a step closer to it.
-Which leads us to the next question.
+
+Which leads us to the next question...
 
 ### Why tensors?
 When I first started this line of investigation, I did not have tensors in mind at all.
