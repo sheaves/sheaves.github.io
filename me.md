@@ -24,7 +24,8 @@ Since the start of 2025, I have written the following short papers:
 - 'Generalization is hallucination' through the lens of tensor completions  
   \[[arXiv:2502.17305](https://arxiv.org/abs/2502.17305){:target="_blank"}\]
 
-I plan to write more about them on this site in the near future.
+I am writing a series of blog posts about these papers on this site. 
+The first one is [here](https://sheaves.github.io/Tensors-Facts-LLMs/){:target="_blank"}.
 
 Back in 2014, I developed a sparse auto-encoder that could handle missing data:
 
