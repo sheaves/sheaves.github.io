@@ -76,4 +76,5 @@ I've talked a lot about tensors without really defining them. In the next post, 
 #### Getting involved
 If this line of work interests you, please reach out in the comments below, or email me at [liangze.wong@gmail.com](mailto:liangze.wong@gmail.com).
 I would be happy to collaborate on topics related to interpretability and theory of language models, even if it does not involve tensors or factual recall.
+
 If you are hiring (or know of anyone who might be interested in hiring) research scientists with my background, I am currently open to work, and am open to re-location!
