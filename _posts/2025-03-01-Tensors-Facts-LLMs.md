@@ -18,7 +18,7 @@ The overarching theme behind these papers is that tensors and tensor completions
 As I've only started doing this in 2025, everything is still quite preliminary. In particular, the results of these papers only hold for very simple toy models and synthetic datasets.
 
 Nevertheless, this line of inquiry has already yielded some interesting findings.
-For example, the ['Paying attention to the facts' paper](https://arxiv.org/abs/2502.05076){:target="_blank"} shows that transformers can store facts in their attention heads and not just their MLP layers. It also shows that we can increase model capacity without increasing the number of parameters by increasing the dimensions of the output-value weights at the expense of the key-query weights. 
+For example, the ['Paying attention to the facts' paper](https://arxiv.org/abs/2502.05076){:target="_blank"} shows that transformers can store facts in their attention heads and not just their MLP layers. It also shows that we can increase model capacity without increasing the number of parameters by have larger output-value weights and smaller key-query weights. 
 Meanwhile, the ['Generalization is hallucination' paper](https://arxiv.org/abs/2502.17305){:target="_blank"} identifies a common mechanism that shows how training data gives rise to certain types of generalizations and hallucinations.
 
 In this series of blog posts, I plan to explain and expand on some of the ideas in these papers, in the hopes of encouraging more research in this direction.
