@@ -12,6 +12,8 @@ This is the first in a series of posts explaining and expanding on the ideas int
 - 'Generalization is hallucination' through the lens of tensor completions  
   \[[arXiv:2502.17305](https://arxiv.org/abs/2502.17305){:target="_blank"}\]
 
+<!--more-->
+
 The overarching theme behind these papers is that tensors and tensor completions are a useful theoretical framework for thinking about language models, specifically generative models based on [transformers](https://en.wikipedia.org/wiki/Transformer_(deep_learning_architecture)){:target="_blank"}.
 As I've only started doing this in 2025, everything is still quite preliminary. In particular, the results of these papers only hold for very simple toy models and synthetic datasets.
 
