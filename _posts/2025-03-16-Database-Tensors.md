@@ -381,7 +381,7 @@ Just as the matrix $M_f$ contains all the information of the function $f$, the t
 ### Summary and what's next
 In this post, we have seen how to represent a function as a matrix, and a database as a 3-tensor. We have also touched upon the relationship between functions and MLPs. Note that a database *cannot* be represented as a single MLP, because MLPs only store key-value pairs! But as we will eventually see, we can encode databases in the attention heads of transformers. (see the ['Paying attention to facts' paper](https://arxiv.org/abs/2502.05076){:target="_blank"} to skip ahead)
 
-While we have defined and computed rank of $M_f$, we haven't talked about the rank of tensors. That will be the subject of the next post. We will also see that tensor rank has some unintuitive properties (at least for those who are more familiar with matrix rank).
+While we have defined and computed the rank of $M_f$, we haven't talked about the rank of tensors. That will be the subject of the next post. We will also see that tensor rank has some unintuitive properties (at least for those who are more familiar with matrix rank).
 
 #### Getting involved
 If this line of work interests you, please reach out in the comments below, or email me at [liangze.wong@gmail.com](mailto:liangze.wong@gmail.com).
