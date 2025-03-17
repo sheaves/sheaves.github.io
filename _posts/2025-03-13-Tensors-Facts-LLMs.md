@@ -4,7 +4,7 @@ title: Tensors and Factual Recall in Language Models
 tag: 
 - Tensors and Language Models
 ---
-This is the first in a series of posts explaining and expanding on the ideas introduced in the following papers:
+This is the first in a [series of posts](https://sheaves.github.io/topics/#Tensors+and+Language+Models){:target="_blank"} explaining and expanding on the ideas introduced in the following papers:
 
 - Paying attention to facts: quantifying the knowledge capacity of attention layers  
   \[[arXiv:2502.05076](https://arxiv.org/abs/2502.05076){:target="_blank"}\]
