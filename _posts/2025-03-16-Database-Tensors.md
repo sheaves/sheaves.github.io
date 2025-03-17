@@ -371,6 +371,7 @@ $$
 D_{kqv} = \begin{cases}
 1 \mbox{ if } (k,q,v) \in \mathcal{D}, \mbox{ and}\\
 0 \mbox{ otherwise.}
+\end{cases}
 $$
 
 Just as the matrix $M_f$ contains all the information of the function $f$, the tensor $D$ contains all the information of the database $\mathcal{D}$.
