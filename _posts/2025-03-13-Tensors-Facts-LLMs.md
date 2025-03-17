@@ -71,7 +71,7 @@ For example, can we relate linear-algebraic properties of a tensor to geometric 
 Can we relate linear-algebraic properties of tensors to neuron activations?
 
 ### Up next
-I've talked a lot about tensors without really defining them. In the next post, I will define tensors and relate them to facts represented as RDF triples.
+I've talked a lot about tensors without really defining them. In the [next post](https://sheaves.github.io/Database-Tensors/), I will define tensors and relate them to facts represented as RDF triples.
 
 #### Getting involved
 If this line of work interests you, please reach out in the comments below, or email me at [liangze.wong@gmail.com](mailto:liangze.wong@gmail.com).
