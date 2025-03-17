@@ -52,7 +52,7 @@ $$
 				a \\ b \\ c
 			\end{array}
 			&
-			\left[
+			\left(
 				\begin{array}{cc}
 					0 & 1 
 					\\ 
@@ -60,7 +60,7 @@ $$
           \\
           1 & 0
 				\end{array} 
-			\right]
+			\right)
 		\end{array}
 $$
 
@@ -80,7 +80,7 @@ There are a few [equivalent definitions](https://en.wikipedia.org/wiki/Rank_(lin
 In order to state this definition, we first define a rank-1 matrix to be a non-zero matrix that can be expressed as a matrix product $c \cdot r$ of a column vector $c$ and a row vector $r$. The following example shows a rank-1 matrix and its decomposition into $c$ and $r$:
 
 $$ 
-\left[
+\left(
   \begin{array}{cc}
     0 & 0 
     \\ 
@@ -88,10 +88,10 @@ $$
     \\
     1 & 0
   \end{array} 
-\right]
+\right)
 = 
-\left[ \begin{array}{c} 0 \\ 0 \\ 1 \end{array} \right] 
-\left[ \begin{array}{cc} 1 & 0 \end{array} \right]
+\left( \begin{array}{c} 0 \\ 0 \\ 1 \end{array} \right) 
+\left( \begin{array}{cc} 1 & 0 \end{array} \right)
 $$
 
 The rank of a matrix $M$ is then the smallest $k$ such that $M$ can be expressed as a sum of $k$ rank-1 matrices.
@@ -100,7 +100,7 @@ From this, we can see that an upper bound for the rank of $M$ is simply the numb
 
 $$
 M_f = 
-\left[
+\left(
   \begin{array}{cc}
     0 & 1 
     \\ 
@@ -108,9 +108,9 @@ M_f =
     \\
     0 & 0
   \end{array} 
-\right]
+\right)
 +
-\left[
+\left(
   \begin{array}{cc}
     0 & 0 
     \\ 
@@ -118,9 +118,9 @@ M_f =
     \\
     0 & 0
   \end{array} 
-\right]
+\right)
 +
-\left[
+\left(
   \begin{array}{cc}
     0 & 0 
     \\ 
@@ -128,7 +128,7 @@ M_f =
     \\
     1 & 0
   \end{array} 
-\right]
+\right)
 $$
 
 and thus $\mathrm{rank}(M_f) \leq 3$. 
@@ -136,7 +136,7 @@ and thus $\mathrm{rank}(M_f) \leq 3$.
 But in fact, the rank of $M_f$ is 2, because this is also a rank 1 matrix:
 
 $$ 
-\left[
+\left(
   \begin{array}{cc}
     0 & 1 
     \\ 
@@ -144,17 +144,17 @@ $$
     \\
     0 & 0
   \end{array} 
-\right]
+\right)
 = 
-\left[ \begin{array}{c} 1 \\ 1 \\ 0 \end{array} \right] 
-\left[ \begin{array}{cc} 0 & 1 \end{array} \right]
+\left( \begin{array}{c} 1 \\ 1 \\ 0 \end{array} \right) 
+\left( \begin{array}{cc} 0 & 1 \end{array} \right)
 $$
 
 and we can decompose $M_f$ as
 
 $$
 M_f = 
-\left[
+\left(
   \begin{array}{cc}
     0 & 1 
     \\ 
@@ -162,9 +162,9 @@ M_f =
     \\
     0 & 0
   \end{array} 
-\right]
+\right)
 +
-\left[
+\left(
   \begin{array}{cc}
     0 & 0 
     \\ 
@@ -172,7 +172,7 @@ M_f =
     \\
     1 & 0
   \end{array} 
-\right].
+\right).
 $$
 
 In fact, for any function $f : X \to Y$ between finite sets, we can always decompose $M_f$ into a sum of $k$ rank-1 matrices, one for each element in the [range](https://en.wikipedia.org/wiki/Range_of_a_function){:target="_blank"} of $f$, so that we have:
@@ -186,21 +186,20 @@ We thus see that the rank of $M_f$ gives us some notion of the size of $f$.
 ### Why matrices? Why rank?
 But why go through all that trouble? Why not just represent $f$ as a dictionary or hashmap, such as ```f = {'a': 's', 'b':'s', 'c':'m'}```?
 
-The reason is that linear algebra is the language of neural networks. Indeed, a rank-1 matrix $M$ can be represented as a neural network with 1 hidden neuron, where the activation functions are all just the identity function:
+The reason is that linear algebra is the language of neural networks and [multi-layer perceptrons (MLPs)](https://en.wikipedia.org/wiki/Multilayer_perceptron){:target="_blank"}. Indeed, a rank-1 matrix $M$ can be represented as an MLP with 1 hidden neuron, where the activation functions are all just the identity function:
 ![Rank 1 matrix as a neural network](/images/rank_1_matrix.png "Rank 1 matrix")
 If $c \cdot r$ is the decomposition of $M$, the weights on the left are the entries of $c$, while the weights on the right are the entries of $r$.
 
-A rank-$k$ matrix is then a neural network with $k$ hidden neurons:
+A rank-$k$ matrix is then an MLP with $k$ hidden neurons:
 ![Rank k matrix as a neural network](/images/rank_k_matrix.png "Rank k matrix")
 
 So the rank of $M_f$ tells us how many hidden neurons are needed to represent the function $f$ when using a linear network (i.e. a network with identity activation functions).
 
-Of course, "real" neural networks usually have non-linear activation functions (such as ReLu or various sigmoids). As papers such as [this](https://arxiv.org/abs/2012.14913){:target="_blank"} show, such networks also store functions (or "key-value memories"), and if we record which outputs we get when we pass inputs of $f$ into the network, we should expect to get a matrix that is similar to $M_f$.
+Of course, "real" MLPs usually have non-linear activation functions (such as ReLu or various sigmoids). As papers such as [this](https://arxiv.org/abs/2012.14913){:target="_blank"} show, such networks also store functions (or "key-value memories"). If we record which outputs we get when we pass inputs of $f$ into the network, we should expect to get a matrix that is similar to $M_f$.
 In this setting, the number of hidden neurons continues to be a useful measure of the size or capacity of a network, even though it may no longer be the same as the rank of $M_f$ due to non-linearity.
 
-
 ### From functions to databases
-So far, we have seen that functions (or key-value pairs, associative memories, dictionaries, hashmaps etc.) can be stored in matrices/neural networks. But functions or key-value pairs are not yet facts. Here's what I mean: consider the key-value pair ```(Michael Jordan, Basketball)```, which is sometimes given as an example of a "fact". Indeed, Michael Jordan is most strongly associated to basketball, and if you asked someone to imagine "Michael Jordan", chances are they would imagine him playing basketball or in a basketball jersey. 
+So far, we have seen that functions (or key-value pairs, associative memories, dictionaries, hashmaps etc.) can be stored in matrices/MLPs. But functions or key-value pairs are not yet facts. Here's what I mean: consider the key-value pair ```(Michael Jordan, Basketball)```, which is sometimes given as an example of a "fact". Indeed, Michael Jordan is most strongly associated to basketball, and if you asked someone to imagine "Michael Jordan", chances are they would imagine him playing basketball or in a basketball jersey. 
 
 But what is happening here is that we are implicitly filling in a relation between Michael Jordan and basketball, such as ```played``` (for most of his career), or ```is most often associated with```. And the facticity of the pair depends on this relation. If we change the relation to something like ```played in 1994```, then the correct fact should mention ```baseball``` instead of ```basketball```.
 
@@ -209,4 +208,181 @@ To put it another way, a function or a set of key-value pairs is only *one* colu
 Since a database is a collection of functions (one for each column in the database), and each function can be represented as a matrix, it stands to reason that a database can be represented as a collection of matrices, or a *tensor*.
 
 ### Tensor representation of a database
+A [tensor](https://en.wikipedia.org/wiki/Tensor){:target="_blank"} is a higher dimensional analogue of a matrix. Just as a matrix (or 2-tensor) can be thought of as a collection of vectors (or 1-tensors), a 3-tensor is a collection of matrices.
 
+We've already seen what the matrix for the ```born_in``` column looks like. Here's the matrix for the ```lives_in``` column:
+
+$$
+\begin{array}{c@{}c}
+&
+\begin{array}{cc}
+m & s
+\end{array}
+\\
+\begin{array}{c}
+a \\ b \\ c
+\end{array}
+&
+\left(
+\begin{array}{cc}
+1 & 0 
+\\ 
+0 & 1 
+\\
+1 & 0
+\end{array} 
+\right)
+\end{array}
+$$
+
+We get a 3-tensor by stacking these two matrices (think of them as lying on different pages of a 2-page book).
+
+Meanwhile, the matrix representation of the ```currency``` column looks like this:
+
+$$
+\begin{array}{c@{}c}
+&
+\begin{array}{cc}
+r & d
+\end{array}
+\\
+\begin{array}{c}
+m \\ s
+\end{array}
+&
+\left(
+\begin{array}{cc}
+1 & 0
+\\ 
+0 & 1
+\end{array} 
+\right)
+\end{array}
+$$
+
+To stack this with the other two matrices, we need to pad them with zeros so that their shapes agree: 
+
+$$
+M_\beta = 
+\begin{array}{cc}
+    &
+    \begin{array}{cccc}
+    m & s & r & d 
+    \end{array}
+    \\
+    \begin{array}{c}
+    a \\ b \\ c \\ m \\ s
+    \end{array}
+    &
+    \left(
+    \begin{array}{cccc}
+    1 & 0 & 0 & 0 
+    \\
+    0 & 1 & 0 & 0 
+    \\
+    1 & 0 & 0 & 0 
+    \\
+    0 & 0 & 0 & 0 
+    \\
+    0 & 0 & 0 & 0 
+    \end{array}
+    \right)
+\end{array}
+$$
+
+$$
+M_\lambda = 
+\begin{array}{cc}
+    &
+    \begin{array}{cccc}
+    m & s & r & d 
+    \end{array}
+    \\
+    \begin{array}{c}
+    a \\ b \\ c \\ m \\ s
+    \end{array}
+    &
+    \left(
+    \begin{array}{cccc}
+    1 & 0 & 0 & 0 
+    \\
+    0 & 1 & 0 & 0 
+    \\
+    1 & 0 & 0 & 0 
+    \\
+    0 & 0 & 0 & 0 
+    \\
+    0 & 0 & 0 & 0 
+    \end{array}
+    \right)
+\end{array}
+$$
+
+$$
+M_\chi = 
+\begin{array}{cc}
+    &
+    \begin{array}{cccc}
+    m & s & r & d 
+    \end{array}
+    \\
+    \begin{array}{c}
+    a \\ b \\ c \\ m \\ s
+    \end{array}
+    &
+    \left(
+    \begin{array}{cccc}
+    0 & 0 & 0 & 0 
+    \\
+    0 & 0 & 0 & 0 
+    \\
+    0 & 0 & 0 & 0 
+    \\
+    0 & 0 & 1 & 0 
+    \\
+    0 & 0 & 0 & 1 
+    \end{array}
+    \right)
+\end{array}
+$$
+
+Here $\beta$ is the column ```born_in```, $\lambda$ is the column ```lives_in``` and $\chi$ is the column ```currency```. 
+Stacking these 3 matrices together gives us the $3 \times 5 \times 4$ tensor associated to this database.
+
+For the general definition, it helps to think of a database as a collection of [RDF triples](https://en.wikipedia.org/wiki/Semantic_triple){:target="_blank"} in (subject, predicate, object) or (key, query, value) format. For example, our database above could be represented as the following set of triples:
+
+$$
+\begin{array}{ccc}
+	Astrid & born\_in & Singapore \\ 
+	Bernard & born\_in & Singapore \\ 
+	Colin & born\_in & Malaysia \\ 
+	Astrid & lives\_in & Malaysia \\ 
+	Bernard & lives\_in & Singapore \\ 
+	Colin & lives\_in & Malaysia \\
+	Malaysia & currency & Ringgit \\
+	Singapore & currency & Dollar\end{array}
+ \end{array}
+$$
+
+If we let $\mathcal{D}$ be this list of triples, we may define a 3-tensor $D$ of the appropriate size whose entries are:
+
+$$
+	D_{kqv} = \begin{cases}
+1 \mbox{ if } (k,q,v) \in \mathcal{D}, \mbox{ and}\\
+0 \mbox{ otherwise.}
+$$
+
+Just as the matrix $M_f$ contains all the information of the function $f$, the tensor $D$ contains all the information of the database $\mathcal{D}$.
+
+*Note: Technically, stacking $M_\beta, M_\lambda$ and $M_\chi$ would correspond to having the triples in (predicate, subject, object) or (query, key, value) format instead.*
+
+### Summary and what's next
+In this post, we have seen how to represent a function as a matrix, and a database as a 3-tensor. We have also touched upon the relationship between functions and MLPs. Note that a database *cannot* be represented as a single MLP, because MLPs only store key-value pairs! But as we will eventually see, we can encode databases in the attention heads of transformers. (see the ['Paying attention to facts' paper](https://arxiv.org/abs/2502.05076){:target="_blank"} to skip ahead)
+
+While we have defined and computed rank of $M_f$, we haven't talked about the rank of tensors. That will be the subject of the next post. We will also see that tensor rank has some unintuitive properties (at least for someone like me who is more familiar with matrix rank).
+
+#### Getting involved
+If this line of work interests you, please reach out in the comments below, or email me at [liangze.wong@gmail.com](mailto:liangze.wong@gmail.com).
+I would be happy to collaborate on topics related to interpretability and theory of language models, even if it does not involve tensors or factual recall.
+
+If you are hiring (or know of anyone who might be interested in hiring) research scientists with my background, I am currently open to work, and am open to re-location!
