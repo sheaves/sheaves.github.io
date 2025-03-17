@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Tensor associated to a database
-draft_tag: 
+tag: 
 - Tensors and Language Models
 ---
 In this post, we will be interested in collections of tables or dataframes that look something like:
@@ -188,6 +188,7 @@ But why go through all that trouble? Why not just represent $f$ as a dictionary 
 
 The reason is that linear algebra is the language of neural networks and [multi-layer perceptrons (MLPs)](https://en.wikipedia.org/wiki/Multilayer_perceptron){:target="_blank"}. Indeed, a rank-1 matrix $M$ can be represented as an MLP with 1 hidden neuron, where the activation functions are all just the identity function:
 ![Rank 1 matrix as a neural network](/images/rank_1_matrix.png "Rank 1 matrix")
+
 If $c \cdot r$ is the decomposition of $M$, the weights on the left are the entries of $c$, while the weights on the right are the entries of $r$.
 
 A rank-$k$ matrix is then an MLP with $k$ hidden neurons:
@@ -195,7 +196,7 @@ A rank-$k$ matrix is then an MLP with $k$ hidden neurons:
 
 So the rank of $M_f$ tells us how many hidden neurons are needed to represent the function $f$ when using a linear network (i.e. a network with identity activation functions).
 
-Of course, "real" MLPs usually have non-linear activation functions (such as ReLu or various sigmoids). As papers such as [this](https://arxiv.org/abs/2012.14913){:target="_blank"} show, such networks also store functions (or "key-value memories"). If we record which outputs we get when we pass inputs of $f$ into the network, we should expect to get a matrix that is similar to $M_f$.
+Of course, "real" MLPs usually have non-linear activation functions (such as ReLu or various sigmoids). As [this paper](https://arxiv.org/abs/2012.14913){:target="_blank"} shows, such networks also store functions (or "key-value memories"). If we record which outputs we get when we pass inputs of $f$ into the network, we should expect to get a matrix that is similar to $M_f$.
 In this setting, the number of hidden neurons continues to be a useful measure of the size or capacity of a network, even though it may no longer be the same as the rank of $M_f$ due to non-linearity.
 
 ### From functions to databases
@@ -276,7 +277,7 @@ M_\beta =
     &
     \left(
     \begin{array}{cccc}
-    1 & 0 & 0 & 0 
+    0 & 1 & 0 & 0 
     \\
     0 & 1 & 0 & 0 
     \\
@@ -360,14 +361,14 @@ $$
 	Bernard & lives\_in & Singapore \\ 
 	Colin & lives\_in & Malaysia \\
 	Malaysia & currency & Ringgit \\
-	Singapore & currency & Dollar\end{array}
+	Singapore & currency & Dollar
  \end{array}
 $$
 
 If we let $\mathcal{D}$ be this list of triples, we may define a 3-tensor $D$ of the appropriate size whose entries are:
 
 $$
-	D_{kqv} = \begin{cases}
+D_{kqv} = \begin{cases}
 1 \mbox{ if } (k,q,v) \in \mathcal{D}, \mbox{ and}\\
 0 \mbox{ otherwise.}
 $$
@@ -379,7 +380,7 @@ Just as the matrix $M_f$ contains all the information of the function $f$, the t
 ### Summary and what's next
 In this post, we have seen how to represent a function as a matrix, and a database as a 3-tensor. We have also touched upon the relationship between functions and MLPs. Note that a database *cannot* be represented as a single MLP, because MLPs only store key-value pairs! But as we will eventually see, we can encode databases in the attention heads of transformers. (see the ['Paying attention to facts' paper](https://arxiv.org/abs/2502.05076){:target="_blank"} to skip ahead)
 
-While we have defined and computed rank of $M_f$, we haven't talked about the rank of tensors. That will be the subject of the next post. We will also see that tensor rank has some unintuitive properties (at least for someone like me who is more familiar with matrix rank).
+While we have defined and computed rank of $M_f$, we haven't talked about the rank of tensors. That will be the subject of the next post. We will also see that tensor rank has some unintuitive properties (at least for those who are more familiar with matrix rank).
 
 #### Getting involved
 If this line of work interests you, please reach out in the comments below, or email me at [liangze.wong@gmail.com](mailto:liangze.wong@gmail.com).
