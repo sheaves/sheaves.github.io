@@ -376,7 +376,7 @@ $$
 
 Just as the matrix $M_f$ contains all the information of the function $f$, the tensor $D$ contains all the information of the database $\mathcal{D}$.
 
-*Technical note: In the paper ['Paying attention to facts'](https://arxiv.org/abs/2502.05076){:target="_blank"}, the triples are in (k,q,v) format and the entries of $D$ are indexed by $k,q,v$ instead of $q,k,v$.*
+*Technical note: In the paper ['Paying attention to facts'](https://arxiv.org/abs/2502.05076){:target="_blank"}, the triples are in (key,query,value) format and the entries of $D$ are indexed by $k,q,v$ instead of $q,k,v$.*
 
 ### Summary and what's next
 In this post, we have seen how to represent a function as a matrix, and a database as a 3-tensor. We have also touched upon the relationship between functions and MLPs. Note that a database *cannot* be represented as a single MLP, because MLPs only store key-value pairs! But as we will eventually see, we can encode databases in the attention heads of transformers. (see the ['Paying attention to facts' paper](https://arxiv.org/abs/2502.05076){:target="_blank"} to skip ahead)
