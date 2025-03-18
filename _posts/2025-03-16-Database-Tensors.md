@@ -4,7 +4,7 @@ title: Tensor associated to a database
 tag: 
 - Tensors and Language Models
 ---
-In this post, we will be interested in collections of tables or dataframes that look something like:
+In this post (the 2nd in [this series on Tensors and Language Models](https://sheaves.github.io/topics/#Tensors+and+Language+Models){:target="_blank"}), we will be interested in collections of tables or dataframes that look something like:
 
 ![Example of a database](/images/database_example.png "Example of a database")
 
