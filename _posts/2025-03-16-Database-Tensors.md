@@ -350,33 +350,33 @@ $$
 Here $\beta$ is the column ```born_in```, $\lambda$ is the column ```lives_in``` and $\chi$ is the column ```currency```. 
 Stacking these 3 matrices together gives us the $3 \times 5 \times 4$ tensor associated to this database.
 
-For the general definition, it helps to think of a database as a collection of [RDF triples](https://en.wikipedia.org/wiki/Semantic_triple){:target="_blank"} in (subject, predicate, object) or (key, query, value) format. For example, our database above could be represented as the following set of triples:
+For the general definition, it helps to think of a database as a collection of [RDF triples](https://en.wikipedia.org/wiki/Semantic_triple){:target="_blank"}. Although RDF triples are usually in (subject, predicate, object) or (key, query, value) format, for the purpose of this post, it will help to think of them in (predicate, subject, object) or (query, key, value) format instead. For example, our database above could be represented as the following set of triples:
 
 $$
 \begin{array}{ccc}
-	Astrid & born\_in & Singapore \\ 
-	Bernard & born\_in & Singapore \\ 
-	Colin & born\_in & Malaysia \\ 
-	Astrid & lives\_in & Malaysia \\ 
-	Bernard & lives\_in & Singapore \\ 
-	Colin & lives\_in & Malaysia \\
-	Malaysia & currency & Ringgit \\
-	Singapore & currency & Dollar
+	born\_in & Astrid & Singapore \\ 
+	born\_in & Bernard & Singapore \\ 
+	born\_in & Colin & Malaysia \\ 
+	lives\_in & Astrid & Malaysia \\ 
+	lives\_in & Bernard & Singapore \\ 
+	lives\_in & Colin & Malaysia \\
+	currency & Malaysia & Ringgit \\
+	currency & Singapore & Dollar
  \end{array}
 $$
 
 If we let $\mathcal{D}$ be this list of triples, we may define a 3-tensor $D$ of the appropriate size whose entries are:
 
 $$
-D_{kqv} = \begin{cases}
-1 \mbox{ if } (k,q,v) \in \mathcal{D}, \mbox{ and}\\
+D_{qkv} = \begin{cases}
+1 \mbox{ if } (q,k,v) \in \mathcal{D}, \mbox{ and}\\
 0 \mbox{ otherwise.}
 \end{cases}
 $$
 
 Just as the matrix $M_f$ contains all the information of the function $f$, the tensor $D$ contains all the information of the database $\mathcal{D}$.
 
-*Note: Technically, stacking $M_\beta, M_\lambda$ and $M_\chi$ would correspond to having the triples in (predicate, subject, object) or (query, key, value) format instead.*
+*Technical note: In the paper ['Paying attention to facts'](https://arxiv.org/abs/2502.05076){:target="_blank"}, the triples are in (k,q,v) format and the entries of $D$ are indexed by $k,q,v$ instead of $q,k,v$.*
 
 ### Summary and what's next
 In this post, we have seen how to represent a function as a matrix, and a database as a 3-tensor. We have also touched upon the relationship between functions and MLPs. Note that a database *cannot* be represented as a single MLP, because MLPs only store key-value pairs! But as we will eventually see, we can encode databases in the attention heads of transformers. (see the ['Paying attention to facts' paper](https://arxiv.org/abs/2502.05076){:target="_blank"} to skip ahead)
